@@ -117,11 +117,38 @@ input[type=range]::-moz-range-thumb{width:30px;height:30px;border:0;border-radiu
 .note{margin:30px 0 0;padding-left:16px;max-width:430px;font-size:15px;line-height:1.5;color:var(--dim);position:relative}
 .note::before{content:'';position:absolute;left:0;top:.35em;bottom:.35em;width:2px;background:var(--acc)}
 
-/* ---------- comfort strip ---------- */
-.comfort{padding:96px var(--pad) 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:48px;background:var(--bg)}
-.comfort h3{margin:14px 0 10px;font:400 21px/1.25 var(--disp);font-stretch:118%}
-.comfort p{margin:0;color:var(--dim);font-size:16.5px}
-.comfort .n{font:500 12px var(--mono);color:var(--acc);letter-spacing:.16em}
+/* ---------- comfort steps: their own lifted brass-tinted panel, revealed one by one ---------- */
+.comfort{padding:0 var(--pad) 20px;background:var(--bg)}
+.cbox{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;padding:58px 60px 62px;border-radius:24px;
+  background:radial-gradient(ellipse 60% 140% at 0% 0%,rgba(226,195,142,.14) 0%,rgba(226,195,142,0) 70%),linear-gradient(180deg,#231b14 0%,#1b1510 100%)}
+.cstep{will-change:transform,clip-path}
+.comfort h3{margin:16px 0 10px;font:400 22px/1.25 var(--disp);font-stretch:118%}
+.comfort p{margin:0;color:#c3b7a6;font-size:16.5px}
+.comfort .n{font:500 12px var(--mono);color:var(--acc2);letter-spacing:.16em}
+.cstep .ln{display:block;width:56px;height:1px;margin-top:14px;background:var(--acc);transform-origin:0 50%}
+
+/* ---------- cost estimate ---------- */
+.cost{padding:120px var(--pad) 110px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto 1fr;grid-template-areas:"head res" "form res" "form det";column-gap:110px;row-gap:34px;
+  background:radial-gradient(ellipse 40% 55% at 76% 40%,#211810 0%,rgba(10,8,6,0) 100%),var(--bg)}
+.chead{grid-area:head}.cform{grid-area:form}.cres{grid-area:res}.cdet{grid-area:det}
+.chead h2{margin-bottom:16px}
+.chead p.lead{margin:0;color:var(--dim);max-width:470px}
+.cl{display:block;font:500 11.5px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+.cq+.cq{margin-top:26px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{min-height:46px;padding:0 18px;border-radius:999px;background:#1d1610;font:500 15px/1 var(--disp);font-stretch:110%;color:var(--dim);transition:background-color .3s,color .3s}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed=true]{background:var(--acc);color:#1a120a}
+.big{display:flex;align-items:flex-start;margin:4px 0 0;font:200 clamp(96px,9.4vw,150px)/.86 var(--disp);font-stretch:125%;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.big sup{font-size:.36em;line-height:1;margin:.1em .06em 0 0;color:var(--acc2);font-weight:300}
+.big small{align-self:flex-end;margin:0 0 .5em 10px;font:500 13px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.cres .after{margin:18px 0 0;color:var(--acc2);font-size:17px;max-width:470px}
+.cdet dl{display:grid;grid-template-columns:1fr auto;margin:0;max-width:520px}
+.cdet dt,.cdet dd{padding:13px 0;border-top:1px solid var(--hair);font-size:15.5px}
+.cdet dt{color:var(--dim)}
+.cdet dd{margin:0;text-align:right;font:500 15px/1.6 var(--mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+.cdet dd.sv{color:var(--acc2)}
+.cdet .note{margin-top:26px;max-width:500px}
 
 /* ---------- offices ---------- */
 .offices{padding:110px var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:72px;background:var(--bg)}
@@ -167,7 +194,7 @@ form.bk h3{margin:0 0 18px;font:400 20px/1.2 var(--disp);font-stretch:118%}
 .svl p{grid-column:2;margin:0;color:var(--dim);font-size:16.5px}
 .ins{margin-top:56px;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:baseline;padding:34px 40px;background:var(--bg3);border-radius:20px}
 .ins p{margin:0;font-size:18px}
-.reviews{padding:100px var(--pad) 110px;display:grid;grid-template-columns:repeat(3,1fr);gap:48px;background:#100c09}
+.reviews{padding:110px var(--pad) 64px;display:grid;grid-template-columns:repeat(3,1fr);gap:48px;background:var(--bg)}
 .reviews .eyebrow{grid-column:1/-1;margin-bottom:-10px}
 .reviews blockquote{margin:0;font:300 22px/1.42 var(--disp);font-stretch:108%}
 .reviews cite{display:block;margin-top:16px;font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-style:normal}
@@ -206,7 +233,16 @@ footer .demo{grid-column:1/-1;padding-top:26px;border-top:1px solid var(--hair);
   .sstage{grid-column:1;grid-row:1;height:300px;min-height:0}
   .scopy{grid-column:1;grid-row:2;padding:0 var(--pad) 64px}
   .scopy h2{margin:10px 0 10px}.scopy p.lead{margin-bottom:18px;font-size:16px;line-height:1.5}.sw{margin-top:14px}.note{margin-top:20px}
-  .comfort{grid-template-columns:1fr;gap:30px;padding:64px var(--pad) 20px}
+  .comfort{padding:0 var(--pad) 10px}
+  .cbox{grid-template-columns:1fr;gap:30px;padding:34px 24px 36px;border-radius:18px}
+  .cost{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"head" "res" "form" "det";row-gap:22px;padding:76px var(--pad) 70px;
+    background:radial-gradient(ellipse 80% 30% at 50% 36%,#211810 0%,rgba(10,8,6,0) 100%),var(--bg)}
+  .chead p.lead{font-size:16px;line-height:1.5}
+  .big{font-size:96px}
+  .big small{font-size:12px;margin-left:12px}
+  .cres .after{font-size:16px;margin-top:12px}
+  .cq+.cq{margin-top:20px}
+  .seg button{padding:0 15px;font-size:14.5px}
   .offices{grid-template-columns:1fr;gap:30px;padding:70px var(--pad)}
   .otabs button{padding-right:18px}.otabs button b{font-size:18px}
   .ofacts{margin-top:34px}.ofacts li{grid-template-columns:1fr;gap:4px}
@@ -217,7 +253,7 @@ footer .demo{grid-column:1/-1;padding-top:26px;border-top:1px solid var(--hair);
   .services .head{grid-template-columns:1fr;gap:16px}
   .svl{grid-template-columns:1fr}
   .ins{grid-template-columns:1fr;gap:12px;padding:26px 22px}
-  .reviews{grid-template-columns:1fr;gap:34px;padding:70px var(--pad)}
+  .reviews{grid-template-columns:1fr;gap:34px;padding:70px var(--pad) 44px}
   footer{grid-template-columns:1fr;gap:24px;padding:44px var(--pad)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -289,10 +325,41 @@ footer .demo{grid-column:1/-1;padding-top:26px;border-top:1px solid var(--hair);
   </div>
 </section>
 
+<section class="reviews" id="reviews" aria-label="Sample reviews">
+  <p class="eyebrow" data-t="rv_eb">What patients say · sample reviews</p>
+  <div><blockquote data-t="rv1">"They showed me every piece of the implant before we started. I knew exactly what I was paying."</blockquote><cite data-t="rv1a">M.R. · sample review</cite></div>
+  <div><blockquote data-t="rv2">"My mother only speaks Spanish. The front desk and the dentist explained everything to her, calmly."</blockquote><cite data-t="rv2a">J.P. · sample review</cite></div>
+  <div><blockquote data-t="rv3">"I hid a chipped front tooth for ten years. Two visits for veneers and now I smile in photos."</blockquote><cite data-t="rv3a">A.C. · sample review</cite></div>
+</section>
+
 <section class="comfort" aria-label="Comfort">
-  <div><span class="n">01</span><h3 data-t="c1h">We explain every step</h3><p data-t="c1p">You see the plan, the model and the price before anything starts. Ask as many questions as you like.</p></div>
-  <div><span class="n">02</span><h3 data-t="c2h">Gentle, at your pace</h3><p data-t="c2p">Gentle numbing, warm blankets, headphones, and a break whenever you raise your hand.</p></div>
-  <div><span class="n">03</span><h3 data-t="c3h">No surprises on the bill</h3><p data-t="c3p">We check your insurance first and give you the full price in writing. Monthly payments if you need them.</p></div>
+  <div class="cbox" id="cbox">
+    <div class="cstep"><span class="n">01</span><i class="ln"></i><h3 data-t="c1h">We explain every step</h3><p data-t="c1p">You see the plan, the model and the price before anything starts. Ask as many questions as you like.</p></div>
+    <div class="cstep"><span class="n">02</span><i class="ln"></i><h3 data-t="c2h">Gentle, at your pace</h3><p data-t="c2p">Gentle numbing, warm blankets, headphones, and a break whenever you raise your hand.</p></div>
+    <div class="cstep"><span class="n">03</span><i class="ln"></i><h3 data-t="c3h">No surprises on the bill</h3><p data-t="c3p">We check your insurance first and give you the full price in writing. Monthly payments if you need them.</p></div>
+  </div>
+</section>
+
+<section id="cost" class="cost" aria-label="Cost estimate">
+  <div class="chead">
+    <p class="eyebrow" data-t="e_eb">Cost, up front</p>
+    <h2 data-t="e_h">What would <em>I pay?</em></h2>
+    <p class="lead" data-t="e_p">Pick a treatment, tell us about insurance and choose how long to spread it out. You see a sample monthly price right away.</p>
+  </div>
+  <div class="cres">
+    <span class="cl" data-t="e_big">Sample monthly payment</span>
+    <div class="big"><sup>$</sup><span id="eMo">0</span><small data-t="e_permo">a month</small></div>
+    <p class="after" id="eAfter" aria-live="polite"></p>
+  </div>
+  <div class="cform">
+    <div class="cq"><span class="cl" data-t="e_tr">Treatment</span><div class="seg" id="esTr" role="group"></div></div>
+    <div class="cq"><span class="cl" data-t="e_in">Do you have dental insurance?</span><div class="seg" id="esIn" role="group"></div></div>
+    <div class="cq"><span class="cl" data-t="e_mo">Spread it over</span><div class="seg" id="esMo" role="group"></div></div>
+  </div>
+  <div class="cdet">
+    <dl><dt data-t="e_dl0">Treatment (sample fee)</dt><dd id="eFee">$0</dd><dt data-t="e_dl1">Insurance pays (est.)</dt><dd class="sv" id="eIns">$0</dd><dt data-t="e_dl2">Your part</dt><dd id="eYou">$0</dd><dt data-t="e_dl3">Rate</dt><dd id="eRate"></dd></dl>
+    <p class="note" data-t="e_note">Sample numbers for this demo. We check your benefits for free and give you a written estimate before anything starts.</p>
+  </div>
 </section>
 
 <section id="offices" class="offices" aria-label="Our offices">
@@ -350,12 +417,6 @@ footer .demo{grid-column:1/-1;padding-top:26px;border-top:1px solid var(--hair);
   <div class="ins"><p class="eyebrow" data-t="ins_eb">Insurance &amp; financing</p><p data-t="ins">We take most PPO dental plans and check your benefits before your visit. Monthly payment plans for implants, veneers and aligners.</p></div>
 </section>
 
-<section class="reviews" aria-label="Sample reviews">
-  <p class="eyebrow" data-t="rv_eb">What patients say · sample reviews</p>
-  <div><blockquote data-t="rv1">"They showed me every piece of the implant before we started. I knew exactly what I was paying."</blockquote><cite data-t="rv1a">M.R. · sample review</cite></div>
-  <div><blockquote data-t="rv2">"My mother only speaks Spanish. The front desk and the dentist explained everything to her, calmly."</blockquote><cite data-t="rv2a">J.P. · sample review</cite></div>
-  <div><blockquote data-t="rv3">"I hid a chipped front tooth for ten years. Two visits for veneers and now I smile in photos."</blockquote><cite data-t="rv3a">A.C. · sample review</cite></div>
-</section>
 </main>
 
 <footer>
@@ -416,7 +477,13 @@ en: { nav_impl:'Implants', nav_smile:'Your smile', nav_off:'Offices', nav_serv:'
   rv2:'"My mother only speaks Spanish. The front desk and the dentist explained everything to her, calmly."', rv2a:'J.P. · sample review',
   rv3:'"I hid a chipped front tooth for ten years. Two visits for veneers and now I smile in photos."', rv3a:'A.C. · sample review',
   ft1:'Family, cosmetic and implant dentistry in Essex County, MA.', ft_demo:'Concept demo · fictional business · IC Business Systems', call_aria:'Call ',
-  of1:'First visit', of1p:'About an hour: a gentle exam, X-rays if you need them, and a plan in plain words.', of2:'Tooth pain?', of2p:'Call before noon and we will see you the same day at either office.', of3:'Bring', of3p:'Your insurance card and a list of medicines. That is all.' },
+  of1:'First visit', of1p:'About an hour: a gentle exam, X-rays if you need them, and a plan in plain words.', of2:'Tooth pain?', of2p:'Call before noon and we will see you the same day at either office.', of3:'Bring', of3p:'Your insurance card and a list of medicines. That is all.',
+  e_eb:'Cost, up front', e_h:'What would <em>I pay?</em>', e_p:'Pick a treatment, tell us about insurance and choose how long to spread it out. You see a sample monthly price right away.',
+  e_big:'Sample monthly payment', e_permo:'a month', e_tr:'Treatment', e_in:'Do you have dental insurance?', e_mo:'Spread it over (months)',
+  e_t0:'Implant + crown', e_t1:'Veneers (4)', e_t2:'Clear aligners', e_t3:'Crown', e_t4:'Whitening', e_yes:'Yes', e_no:'No',
+  e_after:(y, m, apr) => `About ${y} after insurance, over ${m} months${apr ? '' : ' at 0%'}.`, e_afterNo:(y, m, apr) => `${y} in total, over ${m} months${apr ? '' : ' at 0%'}.`,
+  e_dl0:'Treatment (sample fee)', e_dl1:'Insurance pays (est.)', e_dl2:'Your part', e_dl3:'Rate', e_rate:apr => apr ? apr + '% APR (sample)' : '0% for 12 months',
+  e_note:'Sample numbers for this demo. We check your benefits for free and give you a written estimate before anything starts.' },
 es: { nav_impl:'Implantes', nav_smile:'Su sonrisa', nav_off:'Oficinas', nav_serv:'Servicios', book:'Reservar cita', callthis:'Llamar a esta oficina',
   h_eb:'Implantes · Carillas · Odontología familiar', h_h1:'Un diente que falta, <em>reemplazado con cuidado.</em>',
   h_sub:'Toque para ver qué es un implante, pieza por pieza. Le explicamos cada paso antes de empezar y le damos el precio completo por escrito.',
@@ -450,7 +517,13 @@ es: { nav_impl:'Implantes', nav_smile:'Su sonrisa', nav_off:'Oficinas', nav_serv
   rv2:'"Mi mamá solo habla español. La recepción y la dentista le explicaron todo con calma."', rv2a:'J.P. · reseña de muestra',
   rv3:'"Escondí un diente de enfrente astillado por diez años. Dos citas para carillas y ahora sonrío en las fotos."', rv3a:'A.C. · reseña de muestra',
   ft1:'Odontología familiar, estética y de implantes en el condado de Essex, MA.', ft_demo:'Demo conceptual · negocio ficticio · IC Business Systems', call_aria:'Llamar a ',
-  of1:'Primera cita', of1p:'Más o menos una hora: un examen con cuidado, radiografías si hacen falta y un plan explicado en palabras sencillas.', of2:'¿Dolor de muela?', of2p:'Llame antes del mediodía y le atendemos el mismo día en cualquiera de las dos oficinas.', of3:'Traiga', of3p:'Su tarjeta del seguro y la lista de sus medicinas. Nada más.' }
+  of1:'Primera cita', of1p:'Más o menos una hora: un examen con cuidado, radiografías si hacen falta y un plan explicado en palabras sencillas.', of2:'¿Dolor de muela?', of2p:'Llame antes del mediodía y le atendemos el mismo día en cualquiera de las dos oficinas.', of3:'Traiga', of3p:'Su tarjeta del seguro y la lista de sus medicinas. Nada más.',
+  e_eb:'El costo, por adelantado', e_h:'¿Cuánto <em>pagaría?</em>', e_p:'Escoja un tratamiento, díganos si tiene seguro y en cuánto tiempo quiere pagarlo. Verá un pago mensual de ejemplo al instante.',
+  e_big:'Pago mensual de ejemplo', e_permo:'al mes', e_tr:'Tratamiento', e_in:'¿Tiene seguro dental?', e_mo:'Pagarlo en (meses)',
+  e_t0:'Implante + corona', e_t1:'Carillas (4)', e_t2:'Alineadores', e_t3:'Corona', e_t4:'Blanqueamiento', e_yes:'Sí', e_no:'No',
+  e_after:(y, m, apr) => `Unos ${y} después del seguro, en ${m} meses${apr ? '' : ' al 0%'}.`, e_afterNo:(y, m, apr) => `${y} en total, en ${m} meses${apr ? '' : ' al 0%'}.`,
+  e_dl0:'Tratamiento (precio de ejemplo)', e_dl1:'Paga el seguro (aprox.)', e_dl2:'Su parte', e_dl3:'Interés', e_rate:apr => apr ? apr + '% APR (ejemplo)' : '0% por 12 meses',
+  e_note:'Números de ejemplo para esta demostración. Revisamos sus beneficios gratis y le damos un estimado por escrito antes de empezar.' }
 };
 const OFF = {
   mill: { name:'Mill District', phone:'(978) 555-0188', tel:'+19785550188', addr:'18 Weaver Row, Suite 3', hours:[['d_mon_thu','h_8_6'],['d_fri','h_8_2'],['d_sat','h_satm']] },
@@ -483,7 +556,7 @@ function applyLang(anim) {
   const sel = $('fFor'), si = sel.selectedIndex; sel.innerHTML = L('f_opts').map(o => `<option>${o}</option>`).join(''); sel.selectedIndex = Math.max(0, si);
   const days = $('fDays'), on = [...days.children].findIndex(b => b.getAttribute('aria-pressed') === 'true');
   days.innerHTML = L('f_days').map((d, i) => `<button type="button" aria-pressed="${i === on}">${d}</button>`).join('');
-  setOffice(office, anim, true); playUI(anim, true); shadeOut();
+  setOffice(office, anim, true); playUI(anim, true); shadeOut(); renderEst(anim);
   if ($('fDone').style.display === 'block') $('fDone').innerHTML = L('f_thanks')(OFF[office].name) + `<small>${L('f_demo')}</small>`;
   try { sessionStorage.setItem('cssLang', lang); } catch (e) {}
   dispatchEvent(new Event('langchange'));
@@ -521,6 +594,46 @@ $('bk').addEventListener('submit', e => {
   d.innerHTML = L('f_thanks')(OFF[office].name) + `<small>${L('f_demo')}</small>`; d.style.display = 'block';
   if (!RM) gsap.fromTo(d, { clipPath: 'inset(0% 0% 100% 0%)', y: 8 }, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: .5, ease: 'power3.out', clearProps: 'clipPath,transform' });
 });
+
+// ---------------- cost estimate (sample fees; the numbers count to their new value) ----------------
+const TRT = [{ fee: 4200, ins: f => Math.min(1500, f * .5) }, { fee: 4800, ins: () => 0 }, { fee: 4500, ins: () => 1000 }, { fee: 1350, ins: f => f * .5 }, { fee: 450, ins: () => 0 }];
+const MOS = [12, 24, 36, 48], EST = window.EST = { t: 0, i: 0, m: 12 }, EV = { mo: 0, fee: 0, ins: 0, you: 0 };
+const money = n => '$' + Math.round(n).toLocaleString('en-US');
+const segBtns = (id, labels) => { $(id).innerHTML = labels.map((s, n) => `<button type="button" data-k="${n}" aria-pressed="false">${s}</button>`).join(''); };
+segBtns('esTr', [0, 1, 2, 3, 4].map(k => `<span data-t="e_t${k}">${T.en['e_t' + k]}</span>`));
+segBtns('esIn', ['e_yes', 'e_no'].map(k => `<span data-t="${k}">${T.en[k]}</span>`));
+segBtns('esMo', MOS);
+const pick = (id, fn) => $(id).addEventListener('click', e => { const b = e.target.closest('button'); if (b) { fn(+b.dataset.k); renderEst(true); } });
+pick('esTr', k => EST.t = k); pick('esIn', k => EST.i = k === 0 ? 1 : 0); pick('esMo', k => EST.m = MOS[k]);
+function drawEst() {
+  $('eMo').textContent = Math.round(EV.mo).toLocaleString('en-US'); $('eFee').textContent = money(EV.fee);
+  $('eIns').textContent = EV.ins >= .5 ? '−' + money(EV.ins) : '$0'; $('eYou').textContent = money(EV.you);
+}
+function renderEst(anim) {
+  [...$('esTr').children].forEach((b, n) => b.setAttribute('aria-pressed', n === EST.t));
+  [...$('esIn').children].forEach((b, n) => b.setAttribute('aria-pressed', n === (EST.i ? 0 : 1)));
+  [...$('esMo').children].forEach((b, n) => b.setAttribute('aria-pressed', MOS[n] === EST.m));
+  const tr = TRT[EST.t], fee = tr.fee, ins = EST.i ? tr.ins(fee) : 0, you = fee - ins, apr = EST.m > 12 ? 7.9 : 0, r = apr / 1200;
+  const mo = r ? you * r / (1 - Math.pow(1 + r, -EST.m)) : you / EST.m;
+  roll($('eAfter'), (EST.i && ins ? L('e_after') : L('e_afterNo'))(money(you), EST.m, apr), anim);
+  roll($('eRate'), L('e_rate')(apr), anim);
+  gsap.to(EV, { mo, fee, ins, you, duration: anim && !RM ? .9 : 0, ease: 'power3.out', overwrite: true, onUpdate: drawEst, onComplete: drawEst });
+}
+window.renderEst = renderEst;
+
+// ---------------- the 3 comfort steps rise out of a mask, one by one, when their panel scrolls in ----------------
+const cSteps = [...document.querySelectorAll('.cstep')];
+function revealSteps() {
+  cSteps.forEach((s, n) => {
+    gsap.to(s, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: .9, ease: 'power3.out', delay: n * .32, clearProps: 'clipPath,transform' });
+    gsap.to(s.querySelector('.ln'), { scaleX: 1, duration: .8, ease: 'power2.inOut', delay: n * .32 + .3 });
+  });
+}
+if (!RM && 'IntersectionObserver' in window) {
+  cSteps.forEach(s => { gsap.set(s, { clipPath: 'inset(100% 0% 0% 0%)', y: 34 }); gsap.set(s.querySelector('.ln'), { scaleX: 0 }); });
+  if (TOUR) window.revealSteps = revealSteps;   // the tour fires it once its glide has landed
+  else { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); revealSteps(); } }, { threshold: .45 }); io.observe($('cbox')); }
+}
 
 // header turns solid once you scroll
 const top = $('top'); const solid = () => top.classList.toggle('solid', scrollY > 40); addEventListener('scroll', solid, { passive: true }); solid();
@@ -614,25 +727,30 @@ async function runTour() {
   const yOf = (el, off) => el.getBoundingClientRect().top + scrollY - off;
   const ph = innerHeight > innerWidth;
   mark('start: assembled implant, slow drift'); await w(900);
-  await tap($('play')); $('play').click(); mark('break-apart starts'); await w(8300);
-  mark('exploded hold, 4 labels'); await tap($('play')); $('play').click(); mark('reassembly starts'); await w(7900);
-  mark('crown seated, scroll to smile'); await glide(yOf($('smile'), ph ? 6 : 0), 1.5); await w(300);
+  await tap($('play')); $('play').click(); mark('break-apart starts'); await w(8000);
+  mark('exploded hold, 4 labels'); await tap($('play')); $('play').click(); mark('reassembly starts'); await w(7650);
+  mark('crown seated, scroll to smile'); await glide(yOf($('smile'), ph ? 6 : 0), 1.3); await w(250);
   mark('shade slides dull to bright');
   await new Promise(r => { const o = { v: +sh.value }; gsap.to(o, { v: 10, duration: 2.2, ease: 'power1.inOut', onUpdate: () => { sh.value = o.v; sh.dispatchEvent(new Event('input')); }, onComplete: r }); });
-  await w(400); await tap($('ven')); $('ven').click(); mark('veneers on: chip fixed, gap closes'); await w(1700);
-  await tap($('lES')); $('lES').click(); mark('flip to Español'); await w(1200);
-  mark('scroll to offices'); await glide(yOf(ph ? $('otabs') : $('offices'), ph ? 80 : 60), 1.4); await w(300);
-  const lk = $('otabs').querySelector('[data-o=lake]'); await tap(lk); lk.click(); mark('switch to Lakeside'); await w(1100);
-  if (ph) await glide(yOf($('oBook'), 420), .9);
-  await tap($('oBook')); openForm(false); mark('Book at Lakeside: form opens'); await w(400);
-  await glide(yOf(ph ? $('bk') : $('ocard'), ph ? 70 : 90), 1.0);
-  const type = async (el, s) => { for (const ch of s) { el.value += ch; await w(35); } };
-  await type($('fName'), 'María R.'); await w(150); await type($('fPhone'), '(978) 555-0123'); await w(200);
-  $('fFor').selectedIndex = 1; await w(300); const d = $('fDays').children[3]; await tap(d); d.click(); await w(300);
-  if (ph) await glide(yOf($('fSend'), 360), .7);
-  await tap($('fSend')); $('fSend').click(); mark('request sent (demo)'); await w(1500);
-  mark('back to top'); await glide(0, 1.6); await w(200);
-  await tap($('play')); $('play').click(); mark('break-apart again, Spanish labels'); await w(6400);
+  await w(300); await tap($('ven')); $('ven').click(); mark('veneers on: chip fixed, gap closes'); await w(1300);
+  await tap($('lES')); $('lES').click(); mark('flip to Español'); await w(1000);
+  mark('scroll to sample reviews'); await glide(yOf($('reviews'), ph ? 36 : 4), 1.2);
+  if (ph) { await w(1100); mark('scroll to the 3 steps'); await glide(yOf($('cbox'), 180), 1.0); }
+  await w(ph ? 0 : 150); if (window.revealSteps) window.revealSteps(); mark('steps rise in one by one'); await w(ph ? 1800 : 1950);
+  mark('scroll to cost estimate'); await glide(yOf($('cost').querySelector('h2'), ph ? 172 : 180), 1.2); await w(350);
+  const yes = $('esIn').children[0]; await tap(yes); yes.click(); mark('estimate: insurance Sí, monthly drops'); await w(1250);
+  const m24 = $('esMo').children[1]; await tap(m24); m24.click(); mark('estimate: 24 meses, monthly drops again'); await w(1300);
+  mark('scroll to offices'); await glide(yOf(ph ? $('otabs') : $('offices'), ph ? 80 : 60), 1.2); await w(250);
+  const lk = $('otabs').querySelector('[data-o=lake]'); await tap(lk); lk.click(); mark('switch to Lakeside'); await w(900);
+  if (ph) await glide(yOf($('oBook'), 420), .8);
+  await tap($('oBook')); openForm(false); mark('Book at Lakeside: form opens'); await w(350);
+  await glide(yOf(ph ? $('bk') : $('ocard'), ph ? 70 : 90), .9);
+  const type = async (el, s) => { for (const ch of s) { el.value += ch; await w(30); } };
+  await type($('fName'), 'María R.'); await w(120); await type($('fPhone'), '(978) 555-0123'); await w(150);
+  $('fFor').selectedIndex = 1; await w(250); const d = $('fDays').children[3]; await tap(d); d.click(); await w(250);
+  if (ph) await glide(yOf($('fSend'), 360), .6);
+  await tap($('fSend')); $('fSend').click(); mark('request sent (demo)');
+  if (!ph) { await glide(yOf($('fSend'), innerHeight * .42), .8); await w(900); } else await w(1400);
   mark('end'); window.TOUR_DONE = true;
 }
 if (TOUR) addEventListener('load', () => setTimeout(runTour, 800));
@@ -670,8 +788,7 @@ const se = (q, n) => Math.sign(q) * Math.pow(Math.abs(q), 2 / n);
 const sq = (th, p) => { const c = Math.cos(th), s = Math.sin(th), r = 1 / Math.pow(Math.pow(Math.abs(c), p) + Math.pow(Math.abs(s), p), 1 / p); return [c * r, s * r]; };
 const fract = x => x - Math.floor(x), lerp = (a, b, t) => a + (b - a) * t, TAU = Math.PI * 2;
 let sd = 7; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
-const PRQ = +new URLSearchParams(location.search).get('pr') || 0;   // test-only override (headless capture)
-const PR = () => PRQ || (ZOOM > 1 ? Math.min(devicePixelRatio * ZOOM, 2.6) : Math.min(devicePixelRatio, isPhone() ? 1.5 : 1.75));
+const PR = () => ZOOM > 1 ? Math.min(devicePixelRatio * ZOOM, 2.6) : Math.min(devicePixelRatio, isPhone() ? 1.5 : 1.75);
 function makeRenderer(canvas) {
   const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
   if (!r.getContext()) throw new Error('no gl');

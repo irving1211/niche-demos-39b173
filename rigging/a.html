@@ -7,6 +7,10 @@
 <meta name="description" content="Machinery moving, plant relocations, millwright work and crane lifts in the Merrimack Valley. Watch a 38,000 lb CNC move, hour by hour.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- load speed: three.js r186 trimmed to the parts this page uses (assets/three-rig.min.js, 0.6 MB instead of 2.2 MB, same code, built from
+     ../vendor with bun build --minify), mapped and preloaded from the head so it downloads and compiles while the page parses -->
+<script type="importmap">{"imports":{"three":"./assets/three-rig.min.js"}}</script>
+<link rel="modulepreload" href="assets/three-rig.min.js">
 <style>
 :root{--bg:#06080b;--bg2:#0c1016;--bg3:#121821;--ink:#efebe3;--mut:#949aa3;--acc:#ff7a1a;--acc2:#ffb36b}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -29,7 +33,17 @@ a{color:inherit}
 #story{position:relative;height:100vh;height:100svh;overflow:hidden;background:#0a0e15}
 #gl,#poster{position:absolute;inset:0;width:100%;height:100%;display:block}
 #poster{z-index:0}
-#gl{z-index:1}
+#gl{z-index:1;visibility:hidden}
+#gl.on{visibility:visible}
+/* pre-rendered first frame of the 3D scene (real GPU), shown at first paint until the live scene is compiled and ready.
+   Placed with the same projection anchor the live camera uses, so the hand-over is not visible:
+   desktop frames by width (principal point at 63.5% x 46%), phone by height (centred, 56% down).
+   The desktop camera distance changes with the window shape, so there is one desktop still per aspect band (largest one not wider than the window). */
+#still{position:absolute;z-index:1;pointer-events:none}
+#still img{position:absolute;display:block;left:0;top:46%;width:100%;height:auto;transform:translateY(-46%)}
+@media (max-width:759.98px){#still img{top:0;left:50%;width:auto;height:100%;transform:translateX(-50%)}}
+#still{inset:0;overflow:hidden}
+#still.off{display:none}
 .scrim{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,#06080bcc 0%,#06080b55 34%,#06080b00 55%),linear-gradient(0deg,#06080bee 0%,#06080b00 34%)}
 .hero{position:absolute;z-index:5;left:44px;top:112px;width:min(560px,46vw)}
 .kick{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc2);font-weight:600}
@@ -55,7 +69,8 @@ a{color:inherit}
 .cue{position:absolute;z-index:5;right:44px;bottom:150px;display:flex;align-items:center;gap:14px;font-weight:600;font-size:15px;letter-spacing:.12em;text-transform:uppercase}
 .cue .ln{width:2px;height:64px;background:#ffffff30;position:relative;overflow:hidden}
 .cue .ln::after{content:"";position:absolute;left:0;top:-30px;width:2px;height:30px;background:var(--acc);animation:drip 1.6s cubic-bezier(.6,0,.4,1) infinite}
-@keyframes drip{to{top:64px}}
+/* same drip as before, as a transform (compositor only: no page layout every frame) */
+@keyframes drip{to{transform:translateY(94px)}}
 /* sections */
 section.blk{padding:110px 44px;max-width:1280px;margin:0 auto}
 .sh{font:900 clamp(40px,5vw,72px)/.95 "Big Shoulders Display",sans-serif;text-transform:uppercase}
@@ -195,6 +210,17 @@ html.tour .cue{display:none}
     <g transform="translate(980 0)"><path d="M0 560 L250 120 L262 126 L18 562Z" fill="#ff7a1a"/><rect x="-60" y="540" width="170" height="40" fill="#d76516"/><rect x="-130" y="575" width="300" height="40" fill="#1b1f25"/><line x1="255" y1="124" x2="255" y2="330" stroke="#aab" stroke-width="2"/><rect x="246" y="330" width="18" height="26" fill="#ff7a1a"/></g>
     <g transform="translate(640 420)"><rect x="0" y="40" width="240" height="160" rx="6" fill="url(#pm)"/><rect x="0" y="40" width="240" height="26" fill="#2b2f35"/><rect x="0" y="146" width="240" height="7" fill="#ff7a1a"/><rect x="34" y="78" width="74" height="58" fill="#10151b"/><rect x="132" y="78" width="74" height="58" fill="#10151b"/><rect x="-6" y="200" width="252" height="16" fill="#2b2f35"/></g>
   </svg>
+  <div id="still" aria-hidden="true"><picture>
+    <source media="(max-width:759.98px)" srcset="assets/still-phone.webp" width="960" height="1281">
+    <source media="(min-width:760px) and (min-aspect-ratio:1920/872)" srcset="assets/still-d220.webp" width="1920" height="872">
+    <source media="(min-width:760px) and (min-aspect-ratio:1920/936)" srcset="assets/still-d205.webp" width="1920" height="936">
+    <source media="(min-width:760px) and (min-aspect-ratio:1920/984)" srcset="assets/still-d195.webp" width="1920" height="984">
+    <source media="(min-width:760px) and (min-aspect-ratio:1920/1032)" srcset="assets/still-d186.webp" width="1920" height="1032">
+    <source media="(min-width:760px) and (min-aspect-ratio:1920/1080)" srcset="assets/still-d178.webp" width="1920" height="1080">
+    <source media="(min-width:760px) and (min-aspect-ratio:1920/1129)" srcset="assets/still-d170.webp" width="1920" height="1129">
+    <source media="(min-width:760px) and (min-aspect-ratio:1920/1200)" srcset="assets/still-d160.webp" width="1920" height="1200">
+    <img src="assets/still-desk.webp" width="1920" height="1440" alt="" fetchpriority="high"></picture></div>
+  <script>if(scrollY>8||/[?&]still=0\b/.test(location.search))document.getElementById('still').className='off'</script>
   <canvas id="gl" aria-hidden="true"></canvas>
   <div class="scrim"></div>
 
@@ -401,29 +427,46 @@ function runTour(){
   tap(sb,()=>sb.click());hold(3.4);
   window.TOUR_LEN=t;window.TOUR_TL=tl;
 }
-if(TOUR&&!reduce)addEventListener('load',()=>setTimeout(runTour,1400));
+if(TOUR&&!reduce)addEventListener('load',()=>setTimeout(()=>{window.__rig3d?runTour():addEventListener('rig3d',()=>setTimeout(runTour,600),{once:true})},1400));
 </script>
 
-<script type="importmap">{"imports":{"three":"../vendor/three.module.js","three/addons/":"../vendor/addons/"}}</script>
 <script type="module">
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { RoomEnvironment, RoundedBoxGeometry, mergeGeometries } from 'three';
 
 const canvas=document.getElementById('gl');
-const phone=()=>innerWidth<760,PH=phone();
+// the build is cut into short tasks (await tick()) so the page stays responsive to taps and scrolls while the scene is made
+// (yields only once ~12 ms of work has run, via scheduler.yield where the browser has it)
+const YLD=globalThis.scheduler&&scheduler.yield?()=>scheduler.yield():()=>new Promise(r=>setTimeout(r,0));
+let lastY=performance.now();const tick=()=>performance.now()-lastY<12?Promise.resolve():YLD().then(()=>{lastY=performance.now()});
+// let the browser paint the pre-rendered still first (decode + one frame, max 400 ms), then start the heavy 3D work
+{const st=document.getElementById('still'),im=st&&st.className!=='off'&&st.querySelector('img');
+ if(im)await Promise.race([im.decode().catch(()=>{}),new Promise(r=>setTimeout(r,400))]).then(()=>new Promise(r=>requestAnimationFrame(()=>setTimeout(r,0))))}
+// layout/viewport values are cached and refreshed on resize: reading them inside the render loop forced a page layout every frame
+let isPh=innerWidth<760,CW=innerWidth,CH=innerHeight;const phone=()=>isPh,PH=isPh;
 let renderer;
 try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});if(!renderer.getContext())throw 0}catch(e){canvas.style.display='none';throw e}
-await Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1200))]);
+// load speed: fonts are no longer awaited here (the text textures are redrawn once they arrive, before the scene is shown)
+const fontsReady=Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1200))]);
 renderer.setPixelRatio(Math.min(devicePixelRatio,PH?1.5:2));
 renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
-renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+// three r186 swaps PCFSoft for PCF at the first shadow render ("PCFSoftShadowMap has been removed"); set it up front so the
+// background shader compile below builds the programs the renderer really uses (same look as before)
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
 const ANI=Math.min(8,renderer.capabilities.getMaxAnisotropy());
 
 const scene=new THREE.Scene();
 scene.fog=new THREE.Fog('#16202e',40,150);
-const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(new RoomEnvironment(),.04).texture;scene.environmentIntensity=.3;
+// environment maps: the PMREM blur shaders and the room's materials are compiled in the background (KHR_parallel_shader_compile)
+// while the world is built below; the maps themselves are rendered once that is done (see boot())
+const pm=new THREE.PMREMGenerator(renderer),roomEnv=new RoomEnvironment();scene.environmentIntensity=.3;
+const pmReady=(()=>{const cam=new THREE.PerspectiveCamera(90,1,.1,100),flat=new THREE.OrthographicCamera(),jobs=[];
+  pm._setSize(256);pm._allocateTargets().dispose();
+  // everything PMREM draws goes into half-float targets without tone mapping: compile in that same state
+  const rt=new THREE.WebGLRenderTarget(4,4,{type:THREE.HalfFloatType}),tm=renderer.toneMapping;renderer.setRenderTarget(rt);renderer.toneMapping=THREE.NoToneMapping;
+  const lod=pm._lodMeshes&&pm._lodMeshes[0];if(lod)for(const m of[pm._blurMaterial,pm._ggxMaterial])if(m){lod.material=m;jobs.push(renderer.compileAsync(lod,flat))}
+  jobs.push(renderer.compileAsync(roomEnv,cam));renderer.setRenderTarget(null);renderer.toneMapping=tm;
+  return Promise.all(jobs).then(()=>rt.dispose())})();
 const camera=new THREE.PerspectiveCamera(34,1,.1,900);
 
 // ---------- helpers ----------
@@ -431,7 +474,8 @@ const D2R=Math.PI/180,V=(x=0,y=0,z=0)=>new THREE.Vector3(x,y,z);
 const cl=v=>Math.min(1,Math.max(0,v)),sm=v=>{v=cl(v);return v*v*(3-2*v)},L=(a,b,t)=>a+(b-a)*t,seg=(u,a,b)=>sm((u-a)/(b-a)),lin=(u,a,b)=>cl((u-a)/(b-a));
 let sd=11;const rnd=()=>{sd=(sd*16807)%2147483647;return(sd-1)/2147483646};
 function cv(w,h,f){const c=document.createElement('canvas');c.width=w;c.height=h;f(c.getContext('2d'),w,h);return c}
-function tx(c,rx=1,ry=1,srgb=true){const t=new THREE.CanvasTexture(c);if(srgb)t.colorSpace=THREE.SRGBColorSpace;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rx,ry);t.anisotropy=ANI;return t}
+const TXT=[];function cvT(w,h,f){const c=cv(w,h,f);c.paint=f;TXT.push(c);return c}
+function tx(c,rx=1,ry=1,srgb=true){const t=new THREE.CanvasTexture(c);(c.txs||(c.txs=[])).push(t);if(srgb)t.colorSpace=THREE.SRGBColorSpace;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rx,ry);t.anisotropy=ANI;return t}
 function speck(g,w,h,n,cols,a=.6,b=1.4){for(let i=0;i<n;i++){g.fillStyle=cols[i%cols.length];const s=a+rnd()*b;g.fillRect(rnd()*w,rnd()*h,s,s)}}
 function blot(g,w,h,n,col,r0,r1){for(let i=0;i<n;i++){const x=rnd()*w,y=rnd()*h,r=r0+rnd()*(r1-r0),gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,col);gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(x-r,y-r,2*r,2*r)}}
 const RBc={};const RB=(w,h,d,r=.04)=>{r=Math.min(r,w/2-.003,h/2-.003,d/2-.003);const k=[w,h,d,r].join();return RBc[k]||(RBc[k]=new RoundedBoxGeometry(w,h,d,2,r))};
@@ -452,19 +496,20 @@ const wetC=cv(256,256,(g,w,h)=>{g.fillStyle='#8c8c8c';g.fillRect(0,0,w,h);blot(g
 const corrC=(base,hi,lo)=>cv(64,64,(g,w,h)=>{g.fillStyle=base;g.fillRect(0,0,w,h);for(let x=0;x<64;x+=16){g.fillStyle=hi;g.fillRect(x,0,5,h);g.fillStyle=lo;g.fillRect(x+9,0,4,h)}const gr=g.createLinearGradient(0,0,0,h);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.25)');g.fillStyle=gr;g.fillRect(0,0,w,h)});
 const woodC=cv(256,256,(g,w,h)=>{for(let y=0;y<h;y+=32){g.fillStyle=['#6b4a2c','#5d3f25','#73512f','#62452a'][(y/32)%4];g.fillRect(0,y,w,32);g.strokeStyle='rgba(30,18,8,.35)';for(let i=0;i<6;i++){g.beginPath();g.moveTo(0,y+4+rnd()*24);g.bezierCurveTo(80,y+rnd()*32,170,y+rnd()*32,w,y+4+rnd()*24);g.stroke()}g.fillStyle='rgba(15,9,4,.9)';g.fillRect(0,y,w,2)}});
 const hazC=cv(128,32,(g,w,h)=>{g.fillStyle='#e8b417';g.fillRect(0,0,w,h);g.fillStyle='#14110d';for(let x=-32;x<w+32;x+=32){g.beginPath();g.moveTo(x,0);g.lineTo(x+16,0);g.lineTo(x+16-h,h);g.lineTo(x-h,h);g.fill()}});
-const logoC=cv(512,150,(g,w,h)=>{g.fillStyle='#f1ece2';g.font='900 112px "Big Shoulders Display",Impact,sans-serif';g.textBaseline='alphabetic';g.fillText('HALYARD',6,100);g.fillStyle='#ff7a1a';g.font='600 30px Barlow,Arial,sans-serif';try{g.letterSpacing='6px'}catch(e){}g.fillText('RIGGING & CRANE',10,140)});
+const logoC=cvT(512,150,(g,w,h)=>{g.fillStyle='#f1ece2';g.font='900 112px "Big Shoulders Display",Impact,sans-serif';g.textBaseline='alphabetic';g.fillText('HALYARD',6,100);g.fillStyle='#ff7a1a';g.font='600 30px Barlow,Arial,sans-serif';try{g.letterSpacing='6px'}catch(e){}g.fillText('RIGGING & CRANE',10,140)});
 const grilleC=cv(128,128,(g,w,h)=>{g.fillStyle='#0d0f12';g.fillRect(0,0,w,h);for(let x=6;x<w;x+=11){const gr=g.createLinearGradient(x,0,x+6,0);gr.addColorStop(0,'#5d636b');gr.addColorStop(.5,'#e3e7ec');gr.addColorStop(1,'#4a4f56');g.fillStyle=gr;g.fillRect(x,4,6,h-8)}});
 const winC=cv(256,256,(g,w,h)=>{const gr=g.createLinearGradient(0,0,0,h);gr.addColorStop(0,'#1d2730');gr.addColorStop(1,'#0a0e12');g.fillStyle=gr;g.fillRect(0,0,w,h);g.fillStyle='#dfeaf3';g.fillRect(20,10,216,10);g.fillStyle='#4b545d';g.fillRect(100,20,60,110);g.fillStyle='#8d969f';g.fillRect(118,130,24,30);g.fillStyle='#c3cbd2';g.fillRect(124,160,12,26);g.fillStyle='#2b333b';g.fillRect(10,196,236,30);g.fillStyle='#59626b';g.fillRect(80,176,96,22);const r=g.createLinearGradient(0,20,0,140);r.addColorStop(0,'rgba(220,235,248,.35)');r.addColorStop(1,'rgba(220,235,248,0)');g.fillStyle=r;g.fillRect(0,20,w,120)});
-const signC=cv(1024,460,(g,w,h)=>{g.fillStyle='#0a6a3e';g.beginPath();g.roundRect(0,0,w,h,34);g.fill();g.strokeStyle='#f4f6f2';g.lineWidth=10;g.beginPath();g.roundRect(16,16,w-32,h-32,26);g.stroke();
+const signC=cvT(1024,460,(g,w,h)=>{g.fillStyle='#0a6a3e';g.beginPath();g.roundRect(0,0,w,h,34);g.fill();g.strokeStyle='#f4f6f2';g.lineWidth=10;g.beginPath();g.roundRect(16,16,w-32,h-32,26);g.stroke();
   // interstate shield (public route marker)
   const sx=70,sy=118,sw=230,sh=250;g.save();g.translate(sx,sy);g.beginPath();g.moveTo(0,40);g.quadraticCurveTo(sw/2,0,sw,40);g.lineTo(sw,150);g.quadraticCurveTo(sw,sh-30,sw/2,sh);g.quadraticCurveTo(0,sh-30,0,150);g.closePath();g.fillStyle='#f4f6f2';g.fill();g.save();g.clip();g.fillStyle='#1d4fa8';g.fillRect(8,74,sw-16,sh);g.fillStyle='#c8202c';g.fillRect(8,0,sw-16,70);g.restore();g.fillStyle='#f4f6f2';g.font='800 112px Barlow,Arial,sans-serif';g.textAlign='center';g.fillText('495',sw/2,200);g.restore();
   g.fillStyle='#f4f6f2';g.textAlign='center';g.font='700 62px Barlow,Arial,sans-serif';g.fillText('NORTH',sx+sw/2,96);
   g.textAlign='left';g.font='600 100px Barlow,Arial,sans-serif';g.fillText('Lawrence',360,200);g.fillText('Haverhill',360,330);g.font='600 46px Barlow,Arial,sans-serif';g.fillText('1/2 MILE',360,412)});
-const bannerC=cv(512,96,(g,w,h)=>{g.fillStyle='#ffd21a';g.fillRect(0,0,w,h);g.fillStyle='#111';g.font='800 64px Barlow,Arial,sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('OVERSIZE LOAD',w/2,h/2+3)});
+const bannerC=cvT(512,96,(g,w,h)=>{g.fillStyle='#ffd21a';g.fillRect(0,0,w,h);g.fillStyle='#111';g.font='800 64px Barlow,Arial,sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('OVERSIZE LOAD',w/2,h/2+3)});
 const glowC=cv(128,128,(g,w,h)=>{const gr=g.createRadialGradient(64,64,0,64,64,64);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.12,'rgba(255,255,255,.55)');gr.addColorStop(.4,'rgba(255,255,255,.1)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,w,h)});
 const poolC=cv(128,128,(g,w,h)=>{const gr=g.createRadialGradient(64,64,0,64,64,64);gr.addColorStop(0,'rgba(255,255,255,.9)');gr.addColorStop(.5,'rgba(255,255,255,.3)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,w,h)});
 const streakC=cv(64,256,(g,w,h)=>{const gr=g.createLinearGradient(0,0,0,h);gr.addColorStop(0,'rgba(255,255,255,.9)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,w,h);const g2=g.createLinearGradient(0,0,w,0);g2.addColorStop(0,'rgba(0,0,0,1)');g2.addColorStop(.5,'rgba(0,0,0,0)');g2.addColorStop(1,'rgba(0,0,0,1)');g.globalCompositeOperation='destination-out';g.fillStyle=g2;g.fillRect(0,0,w,h)});
 
+await tick();
 // ---------- materials ----------
 const std=(c,r=.6,m=.1,ex={})=>new THREE.MeshStandardMaterial({color:c,roughness:r,metalness:m,...ex});
 const phys=(c,r,m,cc=.6,ex={})=>new THREE.MeshPhysicalMaterial({color:c,roughness:r,metalness:m,clearcoat:cc,clearcoatRoughness:.25,...ex});
@@ -516,21 +561,22 @@ const yard=add(new THREE.PlaneGeometry(62,20).rotateX(-Math.PI/2),std('#ffffff',
 const envScene=new THREE.Scene();envScene.add(new THREE.Mesh(new THREE.SphereGeometry(50,32,16),new THREE.ShaderMaterial({side:THREE.BackSide,
  vertexShader:'varying vec3 vD;void main(){vD=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
  fragmentShader:'varying vec3 vD;void main(){float y=vD.y;vec3 c=mix(vec3(.5,.54,.58),vec3(.24,.27,.31),smoothstep(0.,.5,y));c=mix(vec3(.05,.06,.06),c,smoothstep(-.06,.02,y));gl_FragColor=vec4(c,1.);}'})));
-const roadEnv=pm.fromScene(envScene,.02).texture;
-const roadMat=std('#ffffff',.6,0,{map:tx(asphC,40,2.2),roughnessMap:tx(wetC,12,1,false),envMap:roadEnv,envMapIntensity:1.0});
+// (its env map is rendered in boot(), after the PMREM shaders have compiled in the background)
+const roadMat=std('#ffffff',.6,0,{map:tx(asphC,40,2.2),roughnessMap:tx(wetC,12,1,false),envMapIntensity:1.0});
 add(new THREE.PlaneGeometry(HW1-HW0+4,16.4).rotateX(-Math.PI/2),roadMat,(HW0+HW1)/2,.014,-4.4);
 add(new THREE.PlaneGeometry(200,8.6).rotateX(-Math.PI/2),std('#ffffff',.9,0,{map:tx(asphC,26,1.1),roughnessMap:tx(wetC,20,1,false)}),HW1+98,.013,-.6);
 // lane paint
 const dashG=new THREE.BoxGeometry(3,.02,.15),dashX=[];for(let x=24;x<BC+90;x+=12)dashX.push([x,-.8]);for(let x=HW0+2;x<HW1;x+=12)dashX.push([x,-8.8]);
-const dashes=new THREE.InstancedMesh(dashG,M.white,dashX.length);const dm=new THREE.Matrix4();dashX.forEach(([x,z],i)=>{dm.makeTranslation(x,.025,z);dashes.setMatrixAt(i,dm)});dashes.receiveShadow=true;scene.add(dashes);
+const dashes=new THREE.InstancedMesh(dashG,M.white.clone(),dashX.length);const dm=new THREE.Matrix4();dashX.forEach(([x,z],i)=>{dm.makeTranslation(x,.025,z);dashes.setMatrixAt(i,dm)});dashes.receiveShadow=true;scene.add(dashes);
 bx(BC+90-24,.02,.14,M.white,(BC+90+24)/2,.024,3.2,null,0,false);
 bx(HW1-HW0,.02,.14,M.yel,(HW0+HW1)/2,.024,-4.45,null,0,false);bx(HW1-HW0,.02,.14,M.white,(HW0+HW1)/2,.024,-12.3,null,0,false);
 // median barrier (jersey profile)
 {const s=new THREE.Shape();s.moveTo(-.3,0);s.lineTo(.3,0);s.lineTo(.3,.08);s.lineTo(.12,.32);s.lineTo(.08,.84);s.lineTo(-.08,.84);s.lineTo(-.12,.32);s.lineTo(-.3,.08);s.closePath();const g=new THREE.ExtrudeGeometry(s,{depth:HW1-HW0,bevelEnabled:false});g.rotateY(Math.PI/2);add(g,M.barrier,HW0,0,-5.2)}
 // near guardrail + posts
 bx(HW1-HW0,.32,.05,M.galv,(HW0+HW1)/2,.62,4.35,null,.012);
-{const n=Math.floor((HW1-HW0)/1.9),pg=new THREE.InstancedMesh(new THREE.BoxGeometry(.15,.75,.15),M.graphD,n);for(let i=0;i<n;i++){dm.makeTranslation(HW0+i*1.9,.37,4.45);pg.setMatrixAt(i,dm)}pg.castShadow=true;scene.add(pg);
+{const n=Math.floor((HW1-HW0)/1.9),pg=new THREE.InstancedMesh(new THREE.BoxGeometry(.15,.75,.15),M.graphD.clone(),n);for(let i=0;i<n;i++){dm.makeTranslation(HW0+i*1.9,.37,4.45);pg.setMatrixAt(i,dm)}pg.castShadow=true;scene.add(pg);
  const nr=Math.floor(n/8),dl=new THREE.InstancedMesh(new THREE.BoxGeometry(.06,.1,.02),emis('#f2efe6',1.6),nr);for(let i=0;i<nr;i++){dm.makeTranslation(HW0+i*8*1.9,.86,4.36);dl.setMatrixAt(i,dm)}scene.add(dl)}
+await tick();
 // trees: a mixed New England tree line, both sides. Layered low-poly spruce/pine + bare-ish November hardwoods.
 // One merged geometry per kind, instanced, vertex colours (trunk vs needles) x per-tree tint; tops sway in a slow wind.
 const treeU={value:0};
@@ -559,6 +605,7 @@ const TREE={};{
   ps.forEach(([x,z],i)=>{const h=hR[0]+rnd()*(hR[1]-hR[0]),w=h*(.38+rnd()*.12)*(wR[0]+rnd()*(wR[1]-wR[0]))/10;q.setFromAxisAngle(UP,rnd()*6.28);dm.compose(V(x,0,z),q,V(w,h,w*(.9+rnd()*.2)));tr.setMatrixAt(i,dm);tr.setColorAt(i,cols[i%cols.length])});
   tr.frustumCulled=false;scene.add(tr)})}
 
+await tick();
 // ---------- plant buildings ----------
 const wallA=std('#ffffff',.7,.35,{map:tx(corrC('#262c34','#323944','#1b2027'),18,1)}),wallB=std('#ffffff',.7,.35,{map:tx(corrC('#2e3538','#3b4347','#22282b'),18,1)});
 // Plant A (Lowell): back wall, gable with dock door at x=0, open side toward the camera
@@ -612,6 +659,7 @@ const SGX=214;{const gx=SGX,z0=5.8,z1=-13.8;
  bx(.1,2.4,5.2,sm_[0],gx+.7,7.55,-8.8);
  for(const z of[-3.6,-.55,2.5]){bx(.5,.08,.2,M.graph,gx-1.15,5.75,z,null,0,false);glowSprite('#fff6e0',1.1,null,gx-1.3,5.72,z,.5)}}
 
+await tick();
 // ---------- the machine (38,000 lb vertical machining center) ----------
 function makeMachine(){
   const g=new THREE.Group(),win=new THREE.MeshStandardMaterial({map:tx(winC),emissive:'#ffffff',emissiveMap:tx(winC),emissiveIntensity:1,roughness:.6}),scr=emis('#7fb8de',1.4),
@@ -654,6 +702,7 @@ function wheel(par,x,z,r,w,dual=false,rimM=M.rim){const g=new THREE.Group();g.po
   cy(r*.6,.05,rimM,0,0,face,g,'z',22);cy(r*.24,.07,M.chrome,0,0,face+s*.02,g,'z',12);for(let i=0;i<6;i++){const a=i/6*Math.PI*2;cy(.02,.04,M.graphD,Math.cos(a)*r*.38,Math.sin(a)*r*.38,face+s*.03,g,'z',6)}
   spinners.push({g,r,par});return g}
 
+await tick();
 // ---------- mobile crane (60 t all-terrain) ----------
 const crane=new THREE.Group();crane.position.set(CX,0,CZ);scene.add(crane);
 bx(11.6,.7,1.2,M.graphD,0,1.05,0,crane,.05);bx(11.6,.28,2.5,M.graph,0,1.58,0,crane,.05);
@@ -684,6 +733,7 @@ const rigF=new THREE.Group();scene.add(rigF);
 bx(2.8,.14,.14,M.rigY,0,0,1.75,rigF,.03);bx(2.8,.14,.14,M.rigY,0,0,-1.75,rigF,.03);bx(.14,.14,3.64,M.rigY,1.3,0,0,rigF,.03);bx(.14,.14,3.64,M.rigY,-1.3,0,0,rigF,.03);
 const slings=[...Array(8)].map(()=>rod(.035,M.sling,null,8));
 
+await tick();
 // ---------- lowboy + heavy-haul tractor (front faces +x; origin = well deck centre) ----------
 const truck=new THREE.Group();scene.add(truck);
 [-1.05,1.05].forEach(z=>add(ibeam(7.3,.5,.22).rotateY(Math.PI/2),M.graph,0,.48,z,truck));
@@ -714,11 +764,11 @@ bx(.32,.42,2.5,M.chrome,K+6.18,1.05,0,truck,.06);plane(2.0,.36,bannerMat,K+6.35,
 [1,-1].forEach(s=>{cy(.09,2.1,M.chrome,K+1.62,3.2,s*1.08,truck,'y',14);cy(.32,1.2,M.chrome,K+2.85,.98,s*1.08,truck,'x',20);bx(.6,.06,.5,M.graphD,K+2.0,.62,s*1.05,truck)});
 for(let i=-2;i<=2;i++)bx(.06,.06,.12,amberMat,K+3.9,3.84,i*.4,truck,0,false);
 const beacons=[1,-1].map(s=>{const m=bx(.16,.12,.16,emis('#ffae1a',0),K+2.2,3.86,s*.95,truck,.03,false);const gl=glowSprite('#ffa018',2.6,truck,K+2.2,3.95,s*.95,0);return{m,gl}});
-const head=new THREE.SpotLight('#fff3dc',0,70,.42,.7,1.4);head.position.set(K+6.1,1.6,0);head.target.position.set(K+34,0,0);truck.add(head,head.target);
+const head=new THREE.SpotLight('#fff3dc',0,70,.42,.7,1.4);scene.add(head,head.target); // kept in the scene (follows the truck in apply) so the light count never changes
 const headPool=plane(7,18,decal(streakTex,'#fff0d4',.0),K+15,.04,0,0,truck,-Math.PI/2);headPool.rotation.z=Math.PI/2;
 // tie-down chains: real links (instanced, alternating 90 deg) + a lever load binder on each run
 const LINK_P=.092,MAXL=36,linkG=new THREE.TorusGeometry(.04,.011,5,10);linkG.scale(1,1.45,1);
-const chainLinks=new THREE.InstancedMesh(linkG,M.chain,4*MAXL);chainLinks.castShadow=true;chainLinks.count=0;chainLinks.frustumCulled=false;scene.add(chainLinks);
+const chainLinks=new THREE.InstancedMesh(linkG,M.chain.clone(),4*MAXL);chainLinks.castShadow=true;chainLinks.count=0;chainLinks.frustumCulled=false;scene.add(chainLinks);
 const binders=[0,1,2,3].map(()=>{const g=new THREE.Group();scene.add(g);g.visible=false;
   cy(.034,.3,M.graphD,0,0,0,g,'y',10);cy(.05,.08,M.graph,0,0,0,g,'y',10);
   const lv=bx(.026,.46,.026,M.rigY,.06,.12,0,g,.008);lv.rotation.z=-.2;cy(.02,.08,M.rubber,.105,.34,0,g,'y',8);return g});
@@ -729,6 +779,7 @@ const spG=new THREE.BufferGeometry();spG.setAttribute('position',new THREE.Buffe
 const spray=new THREE.Points(spG,new THREE.PointsMaterial({map:glowTex,size:2.1,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));spray.frustumCulled=false;truck.add(spray);
 const tailRef=[-1.16,1.16].map(z=>{const m=plane(.7,5,decal(streakTex,'#ff3a20',0),-11.2,.045,z,0,truck,-Math.PI/2);m.rotation.z=-Math.PI/2;return m});
 
+await tick();
 // ---------- hydraulic gantry (4 telescoping legs on track) ----------
 const gantry=new THREE.Group();scene.add(gantry);const legs=[];
 [[-2.6,-1.75],[2.6,-1.75],[-2.6,1.75],[2.6,1.75]].forEach(([x,z])=>{const g=new THREE.Group();g.position.set(x,0,z);gantry.add(g);
@@ -760,6 +811,7 @@ const dN=PH?140:340,dp=new Float32Array(dN*3);for(let i=0;i<dN;i++){const B=rnd(
 const dG=new THREE.BufferGeometry();dG.setAttribute('position',new THREE.BufferAttribute(dp,3));
 scene.add(new THREE.Points(dG,new THREE.PointsMaterial({color:'#ffd9a8',size:.05,transparent:true,opacity:.5,depthWrite:false,blending:THREE.AdditiveBlending})));
 
+await tick();
 // ---------- story state: p in [0,7], stage i owns [i,i+1) ----------
 function state(p){
   const u=i=>cl(p-i),u1=u(1),u2=u(2),u3=u(3),u4=u(4),u5=u(5),u6=u(6);
@@ -814,7 +866,7 @@ function cam(p,s){
   let i=0;while(i<KEYS.length-2&&p>KEYS[i+1].p)i++;
   const a=KEYS[i],b=KEYS[i+1],f=sm((p-a.p)/(b.p-a.p));
   const ph=phone();keyT(a,s,ta,ph);keyT(b,s,tb,ph);tgt.lerpVectors(ta,tb,f);
-  const W=canvas.clientWidth||innerWidth,H=canvas.clientHeight||innerHeight,asp=W/H;
+  const W=CW,H=CH,asp=W/H;
   camera.fov=ph?46:34;
   const az=L(a.az,b.az,f)*D2R,el=(L(a.el,b.el,f)+(ph?L(a.pel??5,b.pel??5,f):0))*D2R;
   const fw=ph?L(a.pw??a.w*.6,b.pw??b.w*.6,f):L(a.w,b.w,f),fh=L(a.h,b.h,f);
@@ -882,7 +934,7 @@ function apply(p,t){
   sun.intensity=L(L(2.1,.9,wL),.75,wR);sun.color.copy(C_SUN).lerp(C_OVC,wR);
   hemi.intensity=L(.5,1.6,wR);hemi.color.copy(C_HSKY).lerp(C_HSKY2,wR);hemi.groundColor.copy(C_HGND).lerp(C_HGND2,wR);
   gnd.material.color.copy(C_GND).lerp(C_GND2,wR);renderer.toneMappingExposure=L(1.1,1.0,wR);
-  head.intensity=L(30,260,wR);headPool.material.opacity=.16*wR;poolMat.opacity=L(.55,.22,wR);
+  head.intensity=truck.visible?L(30,260,wR):0;head.position.set(s.tx+K+6.1,1.6,1);head.target.position.set(s.tx+K+34,0,1);headPool.material.opacity=.16*wR;poolMat.opacity=L(.55,.22,wR);
   rainM.opacity=.42*wR;
   // road life: oncoming traffic, pole light sweeping the load
   const onRoad=wR>.01;
@@ -900,21 +952,76 @@ function apply(p,t){
   if(rainM.opacity>0){const a=rainG.attributes.position.array,dy=.6;for(let i=0;i<a.length;i+=6){a[i+1]-=dy;a[i+4]-=dy;if(a[i+4]<0){a[i+1]+=24;a[i+4]+=24}}rainG.attributes.position.needsUpdate=true}
   cam(p,s);
 }
-function size(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+function size(){isPh=innerWidth<760;const w=canvas.clientWidth,h=canvas.clientHeight;CW=w||innerWidth;CH=h||innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
 addEventListener('resize',size);size();
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const dpos=dG.attributes.position.array;
 // only render while the story is on screen (saves the GPU while people use the plan tool)
 let onScreen=true;if(window.IntersectionObserver)new IntersectionObserver(e=>{onScreen=e[e.length-1].isIntersecting},{rootMargin:'100px'}).observe(document.getElementById('story'));
+// the world clock starts at the first visible frame (t=0, the same state as the pre-rendered still), so nothing jumps on frame 2
+let T0=-1;
 function frame(t){
-  if(!onScreen&&t){if(!reduce)requestAnimationFrame(frame);return}
-  apply(window.STORY.p,t||0);
+  if(t!==undefined&&T0<0)T0=t-16;
+  if(!onScreen&&t!==undefined){if(!reduce)requestAnimationFrame(frame);return}
+  apply(window.STORY.p,t===undefined?0:t-T0);
   if(!reduce){for(let i=1;i<dpos.length;i+=3){dpos[i]+=.004;if(dpos[i]>9)dpos[i]=0}dG.attributes.position.needsUpdate=true}
   renderer.render(scene,camera);
   if(!reduce)requestAnimationFrame(frame);
 }
-frame(0);
-document.getElementById('poster').style.display='none';
+
+// ---------- load speed: merge static parts into one mesh per material ----------
+// ~700 separate draws per frame became ~200 (each moving part keeps its own node; only parts that never move relative to
+// their parent are merged, per material and per stretch of the world so off-screen pieces are still culled). Same geometry, same look.
+async function bake(){
+  scene.updateMatrixWorld(true);
+  const dyn=new Set([MC.g,MC.feet,skates,...skG,jacks,truck,...spinners.filter(w=>w.par===truck).map(w=>w.g),flags,...beacons.map(b=>b.m),
+    turret,boomPivot,hookG,...ropes,lufB,lufR,rigF,...slings,chainLinks,...binders,gantry,...legs.flatMap(l=>[l.mid,l.rd,l.hd]),...headers,...trolleys,...links,
+    anchors,...cars.map(c=>c.g),sky,rain,spray,headPool,...tailRef,gnd,head,head.target]);
+  const inv=new THREE.Matrix4(),mw=new THREE.Matrix4(),wp=V();let before=0,after=0;
+  for(const C of[scene,...dyn]){if(C.isMesh||!C.children.length)continue;await tick();inv.copy(C.matrixWorld).invert();const groups=new Map();
+    const walk=o=>{for(const ch of o.children){if(dyn.has(ch)||!ch.visible)continue;const g=ch.geometry;
+      if(ch.isMesh&&!ch.isInstancedMesh&&!Array.isArray(ch.material)&&!ch.material.transparent&&!ch.children.length&&g.attributes.normal&&g.attributes.uv&&!Object.keys(g.morphAttributes).length&&ch.matrixWorld.determinant()>0){
+        ch.getWorldPosition(wp);const key=[ch.material.uuid,ch.castShadow,ch.receiveShadow,ch.renderOrder,g.index?1:0,Object.keys(g.attributes).sort().join(),Math.floor((wp.x+60)/90)].join('|');
+        let l=groups.get(key);if(!l)groups.set(key,l=[]);l.push(ch)}
+      walk(ch)}};
+    walk(C);
+    for(const l of groups.values()){if(l.length<2)continue;
+      const mg=mergeGeometries(l.map(m=>{mw.multiplyMatrices(inv,m.matrixWorld);return m.geometry.clone().applyMatrix4(mw)}),false);if(!mg)continue;
+      const m0=l[0],m=new THREE.Mesh(mg,m0.material);m.castShadow=m0.castShadow;m.receiveShadow=m0.receiveShadow;m.renderOrder=m0.renderOrder;C.add(m);
+      l.forEach(x=>x.parent.remove(x));before+=l.length;after++}}
+  // drop the groups the merge emptied, then freeze the local matrix of everything that never moves (no per-frame recompose)
+  let gone=1;while(gone){gone=0;const rm=[];scene.traverse(o=>{if(o!==scene&&!dyn.has(o)&&!o.children.length&&o.type==='Group')rm.push(o)});rm.forEach(o=>o.parent.remove(o));gone=rm.length}
+  const moves=new Set([sun.target,fillL.target]);
+  scene.updateMatrixWorld(true);
+  scene.traverse(o=>{if(o===scene||dyn.has(o)||moves.has(o)||o.isLight||o.isCamera)return;o.updateMatrix();o.matrixAutoUpdate=false});
+  let nodes=0;scene.traverse(()=>nodes++);return{before,after,nodes};
+}
+
+// ---------- boot: build -> compile in the background -> warm up -> show (the pre-rendered still covers all of this) ----------
+async function boot(){
+  // the drawn phone's big soft shadow costs ~70 ms of GPU raster the first time it is drawn (it used to hit as the plan section
+  // scrolls in, right at the end of the story). Draw one invisible copy now, while the still image is up, so that cost is paid here.
+  const warm=document.createElement('div');warm.className='ph';warm.setAttribute('aria-hidden','true');
+  warm.style.cssText='position:fixed;left:0;top:0;margin:0;opacity:.004;pointer-events:none;z-index:40';document.body.appendChild(warm);
+  await pmReady;await tick();
+  scene.environment=pm.fromScene(roomEnv,.04).texture;
+  roadMat.envMap=pm.fromScene(envScene,.02).texture;roadMat.needsUpdate=true;await tick();
+  try{window.__rigBake=await bake()}catch(e){console.warn('bake skipped',e)}
+  size();apply(window.STORY.p,0);
+  // every material in the story (also the ones that only appear later: chains, rain, spray, cars, gantry) compiles off the main thread
+  {const jobs=[],kids=[...scene.children];for(let i=0;i<kids.length;i++){jobs.push(renderer.compileAsync(kids[i],camera,scene));if(i%40===39)await tick()}await Promise.all(jobs)}
+  await fontsReady;
+  TXT.forEach(c=>{c.width=c.width;c.paint(c.getContext('2d'),c.width,c.height);c.txs.forEach(t=>t.needsUpdate=true)});
+  scene.traverse(o=>{const m=o.material;if(m)for(const mm of[].concat(m))for(const k of['map','emissiveMap','roughnessMap'])if(mm[k])renderer.initTexture(mm[k])});
+  // one hidden render per stage that brings in new things, so shadow-pass shaders and first texture uploads happen now, not mid-scroll
+  for(const p of[3.95,4.5,5.4,6.6]){apply(p,0);renderer.render(scene,camera);await tick()}
+  lagS=0;lastTr=0;spdS=0;lastT=0;
+  frame();
+  canvas.classList.add('on');document.getElementById('still').className='off';document.getElementById('poster').style.display='none';
+  warm.remove();
+  window.__rigFirst3D=performance.now();window.__rig3d=true;dispatchEvent(new Event('rig3d'));
+}
+boot();
 </script>
 </body>
 </html>

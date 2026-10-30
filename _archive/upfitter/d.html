@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ridgeback Build Desk · Truck equipment upfits</title>
+<meta name="description" content="Build your rig on your chassis, see payload and bay time, and send the build to the shop. Ridgeback Truck Equipment, Essex County, MA since 1979.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#edf0f4;--card:#fff;--ink:#0d1321;--ink2:#566074;--ink3:#8a93a6;--line:#e6e9ef;--blue:#3b5bfd;--blue2:#e8edff;--green:#13a05a;--green2:#e3f6eb;--amber:#e48a00;--amber2:#fff1d9;--mono:"Geist Mono",ui-monospace,monospace;--sh:0 1px 2px rgba(13,19,33,.05),0 8px 28px rgba(13,19,33,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 Geist,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:var(--mono)}
+.app{display:flex;align-items:center;gap:14px;padding:12px 22px;background:var(--bg);position:sticky;top:0;z-index:30}
+.mk{width:36px;height:36px;border-radius:10px;background:var(--ink);color:#fff;display:grid;place-items:center;font:700 14px/1 var(--mono)}
+.nm{margin-right:6px}.nm b{display:block;font-weight:700;font-size:16px;line-height:1.1}.nm small{display:block;font-size:12.5px;color:var(--ink3)}
+.chip{display:inline-flex;align-items:center;gap:7px;min-height:30px;padding:0 11px;border-radius:999px;background:var(--card);font:500 13px/1 Geist;color:var(--ink2);white-space:nowrap;box-shadow:var(--sh)}
+.chip i{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none}
+.chip.g{background:var(--green2);color:#0b6b3c;box-shadow:none}.chip.b{background:var(--blue2);color:#2a44c7;box-shadow:none}.chip.a{background:var(--amber2);color:#8a5200;box-shadow:none}
+.chip.ex{background:var(--ink);color:#fff;box-shadow:none}.chip.ex i{background:#ffd166}
+.sp{margin-left:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;font-weight:600;font-size:15px;white-space:nowrap}
+.btn-p{background:var(--blue);color:#fff}.btn-p:hover{background:#2c48e0}
+.btn-s{background:var(--card);box-shadow:var(--sh)}
+.btn svg{width:17px;height:17px}
+.grid{display:grid;grid-template-columns:330px minmax(0,1fr) 330px;gap:16px;padding:6px 22px 22px;min-height:calc(100vh - 62px)}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--sh);padding:18px}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ch h2,.ch h3{font-size:15px;font-weight:600}
+.ch span{font:500 12px/1 var(--mono);color:var(--ink3)}
+.lbl{font:500 12px/1 var(--mono);color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px}
+.lbl:first-of-type{margin-top:4px}
+.chs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cs{text-align:left;padding:10px 12px;border-radius:12px;background:#f5f7fa;min-height:62px}
+.cs b{display:block;font-weight:600;font-size:15.5px}
+.cs small{display:block;font:500 12px/1.3 var(--mono);color:var(--ink3);margin-top:2px}
+.cs[aria-pressed=true]{background:var(--blue);color:#fff}.cs[aria-pressed=true] small{color:#c9d3ff}
+.seg{display:flex;background:#f2f4f7;border-radius:12px;padding:3px;gap:2px}
+.seg button{flex:1;min-height:42px;border-radius:9px;font-size:14.5px;font-weight:500;color:var(--ink2);padding:0 4px}
+.seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(13,19,33,.12);font-weight:600}
+.seg button:disabled{opacity:.35;cursor:not-allowed}
+.seg+.seg{margin-top:6px}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:48px;width:100%;padding:0 2px;font-size:15px;font-weight:500;text-align:left}
+.sw small{display:block;font:500 12px/1.2 var(--mono);color:var(--ink3);font-weight:400}
+.sw .t{width:44px;height:26px;border-radius:999px;background:#d7dce5;position:relative;flex:none;transition:background .2s}
+.sw .t:after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s}
+.sw[aria-pressed=true] .t{background:var(--green)}.sw[aria-pressed=true] .t:after{transform:translateX(18px)}
+.note{font-size:13.5px;color:#9a5b00;background:var(--amber2);border-radius:10px;padding:8px 10px;margin-top:10px;display:none}
+.note.on{display:block}
+.live{display:flex;flex-direction:column;padding:18px 18px 16px}
+.lh{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lh h1{font-size:22px;font-weight:700;letter-spacing:-.01em;margin-right:auto}
+.stage{position:relative;flex:1;min-height:300px;margin:8px -18px 0;border-radius:0;background-image:radial-gradient(#d9dee7 1px,transparent 1.2px);background-size:18px 18px;overflow:hidden}
+.stage svg{position:absolute;left:3%;top:56%;width:94%;height:auto;transform:translateY(-50%);overflow:visible}
+.scan{position:absolute;top:0;bottom:0;width:2px;background:var(--blue);left:-4px;opacity:.9}
+.pins{position:absolute;inset:0;pointer-events:none}
+.pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center}
+.pin span{background:var(--ink);color:#fff;font:500 12.5px/1 Geist;padding:7px 9px;border-radius:8px;white-space:nowrap;box-shadow:0 4px 14px rgba(13,19,33,.18)}
+.pin span b{font-family:var(--mono);font-weight:500;color:#9fb0ff;margin-left:6px}
+.pin i{width:1.5px;height:34px;background:var(--ink)}
+.pin em{width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 0 2.5px var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:4px}
+.st{background:#f6f7fa;border-radius:12px;padding:10px 12px}
+.st small{display:block;font:500 11.5px/1.2 var(--mono);color:var(--ink3);text-transform:uppercase;letter-spacing:.05em}
+.st b{display:block;font:600 19px/1.3 var(--mono);margin-top:3px;white-space:nowrap}
+.meter{height:8px;border-radius:99px;background:#e4e8ef;margin-top:8px;overflow:hidden;display:flex}
+.meter i{display:block;height:100%}
+.meter .m1{background:#9aa5b8}.meter .m2{background:var(--blue)}
+.right{display:flex;flex-direction:column;gap:16px}
+.est .big{font:600 34px/1.05 var(--mono);letter-spacing:-.03em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.est .sub{font-size:13px;color:var(--ink3);margin:6px 0 12px}
+.est ul{list-style:none;font-size:14px}
+.est li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;background:linear-gradient(var(--line),var(--line)) top/100% 1px no-repeat}
+.est li span{font-family:var(--mono);color:var(--ink2);white-space:nowrap}
+.est li.e{color:var(--ink3)}
+.est .btn{width:100%;margin-top:12px;min-height:52px;font-size:16px}
+.sheet{display:none;clip-path:inset(0 0 100% 0)}
+.sheet .q{font:600 26px/1 var(--mono);margin:4px 0 10px}
+.tl{list-style:none;margin:10px 0 4px;font-size:14px}
+.card .tl li{display:flex;justify-content:flex-start;gap:10px;align-items:flex-start;padding:6px 0;position:relative;background:none}
+.tl li i{width:12px;height:12px;border-radius:50%;margin-top:4px;flex:none;box-shadow:0 0 0 3px #fff,0 0 0 4.5px #cfd5e0;background:#cfd5e0}
+.tl li.d i{background:var(--green);box-shadow:0 0 0 3px #fff,0 0 0 4.5px #bfe6cf}
+.tl li.n i{background:var(--amber);box-shadow:0 0 0 3px #fff,0 0 0 4.5px #f6dcae}
+.tl small{display:block;font:500 12px/1.3 var(--mono);color:var(--ink3)}
+.sheet .acts{display:flex;gap:8px;margin-top:10px}.sheet .acts .btn{flex:1}
+.phone{flex:1;display:flex;flex-direction:column}
+.dev{flex:1;min-height:200px;width:min(100%,230px);margin:0 auto;border-radius:30px;background:#141925;padding:8px;position:relative;overflow:hidden}
+.dev .scr{position:absolute;inset:8px;border-radius:24px;background:linear-gradient(180deg,#232b3d,#121722);padding:14px 10px;overflow:hidden}
+.dev .tm{color:#e8ecf5;text-align:center;font:600 34px/1 Geist;letter-spacing:-.02em;margin-top:6px}
+.dev .dt{color:#8b95aa;text-align:center;font-size:12.5px;margin:4px 0 12px}
+.dev .idle{color:#6f7a91;text-align:center;font:500 12.5px/1.4 var(--mono);margin-top:18px}
+.nt{background:#fff;box-shadow:0 10px 30px rgba(13,19,33,.25);border-radius:14px;padding:10px 11px;visibility:hidden}
+.nt .h{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink3);font-weight:500}
+.nt .h i{width:20px;height:20px;border-radius:6px;background:var(--blue);color:#fff;display:grid;place-items:center;font:700 9px/1 var(--mono);font-style:normal}
+.nt .h span{margin-left:auto}
+.nt b{display:block;font-size:14.5px;line-height:1.3;margin-top:6px}
+.nt p{font:500 12px/1.4 var(--mono);color:var(--ink2);margin-top:3px}
+.mbar{display:none}
+section{padding:80px 22px}
+.wrap{max-width:1240px;margin:0 auto}
+.sh{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:26px;flex-wrap:wrap}
+.sh h2{font-size:40px;line-height:1.05;font-weight:700;letter-spacing:-.025em;max-width:640px}
+.sh p{color:var(--ink2);max-width:420px;font-size:17px}
+.fleet{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th{font:500 12px/1 var(--mono);color:var(--ink3);text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:0 10px 10px 0}
+td{padding:11px 10px 11px 0;background:linear-gradient(var(--line),var(--line)) top/100% 1px no-repeat;white-space:nowrap}
+td.m{font-family:var(--mono);color:var(--ink2)}
+.fl ul{list-style:none}.fl li{padding:12px 0;background:linear-gradient(var(--line),var(--line)) top/100% 1px no-repeat}.fl li:first-child{background:none;padding-top:0}
+.fl li b{display:block;font-size:16px}.fl li span{color:var(--ink2);font-size:15px}
+.inst{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.inst svg{width:100%;height:84px;margin:4px 0 12px}
+.inst h3{font-size:18px;font-weight:600}.inst p{color:var(--ink2);font-size:15px;margin-top:3px}
+.inst .chip{margin-top:12px;box-shadow:none;background:#f2f4f7}
+.track{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;position:relative}
+.track .card{padding:16px}
+.track .dot{display:flex;align-items:center;gap:8px;font:500 12px/1 var(--mono);color:var(--ink3);margin-bottom:12px}
+.track .dot i{width:10px;height:10px;border-radius:50%;background:var(--blue)}
+.track h3{font-size:17px;font-weight:600}.track p{color:var(--ink2);font-size:15px;margin-top:4px}
+.bar2{height:6px;border-radius:9px;background:#e1e6ee;margin:-4px 0 18px;overflow:hidden}.bar2 i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--blue),#7d93ff)}
+.area{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+.map svg{width:100%;height:auto;display:block}
+.towns{columns:2;font-size:15.5px}.towns li{list-style:none;display:flex;justify-content:space-between;padding:8px 0;break-inside:avoid;background:linear-gradient(var(--line),var(--line)) top/100% 1px no-repeat}
+.towns li span{font-family:var(--mono);color:var(--ink3);font-size:13px}
+.cta{background:var(--ink);color:#fff;border-radius:24px;padding:52px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cta h2{font-size:38px;font-weight:700;letter-spacing:-.02em;line-height:1.08}
+.cta p{color:#a9b3c6;margin-top:8px}
+.cta .acts{display:flex;gap:10px;flex-wrap:wrap}
+footer{padding:20px 22px 40px;color:var(--ink3);font-size:13.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;max-width:1284px;margin:0 auto}
+@media (max-width:1200px){.grid{grid-template-columns:300px minmax(0,1fr)}.right{grid-column:1/-1;flex-direction:row}.right>*{flex:1}.hide-md{display:none}}
+@media (max-width:820px){
+ .app{padding:10px 14px;gap:8px}.nm small,.app .chip,.app .btn-s{display:none}.app .btn{min-height:44px;padding:0 13px;font-size:14.5px}
+ .grid{display:flex;flex-direction:column;padding:0 12px 0;gap:10px;min-height:0}
+ .live{order:1;padding:12px 12px 10px}.lh h1{font-size:18px}.lh .chip{min-height:26px;font-size:12px;padding:0 9px}.lh .hide-sm{display:none}
+ .stage{flex:none;min-height:0;height:190px;margin:6px -12px 0}.stage svg{top:60%;left:3%;width:94%}.stage .exm{display:inline-flex}
+ .pin span{font-size:11.5px;padding:5px 7px}.pin span b{display:none}.pin i{height:14px}
+ .stats{grid-template-columns:repeat(2,1fr);gap:6px;display:none}
+ .build{order:2;padding:12px}.build .ch{display:none}.lbl{display:none}
+ .chs{grid-template-columns:repeat(4,1fr);gap:5px}.cs{padding:7px 4px;min-height:50px;text-align:center}.cs b{font-size:14.5px;white-space:nowrap}.cs small{font-size:10.5px;white-space:nowrap}
+ .seg button{min-height:42px;font-size:14px}
+ .opts2{display:grid;grid-template-columns:1.45fr 1fr;gap:6px;margin-top:6px}.opts2 .seg+.seg{margin-top:0}.opts2 .seg:nth-child(3){grid-column:1/-1}.seg button{padding:0 2px}
+ .sws{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+ .sw{background:#f2f4f7;border-radius:12px;padding:0 8px;min-height:46px;flex-direction:column;justify-content:center;align-items:flex-start;gap:4px;font-size:13.5px}.sw small{display:none}.sw .t{width:30px;height:16px}.sw .t:after{width:12px;height:12px;left:2px;top:2px}.sw[aria-pressed=true] .t:after{transform:translateX(14px)}
+ .right{order:3;flex-direction:column}
+ .est{position:sticky;bottom:0;z-index:20;border-radius:18px 18px 0 0;padding:10px 14px 12px;margin:0 -12px;box-shadow:0 -6px 24px rgba(13,19,33,.10);display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 10px}
+ .est .ch,.est ul,.est .sub{display:none}.est .big{font-size:21px}.est .btn{width:auto;margin:0;min-height:50px;font-size:15px;padding:0 16px}
+ .est .ml{display:block!important;font:500 11px/1.2 var(--mono);color:var(--ink3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+ .phone{display:none}
+ .sheet .q{font-size:22px}
+ section{padding:56px 14px}.sh h2{font-size:30px}
+ .fleet,.inst,.track,.area{grid-template-columns:1fr}.fleet .card{overflow-x:auto}
+ .towns{font-size:15px}
+ .cta{padding:34px 22px}.cta h2{font-size:28px}
+ footer{padding:18px 14px 36px}
+ .mnt{display:block!important}
+ body.sent .build>*:not(.sheet){display:none}body.sent .pins,body.sent .exm{visibility:hidden}
+}
+.ml{display:none}
+.exm{display:none;position:absolute;left:10px;top:8px;z-index:5;min-height:26px;font-size:12px}
+.mnt{display:none;position:absolute;left:10px;right:10px;top:8px;z-index:6}
+@media (min-width:821px){.opts2,.sws{display:block}}
+</style>
+</head>
+<body>
+<header class="app">
+ <div class="mk">RB</div>
+ <div class="nm"><b>Ridgeback</b><small>Truck Equipment · since 1979</small></div>
+ <span class="chip hide-md"><i></i>Shop open · 7:00 to 4:30</span>
+ <span class="chip hide-md" style="margin-left:0">Next open bay · Mon</span>
+ <span class="chip ex sp"><i></i>Exclusive · Essex County, MA</span>
+ <a class="btn btn-s" href="#build">Get a quote</a>
+ <a class="btn btn-p" href="tel:+19785550142"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>(978) 555-0142</a>
+</header>
+
+<main class="grid" id="build">
+ <div class="card build">
+  <div class="ch"><h2>Build your rig</h2><span>step 1–2</span></div>
+  <p class="lbl">Chassis class</p>
+  <div class="chs" id="chs"></div>
+  <p class="lbl">Equipment</p>
+  <div class="opts2">
+   <div class="seg"><button data-k="dump" data-v="none">No body</button><button data-k="dump" data-v="9">9 ft</button><button data-k="dump" data-v="11">11 ft</button></div>
+   <div class="seg"><button data-k="mat" data-v="steel">Steel</button><button data-k="mat" data-v="alum">Aluminum</button></div>
+   <div class="seg"><button data-k="plow" data-v="none">No plow</button><button data-k="plow" data-v="8">8 ft straight</button><button data-k="plow" data-v="9v">9 ft V</button></div>
+  </div>
+  <div class="sws">
+   <button class="sw" data-t="spreader"><span>Spreader<small>tailgate, salt / sand</small></span><span class="t"></span></button>
+   <button class="sw" data-t="strobes"><span>LED strobes<small>roof bar + grille + rear</small></span><span class="t"></span></button>
+   <button class="sw" data-t="liftgate"><span>Liftgate<small>rail gate, 1,600 lb</small></span><span class="t"></span></button>
+  </div>
+  <p class="note" id="note" aria-live="polite"></p>
+ </div>
+
+ <div class="card live">
+  <div class="lh"><h1>Live build</h1><span class="chip b" id="cc">F-550 class</span><span class="chip g" id="ci">1 item</span><span class="chip a hide-sm" id="cb">Bay time 6–9 days</span></div>
+  <div class="stage" id="stage"><span class="chip ex exm"><i></i>Exclusive · Essex County, MA</span><svg id="tr" viewBox="-44 -134 404 146" aria-label="Your truck build"><defs><linearGradient id="gCab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dfe4ec"/></linearGradient><linearGradient id="gGl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a4660"/><stop offset="1" stop-color="#151b28"/></linearGradient><linearGradient id="gSt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a5466"/><stop offset="1" stop-color="#2a313e"/></linearGradient><linearGradient id="gAl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef1f5"/><stop offset="1" stop-color="#b9c1cc"/></linearGradient><linearGradient id="gPl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5d78ff"/><stop offset="1" stop-color="#2c46e0"/></linearGradient><filter id="bl" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="3"/></filter></defs><g id="trg"></g></svg><div class="scan" id="scan"></div><div class="pins" id="pins"></div>
+   <div class="mnt" id="mnt"><div class="nt"><div class="h"><i>RB</i>Ridgeback builds<span>now</span></div><b class="ntt">New build request</b><p class="ntp"></p></div></div>
+  </div>
+  <div class="stats" id="stats"></div>
+ </div>
+
+ <div class="right">
+  <div class="card est">
+   <div class="ch"><h3>Estimate</h3><span>installed, sample ranges</span></div>
+   <div><span class="ml">Estimate range</span><div class="big" id="big">$0</div></div>
+   <p class="sub">Estimate range, final quote from the shop.</p>
+   <ul id="lines"></ul>
+   <div class="sheet" id="sheet" aria-live="polite">
+    <span class="chip g" style="margin-top:12px"><i></i>Sent to shop</span>
+    <div class="q" id="qn" style="margin-top:10px">RB-24117</div>
+    <ul class="tl"><li class="d"><i></i><div>Build sent<small id="tsent">just now</small></div></li><li class="n"><i></i><div>Estimator calls you<small>within 1 business day</small></div></li><li><i></i><div>Quote locked, bay booked<small id="tbay">next open bay Mon</small></div></li></ul>
+    <div class="acts"><button class="btn btn-s" id="edit">Edit build</button><a class="btn btn-s" href="tel:+19785550142">Call shop</a></div>
+   </div>
+   <button class="btn btn-p" id="send">Send this build</button>
+  </div>
+  <div class="card phone">
+   <div class="ch"><h3>Shop owner's phone</h3><span>live preview</span></div>
+   <div class="dev"><div class="scr"><div class="tm">7:42</div><div class="dt">Tuesday · Haverhill shop</div><div class="nt"><div class="h"><i>RB</i>Ridgeback builds<span>now</span></div><b class="ntt">New build request</b><p class="ntp"></p></div><div class="idle" id="idle">Waiting for a build…</div></div></div>
+  </div>
+ </div>
+</main>
+
+<section id="fleets"><div class="wrap">
+ <div class="sh"><h2>Built for town and fleet trucks.</h2><p>DPWs, school districts and contractors get one view of every unit we've upfit: build, service, and fall readiness.</p></div>
+ <div class="fleet">
+  <div class="card"><div class="ch"><h3>Fleet view</h3><span class="chip a" style="box-shadow:none">Sample data</span></div>
+   <table><thead><tr><th>Unit</th><th>Chassis</th><th>Equipment</th><th>Fall check</th></tr></thead><tbody>
+   <tr><td class="m">#14</td><td>F-550 class</td><td>V-plow + spreader</td><td><span class="chip g"><i></i>Done Oct 12</span></td></tr>
+   <tr><td class="m">#15</td><td>F-550 class</td><td>V-plow + spreader</td><td><span class="chip g"><i></i>Done Oct 12</span></td></tr>
+   <tr><td class="m">#22</td><td>Class 6-7</td><td>11 ft dump + plow</td><td><span class="chip a">Booked Nov 3</span></td></tr>
+   <tr><td class="m">#31</td><td>1-ton</td><td>Strobes + liftgate</td><td><span class="chip b">In bay 2</span></td></tr>
+   </tbody></table></div>
+  <div class="card fl"><ul><li><b>Quotes to your bid spec</b><span>Line by line, the way purchasing needs it.</span></li><li><b>Batch upfits</b><span>Same build across the fleet, checked the same way.</span></li><li><b>Fall readiness checks</b><span>Plows, spreaders and strobes before November.</span></li></ul></div>
+ </div>
+</div></section>
+
+<section id="install" style="padding-top:20px"><div class="wrap">
+ <div class="sh"><h2>What we install.</h2><p>Every job leaves with a build sheet and a walk-around.</p></div>
+ <div class="inst" id="inst"></div>
+</div></section>
+
+<section id="process" style="padding-top:20px"><div class="wrap">
+ <div class="sh"><h2>How an upfit goes.</h2><p>Drop it off bare. Pick it up working. You see where it is the whole time.</p></div>
+ <div class="bar2"><i></i></div>
+ <div class="track">
+  <div class="card"><div class="dot"><i></i>Day 1</div><h3>Walk the truck</h3><p>Chassis, job and weight, looked at before we quote.</p></div>
+  <div class="card"><div class="dot"><i></i>2 business days</div><h3>Written quote</h3><p>Every line priced. No surprises at pickup.</p></div>
+  <div class="card"><div class="dot"><i></i>Your date</div><h3>Drop-off</h3><p>Into a bay with the build sheet on the door.</p></div>
+  <div class="card"><div class="dot"><i></i>1 to 2 weeks</div><h3>Build &amp; wire</h3><p>Mount, hydraulics, wiring, lights, bay test.</p></div>
+  <div class="card"><div class="dot"><i></i>Pickup</div><h3>Walk-around</h3><p>Every function run with you first.</p></div>
+ </div>
+</div></section>
+
+<section id="area" style="padding-top:20px"><div class="wrap">
+ <div class="sh"><h2>Service area.</h2><p>Shop in Haverhill, MA. Mon to Fri 7:00 to 4:30, Saturdays in plow season by appointment.</p></div>
+ <div class="area"><div class="card map"><svg id="map" viewBox="0 0 400 330" aria-label="Map of towns served in Essex County"></svg></div><div class="card"><ul class="towns" id="towns"></ul></div></div>
+</div></section>
+
+<section style="padding-top:20px"><div class="wrap cta"><div><h2>Bring us the chassis.</h2><p>Call the shop or send a build. You talk to the people who build it.</p></div><div class="acts"><a class="btn btn-p" href="tel:+19785550142">Call (978) 555-0142</a><a class="btn btn-s" href="#build" style="color:var(--ink)">Build your rig</a></div></div></section>
+<footer><span>Ridgeback Truck Equipment · Haverhill, MA · Exclusive in Essex County, MA</span><span>Concept demo · fictional business · IC Business Systems</span></footer>
+
+<script src="../../vendor/gsap.min.js"></script>
+<script>
+/* ---- Ridgeback build model (shared) ---- */
+const CH={
+ c1:{k:'c1',big:'1-ton',sub:'F-350 class',long:'1-ton / F-350 class',short:'1-ton',wb:145,r:16,fr:34,hoodL:50,hoodH:50,cabTop:80,cabL:62,fo:36,ro:50,ws:20,style:'pickup',f:1,gvwr:14000,curb:7300,w:78},
+ c2:{k:'c2',big:'F-550',sub:'class',long:'F-550 class',short:'F-550',wb:169,r:18,fr:38,hoodL:56,hoodH:57,cabTop:87,cabL:64,fo:40,ro:54,ws:16,style:'md',f:1,gvwr:19500,curb:7800,w:80},
+ c3:{k:'c3',big:'Ram 5500',sub:'class',long:'Ram 5500 class',short:'5500',wb:173,r:18,fr:39,hoodL:58,hoodH:61,cabTop:89,cabL:64,fo:41,ro:54,ws:14,style:'square',f:1.03,gvwr:19500,curb:8000,w:80},
+ c4:{k:'c4',big:'Class 6-7',sub:'6500HD class',long:'Class 6-7 / 6500HD class',short:'Class 6-7',wb:200,r:21,fr:44,hoodL:72,hoodH:68,cabTop:108,cabL:66,fo:44,ro:62,ws:11,style:'conv',f:1.32,gvwr:26000,curb:11500,w:90}
+};
+const PRICE={dump:{'9':{steel:[7800,10400],alum:[10600,13900]},'11':{steel:[10900,14200],alum:[13800,18000]}},plow:{'8':[5600,7200],'9v':[7900,9800]},spreader:[4200,6900],strobes:[1100,2400],liftgate:[3900,6200]};
+const WEIGHT={dump:{'9':{steel:2400,alum:1300},'11':{steel:2900,alum:1600}},plow:{'8':750,'9v':1000},spreader:650,strobes:30,liftgate:1100};
+function estimate(s){const c=CH[s.chassis];let lo=0,hi=0;const add=(r,f)=>{lo+=r[0]*(f||1);hi+=r[1]*(f||1)};
+ if(s.dump!=='none')add(PRICE.dump[s.dump][s.mat],c.f);if(s.plow!=='none')add(PRICE.plow[s.plow],c.f);
+ if(s.spreader)add(PRICE.spreader);if(s.strobes)add(PRICE.strobes);if(s.liftgate)add(PRICE.liftgate);
+ const q=v=>Math.round(v/100)*100;return[q(lo),q(hi)];}
+function addedWeight(s){let w=0;if(s.dump!=='none')w+=WEIGHT.dump[s.dump][s.mat];if(s.plow!=='none')w+=WEIGHT.plow[s.plow];if(s.spreader)w+=WEIGHT.spreader;if(s.strobes)w+=WEIGHT.strobes;if(s.liftgate)w+=WEIGHT.liftgate;return w;}
+function buildParts(s){const p=[];if(s.dump!=='none')p.push(s.dump+' ft '+(s.mat==='alum'?'alum. ':'')+'dump');if(s.plow==='8')p.push('8 ft plow');if(s.plow==='9v')p.push('V‑plow');if(s.spreader)p.push('spreader');if(s.liftgate)p.push('liftgate');if(s.strobes)p.push('LED strobes');return p;}
+function buildName(s){const p=buildParts(s);return CH[s.chassis].short+' · '+(p.length?p.join(' + '):'cab & chassis');}
+function applyRules(s,changed){let note='';
+ if(s.chassis==='c1'&&s.dump==='11'){s.dump='9';note='11 ft bodies need an F-550 class chassis or bigger, so this one is 9 ft.';}
+ if(s.spreader&&s.liftgate){if(changed==='liftgate'){s.spreader=false;note='Liftgate and spreader share the rear of the truck. Spreader taken off.';}else{s.liftgate=false;note='Spreader and liftgate share the rear of the truck. Liftgate taken off.';}}
+ return note;}
+const money=v=>'$'+Math.round(v).toLocaleString('en-US');
+const kmoney=v=>'$'+(Math.round(v/100)/10).toFixed(1)+'K';
+function buildDays(s){let d=2;if(s.dump!=='none')d+=4;if(s.plow!=='none')d+=2;if(s.spreader)d+=1;if(s.liftgate)d+=2;if(s.strobes)d+=1;return[d,d+3];}
+/* path builder: y-up inches, outputs SVG (y flipped) or THREE.Shape */
+function PB(){const c=[];const f=v=>(+v).toFixed(1);const o={
+ M(x,y){c.push(['M',x,y]);return o},L(x,y){c.push(['L',x,y]);return o},Q(a,b,x,y){c.push(['Q',a,b,x,y]);return o},
+ A(cx,cy,R,a0,a1){c.push(['A',cx,cy,R,a0,a1]);return o},Z(){c.push(['Z']);return o},cmds:c,
+ d(){return c.map(q=>{if(q[0]==='M'||q[0]==='L')return q[0]+f(q[1])+' '+f(-q[2]);if(q[0]==='Q')return 'Q'+f(q[1])+' '+f(-q[2])+' '+f(q[3])+' '+f(-q[4]);
+  if(q[0]==='A'){const[,cx,cy,R,a0,a1]=q;const ex=cx+R*Math.cos(a1),ey=cy+R*Math.sin(a1);return 'A'+f(R)+' '+f(R)+' 0 '+(Math.abs(a1-a0)>Math.PI?1:0)+' '+(a1>a0?0:1)+' '+f(ex)+' '+f(-ey);}return 'Z';}).join(' ')},
+ shape(T){const s=new T.Shape();c.forEach(q=>{if(q[0]==='M')s.moveTo(q[1],q[2]);else if(q[0]==='L')s.lineTo(q[1],q[2]);else if(q[0]==='Q')s.quadraticCurveTo(q[1],q[2],q[3],q[4]);else if(q[0]==='A')s.absarc(q[1],q[2],q[3],q[4],q[5],q[5]<q[4]);});return s;}};return o;}
+function rect(x,y,w,h){return PB().M(x,y).L(x+w,y).L(x+w,y+h).L(x,y+h).Z();}
+function rrect(x,y,w,h,r){r=Math.min(r,w/2,h/2);return PB().M(x+r,y).L(x+w-r,y).Q(x+w,y,x+w,y+r).L(x+w,y+h-r).Q(x+w,y+h,x+w-r,y+h).L(x+r,y+h).Q(x,y+h,x,y+h-r).L(x,y+r).Q(x,y,x+r,y).Z();}
+const D=(...a)=>a.map(p=>p.d()).join(' ');
+function rigGeom(s){
+ const c=CH[s.chassis],F=c.fo,R=F+c.wb,E=R+c.ro,r=c.r,fr=c.fr,nose=4,cowl=nose+c.hoodL,back=cowl+c.cabL,bot=fr-7,hH=c.hoodH,top=c.cabTop,ws=c.ws;
+ const g={c,F,R,E,r,fr,nose,cowl,back,bot,hH,top};
+ const Ra=r+4,dy=bot-r,dx=Math.sqrt(Ra*Ra-dy*dy),aa=Math.asin(dy/Ra);
+ const b=PB();let hEnd=hH,lampY=hH-11;
+ if(c.style==='pickup'){b.M(nose+3,bot).L(nose,bot+5).L(nose-1,hH-9).Q(nose-0.5,hH-1,nose+9,hH-1).L(cowl,hH);}
+ else if(c.style==='md'){b.M(nose+1,bot).L(nose,hH-6).Q(nose,hH,nose+6,hH).L(cowl,hH+1);hEnd=hH+1;}
+ else if(c.style==='square'){b.M(nose,bot).L(nose,hH-2.5).Q(nose,hH,nose+2.5,hH).L(cowl,hH);}
+ else{b.M(nose+2,bot).L(nose,bot+6).L(nose,hH-21).Q(nose+1,hH-13,nose+11,hH-12).L(cowl-6,hH-1).Q(cowl-2,hH,cowl,hH);lampY=hH-25;}
+ b.L(cowl+ws-2,top-1.5).Q(cowl+ws,top,cowl+ws+4,top).L(back-4,top).Q(back,top,back,top-4).L(back,bot).L(F+dx,bot).A(F,r,Ra,aa,Math.PI-aa).Z();
+ g.body=b;g.hEnd=hEnd;
+ const belt=hH+4,wt=top-4,xw=y=>cowl+ws*(y-hEnd)/(top-hEnd);g.belt=belt;
+ g.win=PB().M(xw(belt)+3,belt).L(xw(wt)+3,wt).L(back-9,wt).Q(back-7,wt,back-7,wt-2).L(back-7,belt).Z();
+ g.windshield={x0:cowl,y0:hEnd,x1:cowl+ws-2,y1:top-1.5};
+ g.seams=PB().M(cowl+1.5,bot+3).L(cowl+1.5,hEnd+0.5).M(back-4.5,bot+3).L(back-4.5,wt+1).M(cowl+1.5,belt-1).L(back-4.5,belt-1);
+ g.handle=rrect(back-13,belt-6,6,1.8,0.9);
+ g.bumper=rrect(-2,fr-14,11,10,2);
+ g.grille=rect(nose-1.6,bot+4,2.4,lampY-bot-6);
+ g.lamp=rrect(nose-1,lampY,6,5.5,1.5);
+ g.frame=rect(2,fr-8,E-2,8);
+ const tx=back+6,tw=Math.min(38,R-r-12-tx);g.tank=rrect(tx,fr-24,tw,15,5);
+ g.step=rrect(back-24,bot-6,16,3,1);
+ g.stack=c.style==='conv'?D(rrect(back+2,fr,4,top+12-fr,1.5),rect(back+1.4,top+10,5.2,2.5)):null;
+ g.mirror=c.style==='pickup'?D(rrect(cowl-5,belt+1,7,9,2),rect(cowl+1,belt+3,4,1.5)):D(rrect(cowl-6,belt-3,4.5,19,1.5),rect(cowl-2,belt+1,6,1.4),rect(cowl-2,belt+12,6,1.4));
+ g.wheels=[{x:F,y:r,r,dual:false},{x:R,y:r,r,dual:true}];
+ g.flap=rect(R+r+5,4,2.5,fr-12);
+ g.tail=rect(E-3,fr-6.5,3,4);
+ let minX=-2,maxX=E,maxY=top;
+ if(s.dump!=='none'){const L=s.dump==='9'?108:132,H=(s.dump==='9'?24:28)+(c.k==='c4'?6:0),yF=fr+5,yT=yF+H,xf=E-L,xr=E;
+  let ribs=[],ribX=[];if(s.mat==='steel'){const n=s.dump==='9'?6:7,st=(L-14)/n;for(let i=0;i<=n;i++){ribX.push(xf+6+i*st+1.3);ribs.push(rect(xf+6+i*st,yF+1,2.6,H-3.5));}}else{ribs.push(rect(xf+1,yF+H*0.34,L-2,0.9),rect(xf+1,yF+H*0.67,L-2,0.9));}
+  g.dump={L,H,yF,yT,xf,xr,ribX,sub:rect(xf+2,fr,L-4,5),side:rect(xf,yF,L,H),rail:rect(xf-1,yT-2.5,L+2,3.5),ribs:D(...ribs),
+   front:PB().M(xf-4,yF).L(xf-4,top+5).L(xf+3,top+5).L(xf+5,yT).L(xf,yT).L(xf,yF).Z(),canopy:PB().M(xf-20,top+4.5).L(xf+8,top+4).L(xf+8,top+8).L(xf-17,top+7.5).Q(xf-20,top+7.5,xf-20,top+5.5).Z(),gate:rrect(xr,yF-2,3.5,H+4,1),hinge:rect(xr-1,yT-1,5,2.5)};
+  maxX=E+3.5;maxY=Math.max(maxY,top+7);}
+ if(s.plow!=='none'){const v=s.plow==='9v',Hb=(v?35:31)+(c.k==='c4'?5:0),bx=-22;
+  const blade=PB().M(bx-4,1.5).Q(bx+9,Hb*0.45,bx-9,Hb).L(bx-4,Hb+1.5).Q(bx+14,Hb*0.5,bx+3,1.5).Z();
+  g.plow={v,Hb,bx,blade,edge:rect(bx-5,0.5,9,3.2),brace:rect(bx+6,5,3,Hb-11),
+   mount:D(PB().M(bx+8,7).L(-1,fr-13).L(-1,fr-7).L(bx+8,15).Z(),rect(-5,fr-17,4,15)),
+   ram:D(PB().M(bx+8,Hb-9).L(-3,fr-3).L(-3,fr-0.5).L(bx+8,Hb-6).Z()),
+   lights:D(rect(nose-3,fr-3,1.8,hH+10-(fr-3)),rrect(nose-7,hH+9,10,5.5,1.5)),
+   wing:v?PB().M(bx+3,1.5).Q(bx+15,Hb*0.45,bx-1,Hb-3).L(bx+3,Hb-1.5).Q(bx+19,Hb*0.5,bx+9,1.5).Z():null};
+  minX=bx-10;}
+ if(s.spreader){const x0=E+5;g.spr={x0,hopper:PB().M(x0,fr+22).L(x0+26,fr+22).L(x0+19,fr-2).L(x0+7,fr-2).Z(),lip:rect(x0-1,fr+20.5,28,3),arm:rect(E-2,fr+3,8,3),chute:rect(x0+10,fr-8,6,6),spin:{cx:x0+13,cy:fr-10,rx:11,ry:2.2}};maxX=Math.max(maxX,x0+28);}
+ if(s.liftgate){g.lift={plat:rect(E+6,2.5,38,3.5),arms:D(PB().M(E-1,fr-7).L(E+12,6).L(E+15.5,6).L(E+2.5,fr-7).Z(),PB().M(E-4,fr-12).L(E+22,6).L(E+25.5,6).L(E-0.5,fr-12).Z()),box:rrect(E-26,fr-18,20,9,1.5)};maxX=Math.max(maxX,E+44);}
+ if(s.strobes){const ry=(g.dump?g.dump.yT:fr)+0.5;g.str={bar:rrect(cowl+ws+8,top,back-cowl-ws-16,4,1.5),rear:rect(E-5,ry,4,4),front:rect(nose-1.5,lampY-6,3,3.5)};maxY=Math.max(maxY,top+4);}
+ g.dims={minX,maxX,oal:maxX-minX,wb:c.wb,ca:R-back,bodyL:g.dump?g.dump.L:0,height:maxY};
+ return g;}
+
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,G=!RM&&window.gsap;
+const S={chassis:'c2',dump:'9',mat:'steel',plow:'none',spreader:false,strobes:false,liftgate:false};
+let quote=24117,sent=false,prev=null;
+const $=q=>document.querySelector(q),$$=q=>[...document.querySelectorAll(q)];
+const f=v=>v.toLocaleString('en-US');
+$('#chs').innerHTML=Object.values(CH).map(c=>`<button class="cs" data-c="${c.k}" aria-pressed="false"><b>${innerWidth<820?c.short:c.long.split(' / ')[0]}</b><small>${innerWidth<820?f(c.gvwr/1000)+'K lb':'GVWR '+f(c.gvwr)+' lb'}</small></button>`).join('');
+function keys(s){return{chassis:s.chassis,dump:s.dump==='none'?'':s.dump+s.mat,plow:s.plow==='none'?'':s.plow,spreader:s.spreader?1:'',liftgate:s.liftgate?1:'',strobes:s.strobes?1:''};}
+function draw(changed){
+ const g=rigGeom(S),K=keys(S),T=$('#trg');let h='';const P=(d,fill,p,x)=>`<path d="${d}" fill="${fill}" ${p?`data-p="${p}"`:''} ${x||''}/>`;
+ h+=`<ellipse cx="${(g.dims.minX+g.dims.maxX)/2}" cy="1" rx="${g.dims.oal/2+6}" ry="4" fill="#0d1321" opacity=".22" filter="url(#bl)"/>`;
+ h+=P(g.frame.d(),'#2a313e')+P(g.tank.d(),'url(#gAl)')+P(g.step.d(),'#2a313e')+(g.stack?P(g.stack,'#9aa3b2'):'');
+ if(g.lift)h+=`<g data-p="liftgate">`+P(D(g.lift.box)+' '+g.lift.arms,'#2a313e')+P(g.lift.plat.d(),'url(#gAl)')+`</g>`;
+ if(g.dump){const d=g.dump,al=S.mat==='alum';h+=`<g data-p="dump">`+P(d.sub.d(),'#2a313e')+P(D(d.side,d.front,d.canopy,d.gate),al?'url(#gAl)':'url(#gSt)')+P(d.ribs+' '+d.rail.d()+' '+d.hinge.d(),al?'#a3acb9':'#222833')+`</g>`;}
+ if(g.spr){const sp=g.spr;h+=`<g data-p="spreader">`+P(D(sp.arm,sp.hopper,sp.lip,sp.chute),'url(#gAl)')+`<ellipse cx="${sp.spin.cx}" cy="${-sp.spin.cy}" rx="${sp.spin.rx}" ry="${sp.spin.ry}" fill="#2a313e"/></g>`;}
+ h+=P(g.body.d(),'url(#gCab)')+P(g.win.d(),'url(#gGl)')+`<path d="${g.seams.d()}" fill="none" stroke="#b7bfcc" stroke-width=".7"/>`+P(g.mirror,'#2a313e')+P(g.bumper.d(),'#2a313e')+P(g.grille.d(),'#2a313e')+P(g.lamp.d(),'#fff7d6')+P(g.handle.d(),'#8d96a6')+P(D(g.flap,g.tail),'#1b2029');
+ g.wheels.forEach(w=>{h+=`<circle cx="${w.x}" cy="${-w.y}" r="${w.r}" fill="#1b2029"/><circle cx="${w.x}" cy="${-w.y}" r="${w.r*.62}" fill="#c3cad4"/><circle cx="${w.x}" cy="${-w.y}" r="${w.r*.5}" fill="#dfe4ea"/><circle cx="${w.x}" cy="${-w.y}" r="${w.r*.2}" fill="#8d96a6"/>`;});
+ if(g.plow){const p=g.plow;h+=`<g data-p="plow">`+P(p.mount+' '+p.ram+' '+p.lights,'#2a313e')+(p.wing?P(p.wing.d(),'#2238b8'):'')+P(p.blade.d(),'url(#gPl)')+P(D(p.edge,p.brace),'#2a313e')+`</g>`;}
+ if(g.str)h+=`<g data-p="strobes">`+P(D(g.str.bar,g.str.rear,g.str.front),'#f59e0b','','class="stb"')+`</g>`;
+ T.innerHTML=h;const vw=Math.max(336,g.dims.oal+46),vb=`${g.dims.minX-18} -134 ${vw} 146`;$('#tr').setAttribute('viewBox',vb);
+ pins(g);
+ if(G&&prev){
+  if(prev.chassis!==K.chassis){const sc=$('#scan'),st=$('#stage');gsap.fromTo('#tr',{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:.9,ease:'power2.inOut'});gsap.fromTo(sc,{left:'4%',opacity:1},{left:'96%',duration:.9,ease:'power2.inOut',onComplete:()=>gsap.set(sc,{opacity:0})});}
+  else for(const k of ['dump','plow','spreader','liftgate','strobes'])if(K[k]&&K[k]!==prev[k]){const e=T.querySelector(`[data-p=${k}]`);if(e)gsap.fromTo(e,{clipPath:'inset(100% 0 0 0)'},{clipPath:'inset(0% 0 0 0)',duration:.6,ease:'power3.out'});
+   const pn=$(`.pin[data-p=${k}] span`);if(pn)gsap.fromTo(pn,{scale:.5},{scale:1,duration:.45,ease:'back.out(2.2)',delay:.2,transformOrigin:'50% 100%'});}}
+ prev=K;}
+function pins(g){const svg=$('#tr'),vb=svg.viewBox.baseVal,st=$('#stage').getBoundingClientRect(),sr=svg.getBoundingClientRect();
+ const at=(x,y)=>[(sr.left-st.left)+(x-vb.x)/vb.width*sr.width,(sr.top-st.top)+(y-vb.y)/vb.height*sr.height];
+ const L=[],ph=innerWidth<820,c=CH[S.chassis];
+ if(g.dump)L.push(['dump',g.dump.xf+g.dump.L*.55,-g.dump.yT,(ph?S.dump+' ft dump':'Dump body · '+S.dump+' ft '+(S.mat==='alum'?'alum.':'steel')),'+'+f(WEIGHT.dump[S.dump][S.mat])+' lb']);
+ if(g.plow)L.push(['plow',g.plow.bx-4,-g.plow.Hb-2,(ph?(S.plow==='8'?'8 ft plow':'V-plow'):(S.plow==='8'?'8 ft straight plow':'9 ft V-plow')),'+'+f(WEIGHT.plow[S.plow])+' lb']);
+ if(g.str)L.push(['strobes',g.cowl+c.ws+18,-(g.top+5),'Strobes','']);
+ if(g.spr)L.push(['spreader',g.spr.x0+13,-(g.fr+23),'Spreader','']);
+ if(g.lift)L.push(['liftgate',g.E+26,-7,'Liftgate','']);
+ $('#pins').innerHTML=L.map(p=>{const [x,y]=at(p[1],p[2]);return `<div class="pin" data-p="${p[0]}" style="left:${x}px;top:${y}px"><span>${p[3]}${p[4]?'<b>'+p[4]+'</b>':''}</span><i></i><em></em></div>`;}).join('');
+ // keep pins inside the stage
+ $$('.pin').forEach(pn=>{const r=pn.getBoundingClientRect();if(r.left<st.left+6)pn.style.left=(parseFloat(pn.style.left)+(st.left+6-r.left))+'px';if(r.right>st.right-6)pn.style.left=(parseFloat(pn.style.left)-(r.right-st.right+6))+'px';});
+ const ps=$$('.pin');for(let pass=0;pass<5;pass++){let mv=false;for(let i=1;i<ps.length;i++)for(let j=0;j<i;j++){const a=ps[i].querySelector('span').getBoundingClientRect(),b=ps[j].querySelector('span').getBoundingClientRect();if(a.left<b.right+6&&a.right>b.left-6&&a.top<b.bottom+4&&a.bottom>b.top-4){const st=ps[i].querySelector('i');st.style.height=(st.offsetHeight+(a.bottom-b.top)+6)+'px';mv=true;}}if(!mv)break;}}
+const pv={lo:0,hi:0,w:0};
+function stats(){const c=CH[S.chassis],w=addedWeight(S),left=c.gvwr-c.curb-w,d=buildDays(S);
+ $('#stats').innerHTML=`<div class="st"><small>GVWR</small><b>${f(c.gvwr)} lb</b></div><div class="st"><small>Equipment adds</small><b id="sw">+${f(w)} lb</b></div><div class="st"><small>Payload left</small><b style="color:${left<1500?'#c2410c':'inherit'}">${f(left)} lb</b><div class="meter"><i class="m1" style="width:${c.curb/c.gvwr*100}%"></i><i class="m2" style="width:${w/c.gvwr*100}%"></i></div></div><div class="st"><small>Bay time</small><b>${d[0]}–${d[1]} days</b></div>`;
+ $('#cc').textContent=c.long.split(' / ')[0];const n=buildParts(S).length;$('#ci').textContent=n+' item'+(n===1?'':'s');$('#cb').textContent='Bay time '+d[0]+'–'+d[1]+' days';}
+function lines(){const c=CH[S.chassis],q=v=>Math.round(v/100)*100,r=(a,m)=>money(q(a[0]*(m||1)))+'–'+money(q(a[1]*(m||1))).slice(1),L=[];
+ if(S.dump!=='none')L.push([S.dump+' ft '+(S.mat==='alum'?'aluminum':'steel')+' dump',r(PRICE.dump[S.dump][S.mat],c.f)]);if(S.plow!=='none')L.push([S.plow==='8'?'8 ft straight plow':'9 ft V-plow',r(PRICE.plow[S.plow],c.f)]);if(S.spreader)L.push(['Spreader',r(PRICE.spreader)]);if(S.strobes)L.push(['LED strobes',r(PRICE.strobes)]);if(S.liftgate)L.push(['Liftgate',r(PRICE.liftgate)]);
+ $('#lines').innerHTML=L.length?L.map(x=>`<li>${x[0]}<span>${x[1]}</span></li>`).join(''):'<li class="e">Nothing added yet</li>';
+ const e=estimate(S),set=()=>$('#big').textContent=pv.hi<1?'$0':money(pv.lo)+'–'+money(pv.hi).slice(1);
+ if(!G){pv.lo=e[0];pv.hi=e[1];set();}else gsap.to(pv,{lo:e[0],hi:e[1],duration:.7,ease:'power2.out',onUpdate:set});}
+function render(changed){
+ $$('.cs').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===S.chassis));
+ $$('.seg [data-k]').forEach(b=>b.setAttribute('aria-pressed',String(S[b.dataset.k])===b.dataset.v));
+ $$('[data-k=mat]').forEach(b=>b.disabled=S.dump==='none');$$('[data-k=dump][data-v="11"]').forEach(b=>b.disabled=S.chassis==='c1');
+ $$('.sw').forEach(b=>b.setAttribute('aria-pressed',S[b.dataset.t]));
+ draw(changed);stats();lines();}
+function change(k,v){if(sent)return;S[k]=v;const n=applyRules(S,k);$('#note').textContent=n;$('#note').classList.toggle('on',!!n);render(k);}
+$('#chs').addEventListener('click',e=>{const b=e.target.closest('.cs');if(b)change('chassis',b.dataset.c);});
+$$('.seg [data-k]').forEach(b=>b.addEventListener('click',()=>change(b.dataset.k,b.dataset.v)));
+$$('.sw').forEach(b=>b.addEventListener('click',()=>change(b.dataset.t,!S[b.dataset.t])));
+function send(){
+ if(sent){sent=false;document.body.classList.remove('sent');$('.est').insertBefore($('#sheet'),$('#send'));$('#sheet').style.display='none';$('#lines').style.display='';$('#send').textContent='Send this build';$$('.nt').forEach(n=>n.style.visibility='hidden');$('#idle').style.display='';quote++;return;}
+ sent=true;const c=CH[S.chassis],e=estimate(S);$('#qn').textContent='RB-'+quote;
+ $$('.ntt').forEach(n=>n.textContent='New build request · '+c.short.replace(/-/g,String.fromCharCode(8209))+' · '+(buildParts(S).slice(0,2).join(' + ')||'cab & chassis'));
+ $$('.ntp').forEach(n=>n.textContent='RB-'+quote+' · est. '+(e[1]?kmoney(e[0])+'–'+kmoney(e[1]):'$0'));
+ $('#tsent').textContent='7:42 AM · '+buildName(S);
+ $('#lines').style.display='none';const sh=$('#sheet');if(innerWidth<820){$('.build').appendChild(sh);document.body.classList.add('sent');}sh.style.display='block';$('#send').textContent='Edit this build';$('#idle').style.display='none';
+ $$('.nt').forEach(n=>n.style.visibility='visible');
+ if(G){gsap.fromTo(sh,{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:.6,ease:'power3.out'});gsap.fromTo('.nt',{y:-140},{y:0,duration:.6,ease:'back.out(1.5)',delay:.25});}else sh.style.clipPath='none';}
+$('#send').addEventListener('click',send);$('#edit').addEventListener('click',send);
+addEventListener('resize',()=>pins(rigGeom(S)));
+if(!RM)setInterval(()=>{$$('.stb').forEach(e=>{e.style.fill='#fff';setTimeout(()=>e.style.fill='#f59e0b',80);setTimeout(()=>{e.style.fill='#fff';setTimeout(()=>e.style.fill='#f59e0b',80)},170);});},1000);
+// install cards
+(function(){const g=rigGeom({chassis:'c2',dump:'11',mat:'steel',plow:'9v',spreader:true,strobes:true,liftgate:false}),gl=rigGeom({chassis:'c2',dump:'none',mat:'steel',plow:'none',spreader:false,strobes:false,liftgate:true});
+ const svc=D(rect(130,43,120,40),rect(150,50,24,28),rect(178,50,24,28),rect(206,50,24,28),rect(234,50,12,28));
+ const it=[['Dump bodies','Steel and aluminum, 9 to 14 ft.','4–6 bay days',`<path d="${D(g.dump.side,g.dump.front,g.dump.canopy,g.dump.gate)}" fill="url(#iSt)"/><path d="${g.dump.ribs}" fill="#222833"/>`],
+ ['Snow plows','Straight and V-blades, lights, cab controls.','2 bay days',`<path d="${g.plow.mount} ${g.plow.ram}" fill="#2a313e"/><path d="${g.plow.wing.d()}" fill="#2238b8"/><path d="${g.plow.blade.d()}" fill="#3b5bfd"/>`],
+ ['Spreaders','Tailgate and V-box units for salt and sand.','1 bay day',`<path d="${D(g.spr.hopper,g.spr.lip,g.spr.chute,g.spr.arm)}" fill="#c3cad4"/><ellipse cx="${g.spr.spin.cx}" cy="${-g.spr.spin.cy}" rx="${g.spr.spin.rx}" ry="${g.spr.spin.ry}" fill="#2a313e"/>`],
+ ['Service bodies','Compartments laid out for your trade.','5–8 bay days',`<path d="${rect(130,43,120,40).d()}" fill="#dfe4ec"/><path d="${D(rect(150,50,24,28),rect(178,50,24,28),rect(206,50,24,28),rect(234,50,12,28))}" fill="#c3cad4"/>`],
+ ['Liftgates','Rail and tuck-under gates.','2 bay days',`<path d="${D(gl.lift.box)} ${gl.lift.arms}" fill="#2a313e"/><path d="${gl.lift.plat.d()}" fill="#c3cad4"/><path d="${rect(gl.E-70,gl.fr-8,70,8).d()}" fill="#2a313e"/>`],
+ ['Strobes & lighting','LED strobes and work lights, sealed.','1 bay day',`<path d="${g.body.d()}" fill="#e6eaf0"/><path d="${g.win.d()}" fill="#3a4660"/><path d="${g.str.bar.d()}" fill="#f59e0b"/>`]];
+ const h=$('#inst');h.innerHTML=it.map(i=>`<div class="card"><svg aria-hidden="true"><defs><linearGradient id="iSt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a5466"/><stop offset="1" stop-color="#2a313e"/></linearGradient></defs>${i[3]}</svg><h3>${i[0]}</h3><p>${i[1]}</p><span class="chip">${i[2]}</span></div>`).join('');
+ h.querySelectorAll('svg').forEach(s=>{const b=s.getBBox();s.setAttribute('viewBox',`${b.x-3} ${b.y-3} ${b.width+6} ${b.height+6}`);});
+ // map
+ const T=[['Haverhill',42.776,-71.077,'shop'],['Methuen',42.726,-71.191,'7 mi'],['Lawrence',42.707,-71.163,'10 mi'],['North Andover',42.699,-71.135,'11 mi'],['Andover',42.658,-71.137,'14 mi'],['Salem, NH',42.788,-71.201,'10 mi'],['Merrimac',42.830,-71.002,'6 mi'],['Amesbury',42.858,-70.930,'11 mi'],['Newburyport',42.812,-70.877,'15 mi'],['Georgetown',42.725,-70.991,'9 mi'],['Boxford',42.661,-71.000,'11 mi'],['Topsfield',42.637,-70.949,'15 mi'],['Ipswich',42.679,-70.841,'20 mi'],['Danvers',42.575,-70.930,'22 mi'],['Peabody',42.528,-70.929,'25 mi'],['Beverly',42.558,-70.880,'28 mi'],['Salem',42.519,-70.896,'28 mi'],['Lynn',42.466,-70.949,'30 mi'],['Gloucester',42.616,-70.662,'35 mi'],['Rockport',42.656,-70.620,'38 mi']];
+ const PX=9.42,X=lon=>(lon+71.26)*479+22,Y=lat=>(42.9-lat)*650+20,hx=X(-71.077),hy=Y(42.776);let m='';const LE={Lawrence:1,Gloucester:1,Lynn:1,Peabody:1,Danvers:1};
+ for(const r of [10,20,30])m+=`<circle cx="${hx}" cy="${hy}" r="${r*PX}" fill="none" stroke="#c9d1df" stroke-dasharray="3 4"/><text x="${hx+r*PX*.71+3}" y="${hy-r*PX*.71-3}" font-family="Geist Mono" font-size="10" fill="#8a93a6">${r} mi</text>`;
+ T.forEach(t=>{const x=X(t[2]),y=Y(t[1]),hq=t[3]==='shop';m+=`<line x1="${hx}" y1="${hy}" x2="${x}" y2="${y}" stroke="#3b5bfd" stroke-opacity=".1"/>`;});
+ T.forEach(t=>{const x=X(t[2]),y=Y(t[1]),hq=t[3]==='shop';m+=hq?`<circle cx="${x}" cy="${y}" r="9" fill="#3b5bfd" fill-opacity=".18"/><circle cx="${x}" cy="${y}" r="5" fill="#3b5bfd"/><text x="${x+10}" y="${y-8}" font-family="Geist" font-weight="600" font-size="13" fill="#0d1321">Ridgeback · Haverhill</text>`:`<circle cx="${x}" cy="${y}" r="3.4" fill="#0d1321"/><text x="${t[0]==="Salem, NH"?x+8:LE[t[0]]?x-6:x+6}" y="${t[0]==="Salem, NH"?y+17:y+4}" text-anchor="${LE[t[0]]?"end":"start"}" font-family="Geist" font-size="11" fill="#566074">${t[0]}</text>`;});
+ $('#map').innerHTML=`<rect x="0" y="0" width="400" height="340" fill="#f6f8fb"/>`+m;
+ $('#towns').innerHTML=T.slice(0,16).map(t=>`<li>${t[0]}<span>${t[3]}</span></li>`).join('');})();
+render();
+</script>
+</body>
+</html>

@@ -35,10 +35,14 @@ a{color:inherit}
 /* hero */
 .hero{position:relative;height:100vh;min-height:820px;max-height:1000px;overflow:hidden}
 .scene{position:absolute;inset:0}
-.scene>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.scene>svg.anim{will-change:transform}
+.scene{background:#05070a}
+/* instant poster: a still rendered from the 3D bay (same camera + light), so the first boat anyone sees is the 3D one */
+.still{position:absolute;inset:0;overflow:hidden}
+.still img{position:absolute;top:0;height:100%;width:auto;max-width:none;left:67%;transform:translateX(-67%)}
+.s1{display:none;clip-path:inset(0% 0% 100% 0%)}
+.scene.fb .s1{display:block}
+.scene.live .still{display:none}
 .scene>canvas.gl3{position:absolute;inset:0;width:100%;height:100%;display:block}
-.scene.gl>svg{display:none}
 /* tour (promo recording) */
 html.tour,html.tour *{cursor:none!important}
 html.tour{scrollbar-width:none}
@@ -135,10 +139,19 @@ h2{font:800 clamp(30px,3.6vw,52px)/1.04 Archivo,sans-serif;font-variation-settin
 .svc p{color:var(--mute)}
 .svc svg{width:44px;height:44px}
 .split{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:center}
-.store svg{width:100%;height:auto;display:block}
-.facts{margin-top:28px;display:grid;gap:14px}
-.facts div{display:flex;gap:14px;align-items:baseline;font-weight:600}
-.facts div::before{content:"";flex:none;width:18px;height:2px;background:var(--amber);transform:translateY(-4px)}
+/* haul-out & storage: five lit scenes of the same 3D boat; edges melt into the page (no boxes) */
+.haulw{max-width:1328px}
+.haulg{display:grid;grid-template-columns:repeat(3,1fr);gap:46px 30px;align-items:start}
+.hhead{align-self:center;padding-right:12px}
+.hhead h2{font-size:clamp(30px,3vw,44px)}
+.hhead .lead{font-size:17px}
+.haul{display:contents;list-style:none}
+.haul li{position:relative;min-width:0}
+.haul figure svg{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(180deg,transparent,#000 9%,#000 88%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(180deg,transparent,#000 9%,#000 88%,transparent);mask-composite:intersect}
+.haul .cap{display:flex;gap:12px;align-items:flex-start;margin-top:12px;position:relative}
+.haul .n{position:relative;flex:none;width:34px;height:34px;border-radius:50%;background:#161c23;color:var(--amber);display:grid;place-items:center;font:800 15px Archivo,sans-serif}
+.haul h3{font:800 19px/1.2 Archivo,sans-serif;font-variation-settings:'wdth' 110;margin:6px 0 5px}
+.haul p{color:var(--mute);font-size:16px;line-height:1.4}
 .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-top:64px;position:relative}
 .steps::before{content:"";position:absolute;top:27px;left:28px;right:28px;height:2px;background:linear-gradient(90deg,var(--amber),rgba(255,166,43,.15))}
 .steps li{list-style:none;position:relative}
@@ -155,11 +168,6 @@ h2{font:800 clamp(30px,3.6vw,52px)/1.04 Archivo,sans-serif;font-variation-settin
 .seal svg{width:28px;height:28px}
 .hseal{margin-top:18px}
 footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.shim line{animation:shim 3.4s ease-in-out infinite}
-.shim line:nth-child(2n){animation-delay:-1.2s}
-.shim line:nth-child(3n){animation-delay:-2.1s}
-@keyframes shim{0%,100%{stroke-dashoffset:0}50%{stroke-dashoffset:14}}
-@media (prefers-reduced-motion:reduce){.shim line{animation:none}}
 /* phone */
 @media (max-width:760px){
   .top{position:sticky;padding:10px 16px;background:rgba(7,9,12,.94);gap:8px}
@@ -173,6 +181,7 @@ footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-
   .head{order:1;padding:14px 16px 0}
   .tool{order:2;padding:2px 16px 0}
   .scene{order:3;position:relative;height:290px;margin-top:26px}
+  .still img{left:50%;transform:translateX(-50%)}
   .check{order:4;position:relative;left:auto;top:auto;flex-direction:column;gap:18px;padding:22px 16px 0}
   .check::before{display:none}
   .est{order:5;position:relative;left:auto;right:auto;bottom:auto;flex-direction:column;align-items:stretch;gap:24px;padding:28px 16px 0}
@@ -195,6 +204,8 @@ footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-
   section.s{padding:72px 16px}
   .svc{grid-template-columns:1fr;gap:34px;margin-top:40px}
   .split{grid-template-columns:1fr;gap:36px}
+  .haulg{grid-template-columns:1fr;gap:34px}
+  .hhead{padding-right:0}
   .steps{grid-template-columns:1fr;gap:26px;margin-top:40px}
   .steps::before{top:28px;bottom:28px;left:27px;right:auto;width:2px;height:auto;background:linear-gradient(180deg,var(--amber),rgba(255,166,43,.15))}
   .steps li{display:grid;grid-template-columns:56px 1fr;column-gap:18px}
@@ -218,270 +229,8 @@ footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-
 
 <section class="hero" id="quote">
   <div class="scene" id="scene" aria-hidden="true">
-    <svg id="shop" class="ly" viewBox="0 40 1440 900" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#040508"/><stop offset="1" stop-color="#0d1217"/></linearGradient>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#060d18"/><stop offset="1" stop-color="#132a43"/></linearGradient>
-        <linearGradient id="river" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f2234"/><stop offset="1" stop-color="#03070b"/></linearGradient>
-        <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#11161b"/><stop offset="1" stop-color="#040506"/></linearGradient>
-        <linearGradient id="cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb34a" stop-opacity=".3"/><stop offset=".7" stop-color="#ffa62b" stop-opacity=".06"/><stop offset="1" stop-color="#ffa62b" stop-opacity="0"/></linearGradient>
-        <radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffa62b" stop-opacity=".3"/><stop offset="1" stop-color="#ffa62b" stop-opacity="0"/></radialGradient>
-        <radialGradient id="cShadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".75"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
-        <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient>
-        <mask id="reflMask" maskUnits="userSpaceOnUse" x="0" y="650" width="1440" height="300"><rect x="0" y="650" width="1440" height="300" fill="url(#fade)"/></mask>
-        <filter id="b1" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation=".7"/></filter>
-        <filter id="b2" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
-        <filter id="b3" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
-        <filter id="b40" x="-50%" y="-20%" width="200%" height="140%"><feGaussianBlur stdDeviation="34"/></filter>
-        <filter id="b12" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
-        <filter id="chalk"><feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="3" seed="7"/><feColorMatrix values="0 0 0 0 1 0 0 0 0 .99 0 0 0 0 .94 0 0 0 2.2 -1"/></filter>
-        <pattern id="corr" width="24" height="10" patternUnits="userSpaceOnUse"><rect width="12" height="10" fill="#fff" opacity=".022"/></pattern>
-        <!-- hull -->
-        <linearGradient id="gel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9ecee"/><stop offset=".5" stop-color="#d3d8dc"/><stop offset="1" stop-color="#a9b1b7"/></linearGradient>
-        <linearGradient id="gelLow" gradientUnits="userSpaceOnUse" x1="0" y1="-110" x2="0" y2="-30"><stop offset="0" stop-color="#9aa3aa"/><stop offset=".5" stop-color="#b9b6ad"/><stop offset="1" stop-color="#8d8b85"/></linearGradient>
-        <radialGradient id="flare" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-        <linearGradient id="botPaint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2f48"/><stop offset=".5" stop-color="#122136"/><stop offset="1" stop-color="#070d16"/></linearGradient>
-        <linearGradient id="tEdge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".6" stop-color="#000" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".05"/></linearGradient>
-        <clipPath id="hullClip"><path d="M-4 -100C-200 -106 -400 -128 -582 -168C-566 -104 -532 -44 -456 -10C-424 -2 -390 0 -350 0L2 2Z"/></clipPath>
-        <linearGradient id="console" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f3f5f6"/><stop offset="1" stop-color="#b4bcc2"/></linearGradient>
-        <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2c3b48"/><stop offset=".5" stop-color="#4d6273"/><stop offset="1" stop-color="#121a21"/></linearGradient>
-        <linearGradient id="tube" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7d868e"/><stop offset=".5" stop-color="#e3e8eb"/><stop offset="1" stop-color="#8a939a"/></linearGradient>
-        <linearGradient id="canvas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b323a"/><stop offset="1" stop-color="#0e1216"/></linearGradient>
-        <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2d21"/><stop offset="1" stop-color="#1c150f"/></linearGradient>
-        <!-- motors -->
-        <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22272c"/><stop offset=".5" stop-color="#5d656d"/><stop offset="1" stop-color="#1a1d21"/></linearGradient>
-        <linearGradient id="oCowl" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#f2ecdc"/><stop offset=".45" stop-color="#dcd3bc"/><stop offset=".8" stop-color="#b2a88f"/><stop offset="1" stop-color="#8a8170"/></linearGradient>
-        <linearGradient id="oLow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c7bea7"/><stop offset="1" stop-color="#857c68"/></linearGradient>
-        <linearGradient id="oLeg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#454a4f"/><stop offset=".35" stop-color="#868c90"/><stop offset=".7" stop-color="#5a5f63"/><stop offset="1" stop-color="#2e3236"/></linearGradient>
-        <linearGradient id="oProp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ba1a5"/><stop offset="1" stop-color="#555b60"/></linearGradient>
-        <linearGradient id="cowlFoot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#2a2418" stop-opacity=".35"/></linearGradient>
-        <clipPath id="oClip"><path d="M12 -66L10 -88C10 -97 14 -102 22 -104L66 -109C78 -110 86 -103 87 -93L87 -80C87 -74 85 -69 82 -66Z"/></clipPath>
-        <linearGradient id="nCowl" x1="0" y1="0" x2=".4" y2="1"><stop offset="0" stop-color="#5f6872"/><stop offset=".3" stop-color="#2b3138"/><stop offset=".65" stop-color="#121519"/><stop offset="1" stop-color="#050607"/></linearGradient>
-        <linearGradient id="nLow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#262c32"/><stop offset="1" stop-color="#090b0d"/></linearGradient>
-        <linearGradient id="nLeg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0d0f12"/><stop offset=".38" stop-color="#3e464e"/><stop offset=".7" stop-color="#1b1f23"/><stop offset="1" stop-color="#08090b"/></linearGradient>
-        <linearGradient id="nProp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a7b0b8"/><stop offset=".45" stop-color="#f4f7f9"/><stop offset=".6" stop-color="#8d969e"/><stop offset="1" stop-color="#5f676e"/></linearGradient>
-        <linearGradient id="cowlFootN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></linearGradient>
-        <clipPath id="nClip"><path d="M11 -66L9 -89C9 -99 14 -105 23 -107L67 -112C80 -113 88 -105 89 -95L89 -80C89 -74 87 -69 84 -66Z"/></clipPath>
-        <linearGradient id="hoistG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1f2428"/><stop offset=".45" stop-color="#4d555c"/><stop offset="1" stop-color="#16191c"/></linearGradient>
-      </defs>
-      <rect y="0" width="1440" height="1000" fill="url(#wall)"/>
-      <rect y="0" width="1440" height="650" fill="url(#corr)"/>
-      <!-- open bay door to the river -->
-      <g>
-        <rect x="620" y="186" width="700" height="410" fill="url(#sky)"/>
-        <path d="M620 420L668 414L702 404L760 409L812 400L860 408L930 403L1010 410L1080 398L1150 406L1230 401L1320 409L1320 452L620 452Z" fill="#03060a"/>
-        <g fill="#ffcf8a"><circle cx="700" cy="420" r="2"/><circle cx="812" cy="414" r="1.6"/><circle cx="944" cy="418" r="2.2"/><circle cx="1090" cy="412" r="1.6"/><circle cx="1180" cy="419" r="2"/></g>
-        <circle cx="1018" cy="416" r="1.8" fill="#cfe6ff"/>
-        <rect x="620" y="450" width="700" height="146" fill="url(#river)"/>
-
-        <rect x="606" y="164" width="728" height="26" fill="#0b0f13"/>
-        <g stroke="#ffffff" stroke-opacity=".05"><line x1="606" y1="172" x2="1334" y2="172"/><line x1="606" y1="181" x2="1334" y2="181"/></g>
-        <rect x="604" y="164" width="16" height="436" fill="#080b0e"/>
-        <rect x="1320" y="164" width="16" height="436" fill="#080b0e"/>
-      </g>
-    </svg>
-    <svg class="ly anim" viewBox="0 40 1440 900" preserveAspectRatio="xMidYMid slice">
-        <g class="shim" stroke-linecap="round">
-          <line x1="690" y1="470" x2="712" y2="470" stroke="#ffcf8a" stroke-opacity=".5" stroke-width="2" stroke-dasharray="10 6"/>
-          <line x1="683" y1="492" x2="719" y2="492" stroke="#ffcf8a" stroke-opacity=".32" stroke-width="2" stroke-dasharray="12 8"/>
-          <line x1="800" y1="466" x2="826" y2="466" stroke="#ffcf8a" stroke-opacity=".42" stroke-width="2" stroke-dasharray="8 6"/>
-          <line x1="934" y1="474" x2="958" y2="474" stroke="#ffcf8a" stroke-opacity=".5" stroke-width="2" stroke-dasharray="10 6"/>
-          <line x1="1006" y1="470" x2="1030" y2="470" stroke="#cfe6ff" stroke-opacity=".4" stroke-width="2" stroke-dasharray="8 6"/>
-          <line x1="1080" y1="466" x2="1102" y2="466" stroke="#ffcf8a" stroke-opacity=".4" stroke-width="2" stroke-dasharray="8 6"/>
-          <line x1="1168" y1="474" x2="1194" y2="474" stroke="#ffcf8a" stroke-opacity=".5" stroke-width="2" stroke-dasharray="10 6"/>
-        </g>
-    </svg>
-    <svg class="ly" viewBox="0 40 1440 900" preserveAspectRatio="xMidYMid slice">
-      <!-- floor -->
-      <rect y="596" width="1440" height="404" fill="url(#floor)"/>
-      <rect y="596" width="1440" height="2" fill="#1b2229"/>
-      <!-- light -->
-      <polygon points="1150,126 1250,126 1440,650 820,650" fill="url(#cone)" filter="url(#b40)"/>
-      <ellipse cx="1120" cy="664" rx="430" ry="62" fill="url(#pool)"/>
-      <!-- reflection of the boat on the wet floor -->
-      <g mask="url(#reflMask)" opacity=".8"><use href="#boatS" transform="translate(0 1300) scale(1 -1)" filter="url(#b3)"/></g>
-      <!-- contact shadow -->
-      <ellipse cx="930" cy="652" rx="360" ry="16" fill="url(#cShadow)"/>
-      <!-- hoist beam + lamp -->
-      <rect x="560" y="134" width="900" height="14" fill="#101418"/>
-      <rect x="560" y="134" width="900" height="2" fill="#2a323a"/>
-      <line x1="1200" y1="40" x2="1200" y2="96" stroke="#1a1f24" stroke-width="3"/>
-      <path d="M1158 128L1242 128L1226 96L1174 96Z" fill="#14181c"/>
-      <ellipse cx="1200" cy="128" rx="42" ry="5" fill="#ffe2b0"/>
-      <!-- ===== boat on stands (local units: 79 per metre, origin = keel at the transom) ===== -->
-      <g id="boatS">
-        <g transform="translate(1240 590) scale(1.06)">
-          <!-- keel blocks -->
-          <g fill="url(#wood)"><rect x="-372" y="0" width="54" height="57" rx="2"/><rect x="-96" y="1" width="54" height="56" rx="2"/></g>
-          <g fill="#4a3a2a"><rect x="-372" y="0" width="54" height="4"/><rect x="-96" y="1" width="54" height="4"/></g>
-          <!-- far-side T-top leg, console, leaning post (sit behind the hull side) -->
-          <path d="M-298 -150L-312 -247" stroke="#6d757c" stroke-width="3.2"/>
-          <path d="M-302 -119L-293 -168C-292 -172 -288 -175 -284 -175L-236 -175C-232 -175 -229 -172 -229 -168L-225 -119Z" fill="url(#console)"/>
-          <path d="M-302 -119L-293 -168C-292 -172 -288 -175 -284 -175L-268 -175L-276 -119Z" fill="#fff" opacity=".5"/>
-          <path d="M-295 -173L-281 -202L-249 -202L-251 -173Z" fill="url(#glass)"/>
-          <path d="M-289 -176L-279 -197L-271 -197L-282 -176Z" fill="#fff" opacity=".22"/>
-          <path d="M-299 -171L-284 -206L-246 -206L-246 -174" fill="none" stroke="#c9d0d5" stroke-width="2.2" stroke-linejoin="round"/>
-          <path d="M-214 -116L-212 -158C-212 -162 -209 -164 -205 -164L-194 -164C-190 -164 -188 -161 -188 -157L-187 -116Z" fill="#2c3238"/>
-          <path d="M-212 -154L-190 -154" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
-          <g stroke="#b9c1c7" stroke-width="2.2" stroke-linecap="round"><path d="M-209 -150L-214 -176"/><path d="M-199 -150L-202 -177"/><path d="M-190 -150L-190 -176"/></g>
-          <!-- T-top -->
-          <path d="M-296 -150L-310 -247" stroke="url(#tube)" stroke-width="3.6" stroke-linecap="round"/>
-          <path d="M-232 -152L-210 -247" stroke="url(#tube)" stroke-width="3.6" stroke-linecap="round"/>
-          <path d="M-342 -247L-186 -247C-180 -247 -177 -251 -179 -255L-188 -264L-334 -264C-341 -264 -345 -259 -343 -253Z" fill="url(#canvas)"/>
-          <path d="M-334 -264L-188 -264" stroke="#5a646d" stroke-width="1.5"/>
-          <path d="M-342 -247L-182 -247" stroke="#cfd5da" stroke-width="2.2"/>
-          <rect x="-292" y="-246" width="44" height="9" rx="2" fill="#1d2227"/>
-          <circle cx="-262" cy="-237" r="2.2" fill="#ffcf8a"/>
-          <!-- bow rail -->
-          <g stroke="url(#tube)" stroke-width="2.4" stroke-linecap="round" fill="none">
-            <path d="M-360 -128C-362 -150 -372 -166 -385 -168C-430 -175 -500 -187 -556 -197C-574 -200 -592 -194 -592 -182L-588 -170"/>
-            <path d="M-442 -142V-177M-499 -152V-187M-548 -161V-195"/>
-          </g>
-          <!-- hull -->
-          <path id="hullP" d="M-4 -100C-200 -106 -400 -128 -582 -168C-566 -104 -532 -44 -456 -10C-424 -2 -390 0 -350 0L2 2Z" fill="url(#gel)"/>
-          <g clip-path="url(#hullClip)">
-            <!-- reflections that follow the sheer -->
-            <path d="M-4 -92C-200 -98 -400 -120 -582 -160L-582 -128C-400 -94 -200 -74 -4 -70Z" fill="#fff" opacity=".85" filter="url(#b3)"/>
-            <path d="M-4 -62C-200 -68 -400 -88 -582 -126L-582 -112C-400 -76 -200 -58 -4 -54Z" fill="#7b858d" opacity=".75" filter="url(#b2)"/>
-            <path d="M-4 -54C-200 -60 -400 -78 -582 -112L-582 0L-4 0Z" fill="url(#gelLow)"/>
-            <ellipse cx="-520" cy="-128" rx="80" ry="34" fill="url(#flare)"/>
-            <ellipse cx="-120" cy="-84" rx="110" ry="9" fill="#ffcf8a" opacity=".55" filter="url(#b3)"/>
-            <ellipse cx="-90" cy="-66" rx="160" ry="20" fill="#ffa62b" opacity=".12" filter="url(#b12)"/>
-            <!-- shadow under the rub rail -->
-            <path d="M-4 -96C-200 -102 -400 -124 -582 -164L-582 -158C-400 -118 -200 -96 -4 -90Z" fill="#000" opacity=".28" filter="url(#b2)"/>
-            <!-- boot stripe + bottom paint -->
-            <rect x="-620" y="-47" width="640" height="4" fill="#1d3550"/>
-            <rect x="-620" y="-38" width="640" height="50" fill="url(#botPaint)"/>
-            <path d="M-528 -84C-440 -46 -250 -30 2 -26L2 4L-560 4Z" fill="#0b1118" opacity=".3" filter="url(#b3)"/>
-            <path d="M-528 -84C-440 -46 -250 -30 2 -26" stroke="#5f7a9a" stroke-width="1.6" fill="none"/>
-            <g stroke="#3b5576" stroke-width="1.2" fill="none" opacity=".8"><path d="M-500 -40C-420 -20 -250 -12 0 -12"/><path d="M-470 -20C-400 -8 -250 -5 0 -5"/></g>
-            <!-- transom edge -->
-            <rect x="-12" y="-110" width="16" height="120" fill="url(#tEdge)"/>
-            <!-- scuppers, registration -->
-            <g fill="#2a3036"><ellipse cx="-34" cy="-74" rx="5" ry="3"/><ellipse cx="-58" cy="-75" rx="5" ry="3"/></g>
-            <text x="-500" y="-112" font-family="Archivo,sans-serif" font-weight="700" font-size="13" letter-spacing="1.5" fill="#262c32" opacity=".85">MS 4471 BK</text>
-          </g>
-          <!-- rub rail with stainless insert -->
-          <path d="M-4 -97C-200 -103 -400 -125 -581 -165" stroke="#22272c" stroke-width="7" fill="none" stroke-linecap="round"/>
-          <path d="M-4 -97.5C-200 -103.5 -400 -125.5 -581 -165.5" stroke="#dfe4e8" stroke-width="1.5" fill="none"/>
-          <path d="M-582 -168C-566 -104 -532 -44 -456 -10" stroke="#fff" stroke-opacity=".35" stroke-width="2" fill="none"/>
-          <path d="M-30 -102L-12 -101" stroke="#c9d0d5" stroke-width="3" stroke-linecap="round"/>
-          <!-- jack stands in front -->
-          <g fill="none" stroke="#2a3138" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M-430 -24V26M-452 57L-430 20L-408 57M-430 20V57"/>
-            <path d="M-200 -22V26M-222 57L-200 20L-178 57M-200 20V57"/>
-          </g>
-          <g stroke="#59636c" stroke-width="1" stroke-linecap="round"><path d="M-431.5 -22V22" stroke-dasharray="1.5 2"/><path d="M-201.5 -20V22" stroke-dasharray="1.5 2"/></g>
-          <g fill="#3d454d"><rect x="-446" y="-31" width="32" height="8" rx="2"/><rect x="-216" y="-29" width="32" height="8" rx="2"/></g>
-        </g>
-      </g>
-    </svg>
-    <svg class="ly anim" viewBox="0 40 1440 900" preserveAspectRatio="xMidYMid slice">
-      <g mask="url(#reflMask)" opacity=".8"><use href="#motors" transform="translate(0 1300) scale(1 -1)" filter="url(#b3)"/></g>
-      <g id="motors" transform="translate(1240 590) scale(1.06)">
-          <!-- ===== OLD motor: faded, salt-stained (no maker names) ===== -->
-          <g id="oldM"><g transform="scale(1.2)">
-            <path d="M-1 -64L12 -64C14 -64 15 -62 15 -60L15 -16L9 -12L-1 -12Z" fill="url(#metal)"/>
-            <path d="M3 -50C3 -38 2 -26 4 -10" stroke="#8a4a26" stroke-width="2" opacity=".75" fill="none"/>
-            <g fill="#9a5128"><circle cx="5" cy="-54" r="2.2"/><circle cx="5" cy="-22" r="2"/><circle cx="9" cy="-40" r="1.3"/></g>
-            <g fill="#e7e2d4" opacity=".8"><circle cx="7" cy="-51" r="1.2"/><circle cx="3" cy="-25" r="1"/></g>
-            <path d="M13 -62L28 -62C30 -62 31 -60 31 -58L31 -22L17 -18L13 -20Z" fill="#41464b"/>
-            <path d="M14 -61L29 -61" stroke="#80878d" stroke-width="1"/>
-            <path d="M7 -16L13 -34" stroke="#2a2f34" stroke-width="6" stroke-linecap="round"/><path d="M13 -34L21 -52" stroke="#8d949a" stroke-width="2.6" stroke-linecap="round"/>
-            <circle cx="11" cy="-60" r="3.6" fill="#2b3035" stroke="#7a8288" stroke-width="1"/>
-            <path d="M27 -44L52 -44C50 -30 48 -16 47 -3L30 -3C29 -16 28 -30 27 -44Z" fill="url(#oLeg)"/>
-            <path d="M44 -40C43 -26 42 -16 42 -6" stroke="#2c2117" stroke-opacity=".6" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-            <ellipse cx="47" cy="-36" rx="2" ry="1.4" fill="#1d2023"/>
-            <g fill="#b6babd" opacity=".7"><path d="M32 -25C34 -26 36 -25 35 -23C34 -22 32 -23 32 -25Z"/><path d="M37 -13C39 -14 40 -12 39 -11C38 -10 36 -11 37 -13Z"/></g>
-            <path d="M20 -4L68 -4C73 -4 74 0 70 1L20 1C18 0 18 -3 20 -4Z" fill="#62686d"/>
-            <path d="M20 -4L68 -4" stroke="#9ea4a9" stroke-width=".8"/>
-            <path d="M30 1L52 1L56 7C60 8 62 11 62 14C62 18 59 21 54 21L22 21C16 21 13 18 13 14C13 10 16 7 22 7L28 3Z" fill="url(#oLeg)"/>
-            <g stroke="#2e3236" stroke-width="1"><path d="M23 11V17"/><path d="M26 11V17"/><path d="M29 11V17"/></g>
-            <g fill="#ece8de" opacity=".6" filter="url(#b1)"><path d="M14 11C16 10 18 12 17 14C16 15 14 13 14 11Z"/><path d="M40 -2C43 -3 46 -2 44 0Z"/></g>
-            <path d="M52 1L64 1L63 5L54 5Z" fill="#7d6a52"/>
-            <path d="M34 21L50 21C50 27 51 33 54 38L43 38C39 33 36 27 34 21Z" fill="#555b60"/>
-            <path d="M43 38L54 38L52 35L45 36Z" fill="#8f9498"/>
-            <path d="M61 10.5L70 10.5C73 11 74 12.5 74 14C74 15.5 73 17 70 17.5L61 17.5Z" fill="#6c7277"/>
-            <g fill="url(#oProp)" stroke="#3a3f44" stroke-width=".6"><path d="M63 11.5C60 6 61 1.5 66 1C71 1 73 5 70 11Z"/><path d="M63 16.5C60 22 61 26.5 66 27C71 27 73 23 70 17Z"/><path d="M62 12.5C64 9.5 68 9.5 68.5 12.5C69 15.5 64 17.5 62 15.5Z"/></g>
-            <path d="M65.5 1.2L67 3.2L68.6 1.6" fill="none" stroke="#2a2f34" stroke-width=".9"/>
-            <!-- lower cowl -->
-            <path d="M12 -66L82 -66C82 -60 79 -55 72 -51C65 -47 58 -45 52 -44L27 -44C20 -45 15 -50 13 -56Z" fill="url(#oLow)"/>
-            <g fill="#f4f1e8" opacity=".8" filter="url(#b1)"><path d="M22 -64C26 -65 32 -64 34 -62C30 -61 25 -61 22 -64Z"/><path d="M56 -63C62 -65 70 -64 72 -61C66 -60 60 -60 56 -63Z"/><path d="M40 -48C44 -49 48 -48 50 -46C46 -45 42 -46 40 -48Z"/></g>
-            <path d="M70 -54C66 -48 58 -46 52 -41" stroke="#2a2016" stroke-opacity=".55" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <!-- top cowl -->
-            <path d="M12 -66L10 -88C10 -97 14 -102 22 -104L66 -109C78 -110 86 -103 87 -93L87 -80C87 -74 85 -69 82 -66Z" fill="url(#oCowl)"/>
-            <g clip-path="url(#oClip)">
-              <rect x="6" y="-114" width="86" height="50" filter="url(#chalk)" opacity=".28"/>
-              <path d="M14 -98C16 -102 22 -104 30 -105L66 -109C72 -109 78 -108 82 -105C64 -106 40 -104 24 -101C18 -100 15 -99 14 -96Z" fill="#fff" opacity=".45"/>
-              <path d="M8 -83C40 -86 70 -87 92 -86L92 -80C70 -81 40 -80 8 -77Z" fill="#4f7c7c" opacity=".3"/>
-              <path d="M50 -87H57V-79H50Z" fill="#d8cfb8"/>
-              <text x="62" y="-89" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="800" font-size="10" fill="#7d755f" opacity=".6">115</text>
-              <g stroke="#6b6455" stroke-opacity=".6" stroke-width=".7" stroke-linecap="round"><path d="M16 -88l7 -2"/><path d="M19 -80l5 1"/><path d="M76 -98l5 3"/><path d="M40 -74l6 -1"/><path d="M30 -94l3 3"/></g>
-              <rect x="6" y="-76" width="86" height="12" fill="url(#cowlFoot)"/>
-              <g fill="#f4f1e8" opacity=".85" filter="url(#b1)"><path d="M16 -68C20 -70 28 -69 30 -66C24 -66 19 -66 16 -68Z"/><path d="M48 -69C54 -71 62 -70 64 -67C58 -66 52 -66 48 -69Z"/></g>
-              <g fill="#57564f" opacity=".6"><rect x="72" y="-102" width="10" height="1.6" rx=".8"/><rect x="73" y="-98" width="10" height="1.6" rx=".8"/><rect x="74" y="-94" width="10" height="1.6" rx=".8"/></g>
-            </g>
-            <path d="M11 -66L83 -66" stroke="#4a463d" stroke-width="1.2"/>
-            <circle cx="49" cy="-111" r="2.4" fill="none" stroke="#7d858c" stroke-width="1.4"/>
-          </g></g>
-          <!-- ===== NEW motor: graphite, glossy (no maker names) ===== -->
-          <g id="newM" style="visibility:hidden"><g transform="scale(1.2)">
-            <path d="M-1 -64L12 -64C14 -64 15 -62 15 -60L15 -16L9 -12L-1 -12Z" fill="url(#metal)"/>
-            <g fill="#9aa3ab"><circle cx="5" cy="-54" r="1.8"/><circle cx="5" cy="-22" r="1.8"/></g>
-            <path d="M13 -62L28 -62C30 -62 31 -60 31 -58L31 -22L17 -18L13 -20Z" fill="#1c2125"/>
-            <path d="M14 -61L29 -61" stroke="#5f6870" stroke-width="1"/>
-            <path d="M7 -16L13 -34" stroke="#15191d" stroke-width="6" stroke-linecap="round"/><path d="M13 -34L21 -52" stroke="#e6ebee" stroke-width="2.6" stroke-linecap="round"/>
-            <circle cx="11" cy="-60" r="3.6" fill="#15191d" stroke="#8b949c" stroke-width="1"/>
-            <path d="M27 -44L52 -44C50 -30 48 -16 47 -3L30 -3C29 -16 28 -30 27 -44Z" fill="url(#nLeg)"/>
-            <path d="M33 -42C32 -28 32 -16 33 -5" stroke="#fff" stroke-opacity=".3" stroke-width="1.4" fill="none"/>
-            <path d="M49 -40C48 -28 47 -16 46 -5" stroke="#ffb35a" stroke-opacity=".45" stroke-width="1" fill="none"/>
-            <ellipse cx="47" cy="-36" rx="2" ry="1.4" fill="#000"/>
-            <path d="M20 -4L68 -4C73 -4 74 0 70 1L20 1C18 0 18 -3 20 -4Z" fill="#20252a"/>
-            <path d="M20 -4L68 -4" stroke="#8b949c" stroke-width=".9"/>
-            <path d="M30 1L52 1L56 7C60 8 62 11 62 14C62 18 59 21 54 21L22 21C16 21 13 18 13 14C13 10 16 7 22 7L28 3Z" fill="url(#nLeg)"/>
-            <path d="M16 9C22 8 40 8 54 8" stroke="#fff" stroke-opacity=".35" stroke-width="1.2" fill="none"/>
-            <g stroke="#050607" stroke-width="1"><path d="M23 11V17"/><path d="M26 11V17"/><path d="M29 11V17"/></g>
-            <path d="M52 1L64 1L63 5L54 5Z" fill="#8a929a"/>
-            <path d="M34 21L50 21C50 27 51 33 54 38L43 38C39 33 36 27 34 21Z" fill="#14181c"/>
-            <path d="M35 22L49 22" stroke="#fff" stroke-opacity=".2" stroke-width="1"/>
-            <path d="M61 10.5L70 10.5C73 11 74 12.5 74 14C74 15.5 73 17 70 17.5L61 17.5Z" fill="url(#nProp)"/>
-            <g fill="url(#nProp)" stroke="#5a636b" stroke-width=".5"><path d="M63 11.5C60 6 61 1.5 66 1C71 1 73 5 70 11Z"/><path d="M63 16.5C60 22 61 26.5 66 27C71 27 73 23 70 17Z"/><path d="M62 12.5C64 9.5 68 9.5 68.5 12.5C69 15.5 64 17.5 62 15.5Z"/></g>
-            <!-- lower cowl -->
-            <path d="M11 -66L84 -66C84 -60 81 -55 74 -51C66 -47 58 -45 52 -44L27 -44C20 -45 15 -50 12 -56Z" fill="url(#nLow)"/>
-            <path d="M13 -64L82 -64" stroke="#fff" stroke-opacity=".2" stroke-width="1.2"/>
-            <path d="M76 -60C80 -57 80 -54 74 -51" stroke="#ffb35a" stroke-opacity=".55" stroke-width="1" fill="none"/>
-            <!-- top cowl -->
-            <path d="M11 -66L9 -89C9 -99 14 -105 23 -107L67 -112C80 -113 88 -105 89 -95L89 -80C89 -74 87 -69 84 -66Z" fill="url(#nCowl)"/>
-            <g clip-path="url(#nClip)">
-              <path d="M6 -84C30 -88 60 -89 94 -87L94 -81C60 -83 30 -82 6 -78Z" fill="#9fb0c0" opacity=".2"/>
-              <path d="M12 -96C14 -102 20 -105 28 -106L67 -111C74 -112 80 -111 84 -108C66 -109 44 -107 28 -104C20 -102 15 -100 13 -93Z" fill="#fff" opacity=".7"/>
-              <ellipse cx="26" cy="-94" rx="12" ry="3" fill="#fff" opacity=".3" filter="url(#b2)"/>
-              <rect x="6" y="-78" width="88" height="14" fill="url(#cowlFootN)"/>
-              <path d="M54 -79L88 -80" stroke="#ffa62b" stroke-width="1.6"/>
-              <text x="71" y="-84" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="800" font-size="10.5" fill="#cfd6dc">150</text>
-              <g fill="#000" opacity=".6"><rect x="74" y="-104" width="11" height="1.6" rx=".8"/><rect x="75" y="-100" width="11" height="1.6" rx=".8"/><rect x="76" y="-96" width="11" height="1.6" rx=".8"/></g>
-            </g>
-            <path d="M77 -112C85 -110 89 -103 89 -95L89 -80C89 -74 87 -69 84 -66" stroke="#ffb35a" stroke-opacity=".85" stroke-width="1.4" fill="none"/>
-            <path d="M10 -66L85 -66" stroke="#9aa3ab" stroke-width="1"/>
-            <circle cx="49" cy="-114" r="2.4" fill="none" stroke="#9aa3ab" stroke-width="1.4"/>
-          </g></g>
-      </g>
-      <!-- chain hoist on a trolley -->
-      <g id="rig" transform="translate(1302 0)">
-        <rect x="-22" y="146" width="44" height="8" rx="2" fill="#1d2227"/>
-        <circle cx="-13" cy="146" r="5" fill="#2f363d"/><circle cx="13" cy="146" r="5" fill="#2f363d"/>
-        <rect x="-18" y="156" width="36" height="46" rx="9" fill="url(#hoistG)"/>
-        <rect x="-18" y="171" width="36" height="11" fill="#ffa62b"/>
-        <rect x="-18" y="171" width="36" height="2" fill="#fff" opacity=".3"/>
-        <path d="M17 186C24 186 24 296 20 296C16 296 15 186 17 186" fill="none" stroke="#4d565e" stroke-width="1.6" stroke-dasharray="3 2"/>
-        <line id="chain" x1="0" y1="202" x2="0" y2="330" stroke="#8a939b" stroke-width="3" stroke-dasharray="5 2.5"/>
-        <g id="hook" transform="translate(0 330)">
-          <rect x="-6" y="-5" width="12" height="11" rx="2.5" fill="#3a4148"/>
-          <path d="M0 6V10C0 13 5 14 5 18C5 23 -5 24 -6 18" fill="none" stroke="#c4ccd2" stroke-width="3.2" stroke-linecap="round"/>
-        </g>
-      </g>
-    </svg>
-
+    <picture class="still s0"><source media="(max-width:760px)" srcset="assets/r4-bay-phone.webp"><img src="assets/r4-bay-desk.webp" alt="" decoding="sync" fetchpriority="high"></picture>
+    <picture class="still s1"><source media="(max-width:760px)" srcset="assets/r4-bay-phone-end.webp"><img src="assets/r4-bay-desk-end.webp" alt="" loading="lazy"></picture>
   </div>
 
   <div class="col">
@@ -562,44 +311,116 @@ footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-
 </section>
 
 <section class="s" id="storage" style="background:var(--bg2)">
-  <div class="wrap split">
-    <div class="store">
-      <svg viewBox="0 0 600 300" aria-hidden="true">
-        <defs>
-          <linearGradient id="wrap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfcfd"/><stop offset=".6" stop-color="#c4ccd2"/><stop offset="1" stop-color="#8a959e"/></linearGradient>
-          <linearGradient id="wrap2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6d7882"/><stop offset="1" stop-color="#323a42"/></linearGradient>
-          <linearGradient id="hull2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dfe4e7"/><stop offset="1" stop-color="#4b555d"/></linearGradient>
-          <radialGradient id="yard" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#ffa62b" stop-opacity=".22"/><stop offset="1" stop-color="#ffa62b" stop-opacity="0"/></radialGradient>
-          <linearGradient id="gnd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#161c22"/><stop offset="1" stop-color="#0c1015"/></linearGradient>
-        </defs>
-        <rect width="600" height="300" fill="url(#yard)"/>
-        <rect y="252" width="600" height="48" fill="url(#gnd)"/>
-        <g transform="translate(250 -26) scale(.62)" opacity=".9">
-          <path d="M40 228C150 232 330 236 500 236L508 292C380 298 200 294 112 284C82 270 58 250 40 228Z" fill="url(#wrap2)"/>
-          <path d="M40 228C70 192 130 168 210 150L290 104H460C488 104 504 122 506 150L500 236C330 236 150 232 40 228Z" fill="url(#wrap2)"/>
-        </g>
-        <g fill="#2b2119"><rect x="148" y="236" width="34" height="18" rx="2"/><rect x="392" y="240" width="34" height="14" rx="2"/></g>
-        <g transform="translate(8 0)">
-          <path d="M40 210C150 214 330 218 520 218L528 236C400 242 210 240 122 232C90 228 62 222 40 210Z" fill="url(#hull2)"/>
-          <path d="M40 210C66 168 128 140 214 124L296 70H470C504 70 522 90 524 124L520 218C330 218 150 214 40 210Z" fill="url(#wrap)"/>
-          <path d="M296 70L300 216M214 124L220 213M470 70L466 218" stroke="#8d989f" stroke-opacity=".35" stroke-width="2"/>
-          <path d="M44 206C150 210 330 214 520 214" stroke="#ffa62b" stroke-width="3" fill="none"/>
-          <rect x="430" y="132" width="34" height="62" rx="4" fill="#9aa5ad" opacity=".55"/>
-          <path d="M447 136V190" stroke="#4a545c" stroke-width="2" stroke-dasharray="3 3"/>
-          <g fill="#4a545c"><path d="M330 92a10 10 0 0 1 20 0Z"/><path d="M386 92a10 10 0 0 1 20 0Z"/></g>
-        </g>
-      </svg>
-    </div>
-    <div>
+  <div class="wrap haulw haulg">
+    <div class="hhead">
       <p class="lbl">Haul-out &amp; storage</p>
       <h2 class="disp">Hauled, winterized, wrapped. Back in on your date.</h2>
-      <div class="facts">
-        <div>Hydraulic trailer haul-out at your slip or ramp</div>
-        <div>Pressure wash and bottom check on the way in</div>
-        <div>Inside and outside storage on the river</div>
-        <div>Repower work done while she sits, no second haul</div>
-      </div>
+      <p class="lead">One haul out, one launch in. If she's getting a new motor, it goes on while she sits.</p>
     </div>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <linearGradient id="hSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05080d"/><stop offset=".5" stop-color="#14304c"/><stop offset=".52" stop-color="#03060a"/></linearGradient>
+        <linearGradient id="hWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#183552"/><stop offset="1" stop-color="#060b11"/></linearGradient>
+        <linearGradient id="hFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d3d5c" stop-opacity=".9"/><stop offset=".35" stop-color="#0f2236" stop-opacity=".95"/><stop offset="1" stop-color="#060b11"/></linearGradient>
+        <linearGradient id="hRampTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f252b"/><stop offset="1" stop-color="#3c454e"/></linearGradient>
+        <linearGradient id="hConc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b434b"/><stop offset=".5" stop-color="#1a1f24"/><stop offset="1" stop-color="#0e1114"/></linearGradient>
+        <linearGradient id="hWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06080b"/><stop offset="1" stop-color="#121820"/></linearGradient>
+        <linearGradient id="hFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a2026"/><stop offset="1" stop-color="#07090b"/></linearGradient>
+        <linearGradient id="hYard" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#191d22"/><stop offset="1" stop-color="#08090b"/></linearGradient>
+        <radialGradient id="hLamp" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#ffa62b" stop-opacity=".3"/><stop offset=".55" stop-color="#ffa62b" stop-opacity=".06"/><stop offset="1" stop-color="#ffa62b" stop-opacity="0"/></radialGradient>
+        <radialGradient id="hMist" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#e8f2ff" stop-opacity=".55"/><stop offset="1" stop-color="#e8f2ff" stop-opacity="0"/></radialGradient>
+        <radialGradient id="hPool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffa62b" stop-opacity=".22"/><stop offset="1" stop-color="#ffa62b" stop-opacity="0"/></radialGradient>
+        <filter id="hDim" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncR type="linear" slope=".32"/><feFuncG type="linear" slope=".34"/><feFuncB type="linear" slope=".4"/></feComponentTransfer></filter>
+        <clipPath id="hWrapClip"><rect id="hWrapR" x="0" y="0" width="760" height="380"/></clipPath>
+        <g id="hShore"><path d="M0 186L60 181L118 184L180 176L240 182L300 178L380 183L450 175L520 181L600 177L680 183L760 179V200H0Z" fill="#03060a"/><g fill="#ffcf8a"><circle cx="96" cy="187" r="1.6"/><circle cx="214" cy="183" r="1.3"/><circle cx="322" cy="185" r="1.7"/><circle cx="508" cy="182" r="1.4"/><circle cx="640" cy="185" r="1.6"/></g><circle cx="430" cy="184" r="1.4" fill="#cfe6ff"/></g>
+      </defs>
+    </svg>
+    <ol class="haul" id="haul">
+      <li>
+        <figure><svg viewBox="30 10 700 350" aria-hidden="true">
+          <rect width="760" height="380" fill="url(#hSky)"/>
+          <use href="#hShore"/>
+          <rect y="198" width="760" height="182" fill="url(#hWater)"/>
+          <g stroke="#ffcf8a" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"><path d="M560 230h30M610 246h22M470 222h18"/></g>
+          <g transform="rotate(6.5 380 330)">
+            <rect x="-200" y="284" width="1200" height="56" fill="url(#hRampTop)"/>
+            <g stroke="#0b0e11" stroke-opacity=".55" stroke-width="2"><path d="M-40 286L-52 338M40 286L28 338M120 286L108 338M200 286L188 338M280 286L268 338M360 286L348 338M440 286L428 338M520 286L508 338"/></g>
+            <rect x="-200" y="338" width="1200" height="220" fill="url(#hConc)"/>
+            <path d="M-200 338H1000" stroke="#56606a" stroke-width="2"/>
+            <g class="mv"><image href="assets/r4-haul-a.webp" width="760" height="380"/></g>
+          </g>
+          <path d="M170 298H770V400H70Z" fill="url(#hFront)"/>
+          <path d="M170 298H770" stroke="#a9cdf0" stroke-opacity=".55" stroke-width="2"/>
+          <g class="rip" stroke="#9cc3e8" stroke-opacity=".5" stroke-width="2" stroke-linecap="round" stroke-dasharray="16 12"><path d="M330 306H760"/><path d="M470 318h120M620 326h90" stroke-opacity=".3"/></g>
+        </svg></figure>
+        <div class="cap"><span class="n">1</span><div><h3>Haul-out</h3><p>Hydraulic trailer at your slip or ramp.</p></div></div>
+      </li>
+      <li>
+        <figure><svg viewBox="30 10 700 350" aria-hidden="true">
+          <rect width="760" height="380" fill="url(#hWall)"/>
+          <rect x="560" y="70" width="200" height="222" fill="#0a1626"/>
+          <use href="#hShore" transform="translate(0 40)"/>
+          <rect x="560" y="236" width="200" height="56" fill="#0b1c2c"/>
+          <g fill="#080b0e"><rect x="552" y="62" width="12" height="230"/><rect x="552" y="62" width="208" height="12"/></g>
+          <rect y="290" width="760" height="90" fill="url(#hFloor)"/>
+          <ellipse cx="380" cy="0" rx="420" ry="300" fill="url(#hLamp)"/>
+          <ellipse cx="470" cy="345" rx="190" ry="16" fill="#0d1b27" opacity=".9"/>
+          <image href="assets/r4-haul-a.webp" width="760" height="380"/>
+          <ellipse cx="470" cy="268" rx="78" ry="22" fill="url(#hMist)"/>
+          <g class="spray" stroke="#e3efff" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="9 13" stroke-opacity=".85" fill="none">
+            <path d="M574 312L418 262"/><path d="M574 312L440 266"/><path d="M574 312L464 268"/><path d="M574 312L488 270"/><path d="M574 312L512 272"/>
+          </g>
+          <path d="M660 380L578 314" stroke="#2c343b" stroke-width="7" stroke-linecap="round"/>
+          <path d="M624 351L606 337" stroke="#ffa62b" stroke-width="8" stroke-linecap="round"/>
+          <path d="M694 171L686 196" stroke="#ffa62b" stroke-width="2.4"/>
+          <g transform="translate(694 152)"><g class="flake"><circle r="19" fill="#ffa62b"/><g stroke="#1a0e00" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M0 -11V11M-9.5 -5.5L9.5 5.5M-9.5 5.5L9.5 -5.5"/><path d="M-3 -9L0 -6L3 -9M-3 9L0 6L3 9"/></g></g></g>
+        </svg></figure>
+        <div class="cap"><span class="n">2</span><div><h3>Wash + winterize</h3><p>Pressure wash, bottom check, engine fogged, antifreeze in.</p></div></div>
+      </li>
+      <li>
+        <figure><svg viewBox="30 10 700 350" aria-hidden="true">
+          <rect width="760" height="380" fill="url(#hSky)"/>
+          <rect y="196" width="760" height="184" fill="url(#hYard)"/>
+          <image href="assets/r4-haul-b.webp" width="760" height="380" transform="translate(-60 128) scale(.42)" filter="url(#hDim)"/>
+          <image href="assets/r4-haul-b.webp" width="760" height="380" transform="translate(470 120) scale(.44)" filter="url(#hDim)"/>
+          <ellipse cx="380" cy="0" rx="420" ry="300" fill="url(#hLamp)"/>
+          <image href="assets/r4-haul-a.webp" width="760" height="380"/>
+          <image href="assets/r4-haul-b.webp" width="760" height="380" clip-path="url(#hWrapClip)"/>
+        </svg></figure>
+        <div class="cap"><span class="n">3</span><div><h3>Shrink-wrap</h3><p>Tight white wrap with vents and a zip door.</p></div></div>
+      </li>
+      <li>
+        <figure><svg viewBox="30 10 700 350" aria-hidden="true">
+          <rect width="760" height="380" fill="url(#hWall)"/>
+          <g stroke="#000" stroke-opacity=".45" stroke-width="3"><path d="M60 0V300M150 0V300M240 0V300M330 0V300M420 0V300M510 0V300M600 0V300M690 0V300"/></g>
+          <rect y="298" width="760" height="82" fill="url(#hFloor)"/>
+          <ellipse cx="420" cy="20" rx="430" ry="320" fill="url(#hLamp)"/>
+          <ellipse cx="420" cy="338" rx="300" ry="26" fill="url(#hPool)"/>
+          <rect x="604" y="86" width="150" height="212" fill="#14273b"/><g fill="#0a0d11"><rect x="598" y="80" width="10" height="218"/><rect x="598" y="80" width="160" height="10"/></g>
+          <use href="#hShore" transform="translate(0 64)"/><rect x="608" y="262" width="146" height="36" fill="#16324e"/>
+          <rect y="30" width="760" height="16" fill="#1b2128"/><rect y="44" width="760" height="3" fill="#2c343c"/>
+          <image href="assets/r4-haul-c.webp" width="760" height="380"/>
+          <g transform="translate(679 0)"><rect x="-17" y="47" width="34" height="9" rx="2" fill="#2b3238"/><rect x="-15" y="56" width="30" height="26" rx="6" fill="#2a3036"/><rect x="-15" y="64" width="30" height="8" fill="#ffa62b"/></g>
+          <line class="chn" x1="679" y1="82" x2="679" y2="214" stroke="#9aa3ab" stroke-width="2.6" stroke-dasharray="4 2.5"/>
+          <g class="mt"><image href="assets/r4-haul-d.webp" width="760" height="380"/><g transform="translate(679 214)"><rect x="-6" y="-9" width="12" height="11" rx="2" fill="#ffa62b"/><path d="M0 2V6C0 9 4 9 4 12" stroke="#c4ccd2" stroke-width="2.4" fill="none" stroke-linecap="round"/></g></g>
+        </svg></figure>
+        <div class="cap"><span class="n">4</span><div><h3>Storage + repower</h3><p>Inside or outside, on stands. A new motor goes on while she sits.</p></div></div>
+      </li>
+      <li>
+        <figure><svg viewBox="30 10 700 350" aria-hidden="true">
+          <rect width="760" height="380" fill="url(#hSky)"/>
+          <use href="#hShore"/>
+          <rect y="198" width="760" height="182" fill="url(#hWater)"/>
+          <g stroke="#ffcf8a" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"><path d="M210 214h26M520 222h30M620 230h22"/></g>
+          <g class="fl"><image href="assets/r4-haul-e.webp" width="760" height="380"/></g>
+          <path d="M0 233.4L760 264.9V380H0Z" fill="url(#hFront)"/>
+          <g class="wake" stroke="#9cc3e8" stroke-width="2.2" stroke-linecap="round" fill="none" stroke-opacity=".55"><path d="M120 240C260 248 420 256 560 262"/><path d="M690 268C720 272 745 276 780 284" stroke-dasharray="14 10"/><path d="M700 258C725 254 750 250 780 244" stroke-dasharray="14 10"/></g>
+          <path d="M0 233.4L760 264.9" stroke="#a9cdf0" stroke-opacity=".5" stroke-width="2"/>
+          <g transform="translate(640 92)"><g class="cal"><g transform="translate(-56 -56)"><rect width="112" height="112" rx="14" fill="#f4f1ea"/><path d="M0 14A14 14 0 0 1 14 0H98A14 14 0 0 1 112 14V36H0Z" fill="#ffa62b"/><text x="56" y="27" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="19" letter-spacing="3" fill="#1a0e00">APR</text><text x="56" y="96" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="800" font-size="54" fill="#121518">18</text></g></g></g>
+        </svg></figure>
+        <div class="cap"><span class="n">5</span><div><h3>Launch</h3><p>Back in the water on the date you pick.</p></div></div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -653,6 +474,7 @@ footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-
 <footer><span>Saltline Marine &amp; Repower · Merrimack River, MA · (978) 555-0177</span><span>Concept demo · fictional business · IC Business Systems</span></footer>
 
 <script src="../vendor/gsap.min.js"></script>
+<script src="../vendor/ScrollTrigger.min.js"></script>
 <script>
 (function(){
   var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -680,25 +502,29 @@ footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-
   var CHIPS = $('#chips').innerHTML;
 
   // ----- hoist + motors -----
-  var shop = $('#shop'), oldM = $('#oldM'), newM = $('#newM'), rig = $('#rig'), chain = $('#chain'), hook = $('#hook');
+  var scene = $('#scene'), oldM = {visibility:'visible'}, newM = {visibility:'hidden'};
   var K = 1.06, RX = 1302, REST = 300, EY = 427, LIFT = 150, OFF = 1740;
   var S, last = '';
   function resetS(){ S = {rx:RX, hy:REST, ox:0, oy:0, nx:(OFF - RX) / K, ny:-LIFT / K, cz:0}; }
-  function vis(el){ return el.style.visibility !== 'hidden'; }
+  function vis(o){ return o.visibility !== 'hidden'; }
+  // no 3D yet (loading) or no WebGL: the poster stills stand in; the end still wipes down over the start still when the new motor goes on
+  var stillNew = false;
+  function still(nv){
+    if (nv === stillNew) return; stillNew = nv;
+    var s1 = $('.s1'); gsap.killTweensOf(s1);
+    if (nv && !RM) gsap.fromTo(s1, {clipPath:'inset(0% 0% 100% 0%)'}, {clipPath:'inset(0% 0% 0% 0%)', duration:.9, ease:'power2.inOut'});
+    else gsap.set(s1, {clipPath: nv ? 'inset(0% 0% 0% 0%)' : 'inset(0% 0% 100% 0%)'});
+  }
+  function prefb(){ if (!window.SALT.d3) scene.classList.add('fb'); }
   function draw(){
     var ov = vis(oldM), nv = vis(newM);
     var key = [S.rx, S.hy, S.ox, S.oy, S.nx, S.ny, S.cz].map(function(v){ return v.toFixed(3); }).join() + ov + nv;
     if (key === last) return; last = key;
-    if (window.SALT.d3) window.SALT.d3(S, ov, nv);
-    rig.setAttribute('transform', 'translate(' + S.rx + ' 0)');
-    chain.setAttribute('y2', S.hy); hook.setAttribute('transform', 'translate(0 ' + S.hy + ')');
-    oldM.setAttribute('transform', 'translate(' + S.ox + ' ' + S.oy + ')');
-    newM.setAttribute('transform', 'translate(' + S.nx + ' ' + S.ny + ')');
+    if (window.SALT.d3) window.SALT.d3(S, ov, nv); else still(nv);
   }
   var phone = function(){ return innerWidth < 761; };
-  function fit(){ var v = phone() ? '820 285 620 369' : '0 40 1440 900'; $$('#scene svg.ly').forEach(function(s){ s.setAttribute('viewBox', v); }); }
   window.SALT = {RX:RX, EY:EY, redraw:function(){ last = ''; draw(); }};
-  fit(); addEventListener('resize', fit); resetS(); draw();
+  resetS(); draw();
 
   // ----- tags per photo -----
   var groups = STEPS.map(function(st){
@@ -802,7 +628,7 @@ footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-
   }
   function runFinish(){ tl = finishTl(); settle(); }
   function sample(){
-    resetAll();
+    prefb(); resetAll();
     tl = gsap.timeline();
     STEPS.forEach(function(st, i){ tl.call(setStep, [i]).add(readTl(i, tpl(i)), i ? '+=.5' : '+=.15'); });
     var ft = finishTl(); tl.add(ft);
@@ -812,6 +638,7 @@ footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-
   $('#sample').addEventListener('click', sample);
   $('#file').addEventListener('change', function(e){
     var f = e.target.files && e.target.files[0]; if (!f) return;
+    prefb();
     if (cur > 2) resetAll();
     if (tl && tl.isActive()) tl.progress(1);
     var html = '<img alt="Your photo" src="' + URL.createObjectURL(f) + '">', i = cur;
@@ -854,9 +681,42 @@ footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-
       tl.eventCallback('onComplete', function(){
         var T = gsap.timeline();
         if (phone()) T.call(function(){ glide($('#est').getBoundingClientRect().top + scrollY - 90, 1.2); }).to({}, {duration: 1.4});
-        T.to({}, {duration: .5}).call(function(){ tap($('#send'), function(){ send(false); }); });
+        T.to({}, {duration: .5}).call(function(){ tap($('#send'), function(){ send(false); }); })
+         .to({}, {duration: 2.8}).call(haulTour);
       });
     }); });
+  }
+  // ----- haul-out & storage: each scene plays once as it scrolls into view. The markup holds the end states, so no JS / reduced motion = finished scenes. -----
+  function haulTl(li, k){
+    var t = gsap.timeline({paused:true}), q = function(c){ return li.querySelector(c); }, io = {duration:1.6, ease:'power2.inOut'};
+    if (k === 0) t.fromTo(q('.mv'), {x:84}, {x:0, duration:1.8, ease:'power2.inOut'}).fromTo(q('.rip'), {strokeDashoffset:0}, {strokeDashoffset:-56, duration:1.8, ease:'none'}, 0);
+    if (k === 1) t.fromTo(q('.spray'), {strokeDashoffset:0}, {strokeDashoffset:-110, duration:2.2, ease:'none'}).fromTo(q('.flake'), {scale:0, transformOrigin:'50% 50%'}, {scale:1, duration:.5, ease:'back.out(2.4)'}, 1);
+    if (k === 2) t.fromTo('#hWrapR', {attr:{height:0}}, Object.assign({attr:{height:380}}, io));
+    if (k === 3) t.fromTo(q('.mt'), {y:-96}, Object.assign({y:0}, io)).fromTo(q('.chn'), {attr:{y2:118}}, Object.assign({attr:{y2:214}}, io), 0);
+    if (k === 4) t.fromTo(q('.fl'), {x:110}, {x:0, duration:1.9, ease:'power2.out'}).fromTo(q('.wake'), {strokeDashoffset:0}, {strokeDashoffset:-72, duration:1.9, ease:'none'}, 0)
+      .fromTo(q('.cal'), {scale:0, transformOrigin:'50% 50%'}, {scale:1, duration:.55, ease:'back.out(2)'}, 1.1);
+    return t;
+  }
+  var haulLis = [].slice.call($$('#haul > li')), hauls = haulLis.map(haulTl);
+  // the scenes' first paint costs the GPU a one-time ~0.3 s shader warm-up; pay it in the first frames, before anything moves, not mid-scroll (a 1% opacity copy in a corner, removed after load)
+  (function(){
+    var w = document.createElement('div'), h = document.createElement('div'); w.setAttribute('aria-hidden', 'true');
+    w.style.cssText = 'position:fixed;left:0;bottom:0;width:min(330px,100vw);height:170px;overflow:hidden;opacity:.01;pointer-events:none;z-index:1'; h.className = 'haul';
+    haulLis.forEach(function(li){ var f = li.querySelector('figure').cloneNode(true); f.style.cssText = 'position:absolute;left:0;top:0;width:330px;margin:0'; h.appendChild(f); });
+    w.appendChild(h); document.body.appendChild(w);
+    addEventListener('load', function(){ setTimeout(function(){ w.remove(); }, 900); });
+  })();
+  if (!RM && window.ScrollTrigger){
+    gsap.registerPlugin(ScrollTrigger);
+    if (phone()) haulLis.forEach(function(li, i){ ScrollTrigger.create({trigger:li, start:'top 80%', once:true, onEnter:function(){ hauls[i].play(); }}); });
+    else ScrollTrigger.create({trigger:haulLis[0], start:'top 80%', once:true, onEnter:function(){ hauls.forEach(function(t, i){ gsap.delayedCall(i * .45, function(){ t.play(); }); }); }});
+  } else hauls.forEach(function(t){ t.progress(1); });
+  // tour coda: glide down to the haul-out story and let it play
+  function haulTour(){
+    var sec = $('#storage'), top = sec.getBoundingClientRect().top + scrollY;
+    if (!phone()){ glide(top - Math.max(0, (innerHeight - sec.offsetHeight) / 2), 1.8); return; }
+    var last = haulLis[haulLis.length - 1], end = last.getBoundingClientRect().top + scrollY + last.offsetHeight - innerHeight + 24;
+    gsap.timeline().call(function(){ glide(top + 40, 1.6); }).to({}, {duration: 2.8}).call(function(){ glide(end, 7.5); });
   }
   window.TOUR = TOUR;
   var h = location.hash;
@@ -1210,6 +1070,8 @@ import { ParametricGeometry } from 'three/addons/geometries/ParametricGeometry.j
   window.SALT.d3 = draw3d;
   addEventListener('resize', frame);
   frame(); window.SALT.redraw();
+  // the poster still sits on top until the first 3D frame is on screen, then steps aside (identical pixels, so nothing visibly switches)
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ host.classList.add('live'); }); });
 })();
 </script>
 </body>

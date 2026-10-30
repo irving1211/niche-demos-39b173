@@ -122,14 +122,44 @@ input[type=range]::-moz-range-thumb{width:32px;height:32px;border:0;border-radiu
 .money div{background:var(--mint);border-radius:22px;padding:30px 30px 32px}
 .money h3{font-size:34px;margin-bottom:10px}
 .money p{color:#33504b}
-.rev{padding:110px 0 30px}
-.rev h2{margin:12px 0 8px}
-.rev .sub{color:var(--mut);margin-bottom:40px}
-.rev-l{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.rev-l li{background:var(--paper);border-radius:22px;padding:30px 28px}
-.rev-l blockquote{font:400 24px/1.25 var(--serif)}
-.rev-l .by{display:flex;justify-content:space-between;gap:10px;margin-top:22px;font:600 14px var(--sans);color:var(--mut)}
-.rev-l .by span:last-child{color:var(--teal);font-weight:600}
+/* reviews strip, right under the hero */
+.rv{padding:62px 0 70px;background:var(--bg)}
+.rv-g{display:grid;grid-template-columns:300px 1fr;gap:34px;align-items:start}
+.rv-sc{display:flex;align-items:center;gap:16px;margin-top:14px}
+.rv-n{font:400 76px/.9 var(--serif);letter-spacing:-.02em}
+.rv-st{display:flex;gap:3px}.rv-st svg{width:19px;height:19px;fill:var(--teal)}
+.rv-sc small{display:block;font:600 14px var(--sans);color:var(--mut);margin-top:6px}
+.rv-sub{font-size:14.5px;line-height:1.45;color:var(--mut);margin-top:14px;max-width:250px}
+.rv-l{list-style:none;display:grid;grid-template-columns:repeat(3,1fr)}
+.rv-l li{padding:6px 30px 0}
+.rv-l li+li{box-shadow:-1px 0 0 rgba(27,42,42,.09)}
+.rv-l blockquote{font:400 23px/1.28 var(--serif)}
+.rv-l .by{display:flex;gap:10px;margin-top:16px;font:600 14px var(--sans);color:var(--mut)}
+.rv-l .by span:last-child{color:var(--teal)}
+.rv-dots{display:none}
+/* cost estimate */
+.cost{padding:110px 0 10px}
+.cost-h{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:40px}
+.cost-h h2{margin-top:12px}
+.cost-h p{max-width:430px;color:var(--mut)}
+.calc{display:grid;grid-template-columns:1.08fr 1fr;background:#fff;border-radius:28px;box-shadow:0 10px 40px rgba(27,42,42,.06);overflow:hidden}
+.cin{padding:34px 36px 32px}
+.cin .fl{display:block;font:600 15.5px var(--sans);margin:24px 0 10px}.cin .fl:first-child{margin-top:0}
+.chips.eq{flex-wrap:nowrap}.chips.eq button{flex:1 1 0;padding:0 6px;min-width:0}
+.res{background:var(--teal);color:#fff;padding:34px 38px 30px;display:flex;flex-direction:column}
+.res .k{font:600 13px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#bfe1d9}
+.res .big{display:flex;align-items:baseline;gap:12px;margin-top:16px;font:400 98px/.92 var(--serif);letter-spacing:-.02em}
+.res .big span{font-variant-numeric:tabular-nums}
+.res .big small{font:500 18px var(--sans);color:#d5ebe5;letter-spacing:0}
+.res .after{margin-top:12px;font-size:16px;color:#d5ebe5}
+.bar{position:relative;height:10px;border-radius:99px;background:#fcfaf6;margin-top:26px;overflow:hidden}
+.bar i{position:absolute;inset:0;border-radius:99px;background:#86c9bb;transform-origin:0 50%;transform:scaleX(0)}
+.res dl{display:grid;grid-template-columns:1fr auto;gap:9px 16px;margin-top:18px;font-size:15.5px}
+.res dt{color:#d5ebe5;display:flex;align-items:center;gap:9px}
+.res dt i{flex:none;width:9px;height:9px;border-radius:50%}
+.res dd{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.cost .note{max-width:820px}
+.mwl{display:none!important}
 .off{padding:110px 0 120px}
 .off-g{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start}
 .off h2{margin:12px 0 16px}
@@ -204,7 +234,21 @@ html.tour .mbar{bottom:0}
   .svc-l{grid-template-columns:1fr;gap:10px}.svc-l li{min-height:0;padding:22px 20px}
   .svc-l h3{margin:12px 0 6px}
   .money{grid-template-columns:1fr;gap:10px}.money div{padding:24px 20px}.money h3{font-size:30px}
-  .rev{padding:72px 0 20px}.rev-l{grid-template-columns:1fr;gap:10px}.rev-l li{padding:24px 20px}.rev-l blockquote{font-size:22px}
+  .rv{padding:40px 0 34px}.rv-g{grid-template-columns:1fr;gap:16px}
+  .rv-sc{margin-top:10px}.rv-n{font-size:58px}.rv-sub{max-width:none;margin-top:8px;font-size:14px}
+  .rv-l{grid-template-columns:1fr}.rv-l li{grid-area:1/1;padding:0;visibility:hidden}.rv-l li.on{visibility:visible}.rv-l li+li{box-shadow:none}
+  .rv-l blockquote{font-size:25px;line-height:1.24}
+  .rv-dots{display:flex;margin:2px 0 0 -12px}
+  .rv-dots button{width:44px;height:44px;display:grid;place-items:center}
+  .rv-dots button::after{content:"";width:8px;height:8px;border-radius:99px;background:#d3cabd;transition:background-color .3s,width .35s}
+  .rv-dots button[aria-current=true]::after{width:22px;background:var(--teal)}
+  .cost{padding:60px 0 6px}.cost-h{display:block;margin-bottom:22px}.cost-h h2{margin-top:10px}.cost-h p{margin-top:12px}
+  .calc{grid-template-columns:minmax(0,1fr);border-radius:22px}
+  .mw{display:none!important}.mwl{display:inline!important}
+  .cin{padding:20px 18px 18px}.cin .fl{margin:16px 0 8px;font-size:15px}
+  .cin .chips button{padding:0 13px}
+  .res{padding:22px 20px 22px}.res .big{font-size:66px;margin-top:10px}.res .big small{font-size:16px}
+  .res .after{font-size:15px;margin-top:8px}.bar{margin-top:18px}.res dl{font-size:14.5px;gap:7px 10px;margin-top:14px}
   .off{padding:72px 0 80px}.off-g{grid-template-columns:1fr;gap:6px}.onotes{font-size:16px;margin-top:20px}
   .seg{display:flex;width:100%}.seg button{flex:1;padding:0 8px}
   .card{padding:26px 20px 24px}.card .nm{font-size:34px}
@@ -217,6 +261,8 @@ html.tour .mbar{bottom:0}
 }
 @media (min-width:901px) and (min-aspect-ratio:3/4){.pctl{display:none}}
 @media (min-width:901px) and (min-aspect-ratio:3/4) and (max-height:860px){.copy h1{font-size:52px;margin:12px 0 12px}.steps{margin-top:16px}.steps button{min-height:40px}.ctl{margin-top:20px}.calm{display:none}}
+/* tour at 1920x1080 is zoomed, so the max-height query above never fires: same rules by class */
+html.short .copy h1{font-size:52px;margin:12px 0 12px}html.short .steps{margin-top:16px}html.short .steps button{min-height:40px}html.short .ctl{margin-top:20px}html.short .calm{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -227,7 +273,7 @@ html.tour .mbar{bottom:0}
     <span><b>Calloway</b><small data-i="brandSub">Smile Studio</small></span>
   </a>
   <nav class="nv" aria-label="Main">
-    <a href="#top" data-i="navImpl">Implants</a><a href="#smile" data-i="navSmile">Your smile</a><a href="#services" data-i="navSvc">Services</a><a href="#offices" data-i="navOff">Offices</a>
+    <a href="#top" data-i="navImpl">Implants</a><a href="#smile" data-i="navSmile">Your smile</a><a href="#cost" data-i="navCost">Costs</a><a href="#services" data-i="navSvc">Services</a><a href="#offices" data-i="navOff">Offices</a>
   </nav>
   <div class="hr">
     <div class="lang" role="group" aria-label="Language"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="es" aria-pressed="false">ES</button></div>
@@ -274,6 +320,22 @@ html.tour .mbar{bottom:0}
   </ul>
 </section>
 
+<section class="rv" id="reviews"><div class="wrap rv-g">
+  <div>
+    <p class="eyebrow" data-i="revH">What patients tell us</p>
+    <div class="rv-sc"><p class="rv-n">4.9</p><div><div class="rv-st" aria-label="5 stars"><svg viewBox="0 0 20 20"><path d="M10 1.6l2.5 5.4 5.9.7-4.4 4 1.2 5.8L10 14.6l-5.2 2.9 1.2-5.8-4.4-4 5.9-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.5 5.4 5.9.7-4.4 4 1.2 5.8L10 14.6l-5.2 2.9 1.2-5.8-4.4-4 5.9-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.5 5.4 5.9.7-4.4 4 1.2 5.8L10 14.6l-5.2 2.9 1.2-5.8-4.4-4 5.9-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.5 5.4 5.9.7-4.4 4 1.2 5.8L10 14.6l-5.2 2.9 1.2-5.8-4.4-4 5.9-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.5 5.4 5.9.7-4.4 4 1.2 5.8L10 14.6l-5.2 2.9 1.2-5.8-4.4-4 5.9-.7z"/></svg></div><small data-i="revN">Sample rating</small></div></div>
+    <p class="rv-sub" data-i="revSub">Sample rating and reviews written for this demo, not real patients.</p>
+  </div>
+  <div>
+    <ul class="rv-l" id="rvL">
+      <li class="on"><blockquote data-i="r1">“They showed me a model of the implant before we started, so I knew exactly what was going on.”</blockquote><p class="by"><span>M. R.</span><span data-i="sample">Sample review</span></p></li>
+      <li><blockquote data-i="r2">“The front desk answered every question in Spanish, and my kids actually like going.”</blockquote><p class="by"><span>L. P.</span><span data-i="sample">Sample review</span></p></li>
+      <li><blockquote data-i="r3">“My whitening was done in one visit, and they told me the price up front.”</blockquote><p class="by"><span>D. K.</span><span data-i="sample">Sample review</span></p></li>
+    </ul>
+    <div class="rv-dots" id="rvDots" role="group" aria-label="Reviews"><button aria-current="true" aria-label="1"></button><button aria-current="false" aria-label="2"></button><button aria-current="false" aria-label="3"></button></div>
+  </div>
+</div></section>
+
 <section class="smile" id="smile"><div class="wrap sm-grid">
   <div class="sm-stage" id="smStage"><canvas id="gl2" aria-label="3D sample smile: upper and lower front teeth"></canvas><span class="sm-tag" data-i="smTag">Sample smile, not a real patient</span><span class="sm-shade" id="smShade">A3.5</span></div>
   <div class="sm-copy">
@@ -291,6 +353,37 @@ html.tour .mbar{bottom:0}
   </div>
 </div></section>
 
+<section class="cost" id="cost"><div class="wrap">
+  <div class="cost-h"><div><p class="eyebrow" data-i="esEye">Cost, up front</p><h2 data-i="esH">What would I pay?</h2></div><p data-i="esP">Pick a treatment and see a sample monthly cost. Before anything starts, you get the real number in writing.</p></div>
+  <div class="calc" id="calc">
+    <div class="cin">
+      <p class="fl" id="eTrL" data-i="esT">Treatment</p>
+      <div class="chips" id="eTr" role="group" aria-labelledby="eTrL"><button type="button" data-v="0" aria-pressed="true" data-i="eT0">Implant + crown</button><button type="button" data-v="1" aria-pressed="false" data-i="eT1">Veneers (4 teeth)</button><button type="button" data-v="2" aria-pressed="false" data-i="eT2">Clear aligners</button><button type="button" data-v="3" aria-pressed="false" data-i="eT3">Crown</button><button type="button" data-v="4" aria-pressed="false" data-i="eT4">Whitening</button></div>
+      <p class="fl" id="eInL" data-i="esI">Do you have dental insurance?</p>
+      <div class="chips eq" id="eIn" role="group" aria-labelledby="eInL"><button type="button" data-v="1" aria-pressed="true" data-i="eYes">Yes</button><button type="button" data-v="0" aria-pressed="false" data-i="eNo">No</button></div>
+      <p class="fl" id="eMsL"><span data-i="esM">Spread it over</span> <span class="mwl" data-i="moL">(months)</span></p>
+      <div class="chips eq" id="eMs" role="group" aria-labelledby="eMsL"><button type="button" data-v="12" aria-pressed="true">12<span class="mw" data-i="mo">&nbsp;months</span></button><button type="button" data-v="24" aria-pressed="false">24<span class="mw" data-i="mo">&nbsp;months</span></button><button type="button" data-v="36" aria-pressed="false">36<span class="mw" data-i="mo">&nbsp;months</span></button><button type="button" data-v="48" aria-pressed="false">48<span class="mw" data-i="mo">&nbsp;months</span></button></div>
+    </div>
+    <div class="res" id="eRes" aria-live="polite">
+      <p class="k" data-i="esChip">Sample estimate</p>
+      <p class="big"><span id="eMo">$225</span><small data-i="perMo">a month</small></p>
+      <p class="after" id="eAfter"></p>
+      <div class="bar" aria-hidden="true"><i id="eBar"></i></div>
+      <dl>
+        <dt><span data-i="dl0">Sample fee</span></dt><dd id="eFee">$4,200</dd>
+        <dt><i style="background:#86c9bb"></i><span data-i="dl1">Insurance pays (est.)</span></dt><dd id="eIns">−$1,500</dd>
+        <dt><i style="background:#fcfaf6"></i><span data-i="dl2">Your part</span></dt><dd id="eYou">$2,700</dd>
+        <dt><span data-i="dl3">Rate</span></dt><dd id="eRate"></dd>
+      </dl>
+    </div>
+  </div>
+  <p class="note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span data-i="esNote">Sample numbers for this demo. We check your benefits for free and give you a written estimate before anything starts.</span></p>
+  <div class="money">
+    <div><h3 data-i="insH">Insurance</h3><p data-i="insP">We take most PPO dental plans and send the claim for you. Not sure about yours? Call and we will check it before your visit.</p></div>
+    <div><h3 data-i="finH">Payment plans</h3><p data-i="finP">Monthly payment plans are available. You get the full cost in writing before any treatment starts. No surprises.</p></div>
+  </div>
+</div></section>
+
 <section class="svc" id="services"><div class="wrap">
   <div class="svc-h"><div><p class="eyebrow" data-i="svcEye">What we do</p><h2 data-i="svcH">Care for the whole family</h2></div><p data-i="svcP">From a first cleaning to a full smile makeover. We tell you what we see, what it costs, and what your choices are.</p></div>
   <ul class="svc-l">
@@ -302,19 +395,6 @@ html.tour .mbar{bottom:0}
     <li><span class="k">06</span><h3 data-i="v6">Cleanings and family care</h3><p data-i="v6p">Checkups and cleanings for kids, parents and grandparents.</p></li>
     <li class="em"><span class="k">07</span><h3 data-i="v7">Emergencies</h3><p data-i="v7p">Toothache or a broken tooth? Call us. We keep time open for same-day visits.</p></li>
     <li><span class="k">08</span><h3 data-i="v8">New patients</h3><p data-i="v8p">Your first visit is a calm checkup and a plan you can take home. No pressure.</p></li>
-  </ul>
-  <div class="money">
-    <div><h3 data-i="insH">Insurance</h3><p data-i="insP">We take most PPO dental plans and send the claim for you. Not sure about yours? Call and we will check it before your visit.</p></div>
-    <div><h3 data-i="finH">Payment plans</h3><p data-i="finP">Monthly payment plans are available. You get the full cost in writing before any treatment starts. No surprises.</p></div>
-  </div>
-</div></section>
-
-<section class="rev"><div class="wrap">
-  <p class="eyebrow" data-i="revEye">Patients</p><h2 data-i="revH">What patients tell us</h2><p class="sub" data-i="revSub">Sample reviews written for this demo, not real patients.</p>
-  <ul class="rev-l">
-    <li><blockquote data-i="r1">“They showed me a model of the implant before we started, so I knew exactly what was going on.”</blockquote><p class="by"><span>M. R.</span><span data-i="sample">Sample review</span></p></li>
-    <li><blockquote data-i="r2">“The front desk answered every question in Spanish, and my kids actually like going.”</blockquote><p class="by"><span>L. P.</span><span data-i="sample">Sample review</span></p></li>
-    <li><blockquote data-i="r3">“My whitening was done in one visit, and they told me the price up front.”</blockquote><p class="by"><span>D. K.</span><span data-i="sample">Sample review</span></p></li>
   </ul>
 </div></section>
 
@@ -365,7 +445,7 @@ html.tour .mbar{bottom:0}
 <script>
 /* ---------- words (EN is read from the page, ES lives here) ---------- */
 const ES = {
-  brandSub: 'Smile Studio', navImpl: 'Implantes', navSmile: 'Su sonrisa', navSvc: 'Servicios', navOff: 'Consultorios', call: 'Llamar', book: 'Reservar cita',
+  brandSub: 'Smile Studio', navImpl: 'Implantes', navSmile: 'Su sonrisa', navCost: 'Costos', navSvc: 'Servicios', navOff: 'Consultorios', call: 'Llamar', book: 'Reservar cita',
   t1: 'Corona', t1s: 'Lo que se ve y con lo que mastica', t2: 'Pilar', t2s: 'Une la corona con el poste', t3: 'Poste del implante', t3s: 'De titanio, va donde estaba la raíz', t4: 'Su hueso', t4s: 'Crece alrededor del poste y lo sostiene',
   heroEye: 'Implantes dentales · condado de Essex', heroH: 'Un diente nuevo que se ve y se siente <em>como el suyo.</em>',
   heroP: '¿Se pregunta qué es en realidad un implante? Véalo por partes, pieza por pieza. Le explicamos cada paso antes de empezar.',
@@ -388,10 +468,15 @@ const ES = {
   v8: 'Pacientes nuevos', v8p: 'Su primera visita es un chequeo tranquilo y un plan que se puede llevar a casa. Sin presión.',
   insH: 'Seguro dental', insP: 'Aceptamos la mayoría de los planes dentales PPO y enviamos el reclamo por usted. ¿No sabe si aceptamos el suyo? Llame y lo revisamos antes de su cita.',
   finH: 'Planes de pago', finP: 'Tenemos planes de pago mensuales. Le damos el costo completo por escrito antes de empezar cualquier tratamiento. Sin sorpresas.',
-  revEye: 'Pacientes', revH: 'Lo que nos dicen los pacientes', revSub: 'Reseñas de muestra escritas para esta demostración, no son pacientes reales.',
+  revEye: 'Pacientes', revH: 'Lo que dicen los pacientes', revSub: 'Calificación y reseñas de muestra escritas para esta demostración, no son pacientes reales.', revN: 'Calificación de muestra',
   r1: '“Me enseñaron un modelo del implante antes de empezar, así que supe todo el tiempo lo que estaba pasando.”',
   r2: '“En la recepción me contestaron todas las preguntas en español, y a mis hijos hasta les gusta ir.”',
   r3: '“Me hicieron el blanqueamiento en una sola visita y me dijeron el precio desde el principio.”', sample: 'Reseña de muestra',
+  esEye: 'El costo, desde el principio', esH: '¿Cuánto pagaría?', esP: 'Escoja un tratamiento y vea un costo mensual de ejemplo. Antes de empezar, le damos el número real por escrito.',
+  esT: 'Tratamiento', eT0: 'Implante + corona', eT1: 'Carillas (4 dientes)', eT2: 'Alineadores', eT3: 'Corona', eT4: 'Blanqueamiento',
+  esI: '¿Tiene seguro dental?', eYes: 'Sí', eNo: 'No', esM: 'Pagarlo en', mo: '&nbsp;meses', moL: '(meses)',
+  esChip: 'Estimado de ejemplo', perMo: 'al mes', dl0: 'Precio de ejemplo', dl1: 'Paga el seguro (aprox.)', dl2: 'Su parte', dl3: 'Interés',
+  esNote: 'Números de ejemplo para esta demostración. Revisamos sus beneficios gratis y le damos un estimado por escrito antes de empezar.',
   offEye: 'Consultorios', on1: 'Hablamos español en los dos consultorios', on2: '¿Dolor de muela? Llame a cualquiera de los dos, dejamos espacio el mismo día', on3: 'Pacientes nuevos bienvenidos, niños también', offH: 'Dos consultorios, un mismo equipo', offP: 'Los mismos dentistas, el mismo cuidado y los mismos precios. Escoja el que le quede más cerca de su casa o su trabajo.',
   bookHere: 'Reservar en este consultorio', fName: 'Su nombre', fPhone: 'Teléfono', fDay: 'El mejor día para usted', d0: 'Cualquier día de semana', d1: 'Por la mañana', d2: 'Por la tarde', d3: 'Sábado',
   fWhy: 'Motivo de la visita', w0: 'Chequeo y limpieza', w1: 'Consulta de implante', w2: 'Blanqueamiento o carillas', w3: 'Dolor de muela', w4: 'Otra cosa',
@@ -399,8 +484,10 @@ const ES = {
   ftSeal: 'Exclusivo en el condado de Essex, MA', demo: 'Demostración de concepto · negocio ficticio · IC Business Systems'
 };
 const EXTRA = {
-  en: { pApart: 'See the parts', pBack: 'Put it back together', pAgain: 'See it again', pGo: 'Watch…', seal: 'Exclusive in Essex County, MA', callThis: 'Call this office', reqAt: 'Request my visit at ', thanks: n => `Thanks${n ? ', ' + n : ''}. Our ${OFF.cur().name} team will call you to confirm a time. (Demo: nothing was sent.)`, shadeTip: 'Shade', today: 'Today', closed: 'Closed', sat13: '1st and 3rd Saturday' },
-  es: { seal: 'Exclusivo en el condado de Essex, MA', callThis: 'Llamar a este consultorio', reqAt: 'Solicitar mi cita en ', thanks: n => `Gracias${n ? ', ' + n : ''}. Nuestro equipo de ${OFF.cur().name} le llamará para confirmar la hora. (Demostración: no se envió nada.)`, shadeTip: 'Tono', today: 'Hoy', closed: 'Cerrado', sat13: '1.er y 3.er sábado' }
+  en: { pApart: 'See the parts', pBack: 'Put it back together', pAgain: 'See it again', pGo: 'Watch…', seal: 'Exclusive in Essex County, MA', callThis: 'Call this office', reqAt: 'Request my visit at ', thanks: n => `Thanks${n ? ', ' + n : ''}. Our ${OFF.cur().name} team will call you to confirm a time. (Demo: nothing was sent.)`, shadeTip: 'Shade', today: 'Today', closed: 'Closed', sat13: '1st and 3rd Saturday',
+    after: (y, m) => `About ${y} after insurance, over ${m} months.`, afterNo: (y, m) => `${y} in all, over ${m} months.`, rate: apr => apr ? apr + '% APR' : '0% for 12 months' },
+  es: { seal: 'Exclusivo en el condado de Essex, MA', callThis: 'Llamar a este consultorio', reqAt: 'Solicitar mi cita en ', thanks: n => `Gracias${n ? ', ' + n : ''}. Nuestro equipo de ${OFF.cur().name} le llamará para confirmar la hora. (Demostración: no se envió nada.)`, shadeTip: 'Tono', today: 'Hoy', closed: 'Cerrado', sat13: '1.er y 3.er sábado',
+    after: (y, m) => `Unos ${y} después del seguro, en ${m} meses.`, afterNo: (y, m) => `${y} en total, en ${m} meses.`, rate: apr => apr ? apr + '% APR' : '0% por 12 meses' }
 };
 const EN = {};
 document.querySelectorAll('[data-i]').forEach(el => { if (!(el.dataset.i in EN)) EN[el.dataset.i] = el.innerHTML; });
@@ -415,6 +502,7 @@ if (TOUR) {
   document.documentElement.classList.add('tour');
   const W = innerWidth, H = innerHeight, z = H > W ? (W > 520 ? W / 420 : 1) : (W > 1500 ? W / 1440 : 1);
   if (z !== 1) document.documentElement.style.zoom = z;
+  if (W > H && W / z > 900 && H / z <= 860) document.documentElement.classList.add('short');
   window.CZOOM = z;
 }
 const ZM = window.CZOOM || 1;
@@ -508,7 +596,7 @@ function setLang(l, anim) {
   document.querySelectorAll('[data-i]').forEach(el => { const h = T(el.dataset.i); if (h != null && el.innerHTML !== h) roll(el, h, anim && inView(el)); });
   $('sealT').textContent = X('seal') + ' ·';
   if (anim && !RM) gsap.fromTo('.seal', { rotation: -40 }, { rotation: 0, duration: 1, ease: 'power3.out', transformOrigin: '50% 50%' });
-  renderOffice(anim); window.CAL_UI && CAL_UI.lang(anim); window.SMILE && SMILE.ui(anim);
+  renderOffice(anim); window.CAL_UI && CAL_UI.lang(anim); window.SMILE && SMILE.ui(anim); window.EST && EST.words(anim);
   window.TAGS_W && window.TAGS_W();
 }
 document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => { if (b.dataset.lang !== LANG) setLang(b.dataset.lang, true); }));
@@ -569,6 +657,62 @@ window.SMILE = (() => {
   function setShade(v) { st.shade = v; sl.value = Math.round(v * 1000); ui(); }
   return { st, ui, setVen, setShade };
 })();
+
+/* ---------- "What would I pay?" sample estimate: numbers ease to their new value ---------- */
+window.EST = (() => {
+  const TRT = [{ fee: 4200, ins: f => Math.min(1500, f * .5) }, { fee: 4800, ins: () => 0 }, { fee: 4500, ins: () => 1000 }, { fee: 1350, ins: f => f * .5 }, { fee: 450, ins: () => 0 }];
+  const st = { t: 0, i: 1, m: 12 }, EV = { mo: 0, fee: 0, ins: 0, you: 0 };
+  const money = n => '$' + Math.round(n).toLocaleString('en-US');
+  function calc() {
+    const tr = TRT[st.t], fee = tr.fee, ins = st.i ? tr.ins(fee) : 0, you = fee - ins, apr = st.m > 12 ? 7.9 : 0, r = apr / 1200;
+    return { fee, ins, you, apr, mo: r ? you * r / (1 - Math.pow(1 + r, -st.m)) : you / st.m };
+  }
+  const bar = $('eBar');
+  function draw() {
+    $('eMo').textContent = money(EV.mo); $('eFee').textContent = money(EV.fee); $('eYou').textContent = money(EV.you);
+    $('eIns').textContent = EV.ins > .5 ? '−' + money(EV.ins) : '$0';
+    bar.style.transform = `scaleX(${EV.fee ? (EV.ins / EV.fee).toFixed(4) : 0})`;
+  }
+  function words(anim) {
+    const c = calc(), a = anim && inView($('eRes'));
+    roll($('eAfter'), X(c.ins ? 'after' : 'afterNo')(money(c.you), st.m), a);
+    roll($('eRate'), X('rate')(c.apr), a);
+  }
+  function sync(anim) {
+    [['eTr', st.t], ['eIn', st.i], ['eMs', st.m]].forEach(([id, v]) => pick($(id), v));
+    words(anim);
+    const c = calc();
+    gsap.killTweensOf(EV);
+    gsap.to(EV, { mo: c.mo, fee: c.fee, ins: c.ins, you: c.you, duration: anim && !RM ? .9 : 0, ease: 'power3.out', onUpdate: draw, onComplete: draw });
+  }
+  [['eTr', 't'], ['eIn', 'i'], ['eMs', 'm']].forEach(([id, k]) => $(id).addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || +b.dataset.v === st[k]) return; st[k] = +b.dataset.v; sync(true);
+  }));
+  function set(t, i, m, anim) { st.t = t; st.i = i; st.m = m; sync(anim); }
+  return { st, sync, set, words };
+})();
+
+/* ---------- reviews: all three side by side on desktop; on phones one at a time, rotating calmly ---------- */
+window.RV = (() => {
+  const items = [...document.querySelectorAll('#rvL li')], dots = [...document.querySelectorAll('#rvDots button')];
+  const one = matchMedia('(max-width:900px),(max-aspect-ratio:3/4)');
+  let cur = 0;
+  function show(k, anim) {
+    if (k === cur) return;
+    const a = items[cur], b = items[k]; cur = k;
+    dots.forEach((d, i) => d.setAttribute('aria-current', i === k));
+    gsap.killTweensOf([a, b]); gsap.set([a, b], { clearProps: 'clipPath,transform' });
+    if (!anim || RM || !one.matches) { items.forEach((li, i) => li.classList.toggle('on', i === k)); return; }
+    gsap.timeline()
+      .to(a, { clipPath: 'inset(0% 0% 100% 0%)', y: -10, duration: .3, ease: 'power2.in' })
+      .call(() => { a.classList.remove('on'); b.classList.add('on'); gsap.set(a, { clearProps: 'clipPath,transform' }); })
+      .fromTo(b, { clipPath: 'inset(100% 0% 0% 0%)', y: 12 }, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: .55, ease: 'power3.out', clearProps: 'clipPath,transform' });
+  }
+  dots.forEach((d, i) => d.addEventListener('click', () => show(i, true)));
+  if (!TOUR && !RM) setInterval(() => { if (one.matches && !document.hidden && inView($('rvL'))) show((cur + 1) % items.length, true); }, 6500);
+  return { show };
+})();
+
 setLang(LANG, false);
 SMILE.ui();
 document.fonts && document.fonts.ready.then(() => pill(false));
@@ -580,6 +724,8 @@ if (q.get('ven')) SMILE.setVen(true, false);
 if (q.get('shade')) SMILE.setShade(+q.get('shade'));
 if (q.get('office')) { OFF.k = q.get('office'); renderOffice(false); }
 if (q.get('form')) openForm(false);
+EST.sync(false);
+if (q.get('est')) { const [a, b, c] = q.get('est').split(',').map(Number); EST.set(a || 0, isNaN(b) ? 1 : b, c || 12, false); }
 </script>
 
 <script>
@@ -595,25 +741,30 @@ if (TOUR) {
   };
   const typeIn = (tl, id, text, at, dur) => { const o = { n: 0 }; tl.fromTo(o, { n: 0 }, { n: text.length, duration: dur, ease: 'none', immediateRender: false, onUpdate: () => { $(id).value = text.slice(0, Math.round(o.n)); } }, at); };
   const TL = window.CALTOUR = gsap.timeline({ paused: true });
-  TL.call(() => { tap($(innerWidth / ZM > 900 && innerWidth > innerHeight ? 'play' : 'play2')); }, null, 0.8);
+  const WIDE = innerWidth / ZM > 900 && innerWidth > innerHeight, VH = innerHeight / ZM;
+  TL.call(() => { tap($(WIDE ? 'play' : 'play2')); }, null, 0.8);
   TL.to(CALT, { time: CAL_UI.REST, duration: CAL_UI.REST, ease: 'none' }, 0.8);          // 0.8 - 5.3 break-apart
-  TL.call(() => tap($(innerWidth / ZM > 900 && innerWidth > innerHeight ? 'play' : 'play2')), null, 7.0);
-  TL.to(CALT, { time: CAL_UI.DUR, duration: CAL_UI.DUR - CAL_UI.REST, ease: 'none' }, 7.0); // 7.0 - 13.1 reassemble
-  scrollTween(TL, innerWidth / ZM > 900 && innerWidth > innerHeight ? '#smile .sm-grid' : '#smile .sm-copy h2', 13.5, 1.7, 84);                                         // 13.5 - 15.2 to the smile
-  const sh = { v: 0 }; TL.fromTo(sh, { v: 0 }, { v: 1, duration: 3.2, ease: 'power1.inOut', immediateRender: false, onUpdate: () => SMILE.setShade(sh.v) }, 15.6);
-  TL.call(() => { tap($('ven')); SMILE.setVen(true); }, null, 19.4);
-  TL.call(() => { tap(document.querySelector('.lang button[data-lang=es]')); setLang('es', true); }, null, 21.6);
-  scrollTween(TL, '#offices', 23.8, 1.8, 40);
-  TL.call(() => { const b = document.querySelector('#seg button[data-o=lake]'); tap(b); OFF.k = 'lake'; renderOffice(true); }, null, 26.0);
-  TL.call(() => { tap($('oBook')); openForm(); }, null, 27.6);
-  scrollTween(TL, '#oBook', 28.0, 1.1, innerHeight / ZM * .18);
-  typeIn(TL, 'fName', 'Ana R.', 29.3, .8);
-  typeIn(TL, 'fPhone', '(978) 555-0100', 30.2, 1.0);
-  TL.call(() => { const b = document.querySelector('#cDay button[data-v="1"]'); tap(b); pick($('cDay'), 1); }, null, 31.4);
-  TL.call(() => { const b = document.querySelector('#cWhy button[data-v="1"]'); tap(b); pick($('cWhy'), 1); }, null, 32.0);
-  scrollTween(TL, '#send', 32.3, .8, innerHeight / ZM * .45);
-  TL.call(() => { tap($('send')); $('form').requestSubmit(); }, null, 33.4);
-  TL.to({}, { duration: 2.6 }, 33.4);                                                       // hold on the confirmation, ends 36.0
+  TL.call(() => tap($(WIDE ? 'play' : 'play2')), null, 6.6);
+  TL.to(CALT, { time: CAL_UI.DUR, duration: CAL_UI.DUR - CAL_UI.REST, ease: 'none' }, 6.6); // 6.6 - 12.7 reassemble
+  scrollTween(TL, '#reviews', 13.0, 1.4, WIDE ? VH * .3 : VH * .2);                         // 13.0 - 14.4 reviews strip
+  TL.call(() => RV.show(1, true), null, 14.8);                                               // phone: next sample review wipes in
+  scrollTween(TL, WIDE ? '#smile .sm-grid' : '#smile .sm-copy h2', 15.9, 1.5, 84);           // 15.9 - 17.4 to the smile
+  const sh = { v: 0 }; TL.fromTo(sh, { v: 0 }, { v: 1, duration: 2.6, ease: 'power1.inOut', immediateRender: false, onUpdate: () => SMILE.setShade(sh.v) }, 17.7);
+  TL.call(() => { tap($('ven')); SMILE.setVen(true); }, null, 20.7);
+  scrollTween(TL, WIDE ? '#cost .cost-h' : '#calc', 22.5, 1.5, WIDE ? 84 : 72);              // 22.5 - 24.0 to "What would I pay?"
+  TL.call(() => { const b = document.querySelector('#eMs button[data-v="24"]'); tap(b); EST.set(0, 1, 24, true); }, null, 24.4);
+  TL.call(() => { tap(document.querySelector('.lang button[data-lang=es]')); setLang('es', true); }, null, 26.2);
+  scrollTween(TL, '#offices', 27.6, 1.6, 40);
+  TL.call(() => { const b = document.querySelector('#seg button[data-o=lake]'); tap(b); OFF.k = 'lake'; renderOffice(true); }, null, 29.6);
+  TL.call(() => { tap($('oBook')); openForm(); }, null, 31.0);
+  scrollTween(TL, '#oBook', 31.4, 1.1, VH * .18);
+  typeIn(TL, 'fName', 'Ana R.', 32.6, .7);
+  typeIn(TL, 'fPhone', '(978) 555-0100', 33.4, .9);
+  TL.call(() => { const b = document.querySelector('#cDay button[data-v="1"]'); tap(b); pick($('cDay'), 1); }, null, 34.5);
+  TL.call(() => { const b = document.querySelector('#cWhy button[data-v="1"]'); tap(b); pick($('cWhy'), 1); }, null, 35.0);
+  scrollTween(TL, '#send', 35.3, .8, VH * .45);
+  TL.call(() => { tap($('send')); $('form').requestSubmit(); }, null, 36.4);
+  TL.to({}, { duration: 2.4 }, 36.4);                                                       // hold on the confirmation, ends 38.8
   const at = q.get('at');
   addEventListener('load', () => setTimeout(() => { scrollTo(0, 0); if (at != null) { const st = at.split(',').map(Number); st.forEach((v, i) => setTimeout(() => TL.seek(v, false), i * 1400)); } else TL.play(0); }, 500));
 }
@@ -1063,10 +1214,13 @@ if (R2) {
   let lastV = -1, W = 1, H = 1;
   function size() { W = smStage.clientWidth; H = smStage.clientHeight; R2.setPixelRatio(PR()); R2.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix(); }
   addEventListener('resize', size); size();
-  let visible = false; new IntersectionObserver(e => { visible = e[0].isIntersecting; }, { rootMargin: '120px' }).observe(smStage);
+  let visible = false, ioVis = false, warmN = 0; new IntersectionObserver(e => { ioVis = e[0].isIntersecting; visible = ioVis || warmN > 0; }, { rootMargin: '120px' }).observe(smStage);
+  // warm up: run the real frame loop for a few frames at load (off-screen) so scrolling past the reviews into the smile never stalls
+  setTimeout(() => { warmN = 4; visible = true; }, 400);
   function frame(now) {
     requestAnimationFrame(frame);
     if (!visible) return;
+    if (warmN > 0 && --warmN === 0) visible = ioVis;
     const t = now / 1000, v = S.ven;
     if (Math.abs(v - lastV) > 1e-4) { place(v); gU.userData.update(); gL.userData.update(); lastV = v; }
     const sh = S.shade, e = sh * sh * (3 - 2 * sh);

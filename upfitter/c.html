@@ -7,9 +7,16 @@
 <meta name="description" content="Dump bodies, plows, spreaders, liftgates and strobes. Built in Haverhill, MA since 1979. Build your rig and see the price range.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>/* ?pal=2 / ?pal=3 = the runners-up; ?pal=red|cobalt|orange names one directly */(function(){var p=new URLSearchParams(location.search).get('pal'),M={1:'red',2:'cobalt',3:'orange'},v=M[p]||p;if(v&&/^(red|cobalt|orange)$/.test(v))document.documentElement.setAttribute('data-pal',v);})();</script>
 <script type="importmap">{"imports":{"three":"../vendor/three.module.js","three/addons/":"../vendor/addons/"}}</script>
 <style>
-:root{--y:#ffcd14;--y2:#e9b800;--k:#0f0f0f;--w:#f6f2e8;--r:#e5432a;--big:"Big Shoulders Display",Impact,sans-serif}
+/* round 4 palettes. Tokens: bg = poster, bg2 = printed ground shadow, ty = poster type, k = ink, w = paper, acc = accent on ink (+ acct = text on it),
+   hot/hott = the "+ PART" tag, mark = accent readable on paper, warn = low-payload warning on ink, sec/sect = fleets section, plow = blade colour.
+   Default = the pick; ?pal=2 / ?pal=3 = the two runners-up (mapped in the script right below). */
+:root{--big:"Big Shoulders Display",Impact,sans-serif;--k:#0e0e0e;--w:#f3f0e9;--acct:#0e0e0e}
+:root,:root[data-pal=red]{--bg:#d9241a;--bg2:#a5170f;--ty:#0e0e0e;--acc:#ffcc0d;--hot:#ffcc0d;--hott:#0e0e0e;--mark:#d9241a;--warn:#ff5a3d;--sec:#ffcc0d;--sect:#0e0e0e;--plow:#ffcc0d;--dot:.22}
+:root[data-pal=cobalt]{--bg:#1c47d0;--bg2:#10309a;--ty:#f3f0e9;--acc:#ffd20a;--hot:#ffd20a;--hott:#0e0e0e;--mark:#1c47d0;--warn:#ff5a3d;--sec:#ffd20a;--sect:#0e0e0e;--plow:#ffd20a;--dot:.3}
+:root[data-pal=orange]{--bg:#ff5b12;--bg2:#cc4205;--ty:#0e0e0e;--acc:#ff5b12;--hot:#f3f0e9;--hott:#0e0e0e;--mark:#e04a06;--warn:#ff3d3d;--sec:#ffc21a;--sect:#0e0e0e;--plow:#0e0e0e;--dot:.22}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{background:var(--k);color:var(--k);font:17px/1.5 "Work Sans",system-ui,sans-serif;overflow-x:hidden}
@@ -17,20 +24,20 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .bar{display:flex;align-items:center;gap:24px;padding:0 28px;height:60px;background:var(--k);color:var(--w)}
 .wm{font:900 30px/1 var(--big);letter-spacing:.02em;margin-right:auto}
-.wm span{color:var(--y)}
+.wm span{color:var(--acc)}
 .bar nav{display:flex;gap:24px;font:700 15px/1 "Work Sans";text-transform:uppercase;letter-spacing:.06em}
-.call{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;background:var(--y);color:var(--k);font:800 22px/1 var(--big);letter-spacing:.03em;border-radius:3px;white-space:nowrap}
+.call{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;background:var(--acc);color:var(--acct);font:800 22px/1 var(--big);letter-spacing:.03em;border-radius:3px;white-space:nowrap}
 /* ---------- hero: poster on the left, black control column on the right ---------- */
-.hero{background:var(--y);display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);height:calc(100vh - 60px);min-height:660px;max-height:1120px;position:relative;overflow:hidden}
-.left{position:relative;padding:28px 0 0 36px;overflow:hidden;isolation:isolate}
+.hero{background:var(--bg);display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);height:calc(100vh - 60px);min-height:660px;max-height:1120px;position:relative;overflow:hidden}
+.left{color:var(--ty);position:relative;padding:28px 0 0 36px;overflow:hidden;isolation:isolate}
 /* printed-paper floor: fine ink halftone that gets denser toward the bottom of the poster */
-.left:before{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;z-index:0;background:radial-gradient(circle,rgba(15,15,15,.2) 1.15px,transparent 1.55px) 0 0/7px 7px;-webkit-mask-image:linear-gradient(transparent,#000 85%);mask-image:linear-gradient(transparent,#000 85%)}
-h1{font:900 clamp(96px,12.6vw,196px)/.8 var(--big);letter-spacing:-.01em;text-transform:uppercase;position:relative;z-index:1}
-h1 .on{display:block;font-size:.42em;line-height:1;margin-top:.18em;letter-spacing:.01em}
+.left:before{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;z-index:0;background:radial-gradient(circle,rgba(14,14,14,var(--dot)) 1.15px,transparent 1.55px) 0 0/7px 7px;-webkit-mask-image:linear-gradient(transparent,#000 85%);mask-image:linear-gradient(transparent,#000 85%)}
+h1{font:900 clamp(96px,12.6vw,196px)/.8 var(--big);letter-spacing:-.01em;text-transform:uppercase;position:relative}
+h1 .on{display:block;position:relative;z-index:3;font-size:.42em;line-height:1;margin-top:.18em;letter-spacing:.01em}
 h1 .on b{display:inline-block;overflow:hidden;vertical-align:bottom}
-h1 .on b i{display:inline-block;font-style:normal;background:var(--k);color:var(--y);padding:0 .14em}
+h1 .on b i{display:inline-block;font-style:normal;background:var(--k);color:var(--acc);padding:0 .14em}
 h1 .on .add{font-size:.56em;vertical-align:.28em;margin-left:.22em;transform:rotate(-3deg);overflow:visible}
-h1 .on .add i{background:var(--r);color:var(--w);padding:.06em .2em;box-shadow:.08em .08em 0 var(--k)}
+h1 .on .add i{background:var(--hot);color:var(--hott);padding:.06em .2em;box-shadow:.08em .08em 0 var(--k)}
 h1 .on .add:empty{display:none}
 .stage{position:absolute;inset:0;z-index:2;pointer-events:none}
 .stage canvas{display:block;width:100%;height:100%}
@@ -43,30 +50,30 @@ h1 .on .add:empty{display:none}
 .ch{text-align:left;padding:10px 14px 11px;min-height:70px;background:#1d1d1d;border-radius:3px;transition:transform .15s}
 .ch b{display:block;font:900 38px/.95 var(--big);text-transform:uppercase;letter-spacing:.01em}
 .ch small{display:block;font-size:13px;color:#8d8a82;margin-top:2px}
-.ch[aria-pressed=true]{background:var(--y);color:var(--k)}.ch[aria-pressed=true] small{color:#5a4a00}
+.ch[aria-pressed=true]{background:var(--acc);color:var(--acct)}.ch[aria-pressed=true] small{color:var(--acct);opacity:.7}
 .pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .pl{min-height:52px;padding:0 18px;border-radius:999px;background:#1d1d1d;font:800 24px/1 var(--big);letter-spacing:.04em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px;transition:transform .15s}
-.pl:before{content:"+";font-size:.95em;color:var(--y)}
-.pl[aria-pressed=true]{background:var(--w);color:var(--k)}.pl[aria-pressed=true]:before{content:"\2013";color:var(--r)}
+.pl:before{content:"+";font-size:.95em;color:var(--acc)}
+.pl[aria-pressed=true]{background:var(--w);color:var(--k)}.pl[aria-pressed=true]:before{content:"\2013";color:var(--mark)}
 .pl.m:before{display:none}.pl.m{font-size:19px}
 .pl:disabled{opacity:.3;cursor:not-allowed}
 .tap{transform:scale(.9)!important}
 .lst{list-style:none;margin:6px 0 0;font:800 22px/1 var(--big);text-transform:uppercase;letter-spacing:.02em}
 .lst li{display:flex;justify-content:space-between;gap:10px;padding:9px 0;background:linear-gradient(#262626,#262626) bottom/100% 1px no-repeat}
-.lst li span{color:var(--y)}
+.lst li span{color:var(--acc)}
 .lst li.e{color:#5c5a55}
-.note{min-height:22px;font-size:15px;color:var(--y);margin:4px 0 6px}
+.note{min-height:22px;font-size:15px;color:var(--acc);margin:4px 0 6px}
 .pr{margin-top:auto;padding-top:10px}
-.pr .n{font:900 clamp(56px,5.6vw,92px)/.86 var(--big);letter-spacing:.005em;color:var(--y);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pr .n{font:900 clamp(56px,5.6vw,92px)/.86 var(--big);letter-spacing:.005em;color:var(--acc);font-variant-numeric:tabular-nums;white-space:nowrap}
 .pr .n span{color:var(--w)}
 .pay{font:800 26px/1 var(--big);text-transform:uppercase;letter-spacing:.03em;color:var(--w);margin-top:10px;font-variant-numeric:tabular-nums}
-.pay b{color:var(--y);font-weight:900}
-.pay.low b{color:var(--r)}
+.pay b{color:var(--acc);font-weight:900}
+.pay.low b{color:var(--warn)}
 .pr small{display:block;font-size:14px;color:#8d8a82;margin:8px 0 14px}
-.send{width:100%;min-height:62px;background:var(--y);color:var(--k);font:900 30px/1 var(--big);text-transform:uppercase;letter-spacing:.03em;border-radius:3px;transition:transform .15s}
-.send:hover{background:#ffd94a}
+.send{width:100%;min-height:62px;background:var(--acc);color:var(--acct);font:900 30px/1 var(--big);text-transform:uppercase;letter-spacing:.03em;border-radius:3px;transition:transform .15s}
+.send:hover{filter:brightness(1.08)}
 .spec{display:none;clip-path:inset(0 0 100% 0)}
-.spec .q{font:900 72px/.9 var(--big);color:var(--y)}
+.spec .q{font:900 72px/.9 var(--big);color:var(--acc)}
 .spec .q small{display:block;font:700 13px/1 "Work Sans";letter-spacing:.18em;color:#8d8a82;margin-bottom:8px}
 .spec ul{list-style:none;margin:14px 0 12px;font-size:17px}
 .spec li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;background:linear-gradient(#2a2a2a,#2a2a2a) bottom/100% 1px no-repeat}
@@ -80,11 +87,11 @@ body.sent .ping{display:block}body.sent .sticker{visibility:hidden}
 .os b i{margin-right:.2em}
 .card{background:var(--w);color:var(--k);border-radius:16px;padding:14px 16px;width:380px;transform:rotate(-2deg);box-shadow:8px 8px 0 var(--k)}
 .card .h{display:flex;align-items:center;gap:8px;font:600 13px/1 "Work Sans";color:#6c675b}
-.card .h i{font:900 13px/1 var(--big);font-style:normal;background:var(--y);color:var(--k);padding:4px 5px;border-radius:4px}
+.card .h i{font:900 13px/1 var(--big);font-style:normal;background:var(--acc);color:var(--acct);padding:4px 5px;border-radius:4px}
 .card .h span{margin-left:auto}
 .card b{display:block;font:800 25px/1.02 var(--big);text-transform:uppercase;margin:8px 0 4px;letter-spacing:.01em}
 .card p{font-size:14px;color:#55514a}
-.tick{background:var(--k);color:var(--y);overflow:hidden;white-space:nowrap;padding:14px 0}
+.tick{background:var(--k);color:var(--acc);overflow:hidden;white-space:nowrap;padding:14px 0}
 .tick div{display:inline-block;font:900 44px/1 var(--big);text-transform:uppercase;letter-spacing:.02em;animation:mq 26s linear infinite;padding-right:40px}
 .tick div i{font-style:normal;color:var(--w);margin:0 .35em}
 @keyframes mq{to{transform:translateX(-50%)}}
@@ -92,32 +99,32 @@ section{padding:110px 36px}
 .wrap{max-width:1280px;margin:0 auto}
 .kick{font:700 14px/1 "Work Sans";letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px}
 h2{font:900 clamp(64px,8.4vw,132px)/.84 var(--big);text-transform:uppercase;letter-spacing:-.005em}
-.red{background:var(--r);color:var(--w)}
+.red{background:var(--sec);color:var(--sect)}
 .red .three{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:60px}
 .red h3{font:900 36px/.95 var(--big);text-transform:uppercase;margin-bottom:10px}
-.red p{font-size:18px;color:#ffe1da}
+.red p{font-size:18px;opacity:.82}
 .white{background:var(--w)}
 .idx{margin-top:56px}
 .idx div{display:grid;grid-template-columns:110px 1fr 1fr;gap:20px;align-items:baseline;padding:20px 0 18px;background:linear-gradient(var(--k),var(--k)) top/100% 3px no-repeat}
-.idx b{font:900 54px/1 var(--big);color:var(--r)}
+.idx b{font:900 54px/1 var(--big);color:var(--mark)}
 .idx h3{font:900 clamp(44px,5vw,76px)/.9 var(--big);text-transform:uppercase}
 .idx p{font-size:18px;color:#4a4740;max-width:420px}
 .blk{background:var(--k);color:var(--w)}
 .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:26px;margin-top:60px}
 .steps li{list-style:none}
-.steps b{display:block;font:900 110px/.8 var(--big);color:var(--y)}
+.steps b{display:block;font:900 110px/.8 var(--big);color:var(--acc)}
 .steps h3{font:900 30px/1 var(--big);text-transform:uppercase;margin:14px 0 6px}
-.steps small{display:block;font:700 13px/1 "Work Sans";letter-spacing:.14em;text-transform:uppercase;color:var(--y);margin-bottom:8px}
+.steps small{display:block;font:700 13px/1 "Work Sans";letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:8px}
 .steps p{color:#bdb9ae;font-size:17px}
-.ylw{background:var(--y)}
+.ylw{background:var(--bg);color:var(--ty)}
 .towns{font:900 clamp(40px,5.4vw,84px)/1.1 var(--big);text-transform:uppercase;margin-top:40px}
-.towns i{font-style:normal;color:rgba(15,15,15,.28);margin:0 .12em}
-.towns em{font-style:normal;background:var(--k);color:var(--y);padding:0 .1em}
+.towns i{font-style:normal;opacity:.32;margin:0 .12em}
+.towns em{font-style:normal;background:var(--k);color:var(--acc);padding:0 .1em}
 .quote{margin-top:60px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
 .quote blockquote{font:800 clamp(30px,3.4vw,50px)/1.02 var(--big);text-transform:uppercase;max-width:900px}
 .quote cite{font-style:normal;font-size:15px;font-weight:600}
 .fin{background:var(--k);color:var(--w);text-align:center;padding:120px 24px}
-.fin .big{display:block;font:900 clamp(60px,11vw,190px)/.85 var(--big);color:var(--y);margin:20px 0 26px}
+.fin .big{display:block;font:900 clamp(60px,11vw,190px)/.85 var(--big);color:var(--acc);margin:20px 0 26px}
 .fin p{color:#bdb9ae;font-size:19px}
 footer{background:var(--k);color:#77736a;padding:26px 36px 44px;font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 @media (max-width:1100px){.bar nav{display:none}}
@@ -171,7 +178,7 @@ body.tour{overflow:hidden}
 <section class="hero" id="build" style="padding:0">
  <div class="left">
   <h1 id="h1"><span class="hb">Build<br class="br"> your rig.</span><span class="hs">Sent.</span><span class="on"><span class="ob">On <b><i id="onw">an F-550</i></b><b class="add" id="add"></b></span><span class="os"><b><i id="hq">RB-24117</i></b>The owner's phone just buzzed.</span></span></h1>
-  <svg class="sticker" viewBox="0 0 120 120" aria-label="Exclusive in Essex County, MA"><defs><path id="ck" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs><circle cx="60" cy="60" r="58" fill="#0f0f0f"/><text font-family="Work Sans" font-weight="700" font-size="10.4" letter-spacing="1.6" fill="#ffcd14"><textPath href="#ck">EXCLUSIVE IN ESSEX COUNTY, MA · ONE SHOP ·</textPath></text><text x="60" y="58" text-anchor="middle" font-family="Big Shoulders Display" font-weight="900" font-size="30" fill="#f6f2e8">EST.</text><text x="60" y="84" text-anchor="middle" font-family="Big Shoulders Display" font-weight="900" font-size="30" fill="#ffcd14">1979</text></svg>
+  <svg class="sticker" viewBox="0 0 120 120" aria-label="Exclusive in Essex County, MA"><defs><path id="ck" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs><circle cx="60" cy="60" r="58" style="fill:var(--k)"/><text font-family="Work Sans" font-weight="700" font-size="10.4" letter-spacing="1.6" style="fill:var(--acc)"><textPath href="#ck" textLength="272" lengthAdjust="spacing">EXCLUSIVE IN ESSEX COUNTY, MA · </textPath></text><text x="60" y="58" text-anchor="middle" font-family="Big Shoulders Display" font-weight="900" font-size="30" style="fill:var(--w)">EST.</text><text x="60" y="84" text-anchor="middle" font-family="Big Shoulders Display" font-weight="900" font-size="30" style="fill:var(--acc)">1979</text></svg>
   <div class="stage" id="stage"><canvas id="gl" aria-label="Your truck build, drawn live"></canvas><svg id="tr" viewBox="-44 -132 404 146" aria-label="Your truck build"></svg></div>
   <div class="ping" id="ping"><div class="card"><div class="h"><i>RB</i>Ridgeback builds<span>now</span></div><b id="ct">New build request</b><p id="cp"></p></div></div>
  </div>
@@ -227,7 +234,7 @@ body.tour{overflow:hidden}
 </div></section>
 
 <section class="blk" id="process"><div class="wrap">
- <p class="kick" style="color:var(--y)">How an upfit goes</p>
+ <p class="kick" style="color:var(--acc)">How an upfit goes</p>
  <h2>Drop it off bare.<br>Pick it up working.</h2>
  <ol class="steps">
   <li><b>1</b><h3>Walk the truck</h3><small>Day 1</small><p>Chassis, job, weight. We look before we quote.</p></li>
@@ -245,7 +252,7 @@ body.tour{overflow:hidden}
  <div class="quote"><blockquote>"Plow wired, strobes on, two days before the first storm."</blockquote><cite>D.M., DPW foreman · sample review</cite></div>
 </div></section>
 
-<div class="fin"><p class="kick" style="color:var(--y)">Shop in Haverhill · Mon to Fri 7 to 4:30</p><a class="big" href="tel:+19785550142">(978) 555-0142</a><p>Call the shop. You talk to the people who build it.</p></div>
+<div class="fin"><p class="kick" style="color:var(--acc)">Shop in Haverhill · Mon to Fri 7 to 4:30</p><a class="big" href="tel:+19785550142">(978) 555-0142</a><p>Call the shop. You talk to the people who build it.</p></div>
 <footer><span>Ridgeback Truck Equipment · Exclusive in Essex County, MA</span><span>Concept demo · fictional business · IC Business Systems</span></footer>
 
 <script src="../vendor/gsap.min.js"></script>
@@ -282,6 +289,7 @@ function PB(){const c=[];const f=v=>(+v).toFixed(1);const o={
 function rect(x,y,w,h){return PB().M(x,y).L(x+w,y).L(x+w,y+h).L(x,y+h).Z();}
 function rrect(x,y,w,h,r){r=Math.min(r,w/2,h/2);return PB().M(x+r,y).L(x+w-r,y).Q(x+w,y,x+w,y+r).L(x+w,y+h-r).Q(x+w,y+h,x+w-r,y+h).L(x+r,y+h).Q(x,y+h,x,y+h-r).L(x,y+r).Q(x,y,x+r,y).Z();}
 const D=(...a)=>a.map(p=>p.d()).join(' ');
+const TOK=n=>getComputedStyle(document.documentElement).getPropertyValue('--'+n).trim();
 function posterSVG(s){
  const c=CH[s.chassis],F=c.fo,R=F+c.wb,E=R+c.ro,r=c.r,fr=c.fr,nose=4,cowl=nose+c.hoodL,back=cowl+c.cabL,bot=fr-7,hH=c.hoodH,top=c.cabTop,ws=c.ws;
  const Ra=r+4,dy=bot-r,dx=Math.sqrt(Ra*Ra-dy*dy),aa=Math.asin(dy/Ra),b=PB();let hEnd=hH;
@@ -289,15 +297,15 @@ function posterSVG(s){
  b.L(cowl+ws-2,top-1.5).Q(cowl+ws,top,cowl+ws+4,top).L(back-4,top).Q(back,top,back,top-4).L(back,bot).L(F+dx,bot).A(F,r,Ra,aa,Math.PI-aa).Z();
  const belt=hH+4,wt=top-4,xw=y=>cowl+ws*(y-hEnd)/(top-hEnd);
  const win=PB().M(xw(belt)+3,belt).L(xw(wt)+3,wt).L(back-9,wt).Q(back-7,wt,back-7,wt-2).L(back-7,belt).Z();
- const K='#0f0f0f',W='#f6f2e8',Y='#ffcd14',RD='#e5432a';let minX=-2,maxX=E,h='';
+ const K=TOK('k'),W='#d9d3c7',RD=TOK('plow'),SH=TOK('bg2');let minX=-2,maxX=E,h='';
  const P=(d,f)=>`<path d="${d}" fill="${f}"/>`;
  h+=P(D(rect(2,fr-8,E-2,8)),K)+P(rrect(back+6,fr-24,30,15,5).d(),'#3a3a3a');
  if(s.dump!=='none'){const L=s.dump==='9'?108:132,H=(s.dump==='9'?24:28)+(c.k==='c4'?6:0),yF=fr+5,yT=yF+H,xf=E-L;h+=P(D(rect(xf,yF,L,H),PB().M(xf-4,yF).L(xf-4,top+5).L(xf+3,top+5).L(xf+5,yT).L(xf,yT).L(xf,yF).Z()),s.mat==='alum'?'#c9c6bd':K);maxX=E+3;}
  h+=P(b.d(),W)+P(win.d(),K)+P(rrect(-2,fr-14,11,10,2).d(),K);
  [[F,false],[R,true]].forEach(([x])=>{h+=`<circle cx="${x}" cy="${-r}" r="${r}" fill="${K}"/><circle cx="${x}" cy="${-r}" r="${r*.6}" fill="${W}"/><circle cx="${x}" cy="${-r}" r="${r*.22}" fill="${K}"/>`;});
  if(s.plow!=='none'){const Hb=s.plow==='9v'?35:31,bx=-22;h+=P(PB().M(bx-4,1.5).Q(bx+9,Hb*.45,bx-9,Hb).L(bx-4,Hb+1.5).Q(bx+14,Hb*.5,bx+3,1.5).Z().d(),RD)+P(D(PB().M(bx+8,7).L(-1,fr-13).L(-1,fr-7).L(bx+8,15).Z()),K);minX=bx-10;}
- if(s.strobes)h+=P(rrect(cowl+ws+8,top,back-cowl-ws-16,4,1.5).d(),RD);
- return{h:`<path d="M${minX-6} 0 L${maxX+8} 0 L${maxX+22} 9 L${minX+8} 9 Z" fill="#e6b400"/><rect x="-80" y="0" width="520" height="2.2" fill="${K}"/>`+h,vb:`${minX-14} -${top+30} ${Math.max(330,maxX-minX+30)} ${top+42}`};}
+ if(s.strobes)h+=P(rrect(cowl+ws+8,top,back-cowl-ws-16,4,1.5).d(),'#ff9a1a');
+ return{h:`<path d="M${minX-6} 0 L${maxX+8} 0 L${maxX+22} 9 L${minX+8} 9 Z" fill="${SH}"/><rect x="-80" y="0" width="520" height="2.2" fill="${K}"/>`+h,vb:`${minX-14} -${top+30} ${Math.max(330,maxX-minX+30)} ${top+42}`};}
 
 /* ---- page ---- */
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,G=!RM&&window.gsap;
@@ -787,11 +795,16 @@ const RB=window.RB,PHONE=RB.STACK;
 const hex=h=>{const n=parseInt(h.slice(1),16);return new THREE.Vector3((n>>16&255)/255,(n>>8&255)/255,(n&255)/255);};
 const U={L:{value:new THREE.Vector3(-.55,.7,.46).normalize()},res:{value:new THREE.Vector2(1,1)},dot:{value:5},ow:{value:2.4}};
 const INK=['#0f0f0f','#1c1c1c','#3c3c3c','#2a2a2a'];
-const PAL={paint:['#d3c3a0','#f0e8d5','#fffcf2','#a8966e'],black:INK,gloss:[...INK.slice(0,3),'#2a2a2a',1],frame:INK,under:INK,edge:INK,cabin:['#121212','#222','#2e2e2e','#2a2a2a'],
+const TOK=n=>getComputedStyle(document.documentElement).getPropertyValue('--'+n).trim();
+const mixh=(a,b,t)=>{const A=hex(a),B=hex(b);A.lerp(B,t);return '#'+[A.x,A.y,A.z].map(v=>Math.round(v*255).toString(16).padStart(2,'0')).join('');};
+/* blade ramp from the palette plow colour (black blades get the ink ramp) */
+const ramp=h=>{const v=hex(h);return v.x+v.y+v.z<.45?['#0e0e0e','#1f1f1f','#4c4c4c','#2a2a2a',1]:[mixh(h,'#000000',.26),h,mixh(h,'#ffffff',.4),mixh(h,'#000000',.5),1];};
+/* round 4: body toned from bright cream to a soft warm light grey (3 tones kept) */
+const PAL={paint:['#a59d8f','#cdc6b8','#e4dfd4','#7f7769'],black:INK,gloss:[...INK.slice(0,3),'#2a2a2a',1],frame:INK,under:INK,edge:INK,cabin:['#121212','#222','#2e2e2e','#2a2a2a'],
  rubber:['#0d0d0d','#191919','#2c2c2c','#262626'],chrome:['#8f8a7e','#d7d2c6','#ffffff','#6f6a60',1],satin:['#8f8a7e','#c8c3b7','#ebe7dc','#6f6a60'],stainless:['#99948a','#cfcabe','#f1eee5','#77726a'],
- alum:['#99948a','#d2cec3','#f4f1e9','#77726a',1],bodyAl:['#a29d92','#d5d1c6','#f3f0e8','#7c776e'],reflector:['#b8b4aa','#e9e6de','#ffffff','#999'],wheel:['#cfc6b0','#f6f2e8','#ffffff','#a89c7e'],
+ alum:['#959087','#cac6bc','#e6e3db','#74706a',1],bodyAl:['#9d988e','#cdc9bf','#e5e2da','#79746c'],reflector:['#b3afa6','#dedbd3','#efede7','#999'],wheel:['#aba495','#d3cdc0','#e7e3da','#878070'],
  steel:['#0f0f0f','#202020','#474747','#333',1],glass:['#121416','#23282c','#363d43','#2b3035',0,1],mirror:['#7c8a92','#aab7be','#e4ecef','#6d7a82'],
- amber:['#c26300','#ff9a1a','#ffc66a','#a65200'],red:['#a92413','#e5432a','#ff7a5e','#80190c'],plow:['#b8301c','#e5432a','#ff7d61','#7d1b0d',1],
+ amber:['#c26300','#ff9a1a','#ffc66a','#a65200'],red:['#a92413','#e5432a','#ff7a5e','#80190c'],plow:ramp(TOK('plow')),
  drl:['#ffffff','#ffffff','#ffffff','#ffffff'],strobeL:['#3a2a10','#5a4316','#7b5e22','#2a1c08'],strobeR:['#3a2a10','#5a4316','#7b5e22','#2a1c08'],
  seam:['#0f0f0f','#0f0f0f','#0f0f0f','#0f0f0f'],hole:['#0f0f0f','#0f0f0f','#0f0f0f','#0f0f0f'],meshD:['#0f0f0f','#151515','#4a4a4a','#0f0f0f'],meshR:['#0f0f0f','#151515','#4a4a4a','#0f0f0f']};
 const VS=`varying vec3 vN;varying vec3 vV;varying vec3 vW;varying vec2 vUv;
@@ -826,12 +839,12 @@ function decorate(obj,kind){obj.traverse(m=>{if(!m.isMesh||m.userData.ink)return
  if(kind==='truck'){const sh=new THREE.Mesh(SHG,SHM);sh.userData.ink=true;sh.renderOrder=-1;obj.add(sh);obj.userData.shadow=sh;}}
 /* printed ground shadow: flat darker-yellow slab with ink halftone that thickens under the truck */
 const SHG=new THREE.PlaneGeometry(1,1).rotateX(-Math.PI/2);
-const SHM=new THREE.ShaderMaterial({uniforms:{uS:{value:new THREE.Vector2(100,40)},uDot:U.dot},transparent:true,depthWrite:false,
+const SHM=new THREE.ShaderMaterial({uniforms:{uS:{value:new THREE.Vector2(100,40)},uDot:U.dot,uC:{value:hex(TOK('bg2'))}},transparent:true,depthWrite:false,
  vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
- fragmentShader:`uniform vec2 uS;uniform float uDot;varying vec2 vUv;
+ fragmentShader:`uniform vec2 uS;uniform float uDot;uniform vec3 uC;varying vec2 vUv;
  float ht(float amt){vec2 q=mat2(.7071,-.7071,.7071,.7071)*gl_FragCoord.xy/uDot;vec2 f=fract(q)-.5;float r=sqrt(amt)*.62;return 1.-smoothstep(r-.07,r+.07,length(f));}
  void main(){vec2 p=(vUv-.5)*uS*2.;float rr=min(uS.y*.9,26.);vec2 q=abs(p)-(uS-rr);float d=length(max(q,0.))+min(max(q.x,q.y),0.)-rr;
-  float a=1.-smoothstep(-1.2,0.,d);if(a<.01)discard;float core=clamp(-d/(uS.y*1.1),0.,1.);vec3 col=mix(vec3(.902,.706,0.),vec3(.059),ht(core*core*.75));gl_FragColor=vec4(col,a);}`});
+  float a=1.-smoothstep(-1.2,0.,d);if(a<.01)discard;float core=clamp(-d/(uS.y*1.1),0.,1.);vec3 col=mix(uC,vec3(.059),ht(core*core*.75));gl_FragColor=vec4(col,a);}`});
 function fitShadow(){const T=rig.truck(),g=rig.dims();if(!T||!g||!T.userData.shadow)return;const sh=T.userData.shadow,L=g.maxX-g.minX+26,Wd=g.W+(g.plow?30:22);
  sh.scale.set(L,1,Wd);sh.position.set((g.minX+g.maxX)/2+12,.25,-9);SHM.uniforms.uS.value.set(L/2,Wd/2);}
 let rig;
