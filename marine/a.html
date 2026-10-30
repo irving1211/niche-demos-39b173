@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saltline Marine &amp; Repower | Outboard repowers on the Merrimack</title>
+<meta name="description" content="Snap a photo of your old outboard and see the repower. Saltline Marine & Repower, Merrimack River and North Shore MA. Concept demo, fictional business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090c;--bg2:#0c1015;--ink:#eef1f4;--mute:#9aa3ab;--amber:#ffa62b;--amber2:#ffcf8a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+body{font:16px/1.55 Manrope,system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+a{color:inherit}
+.disp{font-family:Archivo,system-ui,sans-serif;font-variation-settings:'wdth' 125;letter-spacing:-.01em}
+/* header */
+.top{position:absolute;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;gap:20px;padding:20px 48px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand b{display:block;font:700 17px/1 Archivo,sans-serif;font-variation-settings:'wdth' 125;letter-spacing:.04em}
+.brand small{display:block;font:600 11px/1 Manrope;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.nav{margin-left:auto;display:flex;gap:30px;font-weight:600;font-size:15px}
+.nav a{text-decoration:none;color:var(--mute)}
+.nav a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font:800 15px/1 Manrope,sans-serif;text-decoration:none;cursor:pointer;border:0;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.btn svg{flex:none}
+.btn.amber{background:var(--amber);color:#1a0e00}
+.btn.amber:hover{background:#ffb64f}
+.btn.soft{background:rgba(255,255,255,.09);color:var(--ink)}
+.btn.soft:hover{background:rgba(255,255,255,.15)}
+.top .btn.soft{margin-left:4px}
+/* hero */
+.hero{position:relative;height:100vh;min-height:760px;max-height:1000px;overflow:hidden}
+.scene{position:absolute;inset:0}
+.scene>svg{width:100%;height:100%;display:block}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,9,12,.96) 0,rgba(7,9,12,.82) 30%,rgba(7,9,12,0) 50%);pointer-events:none;z-index:1}
+.col{position:relative;z-index:3;width:min(560px,41vw);margin-left:56px;padding-top:108px}
+.eyebrow{font:700 12px/1.3 Manrope;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+h1{font:800 clamp(34px,3vw,44px)/1.05 Archivo,sans-serif;font-variation-settings:'wdth' 104;letter-spacing:-.02em;margin:14px 0 22px}
+h1 em{font-style:normal;color:var(--amber)}
+h1{text-wrap:balance}
+/* scanner */
+.scanner{position:relative;aspect-ratio:4/3;width:100%;max-width:470px;border-radius:18px;overflow:hidden;background:radial-gradient(120% 90% at 50% 40%,#131a21 0,#0a0d11 70%)}
+.photo{position:absolute;inset:0}
+.photo>img,.photo>svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;color:var(--mute);font-weight:600;padding:20px}
+.empty svg{width:120px;height:auto;opacity:.9}
+.cn{position:absolute;width:28px;height:28px;border:3px solid var(--amber);z-index:4}
+.cn.a{top:12px;left:12px;border-right:0;border-bottom:0;border-radius:8px 0 0 0}
+.cn.b{top:12px;right:12px;border-left:0;border-bottom:0;border-radius:0 8px 0 0}
+.cn.c{bottom:12px;left:12px;border-right:0;border-top:0;border-radius:0 0 0 8px}
+.cn.d{bottom:12px;right:12px;border-left:0;border-top:0;border-radius:0 0 8px 0}
+.sweep{position:absolute;left:0;right:0;top:0;height:90px;transform:translateY(-100%);z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(255,166,43,0) 0,rgba(255,166,43,.22) 85%,rgba(255,200,120,.95) 98%,rgba(255,166,43,0) 100%)}
+.tag{position:absolute;left:var(--x);top:var(--y);z-index:5;transform:scale(0);transform-origin:0 0}
+.tag i{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:var(--amber);border:3px solid #120c04}
+.tag span{position:absolute;top:-17px;left:14px;width:max-content;max-width:min(230px,52vw);background:rgba(7,9,12,.9);color:#fff;font:800 14px/1.25 Manrope;padding:8px 12px;border-radius:9px}
+.tag.l span{left:auto;right:14px}
+.tag span::before{content:"";position:absolute;top:50%;left:-9px;width:9px;height:2px;background:var(--amber)}
+.tag.l span::before{left:auto;right:-9px}
+.demo{position:absolute;right:14px;bottom:12px;z-index:5;font:700 11px/1 Manrope;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);background:rgba(0,0,0,.55);padding:6px 9px;border-radius:6px;visibility:hidden}
+.acts{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.acts .btn{min-height:54px;font-size:16px}
+.fine{margin-top:12px;color:var(--mute);font-size:14px}
+.fine b{color:var(--ink)}
+input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+/* estimate */
+.est{position:absolute;z-index:3;left:calc(41vw + 130px);right:48px;bottom:28px;display:flex;align-items:flex-end;gap:36px;visibility:hidden}
+.est .k{font:700 12px/1.3 Manrope;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+.est .big{font:800 clamp(48px,5.2vw,84px)/.95 Archivo,sans-serif;font-variation-settings:'wdth' 112;letter-spacing:-.03em;margin:8px 0 6px;white-space:nowrap}
+.est .sub{color:var(--mute);font-size:15px}
+.est .sub b{color:var(--ink)}
+.est .send{margin-top:16px}
+.season{margin-top:10px;font-size:14px;color:var(--amber2);font-weight:700}
+/* owner phone */
+.owner{flex:none;width:236px;height:282px;border-radius:34px;background:#111519;padding:10px;position:relative;visibility:hidden;box-shadow:0 30px 60px rgba(0,0,0,.6),inset 0 0 0 1.5px #2a3139}
+.owner .scr{height:100%;border-radius:26px;background:linear-gradient(170deg,#1b2530 0,#0b1016 65%);padding:44px 12px 12px;position:relative;overflow:hidden}
+.owner .who{position:absolute;top:16px;left:0;right:0;text-align:center;font:700 11px/1 Manrope;letter-spacing:.16em;text-transform:uppercase;color:#7f8a94}
+.note{background:#f4f1ea;color:#121518;border-radius:16px;padding:12px;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+.note .ic{width:34px;height:34px;border-radius:9px;background:var(--amber);display:grid;place-items:center}
+.note p{font:600 12px/1.3 Manrope;color:#59616a}
+.note h4{font:800 14px/1.25 Manrope;margin:2px 0 4px}
+.note .th{grid-column:1/-1;height:70px;border-radius:10px;overflow:hidden;position:relative;background:#222}
+.note .th svg,.note .th img{width:100%;height:100%;object-fit:cover;display:block}
+/* sections */
+section.s{padding:110px 56px;position:relative}
+.wrap{max-width:1240px;margin:0 auto}
+.lbl{font:700 12px/1.3 Manrope;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+h2{font:800 clamp(30px,3.6vw,52px)/1.04 Archivo,sans-serif;font-variation-settings:'wdth' 115;letter-spacing:-.02em;max-width:900px}
+.lead{color:var(--mute);font-size:18px;max-width:640px;margin-top:16px}
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:56px 48px;margin-top:64px}
+.svc h3{font:800 20px/1.2 Archivo,sans-serif;font-variation-settings:'wdth' 110;margin:16px 0 8px}
+.svc p{color:var(--mute)}
+.svc svg{width:44px;height:44px}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:center}
+.store svg{width:100%;height:auto;display:block}
+.facts{margin-top:28px;display:grid;gap:14px}
+.facts div{display:flex;gap:14px;align-items:baseline;font-weight:600}
+.facts div::before{content:"";flex:none;width:18px;height:2px;background:var(--amber);transform:translateY(-4px)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-top:64px;position:relative}
+.steps::before{content:"";position:absolute;top:27px;left:28px;right:28px;height:2px;background:linear-gradient(90deg,var(--amber),rgba(255,166,43,.15))}
+.steps li{list-style:none;position:relative}
+.steps .n{width:56px;height:56px;border-radius:50%;background:#12171d;color:var(--amber);display:grid;place-items:center;font:800 18px Archivo,sans-serif;position:relative}
+.steps h3{font:800 19px/1.2 Archivo,sans-serif;font-variation-settings:'wdth' 110;margin:20px 0 6px}
+.steps p{color:var(--mute);font-size:16px}
+.area .towns{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-weight:700;font-size:17px}
+.area .towns span{color:var(--mute);font-weight:600}
+.map svg{width:100%;height:auto;display:block}
+.cta{text-align:center;padding:120px 24px;background:radial-gradient(60% 80% at 50% 100%,rgba(255,166,43,.16),rgba(7,9,12,0) 70%)}
+.cta h2{margin:0 auto}
+.cta .acts{justify-content:center;margin-top:30px}
+.seal{display:inline-flex;align-items:center;gap:10px;font:700 12px/1 Manrope;letter-spacing:.18em;text-transform:uppercase;color:var(--amber2)}
+.seal svg{width:28px;height:28px}
+.hseal{margin-top:20px}
+footer{padding:36px 56px 48px;color:#6e7780;font-size:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.shim line{animation:shim 3.4s ease-in-out infinite}
+.shim line:nth-child(2n){animation-delay:-1.2s}
+.shim line:nth-child(3n){animation-delay:-2.1s}
+@keyframes shim{0%,100%{stroke-dashoffset:0}50%{stroke-dashoffset:14}}
+@media (prefers-reduced-motion:reduce){.shim line{animation:none}}
+/* phone */
+@media (max-width:760px){
+  .top{position:sticky;padding:10px 16px;background:rgba(7,9,12,.94);gap:8px}
+  .nav,.top .btn.soft{display:none}
+  .brand b{font-size:14px}.brand small{font-size:10px;letter-spacing:.14em}
+  .brand svg{width:30px;height:30px}
+  .top .btn{margin-left:auto;padding:0 16px;min-height:46px;font-size:15px}
+  .hero{height:auto;min-height:0;max-height:none;display:flex;flex-direction:column;padding-bottom:28px}
+  .hero::after{display:none}
+  .col{display:contents}
+  .head{order:1;padding:16px 16px 0}
+  .scene{order:2;position:relative;height:200px;margin-top:4px}
+  .tool{order:3;padding:4px 16px 0}
+  .est{order:4;position:relative;left:auto;right:auto;bottom:auto;flex-direction:column;align-items:stretch;gap:22px;padding:26px 16px 0}
+  .eyebrow{font-size:11px}.xs{display:none}
+  h1{font-size:30px;margin:8px 0 0;font-variation-settings:'wdth' 100}
+  .scanner{max-width:none;border-radius:14px}
+  .acts{flex-wrap:nowrap}
+  .acts .btn{flex:1;padding:0 10px;font-size:15px;min-height:52px}
+  .fine{font-size:13px;margin-top:8px}
+  .hseal{display:none}
+  .owner{align-self:center}
+  section.s{padding:72px 16px}
+  .svc{grid-template-columns:1fr;gap:34px;margin-top:40px}
+  .split{grid-template-columns:1fr;gap:36px}
+  .steps{grid-template-columns:1fr;gap:26px;margin-top:40px}
+  .steps::before{top:28px;bottom:28px;left:27px;right:auto;width:2px;height:auto;background:linear-gradient(180deg,var(--amber),rgba(255,166,43,.15))}
+  .steps li{display:grid;grid-template-columns:56px 1fr;column-gap:18px}
+  .steps h3{margin:4px 0 4px}
+  .steps p{grid-column:2}
+  footer{padding:28px 16px 40px}
+  .cta{padding:84px 16px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#" aria-label="Saltline Marine and Repower home">
+    <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" fill="#ffa62b"/><path d="M7 21c3 0 3-2.4 5.5-2.4S15 21 18 21s3-2.4 5.5-2.4S26 21 29 21" fill="none" stroke="#1a0e00" stroke-width="2.4" stroke-linecap="round"/><path d="M11 15.5h14" stroke="#1a0e00" stroke-width="2.4" stroke-linecap="round"/></svg>
+    <span><b>SALTLINE</b><small>Marine &amp; Repower</small></span>
+  </a>
+  <nav class="nav"><a href="#services">Services</a><a href="#storage">Storage</a><a href="#how">How a repower goes</a><a href="#area">Service area</a></nav>
+  <a class="btn soft" href="#quote">Get a quote</a>
+  <a class="btn amber" href="tel:+19785550177"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>(978) 555-0177</a>
+</header>
+
+<section class="hero" id="quote">
+  <div class="scene" aria-hidden="true">
+    <svg id="shop" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#040508"/><stop offset="1" stop-color="#0d1217"/></linearGradient>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#060d18"/><stop offset="1" stop-color="#132a43"/></linearGradient>
+        <linearGradient id="river" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f2234"/><stop offset="1" stop-color="#03070b"/></linearGradient>
+        <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#11161b"/><stop offset="1" stop-color="#040506"/></linearGradient>
+        <linearGradient id="cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb34a" stop-opacity=".34"/><stop offset=".7" stop-color="#ffa62b" stop-opacity=".07"/><stop offset="1" stop-color="#ffa62b" stop-opacity="0"/></linearGradient>
+        <radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffa62b" stop-opacity=".3"/><stop offset="1" stop-color="#ffa62b" stop-opacity="0"/></radialGradient>
+        <linearGradient id="hull" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f3f2"/><stop offset=".28" stop-color="#bcc3c8"/><stop offset=".7" stop-color="#525c64"/><stop offset="1" stop-color="#1f252a"/></linearGradient>
+        <linearGradient id="bottomP" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2229"/><stop offset="1" stop-color="#07090b"/></linearGradient>
+        <radialGradient id="hullHi" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff3df" stop-opacity=".55"/><stop offset="1" stop-color="#fff3df" stop-opacity="0"/></radialGradient>
+        <linearGradient id="oldCowl" x1="0" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#efe9da"/><stop offset=".45" stop-color="#c3bba6"/><stop offset="1" stop-color="#5f5a4d"/></linearGradient>
+        <linearGradient id="newCowl" x1="0" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#5d6772"/><stop offset=".35" stop-color="#262c33"/><stop offset="1" stop-color="#0a0c0e"/></linearGradient>
+        <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22272c"/><stop offset=".5" stop-color="#5d656d"/><stop offset="1" stop-color="#1a1d21"/></linearGradient>
+        <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c2833"/><stop offset=".5" stop-color="#3b4d5c"/><stop offset="1" stop-color="#0d1318"/></linearGradient>
+        <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <mask id="reflMask" maskUnits="userSpaceOnUse" x="0" y="650" width="1440" height="260"><rect x="0" y="650" width="1440" height="260" fill="url(#fade)"/></mask>
+        <filter id="b3"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="b40" x="-50%" y="-20%" width="200%" height="140%"><feGaussianBlur stdDeviation="34"/></filter>
+        <filter id="b12" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+        <pattern id="corr" width="24" height="10" patternUnits="userSpaceOnUse"><rect width="12" height="10" fill="#fff" opacity=".022"/></pattern>
+        <clipPath id="hullClip"><path d="M58 132C190 144 450 156 632 160L645 262C500 268 260 262 165 250C118 232 76 182 58 132Z"/></clipPath>
+        <g id="motorShape">
+          <path class="cowl" d="M658 160C655 135 655 108 666 98C674 92 686 90 700 90L712 90C726 90 734 100 734 116L732 160Z"/>
+        </g>
+      </defs>
+      <rect width="1440" height="1000" fill="url(#wall)"/>
+      <rect width="1440" height="650" fill="url(#corr)"/>
+      <!-- open bay door to the river -->
+      <g>
+        <rect x="620" y="186" width="700" height="410" fill="url(#sky)"/>
+        <path d="M620 420L668 414L702 404L760 409L812 400L860 408L930 403L1010 410L1080 398L1150 406L1230 401L1320 409L1320 452L620 452Z" fill="#03060a"/>
+        <g fill="#ffcf8a"><circle cx="700" cy="420" r="2"/><circle cx="812" cy="414" r="1.6"/><circle cx="944" cy="418" r="2.2"/><circle cx="1090" cy="412" r="1.6"/><circle cx="1180" cy="419" r="2"/></g>
+        <circle cx="1018" cy="416" r="1.8" fill="#cfe6ff"/>
+        <rect x="620" y="450" width="700" height="146" fill="url(#river)"/>
+        <g class="shim" stroke-linecap="round">
+          <line x1="690" y1="470" x2="712" y2="470" stroke="#ffcf8a" stroke-opacity=".5" stroke-width="2" stroke-dasharray="10 6"/>
+          <line x1="683" y1="492" x2="719" y2="492" stroke="#ffcf8a" stroke-opacity=".32" stroke-width="2" stroke-dasharray="12 8"/>
+          <line x1="800" y1="466" x2="826" y2="466" stroke="#ffcf8a" stroke-opacity=".42" stroke-width="2" stroke-dasharray="8 6"/>
+          <line x1="934" y1="474" x2="958" y2="474" stroke="#ffcf8a" stroke-opacity=".5" stroke-width="2" stroke-dasharray="10 6"/>
+          <line x1="924" y1="500" x2="968" y2="500" stroke="#ffcf8a" stroke-opacity=".3" stroke-width="2" stroke-dasharray="14 8"/>
+          <line x1="1006" y1="470" x2="1030" y2="470" stroke="#cfe6ff" stroke-opacity=".4" stroke-width="2" stroke-dasharray="8 6"/>
+          <line x1="1080" y1="466" x2="1102" y2="466" stroke="#ffcf8a" stroke-opacity=".4" stroke-width="2" stroke-dasharray="8 6"/>
+          <line x1="1168" y1="474" x2="1194" y2="474" stroke="#ffcf8a" stroke-opacity=".5" stroke-width="2" stroke-dasharray="10 6"/>
+          <line x1="1160" y1="504" x2="1204" y2="504" stroke="#ffcf8a" stroke-opacity=".28" stroke-width="2" stroke-dasharray="14 8"/>
+        </g>
+        <rect x="606" y="164" width="728" height="26" fill="#0b0f13"/>
+        <g stroke="#ffffff" stroke-opacity=".05"><line x1="606" y1="172" x2="1334" y2="172"/><line x1="606" y1="181" x2="1334" y2="181"/></g>
+        <rect x="604" y="164" width="16" height="436" fill="#080b0e"/>
+        <rect x="1320" y="164" width="16" height="436" fill="#080b0e"/>
+      </g>
+      <!-- floor -->
+      <rect y="596" width="1440" height="404" fill="url(#floor)"/>
+      <rect y="596" width="1440" height="2" fill="#1b2229"/>
+      <!-- light -->
+      <polygon points="1010,126 1110,126 1440,650 700,650" fill="url(#cone)" filter="url(#b40)"/>
+      <ellipse cx="1080" cy="660" rx="420" ry="60" fill="url(#pool)"/>
+      <!-- reflection of the boat on the wet floor -->
+      <g mask="url(#reflMask)"><use href="#boatAll" transform="translate(0 1300) scale(1 -1)" filter="url(#b3)" opacity="1"/></g>
+      <!-- hoist beam + lamp -->
+      <rect x="560" y="134" width="900" height="14" fill="#101418"/>
+      <rect x="560" y="134" width="900" height="2" fill="#2a323a"/>
+      <line x1="1060" y1="40" x2="1060" y2="96" stroke="#1a1f24" stroke-width="3"/>
+      <path d="M1018 128L1102 128L1086 96L1034 96Z" fill="#14181c"/>
+      <ellipse cx="1060" cy="128" rx="42" ry="5" fill="#ffe2b0"/>
+      <!-- boat on stands -->
+      <g id="boatAll">
+        <g fill="#2b2119"><rect x="800" y="556" width="56" height="94" rx="3"/><rect x="1110" y="562" width="56" height="88" rx="3"/></g>
+        <g fill="#3d3024"><rect x="800" y="556" width="56" height="6"/><rect x="1110" y="562" width="56" height="6"/></g>
+        <g stroke="#2a3138" stroke-width="5" stroke-linecap="round" fill="none">
+          <path d="M700 650L716 590L732 650M716 590V516"/>
+          <path d="M960 650L978 600L996 650M978 600V524"/>
+          <path d="M1140 650L1158 604L1176 650"/>
+        </g>
+        <g transform="translate(560 300)">
+          <!-- deck gear behind the hull side -->
+          <path d="M322 44C360 38 410 38 446 44L444 52C410 47 360 47 324 52Z" fill="#1a1f24"/>
+          <path d="M324 44C360 38 410 38 446 44" stroke="#ffcf8a" stroke-opacity=".5" stroke-width="1.5" fill="none"/>
+          <g stroke="#8c959d" stroke-width="3.5"><line x1="351" y1="104" x2="353" y2="50"/><line x1="405" y1="104" x2="407" y2="50"/></g>
+          <path d="M336 104L346 80L400 80L408 104Z" fill="url(#glass)"/>
+          <path d="M352 82L362 82L352 102L344 102Z" fill="#ffcf8a" opacity=".35"/>
+          <path d="M332 158L334 112C334 106 338 104 344 104L408 104C414 104 418 108 418 114L420 158Z" fill="#d9dee2"/>
+          <path d="M332 158L334 112C334 106 338 104 344 104L360 104L356 158Z" fill="#fff" opacity=".35"/>
+          <path d="M440 158L444 122L472 122L476 158Z" fill="#c3c9ce"/>
+          <rect x="438" y="114" width="40" height="10" rx="5" fill="#2a3036"/>
+          <path d="M76 124C150 134 240 142 300 147" stroke="#a9b2b9" stroke-width="2.5" fill="none"/>
+          <g stroke="#a9b2b9" stroke-width="2"><line x1="110" y1="128" x2="110" y2="141"/><line x1="170" y1="136" x2="170" y2="148"/><line x1="236" y1="144" x2="236" y2="154"/></g>
+          <!-- hull -->
+          <path d="M58 132C190 144 450 156 632 160L645 262C500 268 260 262 165 250C118 232 76 182 58 132Z" fill="url(#hull)"/>
+          <g clip-path="url(#hullClip)">
+            <path d="M92 186C230 212 460 228 640 236L650 270L60 270Z" fill="url(#bottomP)"/>
+            <path d="M86 178C230 204 460 222 641 227" stroke="#ffa62b" stroke-width="3" fill="none"/>
+            <ellipse cx="500" cy="185" rx="150" ry="34" fill="url(#hullHi)"/>
+            <path d="M632 160L645 262L630 262L618 160Z" fill="#000" opacity=".25"/>
+          </g>
+          <path d="M58 132C190 144 450 156 632 160" stroke="#f6f7f8" stroke-width="3" fill="none"/>
+          <path d="M60 137C190 149 450 161 632 165" stroke="#2c3238" stroke-width="2.5" fill="none"/>
+          <!-- old motor -->
+          <g id="oldM">
+            <path d="M632 150L652 150L657 158L657 206L646 206L640 172L632 172Z" fill="url(#metal)"/>
+            <g fill="#8a4a26"><circle cx="648" cy="196" r="2.4"/><circle cx="652" cy="190" r="1.6"/><circle cx="644" cy="200" r="1.8"/></g>
+            <path d="M639 172L641 200" stroke="#8a4a26" stroke-width="2" opacity=".7"/>
+            <path d="M672 192L712 192L706 258L680 258Z" fill="url(#metal)"/>
+            <path d="M664 258H720V263H664Z" fill="#4b5157"/>
+            <path d="M676 263H708C712 268 716 271 716 276C716 283 708 287 698 287H680C670 287 664 282 666 275C667 270 671 266 676 263Z" fill="#3b4147"/>
+            <path d="M686 287H704L698 308H691Z" fill="#30363b"/>
+            <ellipse cx="720" cy="276" rx="4" ry="6" fill="#545b62"/>
+            <path d="M722 276C728 262 734 254 731 247C726 250 722 262 722 276ZM722 276C728 290 734 300 731 307C726 302 722 290 722 276Z" fill="#6c737a"/>
+            <path d="M658 160L732 160L728 184C727 190 722 192 716 192H670C664 192 660 188 660 182Z" fill="#5f6266"/>
+            <path d="M658 160C655 135 655 108 666 98C674 92 686 90 700 90L712 90C726 90 734 100 734 116L732 160Z" fill="url(#oldCowl)"/>
+            <path d="M657 138C680 134 708 132 733 131L733 138C708 139 680 141 657 145Z" fill="#53706f" opacity=".55"/>
+            <path d="M666 100C674 94 688 92 704 92" stroke="#fff" stroke-opacity=".6" stroke-width="2" fill="none"/>
+            <circle cx="700" cy="88" r="3" fill="none" stroke="#7d858c" stroke-width="2"/>
+          </g>
+          <!-- new motor (starts off to the right on the hoist) -->
+          <g id="newM" style="visibility:hidden">
+            <path d="M632 150L652 150L657 158L657 206L646 206L640 172L632 172Z" fill="#2a3036"/>
+            <path d="M672 192L712 192L706 258L680 258Z" fill="#15191d"/>
+            <path d="M664 257H721V263H664Z" fill="#2c3238"/>
+            <path d="M676 263H708C712 268 716 271 716 276C716 283 708 287 698 287H680C670 287 664 282 666 275C667 270 671 266 676 263Z" fill="#1c2126"/>
+            <path d="M686 287H704L698 308H691Z" fill="#14181b"/>
+            <ellipse cx="720" cy="276" rx="4" ry="6" fill="#8e979f"/>
+            <path d="M722 276C728 262 735 253 732 246C726 249 722 262 722 276ZM722 276C728 290 735 300 732 308C726 303 722 290 722 276Z" fill="#c9d0d6"/>
+            <path d="M657 160L733 160L729 186C728 191 723 193 717 193H670C664 193 660 189 660 183Z" fill="#101316"/>
+            <path d="M657 160C653 132 654 104 667 94C676 87 690 85 706 85L714 85C730 85 738 97 737 116L733 160Z" fill="url(#newCowl)"/>
+            <path d="M657 159L733 159" stroke="#ffa62b" stroke-width="2.5"/>
+            <path d="M668 96C677 89 690 88 708 88" stroke="#fff" stroke-opacity=".7" stroke-width="2" fill="none"/>
+            <path d="M660 128C668 112 676 104 690 100" stroke="#fff" stroke-opacity=".18" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <text x="712" y="146" font-family="Archivo,sans-serif" font-weight="800" font-size="12" fill="#ffa62b" text-anchor="middle">200</text>
+            <circle cx="702" cy="83" r="3" fill="none" stroke="#9aa3ab" stroke-width="2"/>
+          </g>
+        </g>
+      </g>
+      <!-- hoist trolley, chain and hook -->
+      <g id="rig" transform="translate(1260 0)">
+        <rect x="-24" y="144" width="48" height="14" rx="3" fill="#1d2227"/>
+        <circle cx="-14" cy="144" r="5" fill="#2f363d"/><circle cx="14" cy="144" r="5" fill="#2f363d"/>
+        <rect x="-17" y="158" width="34" height="40" rx="5" fill="url(#metal)"/>
+        <rect x="-17" y="178" width="34" height="5" fill="#ffa62b"/>
+        <line id="chain" x1="0" y1="198" x2="0" y2="250" stroke="#79828a" stroke-width="3" stroke-dasharray="6 3"/>
+        <g id="hook" transform="translate(0 250)"><path d="M0 0V9C0 17 -9 18 -11 11" fill="none" stroke="#b5bdc4" stroke-width="3.5" stroke-linecap="round"/></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="col">
+    <div class="head">
+      <p class="eyebrow">Outboard repowers · Merrimack River<span class="xs"> &amp; North Shore</span></p>
+      <h1 class="disp">Snap the old motor.<br><em>See the new one&nbsp;go&nbsp;on.</em></h1>
+    </div>
+    <div class="tool">
+      <div class="scanner" id="scanner">
+        <div class="photo" id="photo">
+          <div class="empty" id="empty">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="#ffa62b" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="M40 52C38 36 40 22 52 16C60 12 72 12 82 13C92 15 96 22 95 34L93 52Z"/><path d="M40 52H93L90 64H45Z"/><path d="M54 64H82L78 96H58Z"/><path d="M48 96H88"/><path d="M58 98H80C84 104 80 110 72 110H64C57 110 54 104 58 98Z"/><path d="M25 44H40M25 44V70"/></g></svg>
+            <span>Point at the motor or its ID plate</span>
+          </div>
+        </div>
+        <i class="cn a"></i><i class="cn b"></i><i class="cn c"></i><i class="cn d"></i>
+        <div class="sweep" id="sweep"></div>
+        <div id="tags"></div>
+        <div class="demo" id="demo">Demo read</div>
+      </div>
+      <div class="acts">
+        <label class="btn amber" for="file"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 4 7.2 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3.2L15 4zm3 4.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>Snap or upload</label>
+        <button class="btn soft" id="sample" type="button">Try a sample photo</button>
+      </div>
+      <input type="file" id="file" accept="image/*" capture="environment">
+      <p class="fine">The read on this page is a <b>demo read</b>. Saltline looks at every motor before a real quote.</p>
+      <div class="seal hseal"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12.5" fill="none" stroke="#ffcf8a" stroke-width="1.5"/><path d="M14 7v12M10 10h8M8.5 15.5c1.5 3 3.4 4.5 5.5 4.5s4-1.5 5.5-4.5" fill="none" stroke="#ffcf8a" stroke-width="1.6" stroke-linecap="round"/></svg>Exclusive in Essex County, MA</div>
+    </div>
+  </div>
+
+  <div class="est" id="est" aria-live="polite">
+    <div>
+      <p class="k">Repower estimate · single 115–200 hp</p>
+      <p class="big disp"><span id="lo">$15K</span>–<span id="hi">$30K</span></p>
+      <p class="sub"><b>Installed, with rigging and a sea trial.</b> Estimate range, the shop confirms.</p>
+      <button class="btn amber send" id="send" type="button">Send to Saltline</button>
+      <p class="season">Winter is repower season: book a slot.</p>
+    </div>
+    <div class="owner" id="owner" aria-label="The shop owner's phone receives your request">
+      <div class="scr"><span class="who">Saltline shop phone</span>
+        <div class="note" id="note">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 36 36" aria-hidden="true"><path d="M5 21c3 0 3-2.4 5.5-2.4S13 21 16 21s3-2.4 5.5-2.4S24 21 27 21" transform="translate(2 0)" fill="none" stroke="#1a0e00" stroke-width="3" stroke-linecap="round"/><path d="M11 14h14" stroke="#1a0e00" stroke-width="3" stroke-linecap="round"/></svg></div>
+          <div><p>Saltline · just now</p><h4>New repower request</h4><p>150 hp · photo attached</p></div>
+          <div class="th" id="thumb"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="services">
+  <div class="wrap">
+    <p class="lbl">What we do</p>
+    <h2 class="disp">One yard for the motor, the rigging and the winter.</h2>
+    <div class="svc">
+      <div><svg viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#ffa62b" stroke-width="2.2" stroke-linejoin="round"><path d="M13 20C12 12 14 7 21 6C25 5 31 5 33 9C35 12 34 16 33 20Z"/><path d="M13 20H33L32 25H15Z"/><path d="M18 25H29L27 38H20Z"/></g></svg><h3>Repowers</h3><p>Old two-strokes and tired four-strokes out, new outboards in. Single or twin, 115 to 300 hp.</p></div>
+      <div><svg viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#ffa62b" stroke-width="2.2" stroke-linecap="round"><path d="M6 30C12 30 14 14 22 14S32 30 38 30"/><circle cx="22" cy="14" r="3"/><path d="M6 36H38"/></g></svg><h3>Rigging</h3><p>Controls, cables, gauges, harnesses and props, matched to the new motor.</p></div>
+      <div><svg viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#ffa62b" stroke-width="2.2" stroke-linecap="round"><path d="M22 5V39M8 13L36 31M36 13L8 31"/><path d="M18 8L22 12L26 8M18 36L22 32L26 36"/></g></svg><h3>Winterizing</h3><p>Fogging, fuel stabilizer, lower-unit oil and water drained before the first freeze.</p></div>
+      <div><svg viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#ffa62b" stroke-width="2.2" stroke-linejoin="round"><path d="M5 30L14 14H30L39 30Z"/><path d="M14 14L22 6L30 14"/><path d="M5 30C14 34 30 34 39 30"/></g></svg><h3>Shrink-wrap</h3><p>Tight white wrap with vents and a zip door, so you can check on her all winter.</p></div>
+      <div><svg viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#ffa62b" stroke-width="2.2" stroke-linejoin="round"><path d="M5 38V18L22 7L39 18V38Z"/><path d="M13 38V26H31V38"/></g></svg><h3>Storage</h3><p>Inside and outside spots on the river, with spring launch on the date you pick.</p></div>
+      <div><svg viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#ffa62b" stroke-width="2.2" stroke-linecap="round"><circle cx="22" cy="22" r="7"/><path d="M22 5V11M22 33V39M5 22H11M33 22H39M10 10L14 14M30 30L34 34M34 10L30 14M14 30L10 34"/></g></svg><h3>Mechanical repair</h3><p>No-starts, overheating, lower units, fuel systems. Diagnosed before we touch a wrench.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="storage" style="background:var(--bg2)">
+  <div class="wrap split">
+    <div class="store">
+      <svg viewBox="0 0 600 300" aria-hidden="true">
+        <defs>
+          <linearGradient id="wrap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfcfd"/><stop offset=".6" stop-color="#c4ccd2"/><stop offset="1" stop-color="#8a959e"/></linearGradient>
+          <linearGradient id="wrap2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6d7882"/><stop offset="1" stop-color="#323a42"/></linearGradient>
+          <linearGradient id="hull2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dfe4e7"/><stop offset="1" stop-color="#4b555d"/></linearGradient>
+          <radialGradient id="yard" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#ffa62b" stop-opacity=".22"/><stop offset="1" stop-color="#ffa62b" stop-opacity="0"/></radialGradient>
+          <linearGradient id="gnd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#161c22"/><stop offset="1" stop-color="#0c1015"/></linearGradient>
+        </defs>
+        <rect width="600" height="300" fill="url(#yard)"/>
+        <rect y="252" width="600" height="48" fill="url(#gnd)"/>
+        <g transform="translate(250 -26) scale(.62)" opacity=".9">
+          <path d="M40 228C150 232 330 236 500 236L508 292C380 298 200 294 112 284C82 270 58 250 40 228Z" fill="url(#wrap2)"/>
+          <path d="M40 228C70 192 130 168 210 150L290 104H460C488 104 504 122 506 150L500 236C330 236 150 232 40 228Z" fill="url(#wrap2)"/>
+        </g>
+        <g fill="#2b2119"><rect x="148" y="236" width="34" height="18" rx="2"/><rect x="392" y="240" width="34" height="14" rx="2"/></g>
+        <g transform="translate(8 0)">
+          <path d="M40 210C150 214 330 218 520 218L528 236C400 242 210 240 122 232C90 228 62 222 40 210Z" fill="url(#hull2)"/>
+          <path d="M40 210C66 168 128 140 214 124L296 70H470C504 70 522 90 524 124L520 218C330 218 150 214 40 210Z" fill="url(#wrap)"/>
+          <path d="M296 70L300 216M214 124L220 213M470 70L466 218" stroke="#8d989f" stroke-opacity=".35" stroke-width="2"/>
+          <path d="M44 206C150 210 330 214 520 214" stroke="#ffa62b" stroke-width="3" fill="none"/>
+          <rect x="430" y="132" width="34" height="62" rx="4" fill="#9aa5ad" opacity=".55"/>
+          <path d="M447 136V190" stroke="#4a545c" stroke-width="2" stroke-dasharray="3 3"/>
+          <g fill="#4a545c"><path d="M330 92a10 10 0 0 1 20 0Z"/><path d="M386 92a10 10 0 0 1 20 0Z"/></g>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <p class="lbl">Haul-out &amp; storage</p>
+      <h2 class="disp">Hauled, winterized, wrapped. Back in on your date.</h2>
+      <div class="facts">
+        <div>Hydraulic trailer haul-out at your slip or ramp</div>
+        <div>Pressure wash and bottom check on the way in</div>
+        <div>Inside and outside storage on the river</div>
+        <div>Repower work done while she sits, no second haul</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="how">
+  <div class="wrap">
+    <p class="lbl">How a repower goes</p>
+    <h2 class="disp">Five steps. You know the price before we pull anything.</h2>
+    <ol class="steps">
+      <li><span class="n">1</span><h3>Survey</h3><p>We look at the transom, bracket, controls and wiring.</p></li>
+      <li><span class="n">2</span><h3>Quote</h3><p>A written price for the motor, rigging and labor.</p></li>
+      <li><span class="n">3</span><h3>Haul</h3><p>We pick her up and bring her to the shop.</p></li>
+      <li><span class="n">4</span><h3>Install</h3><p>Old motor out, transom checked, new motor hung and rigged.</p></li>
+      <li><span class="n">5</span><h3>Sea trial</h3><p>On the river with you, props and trim dialed in.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="s area" id="area" style="background:var(--bg2)">
+  <div class="wrap split">
+    <div>
+      <p class="lbl">Service area</p>
+      <h2 class="disp">The Merrimack, mouth to Haverhill, and the North Shore.</h2>
+      <div class="towns">Newburyport <span>·</span> Amesbury <span>·</span> Salisbury <span>·</span> Newbury <span>·</span> West Newbury <span>·</span> Merrimac <span>·</span> Haverhill <span>·</span> Ipswich <span>·</span> Gloucester</div>
+      <div class="seal" style="margin-top:28px"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12.5" fill="none" stroke="#ffcf8a" stroke-width="1.5"/><path d="M14 7v12M10 10h8M8.5 15.5c1.5 3 3.4 4.5 5.5 4.5s4-1.5 5.5-4.5" fill="none" stroke="#ffcf8a" stroke-width="1.6" stroke-linecap="round"/></svg>Exclusive in Essex County, MA</div>
+    </div>
+    <div class="map">
+      <svg viewBox="0 0 560 360" aria-hidden="true">
+        <path d="M30 120C90 110 120 150 170 140C220 130 240 90 300 96C350 100 380 140 430 132C470 126 500 100 540 104" fill="none" stroke="#1d3a55" stroke-width="16" stroke-linecap="round"/>
+        <path d="M30 120C90 110 120 150 170 140C220 130 240 90 300 96C350 100 380 140 430 132C470 126 500 100 540 104" fill="none" stroke="#2f5d86" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 10"/>
+        <path d="M540 104C548 160 520 220 500 260C486 290 470 320 470 352" fill="none" stroke="#1d3a55" stroke-width="5" opacity=".7"/>
+        <g font-family="Manrope,sans-serif" font-weight="700" font-size="15" fill="#c7cfd6">
+          <circle cx="60" cy="116" r="6" fill="#ffa62b"/><text x="46" y="98">Haverhill</text>
+          <circle cx="200" cy="134" r="6" fill="#ffa62b"/><text x="176" y="168">Merrimac</text>
+          <circle cx="300" cy="96" r="6" fill="#ffa62b"/><text x="270" y="78">Amesbury</text>
+          <circle cx="430" cy="132" r="9" fill="#ffa62b"/><circle cx="430" cy="132" r="17" fill="none" stroke="#ffa62b" stroke-width="2"/><text x="384" y="176" fill="#fff">Saltline yard</text>
+          <circle cx="510" cy="100" r="6" fill="#ffa62b"/><text x="470" y="80">Newburyport</text>
+          <circle cx="498" cy="262" r="6" fill="#ffa62b"/><text x="400" y="267">Ipswich</text>
+          <circle cx="472" cy="340" r="6" fill="#ffa62b"/><text x="380" y="345">Gloucester</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <p class="lbl">Book a slot</p>
+  <h2 class="disp">Winter is repower season. Get on the list before spring.</h2>
+  <div class="acts"><a class="btn amber" href="tel:+19785550177">Call (978) 555-0177</a><a class="btn soft" href="#quote">Snap your motor</a></div>
+</section>
+
+<footer><span>Saltline Marine &amp; Repower · Merrimack River, MA · (978) 555-0177</span><span>Concept demo · fictional business · IC Business Systems</span></footer>
+
+<template id="sampleTpl">
+<svg viewBox="0 0 480 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample photo of an older outboard on a boat transom">
+  <defs>
+    <linearGradient id="spSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8ea5b5"/><stop offset="1" stop-color="#d6d0c2"/></linearGradient>
+    <linearGradient id="spWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#58737e"/><stop offset="1" stop-color="#23353e"/></linearGradient>
+    <linearGradient id="spCowl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3ecd9"/><stop offset=".5" stop-color="#d8cdb1"/><stop offset="1" stop-color="#9a8f73"/></linearGradient>
+    <linearGradient id="spShade" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>
+    <linearGradient id="spMetal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#363b40"/><stop offset=".45" stop-color="#6d7378"/><stop offset="1" stop-color="#2b2f33"/></linearGradient>
+    <linearGradient id="spGel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c9c4b8"/><stop offset=".75" stop-color="#ece8de"/><stop offset="1" stop-color="#d4cfc3"/></linearGradient>
+    <linearGradient id="spRust" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d3f1d" stop-opacity=".9"/><stop offset="1" stop-color="#b8743f" stop-opacity="0"/></linearGradient>
+    <radialGradient id="spVig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></radialGradient>
+    <filter id="spBlur"><feGaussianBlur stdDeviation="3.2"/></filter>
+    <filter id="spSoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="spGrain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .1 0"/></filter>
+  </defs>
+  <g filter="url(#spBlur)">
+    <rect width="480" height="160" fill="url(#spSky)"/>
+    <path d="M0 112C70 100 130 112 210 104C290 96 380 110 480 100V160H0Z" fill="#46534d"/>
+    <rect x="30" y="40" width="9" height="130" fill="#3b332c"/><rect x="430" y="56" width="9" height="120" fill="#3b332c"/>
+    <rect y="150" width="480" height="210" fill="url(#spWater)"/>
+    <g stroke="#a9bec6" stroke-opacity=".35" stroke-width="3"><line x1="20" y1="190" x2="120" y2="190"/><line x1="300" y1="200" x2="460" y2="200"/><line x1="60" y1="240" x2="160" y2="240"/></g>
+  </g>
+  <path d="M0 184L188 172L198 360H0Z" fill="url(#spGel)"/>
+  <path d="M0 176L190 165L191 176L0 188Z" fill="#26292b"/>
+  <path d="M150 196C152 230 150 262 154 300L166 300C162 262 166 228 164 196Z" fill="url(#spRust)"/>
+  <path d="M172 200C173 230 171 250 174 284L181 284C179 250 182 228 180 200Z" fill="url(#spRust)"/>
+  <path d="M176 156H238C246 156 248 162 248 170V262C248 270 244 274 236 274H214L206 198H186V178H176Z" fill="url(#spMetal)"/>
+  <g fill="#e2dccb" opacity=".85"><circle cx="196" cy="262" r="4"/><circle cx="206" cy="268" r="3"/><circle cx="188" cy="252" r="2.5"/><circle cx="222" cy="266" r="3.2"/></g>
+  <g fill="#9a5128"><circle cx="200" cy="256" r="3"/><circle cx="214" cy="262" r="2.4"/><circle cx="184" cy="244" r="2"/><circle cx="230" cy="258" r="2.6"/></g>
+  <circle cx="181" cy="210" r="5" fill="#25292c"/><circle cx="181" cy="236" r="5" fill="#25292c"/>
+  <rect x="207" y="206" width="34" height="23" rx="2" fill="#c3c7c9"/>
+  <g fill="#6c7175"><rect x="210" y="210" width="20" height="2"/><rect x="210" y="215" width="27" height="2"/><rect x="210" y="220" width="16" height="2"/><rect x="210" y="224" width="24" height="2"/></g>
+  <path d="M286 258H372L366 360H292Z" fill="url(#spMetal)"/>
+  <path d="M236 206H458L450 250C448 256 444 260 436 260H252C244 260 240 254 238 248Z" fill="#6c6e6b"/>
+  <path d="M236 206H458L456 214H237Z" fill="#000" opacity=".25"/>
+  <path d="M234 206C228 160 230 92 252 62C270 38 302 30 346 30H402C442 30 464 52 464 90L460 206Z" fill="url(#spCowl)"/>
+  <path d="M234 206C228 160 230 92 252 62C270 38 302 30 346 30H402C442 30 464 52 464 90L460 206Z" fill="url(#spShade)"/>
+  <path d="M236 150C300 140 380 138 462 132V152C380 156 300 160 236 170Z" fill="#4c7a7d" opacity=".42"/>
+  <text x="372" y="122" font-family="Arial Black,Archivo,sans-serif" font-weight="900" font-size="36" fill="#867d64" opacity=".42">150</text>
+  <g fill="#3f3d36" opacity=".75"><rect x="414" y="52" width="34" height="5" rx="2.5"/><rect x="418" y="62" width="30" height="5" rx="2.5"/><rect x="422" y="72" width="26" height="5" rx="2.5"/></g>
+  <ellipse cx="320" cy="56" rx="86" ry="13" fill="#fff" opacity=".5" filter="url(#spSoft)"/>
+  <path d="M236 200L460 198" stroke="#3a3833" stroke-width="2"/>
+  <rect x="436" y="190" width="14" height="10" rx="2" fill="#3a3a36"/>
+  <path d="M240 236C200 236 172 216 150 192C134 176 114 166 70 164" fill="none" stroke="#151617" stroke-width="8" stroke-linecap="round"/>
+  <path d="M240 246C196 246 166 226 144 202C128 186 108 178 66 176" fill="none" stroke="#1d1e20" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="240" cy="241" rx="7" ry="12" fill="#2a2a2a"/>
+  <rect y="336" width="480" height="24" fill="#2f4752" opacity=".85"/>
+  <rect width="480" height="360" fill="url(#spVig)"/>
+  <rect width="480" height="360" filter="url(#spGrain)" opacity=".6"/>
+</svg>
+</template>
+
+<script src="../vendor/gsap.min.js"></script>
+<script>
+(function(){
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(s){return document.querySelector(s)};
+  var READS = [
+    {t:'2009 four-stroke 150 hp', x:71, y:25, l:true},
+    {t:'~1,400 hrs', x:47, y:60},
+    {t:'Corrosion at transom bracket', x:34, y:74},
+    {t:'Controls: mechanical', x:22, y:46}
+  ];
+  var shop = $('#shop'), photo = $('#photo'), tags = $('#tags'), est = $('#est'), owner = $('#owner');
+  var oldM = $('#oldM'), newM = $('#newM'), rig = $('#rig'), chain = $('#chain'), hook = $('#hook');
+  var S = {rx:1260, hy:250, ox:0, oy:0, nx:440, ny:-170};
+  function draw(){
+    rig.setAttribute('transform','translate('+S.rx+' 0)');
+    chain.setAttribute('y2', S.hy); hook.setAttribute('transform','translate(0 '+S.hy+')');
+    oldM.setAttribute('transform','translate('+S.ox+' '+S.oy+')');
+    newM.setAttribute('transform','translate('+S.nx+' '+S.ny+')');
+  }
+  function fit(){ shop.setAttribute('viewBox', innerWidth < 761 ? '820 300 620 318' : '0 40 1440 900'); }
+  fit(); addEventListener('resize', fit); draw();
+
+  READS.forEach(function(r){
+    var d = document.createElement('div'); d.className = 'tag' + (r.l ? ' l' : '');
+    d.style.setProperty('--x', r.x + '%'); d.style.setProperty('--y', r.y + '%');
+    d.innerHTML = '<i></i><span>' + r.t + '</span>'; tags.appendChild(d);
+  });
+  var tagEls = tags.querySelectorAll('.tag');
+  var tl = null, srcHTML = '';
+
+  function setPhoto(html){ srcHTML = html; photo.innerHTML = html; }
+  function lo(v){ $('#lo').textContent = '$' + Math.round(v) + 'K'; }
+  function hi(v){ $('#hi').textContent = '$' + Math.round(v) + 'K'; }
+
+  function run(){
+    if (tl) tl.kill();
+    S = {rx:1260, hy:250, ox:0, oy:0, nx:440, ny:-170}; draw();
+    gsap.set(oldM, {visibility:'visible'}); gsap.set(newM, {visibility:'hidden'});
+    gsap.set(tagEls, {scale:0}); gsap.set([est, owner, '#demo'], {visibility:'hidden'});
+    $('#send').textContent = 'Send to Saltline'; $('#send').disabled = false;
+    var c = {lo:0, hi:0};
+    tl = gsap.timeline({onUpdate:draw});
+    tl.fromTo('#sweep', {yPercent:-100, top:'0%'}, {top:'100%', duration:1.5, ease:'none'})
+      .set('#sweep', {top:'0%', yPercent:-100})
+      .set('#demo', {visibility:'visible'})
+      .to(tagEls, {scale:1, duration:.4, ease:'back.out(2.2)', stagger:.32})
+      .to(S, {hy:384, duration:.8, ease:'power2.inOut'}, '+=.2')
+      .to(S, {hy:214, oy:-170, duration:1, ease:'power2.inOut'})
+      .to(S, {rx:1700, ox:440, duration:1, ease:'power2.in'})
+      .set(oldM, {visibility:'hidden'})
+      .set(newM, {visibility:'visible'})
+      .set(S, {nx:440, ny:-170, rx:1700, hy:214})
+      .to(S, {rx:1260, nx:0, duration:1.1, ease:'power2.out'})
+      .to(S, {hy:384, ny:0, duration:1, ease:'power2.inOut'})
+      .to(S, {hy:250, duration:.7, ease:'power2.inOut'})
+      .set(est, {visibility:'visible'}, '-=.5')
+      .fromTo(est, {y:24}, {y:0, duration:.6, ease:'power3.out'}, '<')
+      .fromTo(c, {lo:0, hi:0}, {lo:15, hi:30, immediateRender:false, duration:.9, ease:'power2.out', onUpdate:function(){lo(c.lo);hi(c.hi);}}, '<');
+    if (RM) tl.progress(1);
+    if (innerWidth < 761 && !location.hash) tl.call(function(){ est.scrollIntoView({behavior: RM ? 'auto' : 'smooth', block:'start'}); }, null, RM ? 0 : '+=.3');
+  }
+  function sample(){ setPhoto($('#sampleTpl').innerHTML); run(); }
+  $('#sample').addEventListener('click', sample);
+  $('#file').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0]; if (!f) return;
+    var u = URL.createObjectURL(f);
+    setPhoto('<img alt="Your motor photo" src="' + u + '">'); run();
+  });
+  function send(instant){
+    var b = $('#send'); b.textContent = 'Sent to Saltline ✓'; b.disabled = true;
+    $('#thumb').innerHTML = srcHTML.replace(/id="sp/g,'id="tp').replace(/url\(#sp/g,'url(#tp');
+    gsap.set(owner, {visibility:'visible'});
+    if (instant || RM) return;
+    gsap.fromTo(owner, {y:140, rotate:4}, {y:0, rotate:0, duration:.8, ease:'power3.out'});
+    gsap.fromTo('#note', {y:-70, scale:.9}, {y:0, scale:1, duration:.7, ease:'back.out(1.7)', delay:.55});
+  }
+  $('#send').addEventListener('click', function(){ send(false); });
+  var h = location.hash;
+  if (h === '#done' || h === '#read') { setPhoto($('#sampleTpl').innerHTML); run(); tl.progress(1); draw(); if (h === '#done') send(true); }
+  else if (h === '#run') setTimeout(sample, 700);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halyard Rigging &amp; Crane · Live job board</title>
+<meta name="description" content="Machinery moving, rigging and crane service in the Merrimack Valley. Every move planned, tracked and reported to the minute.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f5;--card:#fff;--ink:#0f1726;--mut:#667085;--line:#e3e8ef;--pri:#2f5bff;--pri2:#e7edff;--ok:#12a46a;--ok2:#e3f6ee;--amb:#e38b06;--amb2:#fdf1dc;--sh:0 1px 2px #0f17260d,0 8px 24px #0f172612}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:16.5px/1.5 Manrope,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}
+.mono{font-family:"JetBrains Mono",monospace}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 18px;border-radius:12px;font:700 15px/1 Manrope;text-decoration:none;border:0;cursor:pointer;white-space:nowrap}
+.bp{background:var(--pri);color:#fff}
+.bs{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
+.btn svg{width:17px;height:17px}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--sh);padding:16px 18px;position:relative;overflow:hidden}
+.ct{display:flex;justify-content:space-between;align-items:center;font:700 12px Manrope;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+.chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:99px;font:700 12px Manrope;letter-spacing:.02em;white-space:nowrap}
+.c-live{background:var(--pri2);color:var(--pri)}
+.c-ok{background:var(--ok2);color:var(--ok)}
+.c-q{background:#f0f2f5;color:var(--mut)}
+.c-amb{background:var(--amb2);color:var(--amb)}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+/* app bar */
+.top{position:fixed;inset:0 0 auto;z-index:20;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:#eef1f5ee;backdrop-filter:blur(10px)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand i{width:34px;height:34px;border-radius:10px;background:var(--ink);display:grid;place-items:center}
+.brand b{font:800 18px Manrope;letter-spacing:.02em}
+.brand small{display:block;font:600 12px Manrope;color:var(--mut);margin-top:-3px}
+.top .r{display:flex;gap:8px;align-items:center}
+.excl{font:700 12px Manrope;color:var(--mut);margin-right:10px;display:flex;align-items:center;gap:6px}
+.excl::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--amb);transform:rotate(45deg)}
+/* dashboard */
+#story{height:100vh;height:100svh;padding:76px 24px 18px;display:grid;grid-template-columns:300px 1fr 310px;grid-template-rows:auto 1fr;gap:14px}
+.intro{grid-column:1/4;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.intro h1{font:800 clamp(26px,2.4vw,36px)/1.1 Manrope;letter-spacing:-.02em}
+.intro h1 span{color:var(--pri)}
+.intro p{color:var(--mut);font-weight:600;font-size:15px}
+.cue{display:flex;align-items:center;gap:10px;font:700 13px Manrope;color:var(--pri);background:var(--pri2);padding:10px 14px;border-radius:12px}
+.cue i{width:16px;height:16px;border-radius:50%;background:var(--pri);position:relative}
+.cue i::after{content:"";position:absolute;left:5px;top:3px;width:4px;height:4px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);animation:nud 1.2s ease-in-out infinite}
+@keyframes nud{50%{top:6px}}
+.colL,.colR{display:flex;flex-direction:column;gap:14px;min-height:0}
+.colC{display:grid;grid-template-rows:1.15fr 1fr;gap:14px;min-height:0}
+/* timeline */
+.tl{flex:1;display:flex;flex-direction:column}
+.tl ol{list-style:none;display:flex;flex-direction:column;flex:1;justify-content:space-between;position:relative}
+.tl ol::before{content:"";position:absolute;left:13px;top:12px;bottom:12px;width:2px;background:var(--line)}
+.tl .bar{position:absolute;left:13px;top:12px;width:2px;background:var(--ok);height:0}
+.tl li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;position:relative;min-height:40px}
+.tl li .n{width:28px;height:28px;border-radius:50%;background:#f0f2f5;display:grid;place-items:center;font:700 12px "JetBrains Mono";color:var(--mut);z-index:1}
+.tl li.done .n{background:var(--ok);color:#fff}
+.tl li.live .n{background:var(--pri);color:#fff}
+.tl li b{font:700 14.5px/1.2 Manrope;display:block}
+.tl li small{font:600 12px "JetBrains Mono";color:var(--mut)}
+/* clock */
+.clk{display:flex;justify-content:space-between;align-items:flex-end}
+.clk .t{font:700 54px/1 "JetBrains Mono";letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.clk .t span{color:var(--mut);font-size:22px;letter-spacing:0;margin-left:4px}
+.prog{height:6px;border-radius:3px;background:#f0f2f5;margin-top:12px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--pri);border-radius:3px}
+.stage h2{font:800 22px/1.15 Manrope;letter-spacing:-.01em}
+.stage p{color:#475467;font-size:15.5px;margin-top:6px;min-height:3em}
+/* gauge */
+.gg{display:flex;align-items:center;gap:14px}
+.gg svg{width:112px;height:66px;flex:0 0 112px}
+.gg .v{font:700 26px/1 "JetBrains Mono";font-variant-numeric:tabular-nums}
+.gg small{display:block;font:600 12px Manrope;color:var(--mut);margin-top:4px}
+.crew{display:flex;flex-wrap:wrap;gap:8px}
+.crew span{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 10px 0 4px;border-radius:99px;background:#f4f6f9;font:700 12.5px Manrope}
+.crew span i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font:700 11px "JetBrains Mono";font-style:normal}
+.eqs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+/* map + lift */
+.map svg,.lift svg{position:absolute;inset:44px 0 0 0;width:100%;height:calc(100% - 44px)}
+.map .ct,.lift .ct{position:relative;z-index:2}
+.ovl{position:absolute;z-index:2;right:16px;bottom:14px;display:flex;gap:8px;flex-wrap:wrap}
+.ovl .chip{background:#ffffffe6;box-shadow:0 1px 4px #0f172614;color:var(--ink)}
+.ctas{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.phoneonly{display:none}
+.cue2{display:none;position:absolute;z-index:3;left:12px;bottom:12px;padding:8px 12px;font-size:12.5px}
+/* below */
+.sec{max-width:1240px;margin:0 auto;padding:90px 24px}
+.sec .k{font:700 13px Manrope;letter-spacing:.1em;text-transform:uppercase;color:var(--pri)}
+.sec h2{font:800 clamp(32px,3.6vw,50px)/1.08 Manrope;letter-spacing:-.025em;margin-top:8px}
+.sec .lede{color:#475467;font-size:18px;max-width:620px;margin-top:12px}
+.pl{display:grid;grid-template-columns:1.05fr 1fr .8fr;gap:16px;margin-top:36px;align-items:start}
+.f label{display:flex;justify-content:space-between;font:700 14px Manrope;margin-bottom:2px}
+.f label output{font:700 18px "JetBrains Mono";color:var(--pri)}
+.f{padding:10px 0 4px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--pri) var(--v,50%),#e3e8ef var(--v,50%))}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:#e3e8ef}
+input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--pri)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;margin-top:-9px;box-shadow:0 0 0 2px var(--pri),0 2px 6px #0f172633}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--pri)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#f0f2f5;padding:4px;border-radius:12px;margin-top:6px}
+.seg button{min-height:44px;border:0;border-radius:9px;background:transparent;font:700 14px Manrope;cursor:pointer;color:var(--mut)}
+.seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px #0f172622}
+.res .big{font:800 34px/1.05 Manrope;letter-spacing:-.02em;margin:4px 0 6px}
+.res .eq{font:700 16px Manrope;color:var(--pri)}
+.res dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin-top:14px;font-size:15px}
+.res dt{color:var(--mut);font-weight:600}
+.res dd{font-weight:700}
+.res ul{list-style:none;margin-top:14px;display:grid;gap:8px}
+.res li{display:flex;gap:8px;font-size:14.5px;color:#475467}
+.res li::before{content:"";flex:0 0 6px;height:6px;border-radius:50%;background:var(--amb);margin-top:8px}
+.ph{width:236px;height:460px;border-radius:42px;background:#0f1726;padding:10px;margin:0 auto;box-shadow:var(--sh)}
+.ph .sc{width:100%;height:100%;border-radius:33px;overflow:hidden;position:relative;background:linear-gradient(170deg,#3a56c9,#0f1f5c)}
+.ph .tm{position:absolute;top:48px;width:100%;text-align:center;color:#fff;font:700 58px/1 Manrope;letter-spacing:-.03em}
+.ph .dt{position:absolute;top:110px;width:100%;text-align:center;color:#ffffffaa;font:600 13px Manrope}
+.nt{position:absolute;left:9px;right:9px;top:150px;background:#ffffffeb;border-radius:18px;padding:12px;transform:translateY(-330px);box-shadow:0 10px 30px #0006}
+.nt.in{transform:none;transition:transform .6s cubic-bezier(.25,1.4,.45,1)}
+.nt .h{display:flex;align-items:center;gap:7px;font:700 11.5px Manrope;color:var(--mut)}
+.nt .h i{width:20px;height:20px;border-radius:6px;background:var(--ink);display:grid;place-items:center}
+.nt .h span{margin-left:auto;font-weight:600}
+.nt h4{font:800 16px Manrope;margin:7px 0 3px}
+.nt p{font-size:12.5px;line-height:1.35;color:#344054}
+.nt .chips{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
+.nt .chips span{font:700 10.5px Manrope;background:var(--pri2);color:var(--pri);border-radius:99px;padding:4px 8px}
+.svcg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.svcg .card{padding:22px}
+.svcg h3{font:800 19px Manrope;margin:12px 0 4px}
+.svcg p{color:#475467;font-size:15.5px}
+.ic{width:40px;height:40px;border-radius:12px;background:var(--pri2);display:grid;place-items:center}
+.ic svg{width:22px;height:22px}
+.trust{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;margin-top:16px}
+.wa{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.wa .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.wa .chips span{background:#f4f6f9;border-radius:99px;padding:8px 13px;font:700 14px Manrope}
+.callc{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:24px;padding:40px}
+.callc a.n{font:700 clamp(34px,5vw,64px)/1 "JetBrains Mono";text-decoration:none;letter-spacing:-.04em}
+footer{max-width:1240px;margin:0 auto;padding:10px 24px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font:600 13.5px Manrope;color:var(--mut)}
+.steps{display:none}
+@media (prefers-reduced-motion: reduce){
+  .cue{display:none}.dot{animation:none}
+  .steps{display:block;max-width:1240px;margin:0 auto;padding:40px 24px}
+  .steps ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:16px}
+  .steps li svg{width:100%;height:150px;display:block;background:#f4f6f9;border-radius:12px;margin-bottom:10px}
+  .nt{transform:none}
+}
+@media (max-width:1100px) and (min-width:761px){#story{grid-template-columns:260px 1fr 270px}}
+@media (max-width:760px){
+  .top{height:56px;padding:0 14px}
+  .brand small,.excl,.top .bs{display:none}
+  .top .btn{min-height:44px}
+  #story{display:flex;flex-direction:column;padding:62px 12px 12px;gap:8px}
+  .intro{order:0}
+  .intro h1{font-size:21px}
+  .intro p,.intro .cue{display:none}
+  .colL{display:contents}
+  .colR{display:contents}
+  .colC{display:contents}
+  .tl,.gauge,.crewc{display:none}
+  .clkc{order:1;padding:10px 14px}
+  .clk .t{font-size:40px}
+  .clkc .ct{margin-bottom:2px}
+  .prog{margin-top:8px}
+  .lift{order:2;flex:1 1 auto;min-height:190px}
+  .stage{order:3;padding:12px 14px}
+  .stage h2{font-size:19px}
+  .stage p{font-size:15px;min-height:2.9em;margin-top:2px}
+  .map{order:4;height:118px;flex:0 0 118px;padding:10px 14px}
+  .map .ct{margin-bottom:0}
+  .map svg{inset:0;height:100%}
+  .cue2{display:flex!important}
+  .map .ovl{display:none}
+  .phoneonly{display:flex;order:5;gap:8px}
+  .phoneonly .btn{flex:1;min-height:48px}
+  .phoneonly .cue{flex:0 0 auto;padding:0 12px}
+  .pl{grid-template-columns:1fr}
+  .svcg{grid-template-columns:1fr}
+  .trust{grid-template-columns:1fr}
+  .wa{grid-template-columns:1fr}
+  .sec{padding:64px 14px}
+  .callc{padding:28px 22px}
+  footer{padding:10px 14px 36px}
+  .steps{padding:40px 14px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#top"><i><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#fff" stroke-width="2"><path d="M3 16V3h12M3 3l7 5v4"/><circle cx="10" cy="13.5" r="1.8" stroke="#7d9bff"/></svg></i><span><b>HALYARD</b><small>Rigging &amp; Crane</small></span></a>
+  <div class="r"><span class="excl">Exclusive in Essex County, MA</span><a class="btn bs" href="#plan">Plan your move</a><a class="btn bp" href="tel:+19785550163"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>(978) 555-0163</a></div>
+</header>
+
+<section id="story" aria-label="The move, hour by hour">
+  <div class="intro">
+    <div><h1>Every move, <span>tracked to the minute.</span></h1><p>Sample job HRC-0614 · 38,000 lb CNC · Lowell to Haverhill · Merrimack Valley machinery moving, rigging and crane service</p></div>
+    <div class="cue" id="cue"><i></i>Scroll to watch the move</div>
+  </div>
+  <div class="colL">
+    <div class="card tl"><div class="ct"><span>Job timeline</span><span class="chip c-live"><span class="dot"></span>Live</span></div><ol id="tl"><div class="bar" id="tlbar"></div></ol></div>
+  </div>
+  <div class="colC">
+    <div class="card lift"><div class="ct"><span>Lift view · 38,000 lb VMC</span><span class="chip c-q" id="liftchip">Staged</span></div><svg id="lift" aria-hidden="true"></svg><div class="cue cue2" id="cue2"><i></i>Scroll to watch the move</div></div>
+    <div class="card map"><div class="ct"><span>Route · I-495</span><span class="chip c-q" id="mapchip">0.0 of 21 mi</span></div>
+      <svg id="map" viewBox="0 28 600 262" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="600" height="300" fill="#f4f6f9"/>
+        <path d="M-10 214 C80 230 120 180 190 186 S300 150 350 130 S470 70 610 56" fill="none" stroke="#d6e4fb" stroke-width="22" stroke-linecap="round"/>
+        <g fill="none" stroke="#e3e8ef" stroke-width="5" stroke-linecap="round"><path d="M0 120 L250 140 L600 170"/><path d="M180 0 L210 300"/><path d="M380 0 L330 300"/><path d="M0 40 L600 10"/><path d="M460 300 L520 0"/></g>
+        <path id="route" d="M70 250 C140 246 170 214 220 206 S300 196 330 170 S420 110 470 98 S520 86 540 74" fill="none" stroke="#c9d3e3" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 12"/>
+        <path id="routeDone" d="M70 250 C140 246 170 214 220 206 S300 196 330 170 S420 110 470 98 S520 86 540 74" fill="none" stroke="#2f5bff" stroke-width="7" stroke-linecap="round"/>
+        <g font-family="Manrope" font-weight="700" font-size="14" fill="#667085"><text x="300" y="214">Lawrence</text><text x="220" y="120">Andover</text><text x="392" y="168">Methuen</text><text x="196" y="60" fill="#98a2b3">NH</text></g>
+        <g><circle cx="70" cy="250" r="9" fill="#0f1726"/><text x="86" y="276" font-family="Manrope" font-weight="800" font-size="15" fill="#0f1726">Lowell plant</text></g>
+        <g><circle cx="540" cy="74" r="9" fill="#12a46a"/><text x="458" y="50" font-family="Manrope" font-weight="800" font-size="15" fill="#0f1726">Haverhill plant</text></g>
+        <g id="truckpin"><circle r="16" fill="#2f5bff"/><circle r="22" fill="none" stroke="#2f5bff" stroke-opacity=".25" stroke-width="6"/><path d="M-7 3h14v-6h-4l-2-3h-8z" fill="#fff"/></g>
+      </svg>
+      <div class="ovl"><span class="chip">ETA 14:10</span><span class="chip">Escort car</span><span class="chip">Permit OS-2214</span></div>
+    </div>
+  </div>
+  <div class="colR">
+    <div class="card clkc"><div class="ct"><span>Job clock</span><span class="chip c-live" id="stchip">Step 1 of 7</span></div><div class="clk"><div class="t mono" id="clk">06:00<span>hrs</span></div></div><div class="prog"><i id="prog"></i></div></div>
+    <div class="card stage"><h2 id="sh">Crew + crane on site</h2><p id="sd">4 riggers, a 60-ton crane and a hydraulic gantry, staged before your first shift.</p></div>
+    <div class="card gauge"><div class="ct"><span id="gl">Hook load · 60 t crane</span></div><div class="gg"><svg viewBox="0 0 112 66"><path d="M10 60 A46 46 0 0 1 102 60" fill="none" stroke="#f0f2f5" stroke-width="12" stroke-linecap="round"/><path id="garc" d="M10 60 A46 46 0 0 1 102 60" fill="none" stroke="#2f5bff" stroke-width="12" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/></svg><div><div class="v" id="gv">0 lb</div><small id="gp">0% of chart</small></div></div></div>
+    <div class="card crewc"><div class="ct"><span>Crew &amp; gear</span><span class="chip c-ok">4 on site</span></div><div class="crew"><span><i style="background:#2f5bff">LR</i>Lead rigger</span><span><i style="background:#e38b06">CO</i>Crane op</span><span><i style="background:#12a46a">RG</i>Rigger</span><span><i style="background:#7a5af8">SP</i>Signal</span></div><div class="eqs"><span class="chip c-q">60 t crane</span><span class="chip c-q">30 t gantry</span><span class="chip c-q">Lowboy</span><span class="chip c-q">Skates ×4</span></div></div>
+  </div>
+  <div class="phoneonly"><a class="btn bp" href="tel:+19785550163">Call now</a><a class="btn bs" href="#plan">Plan your move</a></div>
+</section>
+
+<section class="steps" aria-label="The move, step by step"><div class="k" style="font:700 13px Manrope;color:#2f5bff;letter-spacing:.1em">JOB LOG</div><h2 style="font:800 34px Manrope">The move, hour by hour</h2><ol id="stepsList"></ol></section>
+
+<section class="sec" id="plan">
+  <div class="k">New move request</div>
+  <h2>Plan your move</h2>
+  <p class="lede">Four inputs. We'll show you the crew and equipment a job like yours usually takes, then send it straight to the owner's phone.</p>
+  <div class="pl">
+    <div class="card">
+      <div class="f"><label for="w">Machine weight <output id="wo">38,000 lb</output></label><input id="w" type="range" min="2000" max="120000" step="1000" value="38000"></div>
+      <div class="f"><label for="mi">Distance <output id="mio">21 mi</output></label><input id="mi" type="range" min="0" max="300" value="21"></div>
+      <div class="f"><label for="dw">Narrowest door <output id="dwo">12 ft 0 in</output></label><input id="dw" type="range" min="48" max="240" step="6" value="144"></div>
+      <div class="f"><label>New floor</label><div class="seg" id="fl"><button type="button" aria-pressed="true" data-v="ground">Ground floor</button><button type="button" aria-pressed="false" data-v="upper">Upper floor</button></div></div>
+    </div>
+    <div class="card res">
+      <div class="ct"><span>Suggested plan</span><span class="chip c-amb">Sample</span></div>
+      <div class="big" id="pc">4-person crew</div>
+      <div class="eq" id="pe">30-ton hydraulic gantry or 60-ton crane</div>
+      <dl><dt>Truck</dt><dd id="pt">Lowboy + permit</dd><dt>On site</dt><dd id="pd">est. 1 day</dd></dl>
+      <ul id="pn"></ul>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap"><button class="btn bp" id="sendBtn" type="button">Send to Halyard</button><small style="color:#667085;font-weight:600">Demo only: nothing is sent.</small></div>
+    </div>
+    <div>
+      <div class="ph"><div class="sc"><div class="tm">2:14</div><div class="dt">Tuesday, October 30</div>
+        <div class="nt" id="nt"><div class="h"><i><svg width="11" height="11" viewBox="0 0 18 18" fill="none" stroke="#fff" stroke-width="2.4"><path d="M3 16V3h12M3 3l7 5v4"/></svg></i>Halyard Jobs<span>now</span></div><h4>New move request</h4><p id="ntTxt">38,000 lb · 21 mi · ground floor · 12 ft door</p><div class="chips" id="ntChips"><span>4-person crew</span><span>60 t crane</span></div></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:20px">
+  <div class="k">Services</div>
+  <h2>One crew for the whole move</h2>
+  <div class="svcg">
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2f5bff" stroke-width="2"><rect x="4" y="6" width="12" height="11" rx="1"/><path d="M16 10h3v7M2 20h20"/></svg></div><h3>Machinery moving</h3><p>CNCs, presses, molders and lines. Across the aisle or across the state.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2f5bff" stroke-width="2"><path d="M3 21V9l6-4 6 4v12M15 13h6v8"/><path d="M7 21v-5h4v5"/></svg></div><h3>Plant relocations</h3><p>Whole shops in phases, so you keep shipping while we work.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2f5bff" stroke-width="2"><rect x="3" y="10" width="18" height="5" rx="2.5"/><circle cx="12" cy="12.5" r="1.3"/><path d="M6 18v3M18 18v3"/></svg></div><h3>Millwright work</h3><p>Set, level, anchor and grout. Ready for your techs to hook up.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2f5bff" stroke-width="2"><path d="M4 21V5l14-2M4 5l9 6M13 11v4"/><path d="M11 15h4v3h-4z"/></svg></div><h3>Crane lifts</h3><p>60- and 100-ton cranes, with a written lift plan on every pick.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2f5bff" stroke-width="2"><rect x="5" y="5" width="14" height="10" rx="1"/><circle cx="8" cy="18" r="2"/><circle cx="16" cy="18" r="2"/></svg></div><h3>Skating &amp; jacking</h3><p>Low doors, tight aisles, upper floors. Skates, jacks, gantry.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2f5bff" stroke-width="2"><path d="M3 10l9-6 9 6v11H3z"/><path d="M8 21v-7h8v7"/></svg></div><h3>Storage</h3><p>Heated indoor storage while your new building gets finished.</p></div>
+  </div>
+  <div class="card trust"><span class="chip c-ok">Insured</span><p style="font-weight:600">Fully insured for rigging and cargo. Your certificate of insurance is sent before the crew arrives, and every crane pick gets a written lift plan.</p><a class="btn bs" href="tel:+19785550163">Request our COI</a></div>
+  <div class="wa">
+    <div class="card"><div class="ct"><span>Industries</span></div><div class="chips"><span>Machine shops &amp; CNC</span><span>Plastics &amp; molding</span><span>Food &amp; beverage</span><span>Medical device</span><span>Printing</span><span>Labs &amp; cleanrooms</span><span>Electronics</span><span>Warehousing</span></div></div>
+    <div class="card"><div class="ct"><span>Service area</span><span class="chip c-amb">Exclusive in Essex County, MA</span></div><div class="chips"><span>Lowell</span><span>Lawrence</span><span>Haverhill</span><span>Andover</span><span>Methuen</span><span>Newburyport</span><span>Peabody</span><span>Wilmington</span><span>Nashua, NH</span><span>Salem, NH</span></div></div>
+  </div>
+</section>
+<section class="sec" style="padding-top:0"><div class="callc"><div><div style="font:700 13px Manrope;letter-spacing:.1em;color:#9db1ff">TALK TO A RIGGER</div><a class="n" href="tel:+19785550163">(978) 555-0163</a></div><a class="btn bp" href="#plan">Plan your move</a></div></section>
+<footer><span>Halyard Rigging &amp; Crane · Merrimack Valley, MA</span><span>Concept demo · fictional business · IC Business Systems</span></footer>
+
+<script src="../vendor/gsap.min.js"></script>
+<script src="../vendor/ScrollTrigger.min.js"></script>
+<script>
+const STAGES=[
+ {t:'06:00',m:360,h:'Crew + crane on site',d:'4 riggers, a 60-ton crane and a hydraulic gantry, staged before your first shift.',chip:'Staged'},
+ {t:'07:30',m:450,h:'Disconnected, rigged',d:'Your electrician kills power. We drain coolant, jack it up and set it on skates.',chip:'Rigging'},
+ {t:'09:10',m:550,h:'Skated to the dock',d:'140 ft across the shop floor on machine skates. Your aisles stay open.',chip:'Skating'},
+ {t:'10:40',m:640,h:'Lifted and loaded',d:'The 60-ton crane picks 38,000 lb onto the lowboy, 68% of its chart.',chip:'Lifting'},
+ {t:'13:00',m:780,h:'On the road',d:'Lowell to Haverhill, 21 miles on I-495. Chained, tarped, permitted.',chip:'In transit'},
+ {t:'14:30',m:870,h:'Set in the new plant',d:'The 30-ton gantry lifts it off the trailer and sets it on the new pad.',chip:'Setting'},
+ {t:'16:00',m:960,h:'Leveled and anchored',d:'Leveled to 0.0005 in/ft, anchors torqued. Ready for power tomorrow.',chip:'Complete'}
+];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+const cl=v=>Math.min(1,Math.max(0,v)),sm=v=>{v=cl(v);return v*v*(3-2*v)},L=(a,b,t)=>a+(b-a)*t,seg=(u,a,b)=>sm((u-a)/(b-a));
+// timeline list
+const tl=$('#tl');STAGES.forEach((s,k)=>{const li=document.createElement('li');li.innerHTML=`<span class="n">${k+1}</span><span><b>${s.h}</b><small>${s.t}</small></span><span class="chip c-q">Queued</span>`;tl.appendChild(li)});
+const lis=[...tl.querySelectorAll('li')];
+// ---------- lift view (world in px; ground y=0) ----------
+const LIFT=`
+<defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#dfe4ec"/><stop offset=".55" stop-color="#ffffff"/><stop offset="1" stop-color="#cfd6e1"/></linearGradient>
+<linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb23e"/><stop offset="1" stop-color="#e38b06"/></linearGradient>
+<linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7f9fc"/><stop offset="1" stop-color="#e9edf3"/></linearGradient></defs>
+<rect x="-200" y="-400" width="2000" height="400" fill="url(#gb)"/>
+<rect x="0" y="-170" width="300" height="170" fill="#e6ebf2"/><rect x="0" y="-178" width="300" height="10" fill="#d3dae5"/>
+<rect x="940" y="-170" width="330" height="170" fill="#e3f1ea"/><rect x="940" y="-178" width="330" height="10" fill="#c9e4d6"/>
+<text x="14" y="-150" font-family="Manrope" font-weight="800" font-size="15" fill="#98a2b3">LOWELL PLANT</text>
+<text x="956" y="-150" font-family="Manrope" font-weight="800" font-size="15" fill="#7fb59a">HAVERHILL PLANT</text>
+<rect x="1000" y="0" width="150" height="10" fill="#c9e4d6"/>
+<rect x="-200" y="0" width="2000" height="80" fill="#dfe4ec"/><rect x="-200" y="0" width="2000" height="3" fill="#c3cad6"/>
+<g fill="#fff">${Array.from({length:30},(_,k)=>`<rect x="${560+k*26}" y="22" width="14" height="4" rx="2"/>`).join('')}</g>
+<g id="crane">
+ <rect x="350" y="-34" width="150" height="22" rx="6" fill="#667085"/><rect x="470" y="-58" width="34" height="30" rx="6" fill="#475467"/><rect x="476" y="-52" width="20" height="13" rx="3" fill="#a9c1ff"/>
+ <circle cx="372" cy="-10" r="11" fill="#1d2939"/><circle cx="398" cy="-10" r="11" fill="#1d2939"/><circle cx="452" cy="-10" r="11" fill="#1d2939"/><circle cx="478" cy="-10" r="11" fill="#1d2939"/>
+ <rect x="352" y="-30" width="6" height="30" fill="#e38b06"/><rect x="346" y="-3" width="18" height="4" rx="2" fill="#475467"/><rect x="494" y="-30" width="6" height="30" fill="#e38b06"/><rect x="488" y="-3" width="18" height="4" rx="2" fill="#475467"/>
+ <rect x="384" y="-58" width="66" height="26" rx="5" fill="url(#gc)"/><rect x="372" y="-62" width="20" height="30" rx="4" fill="#b86f05"/>
+ <path id="boom" fill="url(#gc)"/>
+ <line id="cab" stroke="#475467" stroke-width="2"/>
+ <rect id="hook" width="14" height="16" rx="3" fill="#e38b06"/>
+</g>
+<g id="truck"><g transform="translate(80 0)">
+ <rect x="440" y="-30" width="160" height="10" rx="3" fill="#344054"/>
+ <path d="M600 -30 L618 -46 H660 V-38 H624 L610 -20 H600Z" fill="#344054"/>
+ <circle cx="458" cy="-10" r="10" fill="#1d2939"/><circle cx="482" cy="-10" r="10" fill="#1d2939"/><circle cx="506" cy="-10" r="10" fill="#1d2939"/>
+ <rect x="620" y="-30" width="96" height="12" rx="3" fill="#1d2939"/>
+ <path d="M676 -30 V-74 H706 Q718 -74 720 -62 L722 -30Z" fill="#2f5bff"/><rect x="684" y="-68" width="24" height="16" rx="3" fill="#a9c1ff"/>
+ <circle cx="640" cy="-10" r="10" fill="#1d2939"/><circle cx="662" cy="-10" r="10" fill="#1d2939"/><circle cx="706" cy="-10" r="10" fill="#1d2939"/>
+</g></g>
+<g id="gantry"><rect x="-10" y="-118" width="8" height="118" rx="2" fill="#7a5af8"/><rect x="112" y="-118" width="8" height="118" rx="2" fill="#7a5af8"/><rect x="-18" y="-126" width="146" height="12" rx="3" fill="#7a5af8"/></g>
+<path id="sling" stroke="#e38b06" stroke-width="2.5" fill="none"/>
+<g id="mach">
+ <rect x="-3" y="-10" width="106" height="10" rx="2" fill="#344054"/>
+ <rect x="0" y="-92" width="100" height="82" rx="6" fill="url(#gm)"/>
+ <rect x="0" y="-92" width="100" height="12" rx="4" fill="#344054"/>
+ <rect x="0" y="-26" width="100" height="4" fill="#2f5bff"/>
+ <rect x="10" y="-72" width="36" height="36" rx="3" fill="#1d2939"/><rect x="54" y="-72" width="36" height="36" rx="3" fill="#1d2939"/>
+ <rect x="100" y="-76" width="5" height="16" fill="#344054"/><rect x="103" y="-64" width="16" height="24" rx="3" fill="#344054"/><rect x="106" y="-60" width="10" height="8" rx="1" fill="#a9c1ff"/>
+ <g id="sk"><rect x="6" y="0" width="22" height="6" rx="3" fill="#e38b06"/><rect x="72" y="0" width="22" height="6" rx="3" fill="#e38b06"/></g>
+</g>
+<g id="lvl"><rect x="28" y="-120" width="44" height="14" rx="7" fill="#e3f6ee" stroke="#12a46a" stroke-width="2"/><circle cx="50" cy="-113" r="4" fill="#12a46a"/><rect x="8" y="0" width="5" height="12" fill="#12a46a"/><rect x="87" y="0" width="5" height="12" fill="#12a46a"/></g>
+`;
+function makeLift(svg){svg.innerHTML=LIFT;const q=id=>svg.querySelector('#'+id);return{svg,mach:q('mach'),sk:q('sk'),truck:q('truck'),g:q('gantry'),boom:q('boom'),cab:q('cab'),hook:q('hook'),sl:q('sling'),lvl:q('lvl')}}
+const PV={x:420,y:-62},BL=230;
+function st(p){
+  const s={mx:120,my:0,tx:0,gx:1180,rig:false,gs:false,hx:265,hy:-120};
+  if(p<1)s.my=-5*seg(p,.3,.8);
+  else if(p<2){s.mx=L(120,215,sm(p-1));s.my=-5}
+  else if(p<3){const u=p-2;s.mx=215;s.my=-5;s.rig=u>.12&&u<.93;
+    if(u<.15)s.hy=L(-120,-5-92-40,seg(u,0,.12));
+    if(u>=.2)s.my=L(-5,-172,seg(u,.2,.42));
+    if(u>=.42)s.mx=L(215,545,seg(u,.42,.78));
+    if(u>=.78)s.my=L(-172,-30,seg(u,.78,.95));}
+  else if(p<4){s.tx=480*sm(p-3);s.mx=545+s.tx;s.my=-30}
+  else if(p<5){const u=p-4;s.tx=480;s.mx=1025;s.my=-30;s.gx=L(1180,1020,seg(u,0,.25));s.gs=u>.2&&u<.97;
+    if(u>=.25)s.my=L(-30,-52,seg(u,.25,.4));
+    if(u>=.42)s.tx=L(480,820,seg(u,.42,.76));
+    if(u>=.78)s.my=L(-52,0,seg(u,.78,.95));}
+  else{s.tx=820;s.mx=1025;s.my=0;s.gx=L(1020,1150,seg(p-5,0,.45))}
+  if(p>=2&&p<3&&s.rig){s.hx=s.mx+50;s.hy=s.my-92-40}
+  else if(p>=2.15){s.hx=595;s.hy=-140}
+  return s;
+}
+const CK=[280,180,270,400,'m',1080,1075],CW=[660,420,560,660,640,520,380];
+function camL(p,s,aspect){const i=Math.min(5,Math.floor(p)),f=sm(p-i);const mc=s.mx+50;
+  const a=CK[i]==='m'?mc:CK[i],b=CK[i+1]==='m'?mc:CK[i+1];let cx=i===3?L(400+(mc-595),mc,f):L(a,b,f);let w=L(CW[i],CW[i+1],f)*(innerWidth<=760?.74:1);
+  if(innerWidth<=760)cx=L(cx,mc,.55);
+  let h=w*aspect;const minH=innerWidth<=760?150:(i===2||i===3?300:250);if(h<minH){h=minH;w=h/aspect}
+  return[cx-w/2,-h*.82,w,h]}
+function drawL(S,p,vb){const s=st(p);S.svg.setAttribute('viewBox',vb.join(' '));
+  S.mach.setAttribute('transform',`translate(${s.mx} ${s.my})`);S.sk.style.display=(p>.35&&p<2.3)?'':'none';
+  S.truck.setAttribute('transform',`translate(${s.tx} 0)`);S.g.setAttribute('transform',`translate(${s.gx} 0)`);S.g.style.display=p>3.6?'':'none';
+  const dx=s.hx-PV.x,dy=-Math.sqrt(Math.max(400,BL*BL-dx*dx)),tx=s.hx,ty=PV.y+dy,an=Math.atan2(ty-PV.y,tx-PV.x),nx=-Math.sin(an),ny=Math.cos(an);
+  S.boom.setAttribute('d',`M${PV.x+nx*9} ${PV.y+ny*9}L${tx+nx*4} ${ty+ny*4}L${tx-nx*4} ${ty-ny*4}L${PV.x-nx*9} ${PV.y-ny*9}Z`);
+  S.cab.setAttribute('x1',tx);S.cab.setAttribute('y1',ty);S.cab.setAttribute('x2',tx);S.cab.setAttribute('y2',s.hy);
+  S.hook.setAttribute('x',tx-7);S.hook.setAttribute('y',s.hy);
+  const top=s.my-92;
+  S.sl.setAttribute('d',s.rig?`M${tx} ${s.hy+16}L${s.mx+4} ${top}M${tx} ${s.hy+16}L${s.mx+96} ${top}`:s.gs?`M${s.gx+55} -114L${s.mx+4} ${top}M${s.gx+55} -114L${s.mx+96} ${top}`:'');
+  S.lvl.setAttribute('transform',`translate(${s.mx} 0)`);S.lvl.style.display=p>=5.5?'':'none';
+  return s}
+// map
+const route=$('#routeDone'),RL=route.getTotalLength();route.style.strokeDasharray=RL+' '+RL;
+const pin=$('#truckpin');
+let cur=-1;const LS=makeLift($('#lift'));
+function render(p){
+  const r=LS.svg.getBoundingClientRect();drawL(LS,p,camL(p,st(p),(r.height||300)/(r.width||600)));
+  const i=Math.min(5,Math.floor(p)),f=p-i,a=STAGES[i],b=STAGES[Math.min(6,i+1)];
+  const min=p>=6?960:a.m+(b.m-a.m)*cl((f-.15)/.7),hh=Math.floor(min/60),mm=Math.floor(min%60);
+  $('#clk').innerHTML=String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0')+'<span>hrs</span>';
+  $('#prog').style.width=(p/6*100)+'%';
+  const k=p<3?0:p<4?sm(p-3):1;route.style.strokeDashoffset=RL*(1-k);const pt=route.getPointAtLength(RL*k);pin.setAttribute('transform',`translate(${pt.x} ${pt.y})`);
+  $('#mapchip').textContent=(21*k).toFixed(1)+' of 21 mi';$('#mapchip').className='chip '+(k>=1?'c-ok':k>0?'c-live':'c-q');
+  // gauge
+  const crane=p>2.2&&p<3,gan=p>4.25&&p<4.97,pct=crane?68:gan?63:0;
+  $('#garc').setAttribute('stroke-dasharray',pct+' 100');$('#gv').textContent=(crane||gan)?'38,000 lb':'0 lb';$('#gp').textContent=pct+'% of '+(gan?'gantry':'chart');$('#gl').textContent=gan?'Load · 30 t gantry':'Hook load · 60 t crane';
+  $('#tlbar').style.height=`calc(${Math.min(1,p/6)*100}% - 24px*${Math.min(1,p/6)})`;
+  const si=p>=6?6:(f>.15?i+1:i);
+  if(si!==cur){cur=si;const s=STAGES[si];$('#sh').textContent=s.h;$('#sd').textContent=s.d;$('#stchip').textContent='Step '+(si+1)+' of 7';
+    $('#liftchip').textContent=s.chip;$('#liftchip').className='chip '+(si===6?'c-ok':'c-live');
+    lis.forEach((li,k)=>{const c=li.querySelector('.chip');const done=k<si||(si===6&&k===6),live=k===si&&si<6;li.className=done?'done':live?'live':'';c.className='chip '+(done?'c-ok':live?'c-live':'c-q');c.textContent=done?'Done':live?'Live':'Queued';li.querySelector('.n').textContent=done?'✓':k+1});
+    if(window.gsap&&!reduce&&si>0)gsap.fromTo('.stage',{y:8},{y:0,duration:.35,ease:'power3.out'});}
+  $('#cue').style.visibility=p>.2?'hidden':'visible';$('#cue2').style.visibility=p>.2?'hidden':'visible';
+}
+const ST={p:0};render(0);addEventListener('resize',()=>render(ST.p));
+if(!reduce&&window.gsap){gsap.registerPlugin(ScrollTrigger);gsap.ticker.lagSmoothing(0);
+  gsap.to(ST,{p:6,ease:'none',scrollTrigger:{trigger:'#story',start:'top top',end:()=>'+='+innerHeight*6.5,pin:true,scrub:.6,anticipatePin:1},onUpdate:()=>render(ST.p)});}
+if(reduce){$('#stepsList').innerHTML=STAGES.map((s,k)=>`<li class="card"><svg id="rs${k}"></svg><div class="chip c-ok">${s.t}</div><h3 style="font:800 18px Manrope;margin-top:6px">${s.h}</h3><p style="color:#475467">${s.d}</p></li>`).join('');
+  STAGES.forEach((s,k)=>{const T=makeLift(document.getElementById('rs'+k));const r=T.svg.getBoundingClientRect();drawL(T,k,camL(k,st(k),r.height/r.width||.5))});}
+// plan tool
+function plan(w,mi,door,floor){let crew,eq,days=1;const notes=[];
+  if(w<=8000){crew=3;eq='Machine skates + 15,000 lb forklift'}else if(w<=20000){crew=4;eq='Machine skates + 30-ton hydraulic gantry'}else if(w<=45000){crew=4;eq='30-ton hydraulic gantry or 60-ton crane'}else if(w<=80000){crew=5;eq='100-ton crane + jack-and-slide';days+=.5}else{crew=6;eq='200-ton crane + hydraulic jacking';days+=1}
+  if(floor==='upper'){crew+=1;days+=1;notes.push('Upper floor: crane pick through a wall opening or freight elevator. Floor load checked first.')}
+  if(door<96)notes.push('Door under 8 ft: the frame may need to come out. Measured on the free site walk.');else notes.push('Door looks clear. Confirmed on a free site walk.');
+  if(mi>150){days+=1;notes.push('Long haul: overnight in our secured yard.')}
+  if(w>40000)notes.push('Over 40,000 lb on the road: oversize permit, we file it.');
+  const truck=mi===0?'None (same building)':w>40000?'Lowboy + permit':w>12000?'Step-deck trailer':'Liftgate truck';
+  return{crew:crew+'-person crew',eq,notes,truck,days:'est. '+(days===1?'1 day':days+' days')}}
+const W=$('#w'),MI=$('#mi'),DW=$('#dw');let floor='ground';
+function fill(e){e.style.setProperty('--v',((e.value-e.min)/(e.max-e.min)*100)+'%')}
+function upd(){const w=+W.value,mi=+MI.value,dw=+DW.value,r=plan(w,mi,dw,floor);[W,MI,DW].forEach(fill);
+  $('#wo').textContent=w.toLocaleString()+' lb';$('#mio').textContent=mi+' mi';$('#dwo').textContent=Math.floor(dw/12)+' ft '+dw%12+' in';
+  $('#pc').textContent=r.crew;$('#pe').textContent=r.eq;$('#pt').textContent=r.truck;$('#pd').textContent=r.days;$('#pn').innerHTML=r.notes.map(n=>'<li>'+n+'</li>').join('');
+  $('#ntTxt').textContent=`${w.toLocaleString()} lb · ${mi} mi · ${floor} floor · ${Math.floor(dw/12)} ft door`;
+  $('#ntChips').innerHTML=`<span>${r.crew}</span><span>${r.eq.split(' or ')[0].replace('Machine skates + ','Skates + ')}</span><span>${r.days}</span>`}
+[W,MI,DW].forEach(e=>e.addEventListener('input',upd));
+document.querySelectorAll('#fl button').forEach(b=>b.addEventListener('click',()=>{floor=b.dataset.v;document.querySelectorAll('#fl button').forEach(x=>x.setAttribute('aria-pressed',x===b));upd()}));upd();
+$('#sendBtn').addEventListener('click',()=>{const c=$('#nt');c.classList.remove('in');void c.offsetWidth;c.classList.add('in');$('#sendBtn').textContent='Sent ✓'});
+</script>
+</body>
+</html>

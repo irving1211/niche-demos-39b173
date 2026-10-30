@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Kettle Rock Diesel Works · Night Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wdth,wght@75..125,300..800&family=Inter+Tight:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="importmap">{"imports":{"three":"../vendor/three.module.js","three/addons/":"../vendor/addons/"}}</script>
+<script src="../vendor/gsap.min.js"></script>
+<style>
+:root{--bg:#070809;--fg:#f1efe9;--dim:#9a9aa0;--mute:#5d5e64;--acc:#ff6b1a;--acc2:#ffb27d;
+  --disp:'Saira','Arial Narrow',sans-serif;--sans:'Inter Tight',system-ui,sans-serif;--mono:'DM Mono',ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font:400 17px/1.55 var(--sans);overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.x{font-family:var(--disp);font-stretch:125%;text-transform:uppercase}
+/* hero */
+.hero{position:relative;height:100vh;min-height:720px;max-height:1100px;overflow:hidden}
+.stagewrap{position:absolute;inset:0}
+#gl,.poster{position:absolute;inset:0;width:100%;height:100%;display:block}
+.poster{display:none;background:radial-gradient(ellipse 50% 60% at 62% 52%,#2a2622 0%,#121110 55%,#070809 100%)}
+.poster svg{position:absolute;left:36%;top:14%;width:58%;height:72%}
+.shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(7,8,9,.94) 0%,rgba(7,8,9,.78) 24%,rgba(7,8,9,0) 46%),linear-gradient(0deg,rgba(7,8,9,.9) 0%,rgba(7,8,9,0) 22%),linear-gradient(180deg,rgba(7,8,9,.7) 0%,rgba(7,8,9,0) 14%)}
+header{position:absolute;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:22px 40px}
+.brand{display:flex;align-items:baseline;gap:12px}
+.brand b{font:700 22px/1 var(--disp);font-stretch:125%;letter-spacing:.06em;text-transform:uppercase}
+.brand span{font:500 12.5px var(--mono);color:var(--dim);letter-spacing:.14em;text-transform:uppercase}
+.cta{display:flex;align-items:center;gap:22px}
+.q{font:600 15px var(--sans);color:var(--fg);letter-spacing:.02em;min-height:48px;display:inline-flex;align-items:center;box-shadow:inset 0 -1px 0 rgba(241,239,233,.4)}
+.call{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 22px;background:var(--acc);color:#140a04;font:700 16px var(--sans);letter-spacing:.01em;border-radius:2px}
+.call svg{width:18px;height:18px}.call .m{display:none}
+.panel{position:absolute;z-index:4;left:40px;top:104px;bottom:34px;width:410px;display:flex;flex-direction:column}
+.eyebrow{font:500 13px var(--mono);letter-spacing:.16em;color:var(--acc);text-transform:uppercase}
+.job{font:700 28px/1.04 var(--disp);font-stretch:112%;text-transform:uppercase;margin-top:10px;letter-spacing:.01em}
+.job small{display:block;font:500 15px/1.4 var(--sans);text-transform:none;color:var(--dim);margin-top:8px;letter-spacing:0;font-stretch:100%}
+.list{list-style:none;margin-top:16px}
+.list button{width:100%;display:grid;grid-template-columns:34px 1fr auto;align-items:center;min-height:40px;text-align:left;color:var(--mute);position:relative;padding-left:16px}
+.list button::before{content:"";position:absolute;left:0;top:50%;width:2px;height:0;background:var(--acc);transition:height .35s,top .35s}
+.list .n{font:500 13px var(--mono)}
+.list .nm{font:600 17px var(--sans)}
+.list .t{font:400 13px var(--mono)}
+.list .done{color:#c9c8c3}.list .on{color:var(--fg)}
+.list .on .nm{font-weight:700}.list .on .n,.list .on .t{color:var(--acc)}
+.list .on::before{height:28px;top:6px}
+.det{margin-top:12px;min-height:0;flex:1;overflow:hidden}
+.det p{font-size:16px}
+.det p{font:400 17px/1.5 var(--sans);color:#d6d4ce;max-width:34ch}
+.fnd{list-style:none;margin-top:12px;display:grid;gap:9px}
+.fnd li{display:grid;grid-template-columns:26px 1fr;gap:10px;font:600 16px/1.3 var(--sans)}
+.fnd li i{width:22px;height:22px;border-radius:50%;background:#e4483b;color:#fff;font:500 12px/22px var(--mono);text-align:center;font-style:normal;margin-top:1px}
+.fnd li.ok i{background:#2e7d55}
+.fnd li small{display:block;font:400 14.5px var(--sans);color:var(--dim)}
+.dy{margin-top:10px;width:100%;max-width:380px;display:block}
+.dy .gl{stroke:#26272b;stroke-width:1}.dy .hp{fill:none;stroke:var(--acc);stroke-width:2.6}.dy .tq{fill:none;stroke:#e9e6df;stroke-width:1.8;stroke-dasharray:5 5}
+.dy text{font:400 11px var(--mono);fill:var(--dim)}.dy .lab{font-weight:500;fill:var(--fg);font-size:12px}
+.ctl{display:flex;gap:8px;align-items:center;margin-top:14px}
+.ctl button{min-width:50px;min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:rgba(241,239,233,.08);border-radius:2px;font:600 15px var(--sans)}
+.ctl .play{padding:0 18px;background:rgba(241,239,233,.14)}
+.ctl svg{width:15px;height:15px;fill:currentColor}
+.textme{min-height:50px;padding:0 18px;display:inline-flex;align-items:center;gap:10px;background:var(--fg);color:#0b0b0c;font:700 15px var(--sans);border-radius:2px;margin-top:10px;align-self:flex-start}
+.textme.set{background:rgba(241,239,233,.14);color:var(--fg)}
+.textme svg{width:17px;height:17px}
+.ncard{display:none;grid-template-columns:42px 1fr;gap:12px;margin-top:12px;padding:14px 16px;background:#16171a;border-radius:6px;max-width:380px;box-shadow:0 18px 40px -16px #000}
+.ncard.on{display:grid;animation:pop .45s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes pop{0%{transform:scale(.86)}100%{transform:scale(1)}}
+.ncard i{width:42px;height:42px;border-radius:4px;background:var(--acc);color:#140a04;font:800 14px/42px var(--disp);text-align:center;font-style:normal}
+.ncard b{font:700 14.5px var(--sans)}.ncard time{float:right;font:400 12px var(--mono);color:var(--dim)}.ncard p{font-size:15px;line-height:1.4;color:#d6d4ce}
+.title{position:absolute;z-index:3;right:40px;bottom:30px;text-align:right;pointer-events:none}
+.title .k{font:500 13px var(--mono);letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+.title h2{font:800 clamp(56px,6.4vw,104px)/.9 var(--disp);font-stretch:125%;text-transform:uppercase;letter-spacing:-.01em;margin-top:8px}
+.title h2 em{font-style:normal;color:var(--acc)}
+.cam{position:absolute;z-index:3;right:40px;top:96px;font:400 13px var(--mono);color:#cfcdc7;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.cam i{width:9px;height:9px;border-radius:50%;background:#e4483b;animation:blink 1.4s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.stamp{position:absolute;z-index:3;right:7%;top:20%;width:230px;display:none;transform:rotate(-10deg);pointer-events:none}
+.stamp.on{display:block}.stamp.land{animation:land .55s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes land{0%{transform:rotate(-20deg) scale(1.9)}100%{transform:rotate(-10deg) scale(1)}}
+.seal{position:absolute;z-index:6;left:50%;transform:translateX(-50%);top:26px;display:flex;align-items:center;gap:10px;font:500 12.5px var(--mono);color:var(--dim);letter-spacing:.1em;text-transform:uppercase}
+.seal svg{width:40px;height:40px}
+.segs{display:none}
+/* below */
+.below{max-width:1240px;margin:0 auto;padding:120px 40px 40px}
+.h{font:800 clamp(40px,4.6vw,68px)/.98 var(--disp);font-stretch:125%;text-transform:uppercase;letter-spacing:-.01em}
+.h em{font-style:normal;color:var(--acc)}
+.lbl{font:500 13px var(--mono);letter-spacing:.16em;color:var(--acc);text-transform:uppercase;display:block;margin-bottom:16px}
+.wall{margin-top:34px;display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.bay{position:relative;min-height:250px;padding:18px 16px 16px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(180deg,#141518 0%,#0c0d0f 100%);border-radius:3px;overflow:hidden}
+.bay::after{content:"";position:absolute;left:0;right:0;top:0;height:46%;background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 2px,transparent 2px 13px);pointer-events:none}
+.bay .bn{font:800 40px/1 var(--disp);font-stretch:125%;color:#2c2d31;position:relative}
+.bay .u{font:600 17px/1.25 var(--sans);position:relative}
+.bay .c{font:400 12.5px var(--mono);color:var(--dim);letter-spacing:.06em}
+.bay .s{font:600 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--acc2);margin-top:10px}
+.bay .m{height:3px;background:#26272b;margin-top:8px}.bay .m i{display:block;height:100%;background:var(--acc)}
+.bay.mine{background:linear-gradient(180deg,#2a1608 0%,#120b06 100%)}.bay.mine .bn{color:var(--acc)}
+.bay.wait .s{color:#e4483b}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:130px;align-items:start}
+.svc{list-style:none;margin-top:26px}
+.svc li{display:grid;grid-template-columns:44px 1fr;gap:6px 14px;padding:18px 0;box-shadow:0 -1px 0 #1e1f23}
+.svc li span{font:500 13px var(--mono);color:var(--acc);padding-top:4px}
+.svc li b{font:700 21px/1.2 var(--sans)}.svc li p{grid-column:2;color:var(--dim);font-size:16.5px}
+.road{position:sticky;top:40px;padding:34px;background:radial-gradient(ellipse at 80% 0%,#3a1a07 0%,#140b06 60%);border-radius:4px}
+.road p{color:#d6d4ce;margin-top:14px;font-size:18px}
+.road .num{display:block;margin:24px 0 18px;font:800 46px/1 var(--disp);font-stretch:112%;color:var(--fg)}
+.road ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px;font:400 14px var(--mono);color:var(--dim)}
+.road ul b{display:block;color:var(--fg);font:600 20px var(--sans)}
+.wide{margin-top:120px;display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.wide p.t{font:600 22px/1.6 var(--sans);color:#d6d4ce;margin-top:6px}
+.wide p.t small{display:block;font:400 14px var(--mono);color:var(--dim);margin-top:12px;letter-spacing:.06em}
+.rev{margin-top:120px;text-align:center}
+.rev blockquote{font:700 clamp(28px,3.4vw,46px)/1.2 var(--disp);font-stretch:100%;max-width:26ch;margin:0 auto}
+.rev cite{display:block;margin-top:16px;font:400 13px var(--mono);font-style:normal;color:var(--dim);letter-spacing:.1em;text-transform:uppercase}
+.last{margin-top:130px;padding:60px 0 20px;text-align:center}
+.last a.num{display:block;font:800 clamp(52px,8vw,124px)/1 var(--disp);font-stretch:125%;margin:16px 0 26px}
+footer{max-width:1240px;margin:0 auto;padding:26px 40px 44px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font:400 13px var(--mono);color:var(--dim);box-shadow:0 -1px 0 #1e1f23}
+/* phone */
+@media (max-width:900px){
+  .hero{height:auto;min-height:0;max-height:none}
+  header{padding:12px 16px}.brand span,.q{display:none}.brand b{font-size:18px}
+  .call{min-height:46px;padding:0 14px;font-size:15px}.call .l{display:none}.call .m{display:inline}
+  .stagewrap{position:relative;height:47vh;min-height:330px;max-height:420px}
+  .shade{background:linear-gradient(0deg,rgba(7,8,9,1) 0%,rgba(7,8,9,0) 30%),linear-gradient(180deg,rgba(7,8,9,.8) 0%,rgba(7,8,9,0) 22%)}
+  .poster svg{left:3%;top:16%;width:94%;height:76%}
+  .title{display:none}
+  .cam{right:16px;top:auto;bottom:14px;font-size:11px}
+  .stamp{width:136px;right:4%;top:18%}
+  .seal{display:none}
+  .panel{position:relative;left:auto;top:auto;bottom:auto;width:auto;padding:4px 16px 22px;margin-top:0}
+  .eyebrow{order:1}.stg{order:2}.segs{order:3}.ctl{order:4}.textme{order:5}.ncard{order:6}.det{order:7;margin-top:18px}
+  .eyebrow{font-size:12px}.job{display:none}.list{display:none}
+  .segs{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
+  .segs button{height:44px;position:relative}.segs button::before{content:"";position:absolute;left:0;right:0;top:20px;height:4px;background:#2a2b30}
+  .segs .done::before{background:#8d8b86}.segs .on::before{background:var(--acc)}
+  .stg{display:block!important}
+  .det{margin-top:6px}.det p{font-size:16px}
+  .ctl .play{flex:1}.ctl{margin-top:8px}.textme{align-self:stretch;justify-content:center}
+  .below{padding:70px 16px 30px}
+  .wall{grid-template-columns:1fr 1fr;gap:10px}.bay{min-height:190px}
+  .split,.wide{grid-template-columns:1fr;gap:40px;margin-top:80px}
+  .road{position:static;padding:24px}
+  .rev,.last{margin-top:80px}
+}
+.stg{display:none;margin-top:6px}
+.stg h2{font:800 34px/1 var(--disp);font-stretch:118%;text-transform:uppercase}
+.stg time{display:block;font:400 13.5px var(--mono);color:var(--acc);margin-top:6px;letter-spacing:.06em}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<section class="hero" id="hero" aria-label="Engine tracker">
+  <div class="stagewrap" id="stagewrap">
+    <canvas id="gl" aria-label="3D view of the engine at this stage"></canvas>
+    <div class="poster" id="poster"></div>
+    <div class="shade"></div>
+    <div class="cam"><i></i><span id="cam">Bay 4 · Cam 2</span></div>
+    <svg class="stamp" id="stamp" viewBox="0 0 230 120" aria-label="Passed dyno"><rect x="5" y="5" width="220" height="110" fill="none" stroke="#ff6b1a" stroke-width="4"/><rect x="13" y="13" width="204" height="94" fill="none" stroke="#ff6b1a" stroke-width="1.5"/><text x="115" y="66" text-anchor="middle" font-family="Saira" font-stretch="125%" font-weight="800" font-size="40" fill="#ff6b1a">PASSED</text><text x="115" y="93" text-anchor="middle" font-family="DM Mono" font-size="15" fill="#ff6b1a" letter-spacing="5">DYNO · 287 HP</text></svg>
+    <div class="title"><p class="k" id="tK">Stage 06 of 07</p><h2 id="tH">Dyno<em>.</em></h2></div>
+    <div class="seal"><svg viewBox="0 0 40 40" fill="none" stroke="#9a9aa0" stroke-width="1.2"><circle cx="20" cy="20" r="18"/><path d="M20 9l3 6.4 7 .9-5.1 4.8 1.3 6.9L20 24.6l-6.2 3.4 1.3-6.9-5.1-4.8 7-.9z"/></svg>Exclusive in Essex County, MA</div>
+  </div>
+  <header>
+    <a class="brand" href="#"><b>Kettle Rock</b><span>Diesel Works</span></a>
+    <div class="cta"><a class="q" href="#quote">Get a quote</a><a class="call" href="tel:+19785550129"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span class="l">(978) 555-0129</span><span class="m">Call</span></a></div>
+  </header>
+  <div class="panel">
+    <p class="eyebrow">Engine tracker · KR-0614</p>
+    <h1 class="job">Excavator engine, 6-cyl<small>6.7 L inline six · 31-ton excavator · your private link</small></h1>
+    <div class="stg" id="stg"><h2 id="sH"></h2><time id="sT"></time></div>
+    <div class="segs" id="segs"></div>
+    <ol class="list" id="list"></ol>
+    <div class="det" aria-live="polite"><p id="note"></p><div id="extra"></div></div>
+    <div class="ctl">
+      <button id="prev" aria-label="Previous stage"><svg viewBox="0 0 16 16"><path d="M11 2 4 8l7 6z"/></svg></button>
+      <button class="play" id="play"><svg viewBox="0 0 16 16" id="pIco"><path d="M4 2l10 6-10 6z"/></svg><span id="pLbl">Play the rebuild</span></button>
+      <button id="next" aria-label="Next stage"><svg viewBox="0 0 16 16"><path d="M5 2l7 6-7 6z"/></svg></button>
+    </div>
+    <button class="textme" id="textMe"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span>Text me when it's ready</span></button>
+    <div class="ncard" id="ncard" role="status"><i>KR</i><div><time>now</time><b>Kettle Rock Diesel</b><p>KR-0614 is ready for pickup. Passed dyno at 287 hp. Gate's open 6 AM to 6 PM.</p></div></div>
+  </div>
+</section>
+
+<main class="below" id="quote">
+  <span class="lbl">The shop wall · live</span>
+  <h2 class="h">Five bays and a road truck.<br><em>All on one board.</em></h2>
+  <div class="wall" id="wall"></div>
+  <div class="split">
+    <div><span class="lbl">What we do</span><h2 class="h">Built right.<br>Run on the dyno.</h2><ul class="svc" id="svc"></ul></div>
+    <aside class="road"><span class="lbl">24 h road service</span><h2 class="h">Down at 2 AM?</h2><p>A mechanic answers, and the service truck rolls with the parts most likely to fix it. Job site, shoulder or yard.</p><a class="num" href="tel:+19785550129">(978) 555-0129</a><a class="call" href="tel:+19785550129">Call the road line</a>
+      <ul><li><b>24 h</b>phone answered</li><li><b>&lt; 90 min</b>typical arrival</li><li><b>2</b>stocked trucks</li><li><b>Essex</b>county exclusive</li></ul></aside>
+  </div>
+  <div class="wide">
+    <div><span class="lbl">Engines &amp; equipment we work on</span><p class="t" id="brands"></p></div>
+    <div><span class="lbl">Service area</span><p class="t"><span id="towns"></span><small>Exclusive in Essex County, MA · one diesel shop per county</small></p></div>
+  </div>
+  <div class="rev"><span class="lbl">Sample review</span><blockquote>"They texted me a picture of my scored liner before I even asked what was wrong."</blockquote><cite>T. B. · excavation contractor · sample review</cite></div>
+  <div class="last"><span class="lbl">Get a quote</span><a class="num" href="tel:+19785550129">(978) 555-0129</a><a class="call" href="tel:+19785550129">Call the shop</a></div>
+</main>
+<footer><span>Kettle Rock Diesel Works · Merrimack Valley, MA</span><span>Concept demo · fictional business · IC Business Systems</span></footer>
+
+<script>
+/* ===== Kettle Rock shared: job data + side-elevation engine drawing (code-drawn SVG) ===== */
+const KR = (() => {
+  const JOB = { code: 'KR-0614', unit: 'Excavator engine · 6-cyl', detail: '6.7 L inline six · 31-ton excavator · 14,200 hrs', eta: 'Fri Oct 31' };
+  const STAGES = [
+    { k: 'received', name: 'Received', short: 'In', time: 'Mon Oct 20 · 7:12 AM', note: 'Came in on a lowboy. Running rough, blowing oil out the breather.' },
+    { k: 'teardown', name: 'Teardown', short: 'Apart', time: 'Tue Oct 21 · 2:40 PM', note: 'Head, pan and all six pistons out. Every part tagged and bagged.' },
+    { k: 'inspection', name: 'Inspection', short: 'Checked', time: 'Wed Oct 22 · 11:05 AM', note: 'Hot-tanked, measured, every finding logged with a photo.',
+      findings: [
+        { t: 'Cyl 4 liner scored', d: 'Replacing all six liners', s: 'bad' },
+        { t: 'Main bearings worn', d: 'Down to the copper. Crank to grind .010', s: 'bad' },
+        { t: 'Head checked flat', d: 'Within spec. Reusing it', s: 'ok' }] },
+    { k: 'machining', name: 'Machining', short: 'Machined', time: 'Fri Oct 24 · 9:30 AM', note: 'Block decked, liner bores cut, crank ground .010 under.' },
+    { k: 'assembly', name: 'Assembly', short: 'Built', time: 'Tue Oct 28 · 3:15 PM', note: 'New liners, pistons, rings and bearings. Every bolt torqued and marked.' },
+    { k: 'dyno', name: 'Dyno test', short: 'Dyno', time: 'Thu Oct 30 · 10:20 AM', note: 'Run in under load for 2 hours. No leaks, no blow-by.' },
+    { k: 'ready', name: 'Ready for pickup', short: 'Ready', time: 'Fri Oct 31 · 7:00 AM', note: 'Painted, strapped to the pallet. Gate open 6 AM to 6 PM.' }];
+  const BAYS = [
+    { b: 'Bay 1', u: 'Dozer engine · 6-cyl', s: 'Machining', p: 0.52, c: 'KR-0609' },
+    { b: 'Bay 2', u: 'Dump truck · 15 L', s: 'Assembly', p: 0.70, c: 'KR-0611' },
+    { b: 'Bay 3', u: 'Wheel loader · hydraulics', s: 'Testing', p: 0.86, c: 'KR-0612' },
+    { b: 'Bay 4', u: 'Excavator engine · 6-cyl', s: 'Dyno', p: 0.92, c: 'KR-0614', mine: 1 },
+    { b: 'Bay 5', u: 'Skid steer · final drive', s: 'Waiting on parts', p: 0.34, c: 'KR-0615', wait: 1 },
+    { b: 'Road', u: 'Tri-axle · Rt 495, Andover', s: 'Road call', p: 0.15, c: 'RC-2231', road: 1 }];
+  const SERVICES = [
+    ['In-frame rebuilds', 'Liners, pistons, bearings done with the engine still in the machine. Less downtime, less cost.'],
+    ['Out-of-frame rebuilds', 'Engine pulled, torn down to the bare block, machined, built and run on our dyno.'],
+    ['Heavy equipment repair', 'Excavators, dozers, loaders, skid steers. Undercarriage, final drives, electrical.'],
+    ['Hydraulics', 'Cylinders resealed, pumps and valves rebuilt, hoses made while you wait.'],
+    ['Fleet service', 'PM schedules for dump trucks and tri-axles, DOT inspections, one bill a month.'],
+    ['24 h road calls', 'Service truck rolls day or night. Job site, highway shoulder or your yard.']];
+  const BRANDS = 'Caterpillar · Cummins · Detroit Diesel · John Deere · Komatsu · Volvo · Mack · International · Kenworth · Peterbilt · Case · Kubota · Perkins · Isuzu · Hitachi · Doosan';
+  const TOWNS = 'Lawrence · Methuen · Haverhill · Andover · North Andover · Lowell · Dracut · Tewksbury · Amesbury · Newburyport · Salem NH · Windham NH';
+  const PHONE = '(978) 555-0129', TEL = 'tel:+19785550129';
+
+  // ---- dyno curves: hp peaks 287 @ 2200 (governed after), torque derived ----
+  const DYNO = [];
+  for (let r = 1000; r <= 2400; r += 50) {
+    const hp = r <= 2200 ? 287 - 0.000105 * (2200 - r) ** 2 : 287 - 0.0012 * (r - 2200) ** 2;
+    DYNO.push({ r, hp, tq: hp * 5252 / r });
+  }
+  const PEAK_TQ = DYNO.reduce((a, b) => b.tq > a.tq ? b : a);
+  function dynoPaths(x0, y0, w, h, hpMax = 320, tqMax = 900) {
+    const X = r => x0 + (r - 1000) / 1400 * w;
+    const hpP = DYNO.map((d, i) => (i ? 'L' : 'M') + X(d.r).toFixed(1) + ',' + (y0 + h - d.hp / hpMax * h).toFixed(1)).join('');
+    const tqP = DYNO.map((d, i) => (i ? 'L' : 'M') + X(d.r).toFixed(1) + ',' + (y0 + h - d.tq / tqMax * h).toFixed(1)).join('');
+    return { hpP, tqP, X, peakHp: { x: X(2200), y: y0 + h - 287 / hpMax * h }, peakTq: { x: X(PEAK_TQ.r), y: y0 + h - PEAK_TQ.tq / tqMax * h, v: Math.round(PEAK_TQ.tq), r: PEAK_TQ.r } };
+  }
+
+  // ---- engine drawing ----
+  const CX = [255, 330, 405, 480, 555, 630];
+  const JX = [217.5, 292.5, 367.5, 442.5, 517.5, 592.5, 667.5];
+  const r = (x, y, w, h, rx, c, ex = '') => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" class="${c}" ${ex}/>`;
+  const ci = (x, y, rr, c) => `<circle cx="${x}" cy="${y}" r="${rr}" class="${c}"/>`;
+
+  function piston(i) {
+    const x = CX[i];
+    return `<g data-p="pst${i}">` +
+      `<path class="f-st-d" d="M${x - 8},26 L${x - 6},96 L${x + 6},96 L${x + 8},26Z"/>` +
+      ci(x, 104, 15, 'f-st-d') + ci(x, 104, 7, 'f-hole') +
+      r(x - 25, 0, 50, 36, 4, 'f-st') + r(x - 25, 0, 50, 5, 2, 'f-st-l') +
+      r(x - 25, 9, 50, 2.5, 0, 'f-hole') + r(x - 25, 14, 50, 2.5, 0, 'f-hole') + r(x - 25, 19, 50, 2.5, 0, 'f-hole') +
+      ci(x, 28, 5, 'f-hole') + `</g>`;
+  }
+  function crank() {
+    let s = `<g data-p="crank">` + r(195, -26, 12, 52, 3, 'f-st-d') + r(205, -7, 490, 14, 4, 'f-st') + r(692, -6, 34, 12, 3, 'f-st-d');
+    CX.forEach((x, i) => { const up = i % 2 ? -1 : 1; s += `<path class="f-st-d" d="M${x - 26},0 A26,26 0 0 ${up > 0 ? 0 : 1} ${x + 26},0 Z" transform="scale(1,${up > 0 ? 1.15 : 1.15})" transform-origin="${x} 0"/>` + r(x - 8, up > 0 ? -16 : 2, 16, 14, 3, 'f-st-l'); });
+    JX.forEach(x => { s += r(x - 9, -11, 18, 22, 3, 'f-st-l j') ; });
+    return s + `</g>`;
+  }
+  function grime(blobs) { return `<g class="grime">${blobs.map(b => `<path class="f-grime" d="${b}"/>`).join('')}</g>`; }
+
+  function engineSVG(opt = {}) {
+    const id = opt.id || 'eng';
+    let g = '';
+    g += `<defs>
+      <linearGradient id="${id}-gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--blk-l)"/><stop offset=".35" style="stop-color:var(--blk)"/><stop offset="1" style="stop-color:var(--blk-d)"/></linearGradient>
+      <linearGradient id="${id}-gC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--cov-l)"/><stop offset=".5" style="stop-color:var(--cov)"/><stop offset="1" style="stop-color:var(--cov-d)"/></linearGradient>
+      <linearGradient id="${id}-gS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--st-l)"/><stop offset=".45" style="stop-color:var(--st)"/><stop offset="1" style="stop-color:var(--st-d)"/></linearGradient>
+      <radialGradient id="${id}-gP" cx=".35" cy=".3" r=".8"><stop offset="0" style="stop-color:var(--st-l)"/><stop offset=".6" style="stop-color:var(--st)"/><stop offset="1" style="stop-color:var(--st-d)"/></radialGradient>
+      <radialGradient id="${id}-gSh" cx=".5" cy=".5" r=".5"><stop offset="0" style="stop-color:var(--shadow);stop-opacity:.55"/><stop offset="1" style="stop-color:var(--shadow);stop-opacity:0"/></radialGradient>
+    </defs>`;
+    g += `<g data-p="shadow"><ellipse cx="450" cy="532" rx="330" ry="16" class="f-shadow" fill="url(#${id}-gSh)"/></g>`;
+    // pallet
+    g += `<g data-p="pallet">` + r(180, 500, 540, 10, 2, 'f-wood') + r(180, 510, 52, 13, 1, 'f-wood-d') + r(424, 510, 52, 13, 1, 'f-wood-d') + r(668, 510, 52, 13, 1, 'f-wood-d') + r(180, 523, 540, 8, 1, 'f-wood') +
+      [0, 1, 2, 3, 4, 5, 6, 7].map(k => r(200 + k * 66, 503, 1.5, 5, 0, 'f-wood-d')).join('') + `</g>`;
+    // dyno + cart
+    g += `<g data-p="dyno">` + r(18, 470, 160, 60, 4, 'f-dy-d') + r(28, 352, 116, 120, 12, 'f-dy') + r(28, 352, 116, 10, 5, 'f-dy-l') +
+      ci(86, 414, 42, 'f-dy-d') + ci(86, 414, 30, 'f-dy-l') + ci(86, 414, 11, 'f-hole') + r(36, 318, 12, 40, 3, 'f-dy-d') + r(144, 403, 26, 22, 3, 'f-st') + r(150, 398, 8, 32, 2, 'f-st-d') +
+      
+      r(205, 512, 490, 9, 3, 'f-dy-d') + r(228, 452, 14, 62, 2, 'f-dy-d') + r(646, 446, 14, 68, 2, 'f-dy-d') + ci(240, 528, 9, 'f-hole') + ci(660, 528, 9, 'f-hole') + `</g>`;
+    // internals (behind block)
+    g += crank();
+    for (let i = 0; i < 6; i++) g += piston(i);
+    // flywheel housing
+    g += `<g data-p="bell"><path class="f-blk-d" d="M212,262 C186,268 166,300 162,362 C159,420 172,468 212,480 Z"/>` +
+      [300, 340, 380, 420, 456].map((y, k) => ci([186, 172, 168, 171, 186][k], y, 3.5, 'f-st-l')).join('') + `</g>`;
+    // block
+    let blk = `<g data-p="block"><path class="f-blk" d="M210,282 H675 V408 L668,420 H217 L210,408 Z"/>` +
+      `<path class="f-blk-l" d="M214,268 H671 L677,283 H208 Z"/>`;
+    CX.forEach((x, i) => { blk += `<ellipse class="f-hole bore b${i}" cx="${x}" cy="275.5" rx="28" ry="5.5"/><ellipse class="f-bore b${i}" cx="${x}" cy="277" rx="22" ry="3.2"/>`; });
+    for (let i = 0; i < 5; i++) blk += r(290 + 75 * i, 292, 3, 106, 1, 'f-blk-l') + r(293 + 75 * i, 292, 4, 106, 1, 'f-blk-d');
+    blk += r(214, 396, 457, 7, 2, 'f-blk-d') + r(212, 283, 461, 5, 1, 'f-blk-d');
+    CX.forEach(x => { blk += ci(x, 372, 9, 'f-blk-d') + ci(x, 371, 6.5, 'f-st'); });
+    blk += r(300, 316, 220, 34, 9, 'f-blk-l') + r(300, 340, 220, 10, 6, 'f-blk-d');
+    [312, 360, 410, 460, 508].forEach(x => { blk += ci(x, 333, 3, 'f-st-l'); });
+    blk += r(540, 300, 72, 52, 8, 'f-blk-d');
+    blk += grime(['M230,300 C260,290 300,310 290,330 C280,350 240,345 228,330Z', 'M560,360 C600,350 650,365 645,392 C620,405 575,400 560,385Z', 'M400,375 C430,368 470,380 455,398 C430,405 405,398 400,385Z', 'M330,292 l6,40 l4,0 l-3,-40Z', 'M612,300 l5,60 l4,0 l-2,-60Z']);
+    g += blk + `</g>`;
+    // oil pan
+    g += `<g data-p="pan"><path class="f-blk" d="M216,420 H669 L664,446 Q661,452 652,452 H512 L501,486 Q498,492 488,492 H274 Q264,492 260,484 L222,436 Z"/>` +
+      r(214, 419, 458, 7, 2, 'f-blk-l') + ci(380, 489, 5, 'f-st-d') + [250, 320, 400, 480, 560, 640].map(x => ci(x, 422.5, 2.5, 'f-st-l')).join('') +
+      grime(['M300,440 C340,432 380,446 370,470 C340,482 300,470 300,450Z', 'M455,430 l3,58 l5,0 l-2,-58Z', 'M520,440 C560,436 600,442 590,450 C560,454 525,452 520,445Z']) + `</g>`;
+    // front: timing cover + pulleys + belt
+    g += `<g data-p="front"><path class="f-blk-d" d="M675,262 H698 Q712,262 712,276 V440 Q712,454 698,454 H675 Z"/>` +
+      `<path class="belt" d="M722,277 A23,23 0 0 1 744,293 L762,352 A12,12 0 0 1 760,362 L758,404 A40,40 0 1 1 682,412 L699,302 A23,23 0 0 1 722,277 Z"/>` +
+      ci(722, 300, 22, 'f-st') + ci(722, 300, 9, 'f-hole') + ci(752, 358, 10, 'f-st-l') + ci(752, 358, 3.5, 'f-hole') +
+      ci(722, 420, 38, 'f-st') + ci(722, 420, 29, 'f-blk-d') + ci(722, 420, 12, 'f-st-l') + ci(722, 420, 5, 'f-hole') +
+      [0, 1, 2, 3, 4, 5].map(k => ci(722 + 20 * Math.cos(k * 1.047), 420 + 20 * Math.sin(k * 1.047), 2.6, 'f-st-l')).join('') +
+      grime(['M680,300 C700,296 708,330 696,350 C686,352 680,330 680,300Z']) + `</g>`;
+    // head
+    let hd = `<g data-p="head">` + r(205, 230, 475, 50, 3, 'f-blk') + r(205, 230, 475, 6, 2, 'f-blk-l') + r(205, 275, 475, 5, 1, 'f-blk-d');
+    CX.forEach((x, i) => { hd += r(x - 16, 246, 32, 19, 7, 'f-blk-d') + ci(x + 37.5, 239, 3.6, 'f-st-l'); });
+    hd += ci(222, 239, 3.6, 'f-st-l') + `<path class="eye" d="M240,231 V219 A9,9 0 0 1 258,219 V231"/><path class="eye" d="M640,231 V219 A9,9 0 0 1 658,219 V231"/>`;
+    hd += grime(['M420,240 C460,236 500,245 490,262 C460,270 420,262 420,250Z', 'M240,250 l2,26 l4,0 l-1,-26Z']) + `</g>`;
+    g += hd;
+    // fuel rail + lines + pump
+    let ln = `<g data-p="lines">` + r(556, 296, 66, 50, 7, 'f-st-d') + r(556, 296, 66, 8, 4, 'f-st') + `<path class="pipe" d="M600,296 C600,272 612,262 612,244"/>` + r(240, 238, 386, 6, 3, 'f-st');
+    CX.forEach(x => { ln += r(x - 2, 231, 4, 10, 1, 'f-st-d'); });
+    g += ln + `</g>`;
+    // valve cover
+    let cv = `<g data-p="cover">` + r(225, 198, 432, 33, 12, 'f-cov') + r(225, 226, 432, 5, 2, 'f-cov-d');
+    for (let k = 0; k < 11; k++) cv += r(244 + k * 37, 205, 3, 17, 1.5, 'f-cov-l');
+    cv += r(588, 186, 28, 15, 4, 'f-hole') + r(588, 186, 28, 4, 2, 'f-st-d') + grime(['M300,205 C340,200 360,215 345,226 C320,230 300,222 300,212Z']) + `</g>`;
+    g += cv;
+    // exhaust manifold + turbo
+    let ex = `<g data-p="exhaust">` + CX.map(x => r(x - 12, 249, 24, 22, 6, 'f-ir')).join('') + r(212, 262, 410, 17, 8.5, 'f-ir') + r(212, 262, 410, 5, 2.5, 'f-ir-l');
+    ex += r(164, 290, 26, 70, 5, 'f-ir') + ci(178, 266, 31, 'f-ir') + ci(178, 266, 21, 'f-ir-l') + ci(178, 266, 11, 'f-hole') +
+      r(150, 220, 36, 24, 4, 'f-st-d') + ci(150, 216, 26, 'f-st') + ci(150, 216, 17, 'f-st-l') + ci(150, 216, 8, 'f-hole') + r(138, 150, 24, 50, 6, 'f-rub') + r(134, 146, 32, 10, 3, 'f-st-d');
+    g += ex + grime(['M540,264 C570,260 600,268 590,278 C565,282 545,278 540,270Z']) + `</g>`;
+    // boring bar tool
+    g += `<g data-p="tool">` + r(300, 6, 300, 56, 8, 'f-mach') + r(300, 6, 300, 9, 4, 'f-mach-l') + r(458, 62, 44, 54, 6, 'f-mach-d') + r(472, 116, 16, 156, 3, 'f-st-l') + r(468, 262, 24, 9, 2, 'f-st-d') +
+      `<path class="chip" d="M438,268 q6,-8 12,0 M512,266 q5,-7 10,1 M446,262 q-6,-6 0,-10 M520,270 q8,-4 4,-10"/>` + `</g>`;
+    // inspection marks
+    g += `<g data-p="marks"><ellipse class="mark" cx="480" cy="276" rx="44" ry="17"/><path class="mark-l" d="M512,262 L548,228"/>` + ci(560, 218, 15, 'f-mark') + `<text class="t-mark" x="560" y="224">1</text>` +
+      `<ellipse class="mark" cx="480" cy="490" rx="62" ry="36"/><path class="mark-l" d="M536,474 L580,452"/>` + ci(592, 446, 15, 'f-mark') + `<text class="t-mark" x="592" y="452">2</text></g>`;
+    // tag
+    g += `<g data-p="tag"><path class="string" d="M602,187 C620,150 662,146 700,160"/><g transform="rotate(7 740 176)">` + r(692, 152, 112, 50, 5, 'f-tag') + ci(704, 177, 4, 'f-hole') +
+      `<text class="t-tag t-job" x="758" y="175">${JOB.code}</text><text class="t-tag2 t-job" x="758" y="191">6-CYL · BAY 4</text><text class="t-tag t-rdy" x="758" y="175">READY</text><text class="t-tag2 t-rdy" x="758" y="191">${JOB.code}</text></g></g>`;
+    // straps
+    g += `<g data-p="wrap">` + r(300, 190, 10, 312, 2, 'f-strap') + r(588, 190, 10, 312, 2, 'f-strap') + `</g>`;
+    return `<svg class="eng fin-dirty" viewBox="0 0 900 560" role="img" aria-label="Drawing of the engine at this stage" data-id="${id}">${g}</svg>`;
+  }
+
+  const P = { shadow: 1, pallet: 1, dyno: 1, crank: 1, pst0: 1, pst1: 1, pst2: 1, pst3: 1, pst4: 1, pst5: 1, bell: 1, block: 1, pan: 1, front: 1, head: 1, lines: 1, cover: 1, exhaust: 1, tool: 1, marks: 1, tag: 1, wrap: 1 };
+  const PIN = y => ({ pst0: [0, y[0]], pst1: [0, y[1]], pst2: [0, y[2]], pst3: [0, y[3]], pst4: [0, y[4]], pst5: [0, y[5]] });
+  const FULL = { shadow: [0, 0], bell: [0, 0], block: [0, 0], pan: [0, 0], front: [0, 0], head: [0, 0], lines: [0, 0], cover: [0, 0], exhaust: [0, 0], crank: [0, 410], ...PIN([292, 292, 292, 292, 292, 292]) };
+  const LAYOUT = {
+    received: { fin: 'dirty', p: { ...FULL, pallet: [0, 0], tag: [0, 0] } },
+    teardown: { fin: 'dirty', p: { shadow: [0, 0], block: [0, 0], pan: [0, 30], head: [0, -142], cover: [0, -192], ...PIN([150, 150, 150, 150, 150, 150]) } },
+    inspection: { fin: 'clean', p: { shadow: [0, 0], block: [0, 0], crank: [0, 490], marks: [0, 0] } },
+    machining: { fin: 'clean', p: { shadow: [0, 0], block: [0, 0], tool: [0, 0] } },
+    assembly: { fin: 'clean', p: { shadow: [0, 0], block: [0, 0], pan: [0, 0], front: [0, 0], bell: [0, 0], crank: [0, 410], head: [0, -150], ...PIN([292, 292, 292, 250, 205, 165]) } },
+    dyno: { fin: 'paint', p: { ...FULL, dyno: [0, 0] } },
+    ready: { fin: 'paint', p: { ...FULL, pallet: [0, 0], tag: [0, 0], wrap: [0, 0] } }
+  };
+  const ENTER = { shadow: null, pallet: null, dyno: [-90, 0], tool: [0, -90], marks: null, wrap: [0, -30] };
+  function setEngine(svg, key, anim = true) {
+    const L = LAYOUT[key]; if (!L) return;
+    svg.classList.remove('fin-dirty', 'fin-clean', 'fin-paint'); svg.classList.add('fin-' + L.fin);
+    svg.dataset.stage = key;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    Object.keys(P).forEach(name => {
+      const el = svg.querySelector(`[data-p="${name}"]`); if (!el) return;
+      const v = L.p[name], prev = el._o;
+      if (!v) { el.style.display = 'none'; el._o = null; return; }
+      el.style.display = '';
+      const to = `translate(${v[0]}px,${v[1]}px)`; el.style.transform = to;
+      if (anim && !reduce && svg._shown) {
+        let from = null;
+        if (prev && (prev[0] !== v[0] || prev[1] !== v[1])) from = `translate(${prev[0]}px,${prev[1]}px)`;
+        else if (!prev) { const e = name in ENTER ? ENTER[name] : (name.startsWith('pst') ? [0, -60] : [0, -36]); if (e) from = `translate(${v[0] + e[0]}px,${v[1] + e[1]}px)`; }
+        if (from) el.animate([{ transform: from }, { transform: to }], { duration: prev ? 1150 : 650, easing: 'cubic-bezier(.22,.9,.24,1)', delay: name.startsWith('pst') ? (+name[3]) * 70 : 0, fill: 'backwards' });
+      }
+      el._o = v;
+    });
+    svg._shown = true;
+  }
+  const FOCUS = { received: [110, 120, 700, 420], teardown: [170, 0, 620, 540], inspection: [190, 170, 540, 380], machining: [190, 0, 540, 450], assembly: [170, 60, 640, 480], dyno: [10, 110, 790, 430], ready: [110, 120, 700, 420] };
+  function fitView(svg, key, anim = true, full = false) {
+    const to = full ? [0, 0, 900, 560] : FOCUS[key];
+    const from = (svg.getAttribute('viewBox') || '0 0 900 560').split(' ').map(Number);
+    if (svg._vb) cancelAnimationFrame(svg._vb);
+    if (!anim || matchMedia('(prefers-reduced-motion: reduce)').matches) { svg.setAttribute('viewBox', to.join(' ')); return; }
+    const t0 = performance.now(), D = 1100, ease = t => 1 - Math.pow(1 - t, 3);
+    const step = now => { const t = Math.min(1, (now - t0) / D), e = ease(t); svg.setAttribute('viewBox', from.map((v, i) => (v + (to[i] - v) * e).toFixed(2)).join(' ')); if (t < 1) svg._vb = requestAnimationFrame(step); };
+    svg._vb = requestAnimationFrame(step);
+  }
+  return { LAYOUT, FOCUS, fitView, JOB, STAGES, BAYS, SERVICES, BRANDS, TOWNS, PHONE, TEL, DYNO, PEAK_TQ, dynoPaths, engineSVG, setEngine };
+})();
+
+// ---------- tracker UI (works with or without WebGL) ----------
+window.TRK = (() => {
+  const S = KR.STAGES, $ = id => document.getElementById(id), subs = [];
+  const BIG = { received: 'Received', teardown: 'Teardown', inspection: 'Inspection', machining: 'Machining', assembly: 'Assembly', dyno: 'Dyno', ready: 'Ready' };
+  const CAM = { received: 'Receiving dock · Cam 1', teardown: 'Bay 4 · Cam 2', inspection: 'Bay 4 · Cam 2', machining: 'Machine shop · Cam 3', assembly: 'Bay 4 · Cam 2', dyno: 'Dyno cell · Cam 1', ready: 'Shipping · Cam 4' };
+  const list = $('list'), segs = $('segs');
+  S.forEach((s, i) => {
+    list.insertAdjacentHTML('beforeend', `<li><button data-i="${i}"><span class="n">0${i + 1}</span><span class="nm">${s.name}</span><span class="t">${s.time.split(' · ')[0]}</span></button></li>`);
+    segs.insertAdjacentHTML('beforeend', `<button data-i="${i}" aria-label="${s.name}"></button>`);
+  });
+  [list, segs].forEach(el => el.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { stop(); go(+b.dataset.i); } }));
+  const dp = KR.dynoPaths(30, 24, 330, 84, 300, 1000);
+  const chart = () => `<svg class="dy" viewBox="0 0 380 126" aria-label="Dyno sheet: horsepower and torque">${[0, 1, 2, 3].map(i => `<line class="gl" x1="30" x2="360" y1="${24 + i * 28}" y2="${24 + i * 28}"/>`).join('')}
+    ${[1000, 1400, 1800, 2200].map(r => `<text x="${dp.X(r)}" y="122" text-anchor="middle">${r}</text>`).join('')}
+    <path class="hp dr" pathLength="1" d="${dp.hpP}"/><path class="tq" d="${dp.tqP}"/><circle cx="${dp.peakHp.x}" cy="${dp.peakHp.y}" r="4.5" fill="#ff6b1a"/>
+    <text class="lab" x="${dp.peakHp.x}" y="${dp.peakHp.y - 10}" text-anchor="middle">287 HP</text><text class="lab" x="360" y="${24 + 84 * (1 - KR.DYNO[KR.DYNO.length - 1].tq / 1000) + 18}" text-anchor="end">${dp.peakTq.v} LB-FT PEAK</text></svg>`;
+  let cur = 5, timer = null;
+  function go(i, anim = true) {
+    cur = (i + S.length) % S.length; const s = S[cur];
+    list.querySelectorAll('button').forEach((b, j) => b.className = j < cur ? 'done' : j === cur ? 'on' : '');
+    segs.querySelectorAll('button').forEach((b, j) => b.className = j < cur ? 'done' : j === cur ? 'on' : '');
+    $('note').textContent = s.note;
+    $('extra').innerHTML = s.findings ? `<ul class="fnd">${s.findings.map((f, k) => `<li class="${f.s}"><i>${k + 1}</i><span>${f.t}<small>${f.d}</small></span></li>`).join('')}</ul>` : s.k === 'dyno' ? chart() : '';
+    if (s.k === 'dyno' && anim) $('extra').querySelector('.dr').animate([{ strokeDasharray: '1 1', strokeDashoffset: 1 }, { strokeDasharray: '1 1', strokeDashoffset: 0 }], { duration: 1500, easing: 'ease-out', fill: 'backwards' });
+    $('tK').textContent = `Stage 0${cur + 1} of 07 · ${s.time}`; $('tH').innerHTML = `${BIG[s.k]}<em>.</em>`;
+    $('sH').textContent = s.name; $('sT').textContent = s.time;
+    $('cam').textContent = `${CAM[s.k]} · ${s.time.replace(' · ', ' ')}`;
+    const st = $('stamp'); st.classList.toggle('on', s.k === 'dyno');
+    if (s.k === 'dyno' && anim) { st.classList.remove('land'); void st.offsetWidth; st.classList.add('land'); }
+    subs.forEach(f => f(s.k, anim));
+  }
+  function stop() { clearInterval(timer); timer = null; $('pLbl').textContent = 'Play the rebuild'; $('pIco').innerHTML = '<path d="M4 2l10 6-10 6z"/>'; }
+  function play() { if (timer) return stop(); if (cur === S.length - 1) go(0); timer = setInterval(() => { if (cur === S.length - 1) return stop(); go(cur + 1); }, 3000); $('pLbl').textContent = 'Pause'; $('pIco').innerHTML = '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>'; }
+  $('prev').onclick = () => { stop(); go(cur - 1); }; $('next').onclick = () => { stop(); go(cur + 1); }; $('play').onclick = play;
+  $('textMe').onclick = () => { $('textMe').classList.add('set'); $('textMe').querySelector('span').textContent = "You're set · we'll text you"; $('ncard').classList.add('on'); };
+  $('wall').innerHTML = KR.BAYS.map(b => `<div class="bay ${b.mine ? 'mine' : ''} ${b.wait ? 'wait' : ''}"><span class="bn">${b.road ? 'RD' : b.b.replace('Bay ', '0')}</span><div><div class="u">${b.u}</div><div class="c">${b.c}${b.mine ? ' · yours' : ''}</div><div class="s">${b.s}</div><div class="m"><i style="width:${b.p * 100}%"></i></div></div></div>`).join('');
+  $('svc').innerHTML = KR.SERVICES.map(([t, d], i) => `<li><span>0${i + 1}</span><b>${t}</b><p>${d}</p></li>`).join('');
+  $('brands').textContent = KR.BRANDS; $('towns').textContent = KR.TOWNS;
+  const q = new URLSearchParams(location.search), si = S.findIndex(s => s.k === q.get('stage'));
+  if (si > -1) cur = si;
+  go(cur, false);
+  if (q.get('play')) setTimeout(play, 900);
+  if (q.get('notify')) $('textMe').click();
+  return { subscribe: f => { subs.push(f); f(S[cur].k, false); }, get cur() { return S[cur].k; } };
+})();
+// ---------- SVG poster fallback ----------
+window.showPoster = () => {
+  const p = document.getElementById('poster'); p.style.display = 'block'; document.getElementById('gl').style.display = 'none';
+  p.innerHTML = KR.engineSVG({ id: 'a' }); const svg = p.querySelector('svg');
+  TRK.subscribe((k, anim) => { KR.setEngine(svg, k, anim); KR.fitView(svg, k, anim); });
+};
+</script>
+<style>
+/* poster (no-WebGL) engine colors */
+.poster .eng.fin-dirty{--blk:#5d5249;--blk-l:#7d6f62;--blk-d:#302a25;--cov:#4c423a;--cov-l:#6c5f53;--cov-d:#2a2420;--st:#7f7d77;--st-l:#a9a59c;--st-d:#45433f}
+.poster .eng.fin-clean{--blk:#9aa3ab;--blk-l:#d2d8dd;--blk-d:#5c656d;--cov:#a2aab2;--cov-l:#dbe0e5;--cov-d:#646d75;--st:#b8c0c7;--st-l:#eef2f5;--st-d:#6a737b}
+.poster .eng.fin-paint{--blk:#e85d14;--blk-l:#ff9a5c;--blk-d:#8a3307;--cov:#2b2b2e;--cov-l:#55555b;--cov-d:#141416;--st:#b8c0c7;--st-l:#f2f5f8;--st-d:#626b74}
+.poster .eng{--shadow:#000}
+.poster .eng [class^="f-"]{stroke:rgba(0,0,0,.4);stroke-width:.8}
+.poster .f-blk{fill:url(#a-gB)}.poster .f-blk-l{fill:var(--blk-l)}.poster .f-blk-d{fill:var(--blk-d)}.poster .f-cov{fill:url(#a-gC)}.poster .f-cov-l{fill:var(--cov-l)}.poster .f-cov-d{fill:var(--cov-d)}
+.poster .f-st{fill:url(#a-gS)}.poster .f-st-l{fill:var(--st-l)}.poster .f-st-d{fill:var(--st-d)}.poster .f-hole{fill:#0a0a0b}.poster .f-bore{fill:#3b3f44;stroke:none}
+.poster .f-ir{fill:#463b33}.poster .f-ir-l{fill:#665448}.poster .f-rub{fill:#161616}.poster .belt{fill:none;stroke:#111;stroke-width:7}
+.poster .f-wood{fill:#8f6c45}.poster .f-wood-d{fill:#5e452b}.poster .f-dy{fill:#33373e}.poster .f-dy-l{fill:#4c525b}.poster .f-dy-d{fill:#1d2025}
+.poster .f-mach{fill:#3f4a44}.poster .f-mach-l{fill:#5f6d65}.poster .f-mach-d{fill:#29312c}.poster .f-tag{fill:#efe9da}
+.poster .t-tag{font:800 17px 'DM Mono';text-anchor:middle;fill:#111}.poster .t-tag2{font:500 10px 'DM Mono';text-anchor:middle;fill:#555}
+.poster .t-rdy{display:none}.poster [data-stage=ready] .t-rdy{display:inline}.poster [data-stage=ready] .t-job{display:none}
+.poster .f-strap{fill:#ff6b1a}.poster .f-grime{fill:#140d07;opacity:.55;stroke:none}.poster .grime{display:none}.poster .fin-dirty .grime{display:inline}
+.poster .pipe{fill:none;stroke:#222;stroke-width:3}.poster .eye{fill:none;stroke:#555;stroke-width:4}.poster .string{fill:none;stroke:#cfc8b6;stroke-width:1.5}.poster .chip{fill:none;stroke:#ddd;stroke-width:1.6}
+.poster .mark{fill:none;stroke:#e4483b;stroke-width:3;stroke-dasharray:8 6}.poster .mark-l{stroke:#e4483b;stroke-width:2}.poster .f-mark{fill:#e4483b;stroke:none}.poster .t-mark{fill:#fff;font:500 18px 'DM Mono';text-anchor:middle}
+.poster [data-stage=machining] .b3.f-bore{fill:#e9eef2}.poster [data-stage=inspection] .b3.f-bore{fill:#b4433a}
+</style>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const canvas = document.getElementById('gl'), wrap = document.getElementById('stagewrap');
+const phoneMQ = matchMedia('(max-width:900px)'), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+  if (!renderer.getContext()) throw new Error('no gl');
+} catch (e) { window.showPoster(); throw e; }
+const isPhone = () => phoneMQ.matches;
+renderer.setPixelRatio(Math.min(devicePixelRatio, isPhone() ? 1.5 : 1.75));
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = !isPhone(); renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x070809);
+scene.fog = new THREE.Fog(0x070809, 7, 16);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.32;
+
+const camera = new THREE.PerspectiveCamera(26, 1, 0.1, 60);
+
+// ---------- procedural textures ----------
+function canvasTex(w, h, draw, rep = 1) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(rep, rep); t.anisotropy = 4; return t; }
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const grime = canvasTex(512, 512, (g, w, h) => {
+  g.fillStyle = '#c9c6c2'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 220; i++) { const x = rnd() * w, y = rnd() * h, r = 6 + rnd() * 46; const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, `rgba(${10 + rnd() * 14},${10 + rnd() * 12},${10 + rnd() * 10},${.12 + rnd() * .22})`); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); }
+  for (let i = 0; i < 12; i++) { const x = rnd() * w, y = rnd() * h * .6, l = 20 + rnd() * 90; g.strokeStyle = `rgba(12,8,4,${.25 + rnd() * .35})`; g.lineWidth = 2 + rnd() * 3; g.beginPath(); g.moveTo(x, y); g.lineTo(x + rnd() * 6 - 3, y + l); g.stroke(); }
+  for (let i = 0; i < 900; i++) { g.fillStyle = `rgba(60,50,40,${rnd() * .18})`; g.fillRect(rnd() * w, rnd() * h, 2, 2); }
+});
+grime.repeat.set(3, 1);
+const floorTex = canvasTex(512, 512, (g, w, h) => {
+  g.fillStyle = '#7a7a7a'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 5000; i++) { const v = 90 + rnd() * 70; g.fillStyle = `rgba(${v},${v},${v},.35)`; g.fillRect(rnd() * w, rnd() * h, 1 + rnd() * 2, 1 + rnd() * 2); }
+  for (let i = 0; i < 30; i++) { const x = rnd() * w, y = rnd() * h, r = 20 + rnd() * 80; const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, 'rgba(20,20,20,.35)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); }
+  g.strokeStyle = 'rgba(30,30,30,.6)'; g.lineWidth = 2; g.beginPath(); g.moveTo(0, h / 2); g.lineTo(w, h / 2); g.moveTo(w / 2, 0); g.lineTo(w / 2, h); g.stroke();
+}, 6);
+function label(txt, bg, fg, w = 256, h = 128, font = 'bold 64px "DM Mono", monospace', round = false) {
+  return canvasTex(w, h, (g) => { g.fillStyle = bg; if (round) { g.beginPath(); g.arc(w / 2, h / 2, w / 2 - 2, 0, 7); g.fill(); } else g.fillRect(0, 0, w, h); g.fillStyle = fg; g.font = font; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(txt, w / 2, h / 2 + 4); });
+}
+
+// ---------- materials ----------
+const ACC = new THREE.Color(0xff6b1a);
+const M = {
+  body: new THREE.MeshPhysicalMaterial({ color: 0x5a4a3e, roughness: .88, metalness: .3, map: grime }),
+  det: new THREE.MeshPhysicalMaterial({ color: 0x3a3029, roughness: .85, metalness: .35, map: grime }),
+  deck: new THREE.MeshStandardMaterial({ color: 0x6d625a, roughness: .5, metalness: .7 }),
+  cov: new THREE.MeshPhysicalMaterial({ color: 0x3a3029, roughness: .85, metalness: .35, map: grime }),
+  fin: new THREE.MeshStandardMaterial({ color: 0x4a3f36, roughness: .8, metalness: .4 }),
+  steel: new THREE.MeshStandardMaterial({ color: 0xc8cdd2, roughness: .24, metalness: 1 }),
+  steel2: new THREE.MeshStandardMaterial({ color: 0x8d949a, roughness: .35, metalness: 1 }),
+  bright: new THREE.MeshStandardMaterial({ color: 0xeef2f5, roughness: .12, metalness: 1 }),
+  dark: new THREE.MeshStandardMaterial({ color: 0x09090a, roughness: .7, metalness: .2 }),
+  iron: new THREE.MeshStandardMaterial({ color: 0x4a3a30, roughness: .75, metalness: .55 }),
+  alu: new THREE.MeshStandardMaterial({ color: 0xa9adb0, roughness: .45, metalness: .9 }),
+  rubber: new THREE.MeshStandardMaterial({ color: 0x141414, roughness: .8, metalness: 0 }),
+  wood: new THREE.MeshStandardMaterial({ color: 0x8a6a45, roughness: .9 }),
+  dyno: new THREE.MeshStandardMaterial({ color: 0x2c3036, roughness: .5, metalness: .6 }),
+  dynoL: new THREE.MeshStandardMaterial({ color: 0x5b626b, roughness: .3, metalness: .9 }),
+  mach: new THREE.MeshStandardMaterial({ color: 0x3e4a43, roughness: .55, metalness: .4 }),
+  stand: new THREE.MeshStandardMaterial({ color: 0x1d1f22, roughness: .5, metalness: .6 }),
+  score: new THREE.MeshStandardMaterial({ color: 0x7a1d14, roughness: .6, metalness: .6 }),
+  red: new THREE.MeshBasicMaterial({ color: 0xff3b2f }),
+  strap: new THREE.MeshStandardMaterial({ color: 0xe9e5dc, roughness: .7 }),
+  floor: new THREE.MeshStandardMaterial({ color: 0x2a2b2e, roughness: .82, metalness: .15, map: floorTex }),
+  line: new THREE.MeshStandardMaterial({ color: 0xff6b1a, roughness: .7 })
+};
+const FIN = {
+  dirty: { body: [0x4c4c4d, .7, .5, 0, grime], det: [0x2e2e2f, .7, .5, 0, grime], cov: [0x3a3a3b, .7, .5, 0, grime], deck: 0x6d625a, iron: 0x4a3a30, fin: 0x4a3f36 },
+  clean: { body: [0x7f878e, .42, .85, 0, null], det: [0x5f666c, .45, .85, 0, null], cov: [0x7a8289, .4, .85, 0, null], deck: 0xa9b1b8, iron: 0x4f4b48, fin: 0xb8c0c7 },
+  paint: { body: [0xd2501a, .3, .25, 1, null], det: [0x1a1a1c, .35, .5, .8, null], cov: [0x141416, .22, .45, 1, null], deck: 0xc9d0d6, iron: 0x37373a, fin: 0xe6ebef }
+};
+
+// ---------- geometry helpers (svg units -> metres: x=(sx-442.5)/250, y=(530-sy)/250) ----------
+const SX = x => (x - 442.5) / 250, SY = y => (530 - y) / 250;
+const CX = [255, 330, 405, 480, 555, 630].map(SX), JX = [217.5, 292.5, 367.5, 442.5, 517.5, 592.5, 667.5].map(SX);
+function mesh(geo, mat, x = 0, y = 0, z = 0) { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; return m; }
+const box = (w, h, d, mat, x, y, z, r = .012) => mesh(r ? new RoundedBoxGeometry(w, h, d, 2, Math.min(r, w / 2.2, h / 2.2, d / 2.2)) : new THREE.BoxGeometry(w, h, d), mat, x, y, z);
+function cyl(r, h, mat, x, y, z, axis = 'y', r2, seg = 40) { const m = mesh(new THREE.CylinderGeometry(r, r2 ?? r, h, seg), mat, x, y, z); if (axis === 'x') m.rotation.z = Math.PI / 2; if (axis === 'z') m.rotation.x = Math.PI / 2; return m; }
+const G = (...kids) => { const g = new THREE.Group(); kids.forEach(k => g.add(k)); return g; };
+
+const engine = new THREE.Group(); scene.add(engine);
+const P = {};
+// block
+{ const g = G(box(1.86, .55, .62, M.body, 0, .715, 0, .02), box(1.88, .025, .64, M.deck, 0, .99, 0, .006), box(1.84, .03, .66, M.det, 0, .455, 0, .008));
+  for (let i = 0; i < 5; i++) g.add(box(.03, .42, .03, M.body, SX(292.5 + 75 * i), .7, .315, .006));
+  CX.forEach(x => { g.add(cyl(.032, .02, M.steel2, x, SY(372), .312, 'z')); });
+  g.add(box(.9, .13, .05, M.body, SX(410), SY(333), .33, .02), box(.26, .2, .12, M.det, SX(589), SY(323), .36, .02));
+  P.bores = CX.map(x => { const b = cyl(.088, .006, M.dark, x, 1.0035, 0); g.add(b); g.add(mesh(new THREE.RingGeometry(.088, .102, 40).rotateX(-Math.PI / 2), M.steel2, x, 1.004, 0)); return b; });
+  P.block = g; }
+// head
+{ const g = G(box(1.9, .2, .6, M.body, 0, 1.1, 0, .015), box(1.9, .014, .61, M.det, 0, 1.004, 0, .004));
+  for (let i = 0; i < 7; i++) [-.2, .2].forEach(z => g.add(cyl(.016, .02, M.steel, SX(217.5 + 75 * i), 1.205, z)));
+  [-.8, .8].forEach(x => { const t = mesh(new THREE.TorusGeometry(.04, .011, 10, 24), M.steel2, x, 1.25, .26); g.add(t); });
+  P.head = g; }
+// cover
+{ const g = G(box(1.72, .13, .46, M.cov, 0, 1.265, 0, .045));
+  for (let k = 0; k < 11; k++) g.add(box(.022, .03, .34, M.fin, SX(244 + k * 37) + .011, 1.335, 0, .006));
+  g.add(cyl(.05, .05, M.dark, SX(602), 1.35, .08));
+  P.cover = g; }
+// pan
+P.pan = G(box(1.82, .07, .6, M.det, 0, .405, 0, .01), box(.94, .25, .52, M.body, SX(380), .27, 0, .04), box(.62, .13, .52, M.body, SX(590), .345, 0, .03), cyl(.02, .02, M.steel, SX(380), .14, 0));
+// front: timing cover, pulleys, belt
+{ const g = G(box(.12, .74, .5, M.det, 1.0, .69, 0, .03), cyl(.15, .07, M.steel, 1.1, SY(420), 0, 'x'), cyl(.112, .076, M.det, 1.1, SY(420), 0, 'x'), cyl(.04, .09, M.steel, 1.1, SY(420), 0, 'x'),
+    cyl(.09, .045, M.steel, 1.1, SY(300), 0, 'x'), cyl(.03, .05, M.dark, 1.1, SY(300), 0, 'x'), cyl(.042, .04, M.steel2, 1.1, .69, .16, 'x'));
+  const pts = [[1.012, 0], [.95, .085], [.73, .2], [.6, .19], [.44, .155], [.29, 0], [.44, -.155], [.6, -.155], [.92, -.092]].map(([y, z]) => new THREE.Vector3(1.1, y, z));
+  g.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, true), 80, .013, 8, true), M.rubber));
+  P.front = g; }
+// flywheel housing
+P.bell = G(cyl(.3, .14, M.det, -1.0, .66, 0, 'x', .38));
+// exhaust manifold + turbo
+{ const g = G(cyl(.055, 1.5, M.iron, SX(417), 1.04, .345, 'x'));
+  CX.forEach(x => g.add(box(.09, .08, .07, M.iron, x, 1.07, .315, .015)));
+  g.add(cyl(.13, .11, M.iron, -1.1, 1.08, .3, 'z'), cyl(.07, .12, M.dark, -1.1, 1.08, .32, 'z'), cyl(.11, .1, M.alu, -1.1, 1.08, .08, 'z'), cyl(.05, .14, M.steel2, -1.1, 1.08, .19, 'z'),
+    cyl(.045, .14, M.alu, -1.1, 1.2, .08), cyl(.075, .1, M.dark, -1.1, 1.31, .08), cyl(.052, .3, M.iron, -1.1, .86, .3));
+  P.exhaust = g; }
+P.lines = G(box(.03, .03, .03, M.dark, 0, -5, 0, 0));
+// pistons (local crown top = 0)
+for (let i = 0; i < 6; i++) {
+  const g = G(cyl(.084, .13, M.steel, 0, -.065, 0), cyl(.0845, .006, M.dark, 0, -.02, 0), cyl(.0845, .006, M.dark, 0, -.036, 0), cyl(.0845, .006, M.dark, 0, -.052, 0),
+    box(.042, .3, .034, M.steel2, 0, -.26, 0, .008), cyl(.058, .045, M.steel2, 0, -.42, 0, 'z'), cyl(.022, .06, M.dark, 0, -.42, 0, 'z'));
+  g.position.x = CX[i]; P['pst' + i] = g;
+}
+// crank (local centre = 0)
+{ const g = G(cyl(.032, 1.95, M.steel, 0, 0, 0, 'x'), cyl(.13, .035, M.steel2, -1.0, 0, 0, 'x'), cyl(.03, .14, M.steel, 1.02, 0, 0, 'x'));
+  CX.forEach((x, i) => { const up = i % 2 ? 1 : -1; g.add(box(.07, .15, .17, M.steel2, x - .035, up * .06, 0, .03), box(.07, .15, .17, M.steel2, x + .035, up * .06, 0, .03), cyl(.042, .04, M.bright, x, -up * .055, 0, 'x')); });
+  JX.forEach(x => g.add(cyl(.05, .045, M.bright, x, 0, 0, 'x')));
+  P.crank = g; }
+// boring machine
+P.tool = G(box(.62, .22, .34, M.mach, CX[3], 1.98, 0, .03), box(.1, 1.0, .1, M.mach, CX[3] + .42, 1.55, -.22, .02), cyl(.07, .26, M.mach, CX[3], 1.74, 0), cyl(.024, .66, M.bright, CX[3], 1.28, 0), cyl(.05, .03, M.steel2, CX[3], 1.0, 0));
+// inspection marks
+{ const ring1 = mesh(new THREE.TorusGeometry(.125, .008, 8, 60).rotateX(Math.PI / 2), M.red, CX[3], 1.014, 0);
+  const ring2 = mesh(new THREE.TorusGeometry(.12, .008, 8, 60).rotateY(Math.PI / 2), M.red, JX[3], SY(490), 0);
+  const ring3 = mesh(new THREE.TorusGeometry(.12, .008, 8, 60).rotateY(Math.PI / 2), M.red, JX[2], SY(490), 0);
+  const sp = (n, x, y, z) => { const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: label(n, '#ff3b2f', '#fff', 128, 128, 'bold 76px "DM Mono", monospace', true), depthTest: false })); s.scale.set(.13, .13, 1); s.position.set(x, y, z); return s; };
+  const l1 = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(CX[3] + .1, 1.03, .06), new THREE.Vector3(CX[3] + .28, 1.3, .1)]), new THREE.LineBasicMaterial({ color: 0xff3b2f }));
+  const l2 = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(JX[3] + .06, SY(490) + .1, .06), new THREE.Vector3(JX[3] + .3, SY(490) + .32, .1)]), new THREE.LineBasicMaterial({ color: 0xff3b2f }));
+  P.marks = G(ring1, ring2, ring3, l1, l2, sp('1', CX[3] + .31, 1.35, .1), sp('2', JX[3] + .34, SY(490) + .37, .1)); }
+// tag
+{ const tagJob = label('KR-0614', '#efe9da', '#111', 256, 112, 'bold 54px "DM Mono", monospace'), tagRdy = label('READY', '#ff6b1a', '#140a04', 256, 112, 'bold 60px "DM Mono", monospace');
+  const tm = new THREE.MeshStandardMaterial({ map: tagJob, roughness: .8, side: THREE.DoubleSide });
+  const plane = mesh(new THREE.PlaneGeometry(.3, .13), tm, .98, 1.4, .3); plane.rotation.set(0, .5, .12);
+  const str = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(SX(602), 1.36, .08), new THREE.Vector3(.86, 1.44, .25)]), new THREE.LineBasicMaterial({ color: 0xcfc8b6 }));
+  P.tag = G(plane, str); P.tag.userData = { tm, tagJob, tagRdy }; }
+// straps
+P.wrap = G(...[-.55, .55].flatMap(x => [box(.05, .006, .72, M.strap, x, 1.335, 0, 0), box(.05, 1.22, .006, M.strap, x, .73, .37, 0), box(.05, 1.22, .006, M.strap, x, .73, -.37, 0)]));
+// pallet
+{ const g = G(); for (let k = 0; k < 7; k++) g.add(box(.26, .025, 1.0, M.wood, -1.02 + k * .34, .107, 0, .004));
+  [-1.0, 0, 1.0].forEach(x => g.add(box(.2, .07, 1.0, M.wood, x, .055, 0, .006))); g.add(box(2.3, .02, .14, M.wood, 0, .01, .38, .004), box(2.3, .02, .14, M.wood, 0, .01, -.38, .004));
+  P.pallet = g; }
+// dyno + cart + exhaust hose
+{ const g = G(box(.5, .52, .58, M.dyno, -1.44, .48, 0, .04), cyl(.17, .04, M.dynoL, -1.44, .5, .3, 'z'), cyl(.06, .05, M.dark, -1.44, .5, .32, 'z'), box(.66, .24, .66, M.stand, -1.44, .12, 0, .02),
+    cyl(.04, .3, M.steel, -1.15, .66, 0, 'x'), box(2.0, .04, .5, M.stand, 0, .05, 0, .01), box(.06, .32, .06, M.stand, -.65, .22, 0, .01), box(.06, .32, .06, M.stand, .65, .22, 0, .01));
+  const hose = new THREE.CatmullRomCurve3([new THREE.Vector3(-1.1, .72, .3), new THREE.Vector3(-1.12, .55, .42), new THREE.Vector3(-1.4, .9, .5), new THREE.Vector3(-1.5, 2.0, .3), new THREE.Vector3(-1.5, 3.2, .1)]);
+  P.dyno = g; }
+// engine stand (3D only)
+P.stand = G(box(.08, .7, .08, M.stand, -1.38, .38, 0, .01), box(.4, .06, .06, M.stand, -1.17, .7, 0, .01), cyl(.1, .03, M.stand, -.95, .7, 0, 'x'), box(.08, .05, .9, M.stand, -1.38, .03, 0, .01), box(.7, .05, .08, M.stand, -1.05, .03, 0, .01),
+  ...[[-1.38, .42], [-1.38, -.42], [-.72, 0]].map(([x, z]) => cyl(.035, .03, M.rubber, x, .035, z, 'z')));
+Object.values(P).forEach(g => { if (g.isObject3D) engine.add(g); });
+
+// floor + safety line + back wall glow
+const floor = mesh(new THREE.PlaneGeometry(40, 40).rotateX(-Math.PI / 2), M.floor, 0, 0, 0); floor.castShadow = false; scene.add(floor);
+const back = new THREE.Mesh(new THREE.PlaneGeometry(30, 10), new THREE.MeshStandardMaterial({ color: 0x111214, roughness: .95 })); back.position.set(0, 5, -4); scene.add(back);
+
+// lights
+scene.add(new THREE.HemisphereLight(0x50555f, 0x0a0a0a, .5));
+const key = new THREE.SpotLight(0xffe0c0, 62, 14, .55, .7, 1.6); key.position.set(1.4, 4.6, 2.6); key.target.position.set(0, .7, 0); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); key.shadow.bias = -.0004; key.shadow.radius = 4; scene.add(key, key.target);
+const rim = new THREE.DirectionalLight(0xa8bcff, 2.2); rim.position.set(-3.5, 2.8, -3); scene.add(rim);
+const kick = new THREE.SpotLight(0xff8a3c, 18, 10, .5, .9, 1.8); kick.position.set(-2.6, .4, 2.4); kick.target.position.set(0, .6, 0); scene.add(kick, kick.target);
+const pool = new THREE.SpotLight(0xffffff, 30, 12, .9, 1, 2); pool.position.set(0, 4, -2.6); pool.target.position.set(0, 0, -3.5); scene.add(pool, pool.target);
+
+// ---------- stage application ----------
+const BASE = {};
+Object.keys(P).forEach(k => { if (P[k].isObject3D) BASE[k] = P[k].position.clone(); });
+const STAND_ON = { teardown: 1, inspection: 1, machining: 1, assembly: 1 };
+const ENTER = { tool: [0, .45], dyno: [-.5, 0], pallet: null, stand: null, marks: null, wrap: [0, .15] };
+const CAMS = {
+  received: { az: .62, el: .26, r: 6.3, t: [0, .72, 0] }, teardown: { az: .5, el: .2, r: 7.2, t: [0, .92, 0] }, inspection: { az: .42, el: .6, r: 5.4, t: [0, .62, 0] },
+  machining: { az: .7, el: .26, r: 6.8, t: [0, 1.15, 0] }, assembly: { az: .55, el: .26, r: 6.8, t: [0, .95, 0] }, dyno: { az: .5, el: .22, r: 7.4, t: [-.3, .78, 0] }, ready: { az: .78, el: .28, r: 6.4, t: [0, .7, 0] }
+};
+const cam = { az: .62, el: .28, r: 5.2, tx: 0, ty: .72, tz: 0 };
+const L_fin = F => F === FIN.dirty ? .4 : 1;
+function setFinish(k, anim) {
+  const F = FIN[k];
+  [['body', M.body], ['det', M.det], ['cov', M.cov]].forEach(([n, m]) => { const [c, r, mt, cc, map] = F[n]; const col = new THREE.Color(c);
+    if (anim) gsap.to(m.color, { r: col.r, g: col.g, b: col.b, duration: .9 }); else m.color.copy(col);
+    m.roughness = r; m.metalness = mt; m.clearcoat = cc; m.clearcoatRoughness = .25; if (m.map !== map) { m.map = map; m.needsUpdate = true; } });
+  M.deck.color.set(F.deck); M.iron.color.set(F.iron); M.fin.color.set(F.fin); M.fin.metalness = L_fin(F); M.fin.roughness = F === FIN.dirty ? .8 : .22;
+}
+function apply(k, anim) {
+  anim = anim && !reduce;
+  const L = KR.LAYOUT[k];
+  setFinish(L.fin, anim);
+  Object.keys(BASE).forEach(name => {
+    const g = P[name]; let v = L.p[name];
+    if (name === 'stand') v = STAND_ON[k] ? [0, 0] : null;
+    if (!v) { gsap.killTweensOf(g.position); g.visible = false; return; }
+    let x = BASE[name].x + v[0] / 250, y = BASE[name].y - v[1] / 250;
+    if (name.startsWith('pst') || name === 'crank') y = (530 - v[1]) / 250;
+    const was = g.visible; g.visible = true;
+    gsap.killTweensOf(g.position);
+    if (!anim) { g.position.set(x, y, BASE[name].z); return; }
+    if (!was) { const e = name in ENTER ? ENTER[name] : (name.startsWith('pst') ? [0, .25] : [0, .16]); if (e) g.position.set(x + e[0], y + e[1], BASE[name].z); else { g.position.set(x, y, BASE[name].z); return; } }
+    gsap.to(g.position, { x, y, duration: was ? 1.2 : .75, ease: 'power3.out', delay: name.startsWith('pst') ? +name[3] * .07 : 0 });
+  });
+  P.bores.forEach((b, i) => b.material = i === 3 && k === 'inspection' ? M.score : i === 3 && k === 'machining' ? M.bright : (k === 'machining' || k === 'assembly' ? M.steel2 : M.dark));
+  const td = P.tag.userData; td.tm.map = k === 'ready' ? td.tagRdy : td.tagJob; td.tm.needsUpdate = true;
+  const c = CAMS[k], to = { az: c.az, el: c.el, r: c.r * (isPhone() ? 1.04 : 1), tx: c.t[0], ty: c.t[1], tz: c.t[2] };
+  if (anim) gsap.to(cam, { ...to, duration: 1.6, ease: 'power2.inOut' }); else Object.assign(cam, to);
+}
+
+// ---------- render loop ----------
+function size() {
+  const w = wrap.clientWidth, h = wrap.clientHeight;
+  renderer.setSize(w, h, false); camera.aspect = w / h;
+  if (!isPhone()) camera.setViewOffset(w, h, -w * .14, -h * .02, w, h); else camera.clearViewOffset();
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize', size); size();
+let visible = true;
+new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(wrap);
+const clock = new THREE.Clock();
+function frame() {
+  const t = clock.getElapsedTime(), sway = reduce ? 0 : Math.sin(t * .22) * .07;
+  const az = cam.az + sway, el = cam.el;
+  camera.position.set(cam.tx + cam.r * Math.cos(el) * Math.sin(az), cam.ty + cam.r * Math.sin(el), cam.tz + cam.r * Math.cos(el) * Math.cos(az));
+  camera.lookAt(cam.tx, cam.ty, cam.tz);
+  if (visible) renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+TRK.subscribe(apply);
+frame();
+</script>
+</body>
+</html>

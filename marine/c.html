@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saltline Marine &amp; Repower | Snap the old motor</title>
+<meta name="description" content="Snap the old outboard, see the new one go on. Saltline Marine & Repower, Merrimack River and North Shore MA. Concept demo, fictional business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--y:#ffd21f;--blue:#1b36f2;--blue2:#142ac4;--k:#0e0e0e;--w:#fffdf6}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--y);-webkit-text-size-adjust:100%}
+body{font:17px/1.5 'Instrument Sans',system-ui,sans-serif;color:var(--k);background:var(--y);overflow-x:hidden}
+a{color:inherit}
+.A{font-family:Anton,Impact,'Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.005em}
+.S{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font:700 16px/1 'Instrument Sans',sans-serif;text-decoration:none;cursor:pointer;border:0;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.btn.k{background:var(--k);color:var(--y)}
+.btn.k:hover{background:#2a2a2a}
+.btn.y{background:var(--y);color:var(--k)}
+.btn.w{background:var(--w);color:var(--k)}
+/* header */
+.top{display:flex;align-items:center;gap:24px;padding:16px 48px}
+.logo{font:30px/1 Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.01em;text-decoration:none;display:flex;align-items:baseline;gap:10px}
+.logo i{font:italic 19px/1 'Instrument Serif',serif;text-transform:none}
+.top .seal{margin-left:auto;font:700 13px/1.2 'Instrument Sans';letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.top .seal b{display:inline-block;background:var(--k);color:var(--y);padding:6px 9px;border-radius:4px;font-weight:700}
+.top .q{font-weight:700;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px;min-height:48px;display:inline-flex;align-items:center;padding:0 6px}
+/* hero */
+.hero{display:grid;grid-template-columns:1fr minmax(400px,480px);gap:40px;padding:4px 48px 0;align-items:start}
+.big{font-size:clamp(84px,10.6vw,162px);line-height:.86}
+.big br.m{display:none}
+.trio{display:flex;gap:6px;margin-top:26px;flex-wrap:wrap}
+.trio li{list-style:none;font:44px/1 Anton,Impact,sans-serif;text-transform:uppercase;padding:10px 16px 7px;border-radius:4px;display:flex;gap:10px;align-items:baseline}
+.trio li b{font:700 14px/1 'Instrument Sans',sans-serif;letter-spacing:.06em}
+.trio li.on{background:var(--k);color:var(--y)}
+.big .kin{display:inline-block;overflow:hidden;vertical-align:top;height:.9em;position:relative}
+.big .kin span{display:block}
+.big .kin span.alt{color:var(--blue)}
+.lede{font-size:clamp(24px,2.3vw,34px);line-height:1.1;margin-top:20px;max-width:820px}
+.lede b{font-family:'Instrument Sans';font-style:normal;font-weight:700;font-size:.62em;letter-spacing:.08em;text-transform:uppercase;vertical-align:middle;margin-right:8px;background:var(--k);color:var(--y);padding:5px 9px;border-radius:4px}
+.frame{position:relative;aspect-ratio:4/3;background:var(--k);overflow:hidden;border-radius:6px}
+.photo{position:absolute;inset:0}
+.photo>img,.photo>svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.empty{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:22px;color:var(--y)}
+.empty .A{font-size:clamp(46px,5vw,78px);line-height:.9}
+.empty p.S{color:var(--w);font-size:22px}
+.empty svg{position:absolute;right:-20px;bottom:-30px;width:46%;height:auto;opacity:.95}
+.empty p.S{max-width:58%}
+.wipe{position:absolute;top:0;bottom:0;left:0;width:10px;background:var(--y);z-index:3;transform:translateX(-12px)}
+.count{position:absolute;left:14px;top:14px;z-index:4;background:var(--y);color:var(--k);font:700 13px/1 'Instrument Sans';letter-spacing:.12em;padding:7px 9px;border-radius:4px;visibility:hidden}
+.demo{position:absolute;right:14px;top:14px;z-index:4;background:var(--k);color:var(--w);font:700 12px/1 'Instrument Sans';letter-spacing:.14em;text-transform:uppercase;padding:7px 9px;border-radius:4px;visibility:hidden}
+.tag{position:absolute;left:var(--x);top:var(--y0);z-index:5;transform:scale(0);transform-origin:0 0}
+.tag i{position:absolute;left:-8px;top:-8px;width:16px;height:16px;background:var(--y);border:3px solid var(--k)}
+.tag span{position:absolute;left:16px;top:-19px;width:max-content;max-width:min(250px,56vw);background:var(--k);color:var(--y);font:22px/1.05 Anton,Impact,sans-serif;text-transform:uppercase;padding:7px 11px 6px;border-radius:3px}
+.tag.l span{left:auto;right:16px}
+.acts{display:flex;gap:10px;margin-top:14px}
+.acts .btn{min-height:56px;font-size:17px}
+.fine{margin-top:10px;font-size:15px}
+input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+/* water band */
+.band{background:var(--blue);color:var(--w);margin-top:22px;position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 200px;gap:32px;align-items:end;padding:0 48px 24px}
+.stage{align-self:stretch;min-height:300px;position:relative}
+.stage svg{position:absolute;left:-48px;right:0;bottom:-24px;width:calc(100% + 48px);height:calc(100% + 24px + 20px)}
+.est{padding-top:22px;position:relative}
+.est .k{font:700 13px/1.3 'Instrument Sans';letter-spacing:.14em;text-transform:uppercase;color:var(--y)}
+.est .num{font-size:clamp(70px,6.8vw,104px);line-height:.88;color:var(--y);margin:10px 0 8px;white-space:nowrap}
+.est .num.wait{color:rgba(255,255,255,.22)}
+.est .S{font-size:22px;line-height:1.15}
+.est .row{display:flex;gap:12px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.season{font:700 14px/1.3 'Instrument Sans';letter-spacing:.06em;text-transform:uppercase;margin-top:14px;color:var(--w)}
+.season::before{content:"";display:inline-block;width:10px;height:10px;background:var(--y);margin-right:8px}
+.owner{position:relative;width:200px;height:258px;border-radius:30px;background:var(--k);padding:9px;align-self:end}
+.owner .scr{height:100%;border-radius:22px;background:#1d1d1d;padding:34px 10px 10px;position:relative;overflow:hidden}
+.owner .who{position:absolute;top:13px;left:0;right:0;text-align:center;font:700 10px/1 'Instrument Sans';letter-spacing:.16em;text-transform:uppercase;color:#8d8d8d}
+.owner .idle{font:30px/.95 Anton,Impact,sans-serif;text-transform:uppercase;color:#3a3a3a;margin-top:46px;text-align:center}
+.note{background:var(--y);color:var(--k);border-radius:14px;padding:11px;visibility:hidden;position:absolute;left:10px;right:10px;top:34px}
+.note .t{font:700 11px/1 'Instrument Sans';letter-spacing:.08em;text-transform:uppercase}
+.note h4{font:22px/1 Anton,Impact,sans-serif;text-transform:uppercase;margin:7px 0 4px}
+.note p{font:600 13px/1.25 'Instrument Sans'}
+.note .th{height:76px;border-radius:8px;overflow:hidden;margin-top:8px;background:#222}
+.note .th svg,.note .th img{width:100%;height:100%;object-fit:cover;display:block}
+/* marquee */
+.mq{background:var(--k);color:var(--y);overflow:hidden;white-space:nowrap;padding:18px 0}
+.mq div{display:inline-block;font:clamp(44px,5vw,76px)/1 Anton,Impact,sans-serif;text-transform:uppercase;animation:mq 26s linear infinite}
+.mq span{color:var(--w);padding:0 .3em}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* sections */
+section.s{padding:110px 48px}
+.eyebrow{font:700 13px/1.3 'Instrument Sans';letter-spacing:.16em;text-transform:uppercase}
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;border-top:3px solid var(--k)}
+.svc>div{padding:28px 28px 40px 0}
+.svc .n{font:20px/1 Anton,Impact,sans-serif}
+.svc h3{font:clamp(40px,4vw,62px)/.92 Anton,Impact,sans-serif;text-transform:uppercase;margin:14px 0 10px}
+.svc p{font-size:17px;max-width:340px}
+.svc .S{font-size:25px;line-height:1.1;display:block;margin-bottom:8px}
+.h2{font-size:clamp(64px,8.4vw,136px);line-height:.86}
+.blk{display:grid;grid-template-columns:1.1fr 1fr;gap:0}
+.blk .l{background:var(--k);color:var(--y);padding:90px 48px}
+.blk .r{background:var(--w);padding:90px 48px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.blk .r p{font-size:20px;max-width:520px}
+.blk .r .S{font-size:34px;line-height:1.1}
+.steps{margin-top:40px}
+.steps li{list-style:none;display:grid;grid-template-columns:120px 1fr minmax(0,420px);align-items:baseline;gap:24px;border-top:3px solid var(--k);padding:12px 0 14px}
+.steps .n{font:32px/1 Anton,Impact,sans-serif}
+.steps h3{font:clamp(54px,7vw,112px)/.9 Anton,Impact,sans-serif;text-transform:uppercase}
+.steps p{font-size:19px}
+.steps li:nth-child(2) h3,.steps li:nth-child(4) h3{color:var(--blue)}
+.area{background:var(--blue);color:var(--w)}
+.towns{font:clamp(34px,4.4vw,70px)/1.02 Anton,Impact,sans-serif;text-transform:uppercase;margin-top:30px;color:var(--w)}
+.towns span{color:var(--y)}
+.cta{text-align:left}
+.cta .acts{margin-top:34px}
+footer{background:var(--k);color:#bdbdbd;padding:30px 48px 44px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px}
+footer b{color:var(--y);font-weight:700}
+@media (prefers-reduced-motion:reduce){.mq div{animation:none}}
+@media (max-width:1100px){.hero{grid-template-columns:1fr}.band{grid-template-columns:1fr 1fr}.owner{grid-column:2}}
+@media (max-width:760px){
+  body{font-size:17px}
+  .top{padding:10px 16px;gap:10px;position:sticky;top:0;z-index:20;background:var(--y)}
+  .top .seal,.top .q{display:none}
+  .logo{font-size:26px}.logo i{display:none}
+  .top .btn{margin-left:auto;min-height:46px;padding:0 16px;font-size:15px}
+  .hero{padding:6px 16px 0;gap:16px}
+  .big{font-size:74px;line-height:.86}
+  .big br.m{display:inline}
+  .trio{display:none}
+  .lede{font-size:22px;margin-top:10px}
+  .lede b{display:none}
+  .tag span{font-size:17px;max-width:min(210px,54vw);top:-15px;padding:6px 8px 5px}
+  .empty .A{font-size:44px}
+  .acts .btn{flex:1;padding:0 12px;font-size:16px}
+  .fine{font-size:14px}
+  .band{grid-template-columns:1fr;padding:0 16px 30px;gap:18px;margin-top:22px}
+  .stage{min-height:210px;order:0}
+  .stage svg{left:-16px;width:calc(100% + 32px);bottom:-10px;height:calc(100% + 40px)}
+  .est{padding-top:0}
+  .est .num{font-size:78px}
+  .est .S{font-size:21px}
+  .owner{grid-column:auto;justify-self:center}
+  section.s{padding:72px 16px}
+  .svc{grid-template-columns:1fr}
+  .svc>div{padding:22px 0 28px;border-bottom:3px solid var(--k)}
+  .h2{font-size:62px}
+  .blk{grid-template-columns:1fr}
+  .blk .l,.blk .r{padding:56px 16px}
+  .steps li{grid-template-columns:44px 1fr;gap:4px 12px}
+  .steps p{grid-column:2;font-size:17px}
+  .steps h3{font-size:56px}
+  .towns{font-size:36px}
+  footer{padding:26px 16px 40px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="#">Saltline <i>marine &amp; repower</i></a>
+  <span class="seal"><b>Exclusive</b> in Essex County, MA</span>
+  <a class="q" href="#quote">Get a quote</a>
+  <a class="btn k" href="tel:+19785550177"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>(978) 555-0177</a>
+</header>
+
+<main id="quote">
+<section class="hero">
+  <div>
+    <h1 class="big A"><span class="kin" id="kin"><span id="kw">Snap</span></span><br class="m"> the old<br>motor.</h1>
+    <p class="lede S"><b>Repowers</b>We'll show you the new one going on.</p>
+    <ol class="trio" id="trio" aria-hidden="true"><li class="on"><b>01</b>Snap</li><li><b>02</b>Read</li><li><b>03</b>Swap</li><li><b>04</b>Send</li></ol>
+  </div>
+  <div>
+    <div class="frame" id="frame">
+      <div class="photo" id="photo">
+        <div class="empty" id="empty">
+          <p class="A">Your motor<br>goes here.</p>
+          <p class="S">Cowling, bracket, ID plate. One photo.</p>
+          <svg viewBox="0 0 220 220" aria-hidden="true"><g fill="#ffd21f"><path d="M64 108C60 74 64 44 88 32C104 24 128 24 148 26C168 30 176 44 174 68L170 108Z"/><path d="M64 112H170L164 134H74Z" fill="#1b36f2"/><path d="M90 134H148L140 196H98Z"/><path d="M80 196H160V204H80Z"/></g></svg>
+        </div>
+      </div>
+      <div class="wipe" id="wipe"></div>
+      <span class="count" id="count">Reading 0/4</span>
+      <span class="demo" id="demo">Demo read</span>
+      <div id="tags"></div>
+    </div>
+    <div class="acts">
+      <label class="btn k" for="file"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 4 7.2 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3.2L15 4zm3 4.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>Snap your motor</label>
+      <button class="btn w" id="sample" type="button">Try a sample</button>
+    </div>
+    <input type="file" id="file" accept="image/*" capture="environment">
+    <p class="fine">The read here is a demo read. The shop checks every motor in person.</p>
+  </div>
+</section>
+
+<section class="band" aria-live="polite">
+  <div class="stage" aria-hidden="true">
+    <svg id="boat" viewBox="0 0 900 330" preserveAspectRatio="xMidYMax meet" style="overflow:visible">
+      <defs>
+        <clipPath id="hc"><path d="M58 132C190 144 450 156 632 160L645 262C500 268 260 262 165 250C118 232 76 182 58 132Z"/></clipPath>
+        <pattern id="wv" width="60" height="14" patternUnits="userSpaceOnUse"><path d="M0 7C15 0 15 0 30 7S45 14 60 7" fill="none" stroke="#3a55ff" stroke-width="3"/></pattern>
+      </defs>
+      <g transform="translate(20 0)">
+        <g fill="#0e0e0e">
+          <path d="M322 44C360 38 410 38 446 44L444 54C410 49 360 49 324 54Z"/>
+          <rect x="349" y="50" width="5" height="56"/><rect x="403" y="50" width="5" height="56"/>
+          <path d="M336 104L346 80L400 80L408 104Z" fill="#ffd21f"/>
+          <path d="M332 158L334 110C334 106 338 104 342 104L410 104C414 104 418 108 418 112L420 158Z"/>
+          <path d="M440 158L444 122L472 122L476 158Z"/>
+        </g>
+        <path d="M76 124C150 134 240 142 300 147" stroke="#0e0e0e" stroke-width="5" fill="none"/>
+        <path d="M58 132C190 144 450 156 632 160L645 262C500 268 260 262 165 250C118 232 76 182 58 132Z" fill="#fffdf6"/>
+        <g clip-path="url(#hc)">
+          <path d="M84 176C230 204 460 222 641 228L650 270L60 270Z" fill="#0e0e0e"/>
+          <path d="M80 168C230 196 460 214 641 220L641 228C460 222 230 204 84 176Z" fill="#ffd21f"/>
+        </g>
+        <g id="oldM">
+          <path d="M632 150L652 150L657 158L657 206L646 206L640 172L632 172Z" fill="#6f6f6f"/>
+          <path d="M672 192L712 192L706 258L680 258Z" fill="#8a8a8a"/>
+          <path d="M664 258H720V264H664Z" fill="#6f6f6f"/>
+          <path d="M676 264H708C712 268 716 271 716 276C716 283 708 287 698 287H680C670 287 664 282 666 275C667 270 671 266 676 264Z" fill="#8a8a8a"/>
+          <path d="M686 287H704L698 308H691Z" fill="#6f6f6f"/>
+          <path d="M722 276C728 262 734 254 731 247C726 250 722 262 722 276ZM722 276C728 290 734 300 731 307C726 302 722 290 722 276Z" fill="#6f6f6f"/>
+          <path d="M658 160L732 160L728 184C727 190 722 192 716 192H670C664 192 660 188 660 182Z" fill="#6f6f6f"/>
+          <path d="M658 160C655 135 655 108 666 98C674 92 686 90 700 90L712 90C726 90 734 100 734 116L732 160Z" fill="#c9c3b4"/>
+          <text x="696" y="134" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="17" fill="#6f6f6f">OLD</text>
+          <circle cx="700" cy="87" r="3.5" fill="none" stroke="#0e0e0e" stroke-width="2.5"/>
+        </g>
+        <g id="newM" style="visibility:hidden">
+          <path d="M632 150L652 150L657 158L657 206L646 206L640 172L632 172Z" fill="#0e0e0e"/>
+          <path d="M672 192L712 192L706 258L680 258Z" fill="#0e0e0e"/>
+          <path d="M664 257H721V264H664Z" fill="#0e0e0e"/>
+          <path d="M676 264H708C712 268 716 271 716 276C716 283 708 287 698 287H680C670 287 664 282 666 275C667 270 671 266 676 264Z" fill="#0e0e0e"/>
+          <path d="M686 287H704L698 308H691Z" fill="#0e0e0e"/>
+          <path d="M722 276C728 262 735 253 732 246C726 249 722 262 722 276ZM722 276C728 290 735 300 732 308C726 303 722 290 722 276Z" fill="#fffdf6"/>
+          <path d="M657 160L733 160L729 186C728 191 723 193 717 193H670C664 193 660 189 660 183Z" fill="#0e0e0e"/>
+          <path d="M657 160C653 132 654 104 667 94C676 87 690 85 706 85L714 85C730 85 738 97 737 116L733 160Z" fill="#0e0e0e"/>
+          <path d="M656 140H736V150H656Z" fill="#ffd21f"/>
+          <text x="698" y="126" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="19" fill="#ffd21f">NEW</text>
+          <circle cx="702" cy="82" r="3.5" fill="none" stroke="#0e0e0e" stroke-width="2.5"/>
+        </g>
+        <g id="hook"><path id="cable" d="M0 -300V0" stroke="#ffd21f" stroke-width="3"/><path d="M0 0V9C0 17 -9 18 -11 11" fill="none" stroke="#ffd21f" stroke-width="4" stroke-linecap="round"/></g>
+      </g>
+      <rect x="-1200" y="244" width="4000" height="90" fill="#142ac4" opacity=".92"/>
+      <rect x="-1200" y="246" width="4000" height="16" fill="url(#wv)"/>
+    </svg>
+  </div>
+  <div class="est">
+    <p class="k">Repower estimate · single 115–200 hp</p>
+    <p class="num A wait" id="num"><span id="lo">$15K</span>–<span id="hi">$30K</span></p>
+    <p class="S">Installed, rigged, sea-trialed. Estimate range, the shop confirms.</p>
+    <div class="row"><button class="btn y" id="send" type="button">Send to Saltline</button></div>
+    <p class="season">Winter is repower season: book a slot.</p>
+  </div>
+  <div class="owner" aria-label="The shop phone receives your request">
+    <div class="scr"><span class="who">Saltline shop phone</span>
+      <p class="idle" id="idle">No new<br>requests</p>
+      <div class="note" id="note"><p class="t">Saltline · just now</p><h4>New repower request</h4><p>150 hp · photo attached</p><div class="th" id="thumb"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div>Repowers<span>/</span>Rigging<span>/</span>Winterizing<span>/</span>Shrink-wrap<span>/</span>Storage<span>/</span>Repair<span>/</span>Repowers<span>/</span>Rigging<span>/</span>Winterizing<span>/</span>Shrink-wrap<span>/</span>Storage<span>/</span>Repair<span>/</span></div></div>
+
+<section class="s" id="services">
+  <p class="eyebrow">What we do</p>
+  <h2 class="h2 A">One yard.<br>Whole boat.</h2>
+  <div class="svc">
+    <div><span class="n">01</span><h3>Repowers</h3><span class="S">Old motor out. New motor on.</span><p>Single and twin outboards, 115 to 300 hp, rigged to match.</p></div>
+    <div><span class="n">02</span><h3>Rigging</h3><span class="S">Every cable, gauge and prop.</span><p>Controls, harnesses and props matched to the new motor.</p></div>
+    <div><span class="n">03</span><h3>Winterizing</h3><span class="S">Done before the freeze.</span><p>Fogging, stabilizer, lower-unit oil, water drained.</p></div>
+    <div><span class="n">04</span><h3>Shrink-wrap</h3><span class="S">Tight, vented, zip door.</span><p>Get aboard all winter without cutting the wrap.</p></div>
+    <div><span class="n">05</span><h3>Storage</h3><span class="S">Inside or out, on the river.</span><p>Spring launch on the date you pick.</p></div>
+    <div><span class="n">06</span><h3>Repair</h3><span class="S">Diagnosed before the quote.</span><p>No-starts, overheating, lower units, fuel systems.</p></div>
+  </div>
+</section>
+
+<section class="blk" id="storage">
+  <div class="l"><p class="eyebrow" style="color:#fffdf6">Haul-out &amp; storage</p><h2 class="h2 A" style="margin-top:14px">Haul.<br>Wrap.<br>Store.</h2></div>
+  <div class="r">
+    <p class="S">We pull her at your slip, and she stays with us until spring.</p>
+    <p>Hydraulic trailer haul-out, pressure wash, winterizing and shrink-wrap, then inside or outside storage on the river. If she's getting a repower, we do it while she sits. No second haul.</p>
+  </div>
+</section>
+
+<section class="s" id="how">
+  <p class="eyebrow">How a repower goes</p>
+  <ol class="steps">
+    <li><span class="n">01</span><h3>Survey</h3><p>Transom, bracket, controls and wiring checked.</p></li>
+    <li><span class="n">02</span><h3>Quote</h3><p>A written price before anything gets unbolted.</p></li>
+    <li><span class="n">03</span><h3>Haul</h3><p>We pick her up and bring her to the shop.</p></li>
+    <li><span class="n">04</span><h3>Install</h3><p>Old motor out, new motor hung, rigged and wired.</p></li>
+    <li><span class="n">05</span><h3>Sea trial</h3><p>On the river with you. Prop and trim dialed in.</p></li>
+  </ol>
+</section>
+
+<section class="s area" id="area">
+  <p class="eyebrow" style="color:#ffd21f">Service area · Merrimack River &amp; North Shore</p>
+  <p class="towns">Newburyport <span>/</span> Amesbury <span>/</span> Salisbury <span>/</span> Newbury <span>/</span> West Newbury <span>/</span> Merrimac <span>/</span> Haverhill <span>/</span> Ipswich <span>/</span> Gloucester</p>
+</section>
+
+<section class="s cta">
+  <p class="eyebrow">Book a slot</p>
+  <h2 class="h2 A">Winter is<br>repower season.</h2>
+  <div class="acts"><a class="btn k" href="tel:+19785550177">Call (978) 555-0177</a><a class="btn w" href="#quote">Snap your motor</a></div>
+</section>
+</main>
+<footer><span><b>Exclusive in Essex County, MA</b> · Saltline Marine &amp; Repower</span><span>Concept demo · fictional business · IC Business Systems</span></footer>
+
+<template id="sampleTpl">
+<svg viewBox="0 0 480 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample photo of an older outboard on a boat transom">
+  <defs>
+    <linearGradient id="spSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8ea5b5"/><stop offset="1" stop-color="#d6d0c2"/></linearGradient>
+    <linearGradient id="spWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#58737e"/><stop offset="1" stop-color="#23353e"/></linearGradient>
+    <linearGradient id="spCowl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3ecd9"/><stop offset=".5" stop-color="#d8cdb1"/><stop offset="1" stop-color="#9a8f73"/></linearGradient>
+    <linearGradient id="spShade" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>
+    <linearGradient id="spMetal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#363b40"/><stop offset=".45" stop-color="#6d7378"/><stop offset="1" stop-color="#2b2f33"/></linearGradient>
+    <linearGradient id="spGel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c9c4b8"/><stop offset=".75" stop-color="#ece8de"/><stop offset="1" stop-color="#d4cfc3"/></linearGradient>
+    <linearGradient id="spRust" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d3f1d" stop-opacity=".9"/><stop offset="1" stop-color="#b8743f" stop-opacity="0"/></linearGradient>
+    <radialGradient id="spVig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></radialGradient>
+    <filter id="spBlur"><feGaussianBlur stdDeviation="3.2"/></filter>
+    <filter id="spSoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="spGrain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .1 0"/></filter>
+  </defs>
+  <g filter="url(#spBlur)">
+    <rect width="480" height="160" fill="url(#spSky)"/>
+    <path d="M0 112C70 100 130 112 210 104C290 96 380 110 480 100V160H0Z" fill="#46534d"/>
+    <rect x="30" y="40" width="9" height="130" fill="#3b332c"/><rect x="430" y="56" width="9" height="120" fill="#3b332c"/>
+    <rect y="150" width="480" height="210" fill="url(#spWater)"/>
+    <g stroke="#a9bec6" stroke-opacity=".35" stroke-width="3"><line x1="20" y1="190" x2="120" y2="190"/><line x1="300" y1="200" x2="460" y2="200"/><line x1="60" y1="240" x2="160" y2="240"/></g>
+  </g>
+  <path d="M0 184L188 172L198 360H0Z" fill="url(#spGel)"/>
+  <path d="M0 176L190 165L191 176L0 188Z" fill="#26292b"/>
+  <path d="M150 196C152 230 150 262 154 300L166 300C162 262 166 228 164 196Z" fill="url(#spRust)"/>
+  <path d="M172 200C173 230 171 250 174 284L181 284C179 250 182 228 180 200Z" fill="url(#spRust)"/>
+  <path d="M176 156H238C246 156 248 162 248 170V262C248 270 244 274 236 274H214L206 198H186V178H176Z" fill="url(#spMetal)"/>
+  <g fill="#e2dccb" opacity=".85"><circle cx="196" cy="262" r="4"/><circle cx="206" cy="268" r="3"/><circle cx="188" cy="252" r="2.5"/><circle cx="222" cy="266" r="3.2"/></g>
+  <g fill="#9a5128"><circle cx="200" cy="256" r="3"/><circle cx="214" cy="262" r="2.4"/><circle cx="184" cy="244" r="2"/><circle cx="230" cy="258" r="2.6"/></g>
+  <circle cx="181" cy="210" r="5" fill="#25292c"/><circle cx="181" cy="236" r="5" fill="#25292c"/>
+  <rect x="207" y="206" width="34" height="23" rx="2" fill="#c3c7c9"/>
+  <g fill="#6c7175"><rect x="210" y="210" width="20" height="2"/><rect x="210" y="215" width="27" height="2"/><rect x="210" y="220" width="16" height="2"/><rect x="210" y="224" width="24" height="2"/></g>
+  <path d="M286 258H372L366 360H292Z" fill="url(#spMetal)"/>
+  <path d="M236 206H458L450 250C448 256 444 260 436 260H252C244 260 240 254 238 248Z" fill="#6c6e6b"/>
+  <path d="M236 206H458L456 214H237Z" fill="#000" opacity=".25"/>
+  <path d="M234 206C228 160 230 92 252 62C270 38 302 30 346 30H402C442 30 464 52 464 90L460 206Z" fill="url(#spCowl)"/>
+  <path d="M234 206C228 160 230 92 252 62C270 38 302 30 346 30H402C442 30 464 52 464 90L460 206Z" fill="url(#spShade)"/>
+  <path d="M236 150C300 140 380 138 462 132V152C380 156 300 160 236 170Z" fill="#4c7a7d" opacity=".42"/>
+  <text x="372" y="122" font-family="Arial Black,sans-serif" font-weight="900" font-size="36" fill="#867d64" opacity=".42">150</text>
+  <g fill="#3f3d36" opacity=".75"><rect x="414" y="52" width="34" height="5" rx="2.5"/><rect x="418" y="62" width="30" height="5" rx="2.5"/><rect x="422" y="72" width="26" height="5" rx="2.5"/></g>
+  <ellipse cx="320" cy="56" rx="86" ry="13" fill="#fff" opacity=".5" filter="url(#spSoft)"/>
+  <path d="M236 200L460 198" stroke="#3a3833" stroke-width="2"/>
+  <rect x="436" y="190" width="14" height="10" rx="2" fill="#3a3a36"/>
+  <path d="M240 236C200 236 172 216 150 192C134 176 114 166 70 164" fill="none" stroke="#151617" stroke-width="8" stroke-linecap="round"/>
+  <path d="M240 246C196 246 166 226 144 202C128 186 108 178 66 176" fill="none" stroke="#1d1e20" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="240" cy="241" rx="7" ry="12" fill="#2a2a2a"/>
+  <rect y="336" width="480" height="24" fill="#2f4752" opacity=".85"/>
+  <rect width="480" height="360" fill="url(#spVig)"/>
+  <rect width="480" height="360" filter="url(#spGrain)" opacity=".6"/>
+</svg>
+</template>
+
+<script src="../vendor/gsap.min.js"></script>
+<script>
+(function(){
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(s){return document.querySelector(s)};
+  var READS = [
+    {t:'2009 four-stroke 150 hp', x:71, y:25, l:true},
+    {t:'~1,400 hrs', x:47, y:60},
+    {t:'Corrosion at transom bracket', x:34, y:76},
+    {t:'Controls: mechanical', x:22, y:45}
+  ];
+  var photo = $('#photo'), tags = $('#tags');
+  var oldM = $('#oldM'), newM = $('#newM'), hook = $('#hook'), kw = $('#kw');
+  var S;
+  function reset(){ S = {hy:-60, oy:0, ny:-400}; }
+  function draw(){
+    hook.setAttribute('transform', 'translate(700 ' + S.hy + ')');
+    oldM.setAttribute('transform', 'translate(0 ' + S.oy + ')');
+    newM.setAttribute('transform', 'translate(0 ' + S.ny + ')');
+  }
+  reset(); draw();
+  READS.forEach(function(r){
+    var d = document.createElement('div'); d.className = 'tag' + (r.l ? ' l' : '');
+    d.style.setProperty('--x', r.x + '%'); d.style.setProperty('--y0', r.y + '%');
+    d.innerHTML = '<i></i><span>' + r.t + '</span>'; tags.appendChild(d);
+  });
+  var tagEls = tags.querySelectorAll('.tag');
+  var tl = null, srcHTML = '';
+  function setPhoto(h){ srcHTML = h; photo.innerHTML = h; }
+  // kinetic headline word: hard swap with a short rise inside its own mask
+  function word(w, blue){
+    var ix = {Snap:0, Read:1, Swap:2, Send:3}[w]; document.querySelectorAll('#trio li').forEach(function(li, i){ li.className = i === ix ? 'on' : ''; });
+    if (RM || !window.gsap) { kw.textContent = w; kw.className = blue ? 'alt' : ''; return; }
+    gsap.to(kw, {yPercent:-110, duration:.22, ease:'power2.in', onComplete:function(){
+      kw.textContent = w; kw.className = blue ? 'alt' : '';
+      gsap.fromTo(kw, {yPercent:110}, {yPercent:0, duration:.32, ease:'power3.out'});
+    }});
+  }
+  function run(){
+    if (tl) tl.kill();
+    reset(); draw();
+    gsap.set(tagEls, {scale:0}); gsap.set('#count,#demo', {visibility:'hidden'});
+    gsap.set(oldM, {visibility:'visible'}); gsap.set(newM, {visibility:'hidden'});
+    gsap.set('#note', {visibility:'hidden'}); $('#idle').style.display = '';
+    $('#num').classList.add('wait'); $('#send').textContent = 'Send to Saltline'; $('#send').disabled = false;
+    var c = {lo:0, hi:0}, n = {v:0};
+    tl = gsap.timeline({onUpdate:draw});
+    tl.call(word, ['Read', true])
+      .set('#count', {visibility:'visible'})
+      .fromTo('#wipe', {x:-12}, {x:function(){ return $('#frame').offsetWidth + 2; }, duration:1.3, ease:'power1.inOut'})
+      .set('#demo', {visibility:'visible'});
+    READS.forEach(function(r, i){
+      tl.to(tagEls[i], {scale:1, duration:.32, ease:'back.out(2.4)'}, i ? '+=.14' : '+=.05')
+        .call(function(){ $('#count').textContent = 'Reading ' + (i + 1) + '/4'; }, null, '<');
+    });
+    tl.call(function(){ $('#count').textContent = 'Read 4/4'; })
+      .call(word, ['Swap', false], null, '+=.3')
+      .to(S, {hy:87, duration:.7, ease:'power2.inOut'})
+      .to(S, {hy:-320, oy:-407, duration:1.1, ease:'power2.in'})
+      .set(oldM, {visibility:'hidden'})
+      .set(newM, {visibility:'visible'})
+      .set(S, {ny:-407, hy:-325})
+      .to(S, {ny:0, hy:82, duration:1.15, ease:'power2.out'})
+      .to(S, {hy:-60, duration:.55, ease:'power2.in'})
+      .call(function(){ $('#num').classList.remove('wait'); })
+      .fromTo(c, {lo:0, hi:0}, {lo:15, hi:30, immediateRender:false, duration:.8, ease:'power2.out', onUpdate:function(){ $('#lo').textContent = '$' + Math.round(c.lo) + 'K'; $('#hi').textContent = '$' + Math.round(c.hi) + 'K'; }}, '<')
+      ;
+    if (RM) { tl.progress(1); kw.textContent = 'Swap'; kw.className = ''; }
+    if (innerWidth < 761 && !location.hash) tl.call(function(){ $('.band').scrollIntoView({behavior: RM ? 'auto' : 'smooth', block:'start'}); }, null, 3.2);
+  }
+  function sample(){ setPhoto($('#sampleTpl').innerHTML); run(); }
+  $('#sample').addEventListener('click', sample);
+  $('#file').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0]; if (!f) return;
+    setPhoto('<img alt="Your motor photo" src="' + URL.createObjectURL(f) + '">'); run();
+  });
+  function send(instant){
+    var b = $('#send'); b.textContent = 'Sent ✓'; b.disabled = true;
+    $('#thumb').innerHTML = srcHTML.replace(/id="sp/g,'id="tp').replace(/url\(#sp/g,'url(#tp');
+    $('#idle').style.display = 'none'; gsap.set('#note', {visibility:'visible'});
+    document.querySelectorAll('#trio li').forEach(function(li, i){ li.className = i === 3 ? 'on' : ''; });
+    if (instant || RM) return;
+    gsap.fromTo('#note', {y:-80, rotate:-3}, {y:0, rotate:0, duration:.7, ease:'back.out(1.8)'});
+  }
+  $('#send').addEventListener('click', function(){ send(false); });
+  var h = location.hash;
+  if (h === '#done' || h === '#read') { sample(); tl.progress(1); draw(); word('Swap'); if (h === '#done') send(true); }
+  else if (h === '#run') setTimeout(sample, 700);
+})();
+</script>
+</body>
+</html>

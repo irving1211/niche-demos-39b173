@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halyard Rigging &amp; Crane · Machinery moving, Merrimack Valley MA</title>
+<meta name="description" content="Machinery moving, plant relocations, millwright work and crane lifts in the Merrimack Valley. Watch a 38,000 lb CNC move, hour by hour.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06080b;--bg2:#0c1016;--bg3:#121821;--ink:#efebe3;--mut:#949aa3;--acc:#ff7a1a;--acc2:#ffb36b}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:Barlow,system-ui,sans-serif;font-size:17px;line-height:1.5;overflow-x:hidden}
+a{color:inherit}
+.disp{font-family:"Big Shoulders Display",Impact,sans-serif;letter-spacing:.01em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:48px;padding:0 22px;border-radius:4px;font:600 16px/1 Barlow,sans-serif;text-decoration:none;cursor:pointer;border:0;white-space:nowrap}
+.btn-acc{background:var(--acc);color:#140800}
+.btn-ghost{background:rgba(255,255,255,.1);color:var(--ink);backdrop-filter:blur(6px)}
+.btn svg{width:18px;height:18px}
+/* top bar */
+.bar{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:linear-gradient(#06080bdd,#06080b00)}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.logo b{font:900 28px/1 "Big Shoulders Display",sans-serif;letter-spacing:.08em}
+.logo span{font-size:13px;color:var(--mut);letter-spacing:.14em;text-transform:uppercase}
+.bar .r{display:flex;gap:10px;align-items:center}
+.bar .num{font-weight:600;font-size:16px;text-decoration:none;color:var(--ink);padding:0 10px;min-height:44px;display:inline-flex;align-items:center}
+/* story */
+#story{position:relative;height:100vh;height:100svh;overflow:hidden;background:#0a0e15}
+#gl,#poster{position:absolute;inset:0;width:100%;height:100%;display:block}
+#poster{z-index:0}
+#gl{z-index:1}
+.scrim{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,#06080bcc 0%,#06080b55 34%,#06080b00 55%),linear-gradient(0deg,#06080bee 0%,#06080b00 34%)}
+.hero{position:absolute;z-index:5;left:44px;top:112px;width:min(560px,46vw)}
+.kick{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc2);font-weight:600}
+.hero h1{font:900 clamp(44px,5.6vw,84px)/.92 "Big Shoulders Display",sans-serif;margin:14px 0 18px;text-transform:uppercase}
+.hero p.lede{color:#cfcac0;font-size:19px;max-width:440px}
+.hero .ctas{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.seal{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.seal i{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffcf9a,var(--acc) 55%,#8a3a00);display:inline-block;box-shadow:inset 0 0 0 4px #06080b55}
+.clock{position:absolute;z-index:5;left:44px;bottom:40px;width:min(620px,60vw)}
+.clock .t{font:800 clamp(80px,9vw,150px)/.85 "Big Shoulders Display",sans-serif;font-variant-numeric:tabular-nums;color:var(--ink)}
+.clock .t em{font-style:normal;color:var(--acc)}
+.mask{overflow:hidden;display:block}
+.clock .h{font:800 30px/1.1 "Big Shoulders Display",sans-serif;text-transform:uppercase;margin-top:8px;letter-spacing:.03em}
+.clock .d{color:#c9c4ba;font-size:18px;margin-top:4px;max-width:520px;min-height:2.9em}
+.rail{display:flex;gap:6px;margin-top:16px}
+.rail span{flex:1;height:4px;background:#ffffff26;border-radius:2px;position:relative}
+.rail span.on{background:var(--acc)}
+.rail span b{position:absolute;top:10px;left:0;font:600 12px/1 Barlow;color:var(--mut);letter-spacing:.04em}
+.rail span.on b{color:var(--ink)}
+.read{position:absolute;z-index:5;right:44px;bottom:48px;text-align:right}
+.read small{display:block;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.read strong{display:block;font:800 44px/1 "Big Shoulders Display",sans-serif;color:var(--acc2);font-variant-numeric:tabular-nums}
+.cue{position:absolute;z-index:5;right:44px;bottom:150px;display:flex;align-items:center;gap:14px;font-weight:600;font-size:15px;letter-spacing:.12em;text-transform:uppercase}
+.cue .ln{width:2px;height:64px;background:#ffffff30;position:relative;overflow:hidden}
+.cue .ln::after{content:"";position:absolute;left:0;top:-30px;width:2px;height:30px;background:var(--acc);animation:drip 1.6s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes drip{to{top:64px}}
+/* sections */
+section.blk{padding:110px 44px;max-width:1280px;margin:0 auto}
+.sh{font:900 clamp(40px,5vw,72px)/.95 "Big Shoulders Display",sans-serif;text-transform:uppercase}
+.sh em{font-style:normal;color:var(--acc)}
+.sub{color:#bdb8ae;font-size:19px;max-width:620px;margin-top:14px}
+/* plan */
+#plan{background:radial-gradient(1200px 600px at 80% 0%,#1a2230 0%,var(--bg) 60%)}
+.plan{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;margin-top:48px;align-items:start}
+.fld{margin-bottom:28px}
+.fld label{display:flex;justify-content:space-between;align-items:baseline;font-weight:600;font-size:16px;color:#d8d3ca}
+.fld label output{font:800 34px/1 "Big Shoulders Display",sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--acc) var(--v,50%),#ffffff22 var(--v,50%))}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:#ffffff22}
+input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--acc)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--ink);margin-top:-10px;box-shadow:0 2px 10px #0008}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--ink);border:0}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.seg button{min-height:52px;border:0;border-radius:4px;background:#ffffff12;color:var(--ink);font:600 16px Barlow;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ink);color:#0b0d10}
+.out{background:var(--bg3);border-radius:6px;padding:34px;position:relative;overflow:hidden}
+.out .lab{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.out .crew{font:900 64px/.95 "Big Shoulders Display",sans-serif;text-transform:uppercase;margin:10px 0 6px}
+.out .eq{font-size:21px;font-weight:600;color:var(--acc2)}
+.out ul{list-style:none;margin:20px 0 0;display:grid;gap:10px}
+.out li{display:flex;gap:12px;color:#d1ccc3;font-size:17px}
+.out li::before{content:"";flex:0 0 8px;height:8px;margin-top:9px;background:var(--acc);border-radius:1px}
+.out .est{display:flex;gap:28px;margin-top:24px}
+.out .est div small{display:block;font-size:13px;color:var(--mut);letter-spacing:.12em;text-transform:uppercase}
+.out .est div b{font:800 36px/1 "Big Shoulders Display",sans-serif}
+.send{display:flex;gap:12px;align-items:center;margin-top:28px;flex-wrap:wrap}
+.send small{color:var(--mut);font-size:14px}
+/* phone + notification (our own card design) */
+.ph{position:relative;width:260px;height:520px;border-radius:38px;background:#15191f;padding:12px;margin:40px auto 0;box-shadow:0 40px 80px #000a,inset 0 0 0 2px #2a3038}
+.ph .scr{width:100%;height:100%;border-radius:28px;overflow:hidden;position:relative;background:linear-gradient(160deg,#1d2633,#0b0f15)}
+.ph .tm{position:absolute;top:58px;width:100%;text-align:center;font:800 64px/1 "Big Shoulders Display";color:#ffffffd0}
+.ph .dt{position:absolute;top:128px;width:100%;text-align:center;font-size:14px;color:#ffffff90}
+.card{position:absolute;left:10px;right:10px;top:176px;background:#f4efe6;color:#14110d;border-radius:14px;padding:14px 14px 12px;transform:translateY(-360px);box-shadow:0 18px 40px #0009}
+.card.in{transform:none;transition:transform .7s cubic-bezier(.2,1.3,.4,1)}
+.card .hd{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.card .hd i{width:20px;height:20px;border-radius:5px;background:var(--acc);display:grid;place-items:center;font:900 13px "Big Shoulders Display";color:#140800;font-style:normal}
+.card .hd span{margin-left:auto;font-weight:500;color:#6b655c;letter-spacing:0;text-transform:none}
+.card h4{font:800 22px/1.05 "Big Shoulders Display";margin:8px 0 4px;text-transform:uppercase}
+.card p{font-size:14px;line-height:1.35;color:#3b362f}
+.card .acts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.card .acts b{background:#14110d;color:#f4efe6;border-radius:8px;text-align:center;font-size:13px;padding:9px 0}
+.card .acts b+b{background:#e2dbcf;color:#14110d}
+/* services */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;background:var(--bg)}
+.svc div{background:var(--bg2);padding:30px 28px 34px}
+.svc h3{font:800 28px/1 "Big Shoulders Display";text-transform:uppercase;margin-bottom:10px}
+.svc h3 em{font-style:normal;color:var(--acc);margin-right:8px}
+.svc p{color:#bab5ab}
+.band{background:var(--acc);color:#140800}
+.band .in{max-width:1280px;margin:0 auto;padding:44px;display:flex;gap:32px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.band p{font:800 clamp(26px,3vw,38px)/1.05 "Big Shoulders Display";text-transform:uppercase;max-width:860px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:40px}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tags span{background:#ffffff10;padding:10px 16px;border-radius:40px;font-size:16px}
+.call{text-align:center;padding:120px 44px 90px;background:radial-gradient(700px 360px at 50% 100%,#3a1c06 0%,var(--bg) 70%)}
+.call .big{font:900 clamp(56px,9vw,140px)/.9 "Big Shoulders Display";display:block;text-decoration:none;margin:18px 0 26px;font-variant-numeric:tabular-nums}
+footer{padding:28px 44px 40px;color:var(--mut);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1280px;margin:0 auto}
+/* reduced motion timeline */
+.steps{display:none}
+@media (prefers-reduced-motion: reduce){
+  .cue,.read{display:none}
+  .steps{display:block;padding:80px 44px;max-width:1000px;margin:0 auto}
+  .steps ol{list-style:none;margin-top:30px;display:grid;gap:4px}
+  .steps li{display:grid;grid-template-columns:120px 1fr;gap:20px;background:var(--bg2);padding:20px 24px}
+  .steps li b{font:800 40px/1 "Big Shoulders Display";color:var(--acc)}
+  .steps li h3{font:800 24px/1.1 "Big Shoulders Display";text-transform:uppercase}
+  .steps li p{color:#c3beb4}
+  .card{transform:none}
+}
+/* phone */
+@media (max-width:760px){
+  body{font-size:17px}
+  .bar{padding:10px 16px}
+  .logo b{font-size:24px}.logo span{display:none}
+  .bar .num{display:none}
+  .bar .btn{min-height:44px;padding:0 14px}
+  .scrim{background:linear-gradient(180deg,#06080bf0 0%,#06080b88 27%,#06080b00 40%),linear-gradient(0deg,#06080bf5 0%,#06080bcc 22%,#06080b00 40%)}
+  .hero{left:16px;right:16px;top:66px;width:auto}
+  .kick{font-size:12px}
+  .hero h1{font-size:44px;margin:8px 0 10px}
+  .hero p.lede{display:none}
+  .hero .ctas{margin-top:0;gap:8px;display:grid;grid-template-columns:1fr 1.25fr}
+  .hero .ctas .btn{padding:0 10px}
+  .seal{display:none}
+  .clock{left:16px;right:16px;bottom:22px;width:auto}
+  .clock .t{font-size:86px}
+  .clock .h{font-size:25px}
+  .clock .d{font-size:16px;min-height:3em}
+  .rail span b{display:none}
+  .read{right:16px;bottom:auto;top:auto;display:none}
+  .cue{right:16px;top:auto;bottom:206px;font-size:12px;gap:8px}
+  .cue .ln{height:40px}
+  section.blk{padding:72px 16px}
+  .plan{grid-template-columns:1fr;gap:30px}
+  .out{padding:24px}
+  .out .crew{font-size:48px}
+  .svc{grid-template-columns:1fr}
+  .band .in{padding:32px 16px}
+  .two{grid-template-columns:1fr;gap:40px}
+  .call{padding:80px 16px 60px}
+  footer{padding:24px 16px 36px}
+  .steps{padding:60px 16px}
+  .steps li{grid-template-columns:1fr;gap:6px}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="logo" href="#top"><b>HALYARD</b><span>Rigging &amp; Crane</span></a>
+  <div class="r">
+    <a class="num" href="tel:+19785550163">(978) 555-0163</a>
+    <a class="btn btn-acc" href="tel:+19785550163"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call</a>
+  </div>
+</header>
+
+<section id="story" aria-label="The move, hour by hour">
+  <svg id="poster" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="pk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#121a28"/><stop offset=".62" stop-color="#1c2232"/><stop offset=".63" stop-color="#0d1015"/><stop offset="1" stop-color="#050608"/></linearGradient>
+      <radialGradient id="pd" cx=".86" cy=".58" r=".5"><stop offset="0" stop-color="#ff9a4a" stop-opacity=".55"/><stop offset="1" stop-color="#ff9a4a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="pm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8e928f"/><stop offset=".5" stop-color="#d9dcd6"/><stop offset="1" stop-color="#a7aaa5"/></linearGradient>
+    </defs>
+    <rect width="1440" height="900" fill="url(#pk)"/><rect width="1440" height="900" fill="url(#pd)"/>
+    <g transform="translate(980 0)"><path d="M0 560 L250 120 L262 126 L18 562Z" fill="#ff7a1a"/><rect x="-60" y="540" width="170" height="40" fill="#d76516"/><rect x="-130" y="575" width="300" height="40" fill="#1b1f25"/><line x1="255" y1="124" x2="255" y2="330" stroke="#aab" stroke-width="2"/><rect x="246" y="330" width="18" height="26" fill="#ff7a1a"/></g>
+    <g transform="translate(640 420)"><rect x="0" y="40" width="240" height="160" rx="6" fill="url(#pm)"/><rect x="0" y="40" width="240" height="26" fill="#2b2f35"/><rect x="0" y="146" width="240" height="7" fill="#ff7a1a"/><rect x="34" y="78" width="74" height="58" fill="#10151b"/><rect x="132" y="78" width="74" height="58" fill="#10151b"/><rect x="-6" y="200" width="252" height="16" fill="#2b2f35"/></g>
+  </svg>
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="scrim"></div>
+
+  <div class="hero" id="hero">
+    <div class="kick">Machinery moving · Rigging · Crane lifts</div>
+    <h1>38,000 lb.<br>One CNC.<br>One day.</h1>
+    <p class="lede">We move, set and level production machines across the Merrimack Valley. Scroll and watch a real-size job, hour by hour.</p>
+    <div class="ctas">
+      <a class="btn btn-acc" href="tel:+19785550163">Call now</a>
+      <a class="btn btn-ghost" href="#plan">Plan your move</a>
+    </div>
+    <div class="seal"><i></i>Exclusive in Essex County, MA</div>
+  </div>
+
+  <div class="cue" id="cue"><span class="ln"></span>Scroll to watch the move</div>
+
+  <div class="read" id="read"><small id="rl">Crew on site</small><strong id="rv">4 riggers</strong></div>
+
+  <div class="clock" aria-live="polite">
+    <div class="t" id="clk">06<em>:</em>00</div>
+    <span class="mask"><div class="h" id="sh">Crew + crane on site</div></span>
+    <span class="mask"><div class="d" id="sd">4 riggers, a 60-ton crane and a hydraulic gantry, staged before your first shift.</div></span>
+    <div class="rail" id="rail"></div>
+  </div>
+</section>
+
+<section class="steps" aria-label="The move, step by step">
+  <h2 class="sh">The move, <em>hour by hour</em></h2>
+  <ol id="stepsList"></ol>
+</section>
+
+<section class="blk" id="plan">
+  <div class="kick">Your turn</div>
+  <h2 class="sh">Plan your <em>move</em></h2>
+  <p class="sub">Four numbers. We'll show you the crew and equipment a job like yours usually takes. Then send it to us and we'll call you back.</p>
+  <div class="plan">
+    <div>
+      <div class="fld"><label for="w">Machine weight <output id="wo">38,000 lb</output></label><input id="w" type="range" min="2000" max="120000" step="1000" value="38000"></div>
+      <div class="fld"><label for="mi">Distance to new site <output id="mio">21 mi</output></label><input id="mi" type="range" min="0" max="300" step="1" value="21"></div>
+      <div class="fld"><label for="dw">Narrowest door <output id="dwo">12 ft 0 in</output></label><input id="dw" type="range" min="48" max="240" step="6" value="144"></div>
+      <div class="fld"><label>New floor</label><div class="seg" id="fl"><button type="button" aria-pressed="true" data-v="ground">Ground floor</button><button type="button" aria-pressed="false" data-v="upper">Upper floor</button></div></div>
+    </div>
+    <div>
+      <div class="out" id="out">
+        <div class="lab">Sample plan</div>
+        <div class="crew" id="pc">4-person crew</div>
+        <div class="eq" id="pe">30-ton hydraulic gantry or 60-ton crane</div>
+        <ul id="pn"></ul>
+        <div class="est"><div><small>Truck</small><b id="pt">Lowboy</b></div><div><small>On site</small><b id="pd">est. 1 day</b></div></div>
+      </div>
+      <div class="send"><button class="btn btn-acc" id="sendBtn" type="button">Send to Halyard</button><small>Demo only: nothing is sent.</small></div>
+      <div class="ph" aria-label="What lands on the owner's phone">
+        <div class="scr">
+          <div class="tm">2:14</div><div class="dt">Tuesday</div>
+          <div class="card" id="card">
+            <div class="hd"><i>H</i>Halyard jobs<span>now</span></div>
+            <h4>New move request</h4>
+            <p id="cardTxt">38,000 lb machine · 21 mi · ground floor · door 12 ft. Suggested: 4-person crew, 60-ton crane.</p>
+            <div class="acts"><b>Call back</b><b>Book site walk</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="svc">
+  <div class="kick">What we do</div>
+  <h2 class="sh">Heavy, careful, <em>on schedule</em></h2>
+  <div class="svc">
+    <div><h3><em>01</em>Machinery moving</h3><p>CNCs, presses, molders and lines. Across the aisle or across the state.</p></div>
+    <div><h3><em>02</em>Plant relocations</h3><p>Whole shops moved in phases, so you keep shipping parts while we work.</p></div>
+    <div><h3><em>03</em>Millwright work</h3><p>Setting, leveling, anchoring and grouting. Ready for your techs to hook up.</p></div>
+    <div><h3><em>04</em>Crane lifts</h3><p>60- and 100-ton cranes with a lift plan for every pick. Rooftop units too.</p></div>
+    <div><h3><em>05</em>Skating &amp; jacking</h3><p>Low doors, tight aisles, upper floors. We bring the skates, jacks and gantry.</p></div>
+    <div><h3><em>06</em>Storage</h3><p>Heated indoor storage while your new building gets finished.</p></div>
+  </div>
+</section>
+
+<div class="band"><div class="in"><p>Fully insured for rigging and cargo. Certificate of insurance sent before we show up. Lift plan on every crane pick.</p><a class="btn" style="background:#140800;color:#ffb36b" href="tel:+19785550163">Ask for our COI</a></div></div>
+
+<section class="blk">
+  <div class="two">
+    <div><div class="kick">Who we move for</div><h2 class="sh" style="font-size:clamp(34px,4vw,54px)">Industries</h2>
+      <div class="tags"><span>Machine shops &amp; CNC</span><span>Plastics &amp; molding</span><span>Food &amp; beverage</span><span>Medical device</span><span>Printing</span><span>Labs &amp; cleanrooms</span><span>Electronics</span><span>Warehousing</span></div></div>
+    <div><div class="kick">Where</div><h2 class="sh" style="font-size:clamp(34px,4vw,54px)">Service area</h2>
+      <div class="tags"><span>Lowell</span><span>Lawrence</span><span>Haverhill</span><span>Andover</span><span>Methuen</span><span>Newburyport</span><span>Peabody</span><span>Wilmington</span><span>Nashua, NH</span><span>Salem, NH</span></div>
+      <div class="seal" style="display:inline-flex"><i></i>Exclusive in Essex County, MA</div></div>
+  </div>
+</section>
+
+<section class="call">
+  <div class="kick">Talk to a rigger, not a call center</div>
+  <a class="big" href="tel:+19785550163">(978) 555-0163</a>
+  <a class="btn btn-acc" href="#plan">Plan your move</a>
+</section>
+<footer><span>Halyard Rigging &amp; Crane · Merrimack Valley, MA</span><span>Concept demo · fictional business · IC Business Systems</span></footer>
+
+<script src="../vendor/gsap.min.js"></script>
+<script src="../vendor/ScrollTrigger.min.js"></script>
+<script>
+// ---------- shared story data ----------
+window.STAGES=[
+ {t:'06:00',m:360,h:'Crew + crane on site',d:'4 riggers, a 60-ton crane and a hydraulic gantry, staged before your first shift.',rl:'Crew on site',rv:'4 riggers'},
+ {t:'07:30',m:450,h:'Disconnected, rigged',d:'Your electrician kills power. We drain coolant, jack it up and set it on skates.',rl:'Jacked',rv:'+2 in'},
+ {t:'09:10',m:550,h:'Skated to the dock',d:'140 ft across the shop floor on machine skates. Your aisles stay open.',rl:'Skated',rv:'140 ft'},
+ {t:'10:40',m:640,h:'Lifted and loaded',d:'The 60-ton crane picks 38,000 lb onto the lowboy, under 70% of its chart.',rl:'Hook load',rv:'38,000 lb'},
+ {t:'13:00',m:780,h:'On the road',d:'Lowell to Haverhill, 21 miles on I-495. Chained, tarped and permitted.',rl:'Route',rv:'21 mi'},
+ {t:'14:30',m:870,h:'Set in the new plant',d:'The gantry rolls it off the trailer and onto the new pad.',rl:'Gantry',rv:'30 ton'},
+ {t:'16:00',m:960,h:'Leveled and anchored',d:'Leveled to 0.0005 in/ft, anchors torqued. Ready for power tomorrow.',rl:'Level',rv:'0.0005 in/ft'}
+];
+window.STORY={p:0};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=s=>document.querySelector(s);
+// rail
+const rail=$('#rail');STAGES.forEach(s=>{const e=document.createElement('span');e.innerHTML='<b>'+s.t+'</b>';rail.appendChild(e)});
+// reduced-motion list
+$('#stepsList').innerHTML=STAGES.map(s=>`<li><b>${s.t}</b><div><h3>${s.h}</h3><p>${s.d}</p></div></li>`).join('');
+let cur=-1;
+function fmt(min){const h=Math.floor(min/60),m=Math.round(min%60);return String(h).padStart(2,'0')+'<em>:</em>'+String(m).padStart(2,'0')}
+function ui(p){
+  const hk=Math.min(1,Math.max(0,p/.3));const hc='inset(0 0 '+(hk*100)+'% 0)';
+  const he=document.getElementById('hero'),ce=document.getElementById('cue');he.style.clipPath=hc;he.style.transform='translateY('+(-40*hk)+'px)';ce.style.clipPath=hc;he.style.visibility=hk>=1?'hidden':'visible';
+  const i=Math.min(5,Math.floor(p)),f=p-i;
+  const a=STAGES[i],b=STAGES[Math.min(6,i+1)];
+  const cf=Math.min(1,Math.max(0,(f-.2)/.65));
+  const min=p>=6?STAGES[6].m:a.m+(b.m-a.m)*cf;
+  $('#clk').innerHTML=fmt(Math.round(min/10)*10===min?min:Math.floor(min));
+  const si=p>=6?6:(f>.15?i+1:i);
+  if(si!==cur){
+    cur=si;const s=STAGES[si];
+    $('#sh').textContent=s.h;$('#sd').textContent=s.d;$('#rl').textContent=s.rl;$('#rv').textContent=s.rv;
+    [...rail.children].forEach((e,k)=>e.classList.toggle('on',k<=si));
+    if(window.gsap&&!reduce){gsap.fromTo('#sh',{yPercent:110},{yPercent:0,duration:.3,ease:'power3.out'});gsap.fromTo('#sd',{yPercent:110},{yPercent:0,duration:.35,ease:'power3.out'});gsap.fromTo('#rv',{y:20},{y:0,duration:.4})}
+  }
+}
+ui(0);
+addEventListener('scroll',()=>{document.querySelector('.bar').style.background=scrollY>innerHeight*7.2?'#06080b':''},{passive:true});
+if(!reduce&&window.gsap){
+  gsap.registerPlugin(ScrollTrigger);gsap.ticker.lagSmoothing(0);
+  gsap.to(STORY,{p:6,ease:'none',scrollTrigger:{trigger:'#story',start:'top top',end:()=>'+='+innerHeight*7,pin:true,scrub:.7,anticipatePin:1},onUpdate:()=>ui(STORY.p)});
+}
+// ---------- plan tool ----------
+function plan(w,mi,door,floor){
+  let crew,eq,days=1;const notes=[];
+  if(w<=8000){crew=3;eq='Machine skates + 15,000 lb forklift'}
+  else if(w<=20000){crew=4;eq='Machine skates + 30-ton hydraulic gantry'}
+  else if(w<=45000){crew=4;eq='30-ton hydraulic gantry or 60-ton crane'}
+  else if(w<=80000){crew=5;eq='100-ton crane + jack-and-slide';days+=.5}
+  else{crew=6;eq='200-ton crane + hydraulic jacking';days+=1}
+  if(floor==='upper'){crew+=1;days+=1;notes.push('Upper floor: crane pick through a wall opening or freight elevator. We check floor load first.')}
+  if(door<96)notes.push('Door under 8 ft: we measure the machine on the site walk. The frame may need to come out.');
+  else notes.push('Door looks wide enough. We confirm on a free site walk.');
+  if(mi>150){days+=1;notes.push('Long haul: overnight in our secured yard.')}
+  if(w>40000)notes.push('Over 40,000 lb on the road: oversize permit, we file it.');
+  if(mi===0)notes.push('Same building: skate and set, no trailer.');
+  const truck=mi===0?'None':w>40000?'Lowboy + permit':w>12000?'Step-deck':'Liftgate truck';
+  return{crew:crew+'-person crew',eq,notes,truck,days:'est. '+(days===1?'1 day':days+' days')};
+}
+const W=$('#w'),MI=$('#mi'),DW=$('#dw');let floor='ground';
+function fill(el){el.style.setProperty('--v',((el.value-el.min)/(el.max-el.min)*100)+'%')}
+function upd(){
+  const w=+W.value,mi=+MI.value,dw=+DW.value;[W,MI,DW].forEach(fill);
+  $('#wo').textContent=w.toLocaleString()+' lb';$('#mio').textContent=mi+' mi';$('#dwo').textContent=Math.floor(dw/12)+' ft '+(dw%12)+' in';
+  const r=plan(w,mi,dw,floor);$('#pc').textContent=r.crew;$('#pe').textContent=r.eq;$('#pt').textContent=r.truck;$('#pd').textContent=r.days;
+  $('#pn').innerHTML=r.notes.map(n=>'<li>'+n+'</li>').join('');
+  $('#cardTxt').textContent=`${w.toLocaleString()} lb machine · ${mi} mi · ${floor} floor · door ${Math.floor(dw/12)} ft. Suggested: ${r.crew}, ${r.eq.toLowerCase()}.`;
+}
+[W,MI,DW].forEach(e=>e.addEventListener('input',upd));
+document.querySelectorAll('#fl button').forEach(b=>b.addEventListener('click',()=>{floor=b.dataset.v;document.querySelectorAll('#fl button').forEach(x=>x.setAttribute('aria-pressed',x===b));upd()}));
+upd();
+$('#sendBtn').addEventListener('click',()=>{const c=$('#card');c.classList.remove('in');void c.offsetWidth;c.classList.add('in');$('#sendBtn').textContent='Sent: Halyard will call you'});
+</script>
+
+<script type="importmap">{"imports":{"three":"../vendor/three.module.js","three/addons/":"../vendor/addons/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const canvas=document.getElementById('gl');
+const phone=()=>innerWidth<760;
+let renderer;
+try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});if(!renderer.getContext())throw 0}catch(e){canvas.style.display='none';throw e}
+document.getElementById('poster').style.display='none';
+renderer.setPixelRatio(Math.min(devicePixelRatio,phone()?1.5:2));
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+
+const scene=new THREE.Scene();
+const sky=new THREE.Color('#0b111b');scene.background=sky;scene.fog=new THREE.Fog(sky,30,95);
+const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(new RoomEnvironment(),.04).texture;scene.environmentIntensity=.28;
+const camera=new THREE.PerspectiveCamera(36,1,.1,300);
+
+// lights
+scene.add(new THREE.HemisphereLight('#4a5d80','#080808',.55));
+const sun=new THREE.DirectionalLight('#ffa860',2.4);sun.position.set(40,14,22);sun.castShadow=true;
+sun.shadow.mapSize.set(phone()?1024:2048,phone()?1024:2048);
+Object.assign(sun.shadow.camera,{left:-22,right:22,top:16,bottom:-10,near:1,far:120});sun.shadow.bias=-.0004;
+scene.add(sun,sun.target);
+const fill=new THREE.DirectionalLight('#7f9cc8',.35);fill.position.set(-20,12,18);scene.add(fill);
+
+// materials
+const M=(c,r=.6,m=.1,ex={})=>new THREE.MeshStandardMaterial({color:c,roughness:r,metalness:m,...ex});
+const paint=M('#d8dbd5',.42,.25),dark=M('#24282e',.55,.5),steel=M('#3a3f46',.4,.8),acc=M('#ff7a1a',.38,.3),glass=M('#0c141b',.08,.9),rubber=M('#111214',.9,0),conc=M('#2b2e33',.85,0),concB=M('#3b4440',.35,.05),asph=M('#17191c',.95,0),line=M('#c9a227',.6,0),white=M('#cfd2cc',.6,0);
+const box=(w,h,d,mat,x=0,y=0,z=0,par)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.castShadow=m.receiveShadow=true;if(par)par.add(m);return m};
+const cyl=(r,h,mat,seg=20)=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,seg),mat);m.castShadow=true;return m};
+
+// ground + plants + road
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(400,200),M('#0d0f12',.95,0));ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
+box(19,.08,13,conc,-9.6,.04,0.5,scene);                       // plant A floor
+box(18,.08,13,concB,66,.04,0.5,scene);                        // plant B floor (new epoxy)
+box(46,.04,5.2,asph,34,.02,1.2,scene);box(14,.04,10,asph,6,.02,1,scene); // road + yard
+for(let x=13;x<56;x+=3)box(1.4,.02,.12,line,x,.05,-1.0,scene);
+// corrugated wall texture
+function corr(base,hi,lo,rx,ry){const c=document.createElement('canvas');c.width=64;c.height=8;const g=c.getContext('2d');g.fillStyle=base;g.fillRect(0,0,64,8);for(let x=0;x<64;x+=16){g.fillStyle=hi;g.fillRect(x,0,5,8);g.fillStyle=lo;g.fillRect(x+9,0,4,8)}const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rx,ry);return t}
+const wallA=new THREE.MeshStandardMaterial({map:corr('#262c34','#323944','#1b2027',14,1),roughness:.7,metalness:.35});
+const wallB=new THREE.MeshStandardMaterial({map:corr('#2f3639','#3b4347','#22282b',10,1),roughness:.7,metalness:.35});
+// plant A: back wall, door portal, trusses, safety lines
+box(19,10,.3,wallA,-9.6,5,-6,scene);
+box(.3,10,4.4,wallA,-0.3,5,-3.8,scene);
+box(.45,8,.45,steel,-0.3,4,-1.5,scene);box(.45,8,.45,steel,-0.3,4,3.7,scene);box(.5,.7,5.7,steel,-0.3,7.6,1.1,scene);
+const drum=cyl(.45,5.4,M('#59606a',.5,.6));drum.rotation.x=Math.PI/2;drum.position.set(-0.3,6.9,1.1);scene.add(drum);
+for(let x=-18;x<0;x+=4.5){box(.25,.5,13,steel,x,9.6,.5,scene);box(.35,9.6,.35,steel,x,4.8,-5.7,scene)}
+box(17,.02,.12,line,-9.6,.09,-2.2,scene);box(17,.02,.12,line,-9.6,.09,4.6,scene);
+// plant B
+box(18,10,.3,wallB,66,5,-6,scene);box(.3,10,4.4,wallB,57.2,5,-3.8,scene);
+box(.45,8,.45,steel,57.2,4,-1.5,scene);box(.45,8,.45,steel,57.2,4,3.7,scene);box(.5,.7,5.7,steel,57.2,7.6,1.1,scene);
+for(let x=58;x<76;x+=4.5){box(.25,.5,13,steel,x,9.6,.5,scene);box(.35,9.6,.35,steel,x,4.8,-5.7,scene)}
+// dawn sky backdrop + tree line + road lights
+{const c=document.createElement('canvas');c.width=4;c.height=256;const g=c.getContext('2d'),gr=g.createLinearGradient(0,0,0,256);
+ gr.addColorStop(0,'#070b12');gr.addColorStop(.5,'#16233a');gr.addColorStop(.78,'#5a3a3a');gr.addColorStop(.9,'#c8693a');gr.addColorStop(1,'#f0a060');g.fillStyle=gr;g.fillRect(0,0,4,256);
+ const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;
+ const bg=new THREE.Mesh(new THREE.PlaneGeometry(400,60),new THREE.MeshBasicMaterial({map:t,fog:false}));bg.position.set(30,18,-70);scene.add(bg);
+ const tm=M('#06080b',1,0);for(let x=-40;x<110;x+=2.2){const h=3+Math.abs(Math.sin(x*1.7))*4;const tc=new THREE.Mesh(new THREE.ConeGeometry(1.4,h,7),tm);tc.position.set(x,h/2,-40-Math.abs(Math.sin(x))*6);scene.add(tc)}}
+for(let x=14;x<56;x+=9){box(.15,6,.15,steel,x,3,-2.6,scene);box(1.2,.12,.15,steel,x+.55,6,-2.6,scene);const h=box(.6,.12,.35,M('#fff1d6',.3,0,{emissive:'#ffc98a',emissiveIntensity:2}),x+1.05,5.92,-2.6,scene);h.castShadow=false}
+// high-bay lights (cones are soft additive volumes)
+const coneMat=new THREE.MeshBasicMaterial({color:'#ffcf96',transparent:true,opacity:.06,blending:THREE.AdditiveBlending,depthWrite:false});
+[[-12,-1],[-5,1],[63,0.5],[68,0.5]].forEach(([x,z],k)=>{
+  const lamp=box(.9,.18,.9,M('#fff1d6',.3,0,{emissive:'#ffd9a0',emissiveIntensity:2.2}),x,9.2,z,scene);lamp.castShadow=false;
+  const cone=new THREE.Mesh(new THREE.ConeGeometry(3.6,9,32,1,true),coneMat);cone.position.set(x,4.6,z);scene.add(cone);
+  if(!phone()||k===1){const sl=new THREE.SpotLight('#ffd7a3',k<2?120:90,24,.55,.6,1.6);sl.position.set(x,9,z);sl.target.position.set(x,0,z);scene.add(sl,sl.target)}
+});
+
+// machine (vertical machining center)
+const mach=new THREE.Group();scene.add(mach);
+box(3.3,.24,2.5,steel,0,.12,0,mach);
+const enc=new THREE.Mesh(new RoundedBoxGeometry(3.05,2.25,2.25,4,.07),paint);enc.position.y=1.37;enc.castShadow=enc.receiveShadow=true;mach.add(enc);
+box(3.08,.38,2.28,dark,0,2.52,0,mach);box(3.08,.09,2.28,acc,0,.62,0,mach);
+box(1.02,1.05,.03,glass,-.56,1.48,1.13,mach);box(1.02,1.05,.03,glass,.56,1.48,1.13,mach);
+box(.06,1.3,.06,dark,0,1.48,1.15,mach);
+box(.1,.5,.1,dark,1.62,2.3,.85,mach);const pend=box(.55,.75,.16,dark,1.9,1.85,.95,mach);
+box(.42,.3,.02,M('#6fa6c8',.2,0,{emissive:'#3d7fa8',emissiveIntensity:.9}),1.9,1.98,1.04,mach);
+box(.55,.9,1.5,M('#9a9d98',.5,.3),-1.85,.72,-.25,mach);
+const lugs=[[-1.35,2.75,-.95],[1.35,2.75,-.95],[-1.35,2.75,.95],[1.35,2.75,.95]];
+lugs.forEach(p=>box(.16,.14,.16,steel,...p,mach));
+const skates=new THREE.Group();mach.add(skates);
+[[-1.2,-.85],[1.2,-.85],[-1.2,.85],[1.2,.85]].forEach(([x,z])=>{box(.55,.12,.4,acc,x,-.06,z,skates);});
+const anchors=new THREE.Group();scene.add(anchors);
+[[-1.5,-1.1],[1.5,-1.1],[-1.5,1.1],[1.5,1.1]].forEach(([x,z])=>{const a=cyl(.07,.22,M('#e7b54b',.3,.9));a.position.set(x,.11,z);anchors.add(a)});
+
+// trailer + tractor (front faces +x)
+const truck=new THREE.Group();scene.add(truck);
+box(9,.26,2.6,dark,0,.9,0,truck);box(.3,.3,2.6,acc,-4.6,.9,0,truck);
+box(2.4,.5,2.4,dark,5.6,1.35,0,truck);box(1.6,1.1,2.5,dark,-5.3,.75,0,truck);
+const tr=new THREE.Group();tr.position.x=8.6;truck.add(tr);
+box(4.2,.5,2.5,steel,0,.85,0,tr);box(2.1,2.3,2.5,M('#2c3138',.35,.6),.9,2.15,0,tr);box(.06,.9,2.2,glass,1.96,2.6,0,tr);
+box(1.2,1.2,2.4,M('#2c3138',.35,.6),2.5,1.5,0,tr);
+const wheel=(x,z,par)=>{const w=cyl(.5,.42,rubber);w.rotation.x=Math.PI/2;w.position.set(x,.5,z);par.add(w)};
+[-3.6,-2.5,-1.4].forEach(x=>{wheel(x,1.1,truck);wheel(x,-1.1,truck)});[-1,.4,2.6].forEach(x=>{wheel(x,1.1,tr);wheel(x,-1.1,tr)});
+const chains=new THREE.Group();truck.add(chains);
+
+// crane
+const crane=new THREE.Group();const CX=4.25,CZ=-4.6;crane.position.set(CX,0,CZ);scene.add(crane);
+box(8,1,2.5,dark,0,1.15,0,crane);box(1.7,1.6,2.5,M('#2c3138',.35,.6),4.6,2.1,0,crane);
+[-2.8,-1.6,1.5,2.7].forEach(x=>{wheel(x,1.15,crane);wheel(x,-1.15,crane)});
+[[-3.2,1],[3,1],[-3.2,-1],[3,-1]].forEach(([x,s])=>{box(.3,.25,2.2,acc,x,1.1,s*1.9,crane);box(.7,.12,.7,steel,x,.06,s*3,crane);box(.2,1,.2,steel,x,.6,s*3,crane)});
+const turret=new THREE.Group();turret.position.set(0,1.75,0);crane.add(turret);
+box(3.4,1.2,2.3,acc,-.9,.6,0,turret);box(1.3,1.6,2.3,M('#b9550f',.5,.3),-2.6,.75,0,turret);box(1.2,1.2,.9,M('#2c3138',.35,.6),.6,1.0,1.3,turret);
+const boomPivot=new THREE.Group();boomPivot.position.set(0,1.25,0);turret.add(boomPivot);
+const BL=13.5;
+const b1=box(8,.75,.75,acc,4,0,0,boomPivot);const b2=box(6.2,.5,.5,M('#ffa04d',.4,.3),10.3,0,0,boomPivot);
+box(.5,.5,.5,steel,BL,-.1,0,boomPivot);
+const cab1=cyl(.05,1,M('#c9ccd0',.35,.8),6),cab2=cyl(.05,1,M('#c9ccd0',.35,.8),6);scene.add(cab1,cab2);
+const hook=new THREE.Group();scene.add(hook);box(.5,.7,.36,acc,0,.35,0,hook);const hk=cyl(.08,.4,steel,8);hk.position.y=-.15;hook.add(hk);
+// rigging: spreader + slings
+const spreader=box(3.0,.14,.14,M('#e9e5dc',.4,.6),0,0,0,scene);
+const slings=[...Array(6)].map(()=>{const c=cyl(.03,1,M('#e1b33b',.5,0),6);scene.add(c);return c});
+// gantry (plant B), rolls along x
+const gantry=new THREE.Group();scene.add(gantry);
+[-2.2,2.2].forEach(x=>{[-2.4,5.2].forEach(z=>{box(.3,4.9,.3,acc,x,2.45,z,gantry);box(.6,.2,1.1,steel,x,.1,z,gantry)});box(.36,.5,8.2,acc,x,5.1,1.4,gantry)});
+box(4.8,.4,.4,M('#ffa04d',.4,.3),0,4.75,1,gantry);
+const gStraps=[...Array(4)].map(()=>{const c=cyl(.03,1,M('#e1b33b',.5,0),6);scene.add(c);return c});
+box(26,.03,.1,steel,62,.06,-2.4,scene);box(26,.03,.1,steel,62,.06,5.2,scene);
+
+// dust in the light
+const N=phone()?140:360,pos=new Float32Array(N*3);for(let i=0;i<N;i++){pos[i*3]=(Math.random()<.6?-12:66)+(Math.random()-.5)*12;pos[i*3+1]=Math.random()*9;pos[i*3+2]=(Math.random()-.5)*8}
+const dg=new THREE.BufferGeometry();dg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+const dust=new THREE.Points(dg,new THREE.PointsMaterial({color:'#ffd9a8',size:.05,transparent:true,opacity:.55,depthWrite:false,blending:THREE.AdditiveBlending}));scene.add(dust);
+
+// helpers
+const V=(x,y,z)=>new THREE.Vector3(x,y,z),tmp=new THREE.Vector3(),up=V(0,1,0);
+function between(m,a,b){tmp.subVectors(b,a);const L=tmp.length();m.position.copy(a).addScaledVector(tmp,.5);m.scale.set(1,L,1);m.quaternion.setFromUnitVectors(up,tmp.normalize());m.visible=L>.01}
+const cl=v=>Math.min(1,Math.max(0,v)),sm=v=>{v=cl(v);return v*v*(3-2*v)},L=(a,b,t)=>a+(b-a)*t,seg=(u,a,b)=>sm((u-a)/(b-a));
+const A0=Math.atan2(1-CZ,-.5-CX),A1=Math.atan2(1-CZ,9-CX),R=Math.hypot(-.5-CX,1-CZ);
+const TOP=2.72;
+
+function state(p){
+  const s={mx:-5,my:0,mz:1,tx:9,gx:70,rig:0,gst:0,sk:p>.35&&p<4.6,anc:sm((p-5.3)/.5),hookT:null,hookY:7.2};
+  if(p<1){s.my=.18*seg(p,.3,.8)}
+  else if(p<2){s.mx=L(-5,-.5,sm(p-1));s.my=.18}
+  else if(p<3){const u=p-2;s.mx=-.5;s.my=.18;
+    s.rig=u>.12&&u<.93;
+    if(u>=.2){s.my=L(.18,4.4,seg(u,.2,.4))}
+    if(u>=.4){const a=L(A0,A1,seg(u,.4,.78));s.mx=CX+Math.cos(a)*R;s.mz=CZ+Math.sin(a)*R}
+    if(u>=.78){s.my=L(4.4,1.03,seg(u,.78,.95))}
+    if(u<.2)s.hookY=L(7.2,.18+TOP+2.3,seg(u,0,.15));
+  }
+  else if(p<4){const k=sm(p-3);s.tx=L(9,50,k);s.mx=s.tx;s.my=1.03}
+  else if(p<5){const u=p-4;s.tx=50;s.gx=L(70,50,seg(u,0,.25));s.mx=50;s.my=1.03;s.gst=u>.18;
+    if(u>=.25)s.my=L(1.03,3.7,seg(u,.25,.38));
+    if(u>=.38){const k=seg(u,.38,.82);s.mx=L(50,66,k);s.gx=s.mx}
+    if(u>=.82)s.my=L(3.7,0,seg(u,.82,.97));
+    if(u>.97)s.gst=false;
+  }
+  else{s.tx=L(50,34,seg(p-5,.05,.5));s.mx=66;s.my=0;s.gx=L(66,72.5,seg(p-5,0,.45))}
+  if(p>=3&&p<3.1)s.hookY=L(1.03+TOP+2.3,7.2,seg(p,3,3.1));
+  s.hookT=(p<2.4)?{x:-.5,z:1}:(p<3?{x:s.mx,z:s.mz}:{x:9,z:1});
+  return s;
+}
+// camera keyframes: focus x, distance, height (desktop) ; phone multipliers below
+const K=[{x:-1.2,d:25,h:8.5,ly:4.2,ox:3,px:0},{x:-4.4,d:13,h:4.2,ly:1.6,ox:3,px:0},{x:-.2,d:17,h:5.2,ly:2.4,ox:3,px:0},{x:5.6,d:24,h:7.5,ly:4.5,ox:3,px:1.2},{x:'m',d:19,h:6,ly:2,ox:5,px:0,pl:1},{x:64,d:19,h:8,ly:2.8,ox:7,px:.6,pl:0},{x:66,d:10.5,h:3.8,ly:1.2,ox:4,px:-.9}];
+function cam(p,s){
+  const i=Math.min(5,Math.floor(p)),f=sm(p-i),a=K[i],b=K[i+1];
+  const ax=a.x==='m'?s.mx:a.x,bx=b.x==='m'?s.mx:b.x;
+  const ph=phone();
+  let fx=i===3?s.mx+(3.6+2-9)*(1-f):L(ax,bx,f),d=L(a.d,b.d,f),h=L(a.h,b.h,f),ly=L(a.ly,b.ly,f),ox=L(a.ox,b.ox,f);
+  if(ph){d*=1.6;h*=1.3;fx+=.6+L(a.px,b.px,f);ox*=i>=4?1:.6}
+  else{fx-=d*.13}          // push the subject right of the text column
+  camera.fov=ph?52:36;camera.updateProjectionMatrix();
+  camera.position.set(fx+ox,h,1+d);camera.lookAt(fx,ly+(ph?L(a.pl??2.2,b.pl??2.2,f):0),1);
+  sun.position.set(fx+40,14,22);sun.target.position.set(fx,0,0);
+}
+function apply(p,t){
+  const s=state(p);
+  mach.position.set(s.mx,s.my+.0,s.mz);skates.visible=s.sk;
+  anchors.position.set(66,0,1);anchors.visible=s.anc>0;anchors.children.forEach(a=>a.scale.y=Math.max(.01,s.anc));
+  truck.position.set(s.tx,0,1);gantry.position.x=s.gx;
+  // crane geometry: boom tip over hook target
+  const tx=s.hookT.x,tz=s.hookT.z,dx=tx-CX,dz=tz-CZ,r=Math.hypot(dx,dz);
+  turret.rotation.y=-Math.atan2(dz,dx);
+  boomPivot.rotation.z=Math.acos(Math.min(.98,r/BL));
+  const tip=V(BL,0,0);boomPivot.localToWorld(tip);
+  const sway=Math.sin(t*.0012)*.04*(s.rig?0:1);
+  const hy=s.rig?s.my+TOP+2.3:s.hookY;
+  hook.position.set(tip.x+sway,hy,tip.z);
+  between(cab1,V(tip.x-.12,tip.y,tip.z),V(hook.position.x-.12,hy+.7,tip.z));between(cab2,V(tip.x+.12,tip.y,tip.z),V(hook.position.x+.12,hy+.7,tip.z));
+  spreader.visible=s.rig;
+  const top=s.my+TOP;
+  if(s.rig){spreader.position.set(s.mx,top+1.05,s.mz);
+    const hp=V(hook.position.x,hy-.2,hook.position.z),e1=V(s.mx-1.45,top+1.05,s.mz),e2=V(s.mx+1.45,top+1.05,s.mz);
+    between(slings[0],hp,e1);between(slings[1],hp,e2);
+    lugs.forEach((l,k)=>between(slings[2+k],k%2?e2:e1,V(s.mx+l[0],s.my+l[1]+.05,s.mz+l[2])));
+  }else slings.forEach(c=>c.visible=false);
+  gStraps.forEach((c,k)=>{if(!s.gst){c.visible=false;return}const l=lugs[k];between(c,V(s.gx+l[0]*.6,4.55,s.mz+l[2]*.1),V(s.mx+l[0],s.my+l[1]+.05,s.mz+l[2]))});
+  cam(p,s);
+}
+function size(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function frame(t){
+  apply(window.STORY.p,t||0);
+  const a=dg.attributes.position.array;if(!reduce)for(let i=1;i<a.length;i+=3){a[i]+=.004;if(a[i]>9)a[i]=0}dg.attributes.position.needsUpdate=true;
+  renderer.render(scene,camera);
+  if(!reduce)requestAnimationFrame(frame);
+}
+frame(0);
+</script>
+</body>
+</html>

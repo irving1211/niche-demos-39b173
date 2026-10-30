@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ridgeback Truck Equipment · Build sheet</title>
+<meta name="description" content="Truck equipment upfits in Essex County, MA since 1979. Pick your chassis, check the equipment, get an estimate range and send the build sheet to the shop.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f2eee3;--paper2:#e9e4d6;--ink:#1c3360;--ink2:#4c5e82;--faint:rgba(28,51,96,.09);--red:#cf3b22;--mono:"IBM Plex Mono",ui-monospace,monospace;--cond:"IBM Plex Sans Condensed","Arial Narrow",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:17px/1.5 var(--cond);overflow-x:hidden;
+ background-image:linear-gradient(var(--faint) 1px,transparent 1px),linear-gradient(90deg,var(--faint) 1px,transparent 1px);background-size:24px 24px}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:var(--mono)}
+.hdr{display:flex;align-items:center;gap:22px;padding:14px 32px;background:var(--paper);position:relative;z-index:5}
+.hdr:after{content:"";position:absolute;left:32px;right:32px;bottom:0;height:2px;background:var(--ink)}
+.logo{display:flex;align-items:baseline;gap:12px;margin-right:auto}
+.logo b{font:700 24px/1 var(--cond);letter-spacing:.04em}
+.logo em{font-style:normal}
+.logo span{font:500 12px/1 var(--mono);letter-spacing:.08em;color:var(--ink2);text-transform:uppercase}
+.hdr nav{display:flex;gap:22px;font:500 13px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 20px;font:600 15px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ink:hover{background:#0f2147}
+.btn-line{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-red{background:var(--red);color:#fff}
+.main{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(380px,1fr);gap:0 40px;padding:26px 32px 30px;min-height:calc(100vh - 78px)}
+.ttl{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:14px}
+h1{font:700 64px/.92 var(--cond);letter-spacing:-.01em;text-transform:uppercase}
+.ttl p{font-size:17px;color:var(--ink2);max-width:330px;text-align:right}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.tab{text-align:left;padding:10px 14px 11px;font:500 13px/1.25 var(--mono);text-transform:uppercase;letter-spacing:.03em;color:var(--ink2);box-shadow:inset 0 -1.5px 0 var(--ink);min-height:56px}
+.tab b{display:block;font:700 19px/1.1 var(--cond);letter-spacing:.01em;color:var(--ink);text-transform:none}
+.tab[aria-pressed=true]{background:var(--ink);color:#c9d3e8}
+.tab[aria-pressed=true] b{color:var(--paper)}
+.sheetwrap{position:relative;background:rgba(242,238,227,.55);box-shadow:inset 1.5px 0 0 var(--ink),inset -1.5px 0 0 var(--ink),inset 0 -1.5px 0 var(--ink)}
+#dwg{display:block;width:100%;height:auto}
+#dwg .ln{fill:var(--paper);stroke:var(--ink);stroke-width:1.15;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+#dwg .ln2{fill:none;stroke:var(--ink);stroke-width:.8;vector-effect:non-scaling-stroke}
+#dwg .gl{fill:url(#glass);stroke:var(--ink);stroke-width:1;vector-effect:non-scaling-stroke}
+#dwg .cl{fill:none;stroke:var(--ink2);stroke-width:.7;stroke-dasharray:10 3 2 3;vector-effect:non-scaling-stroke}
+#dwg .dim{fill:none;stroke:var(--ink2);stroke-width:.75;vector-effect:non-scaling-stroke}
+#dwg .dt{font-family:var(--mono);fill:var(--ink);font-weight:500}
+#dwg .bl circle{fill:var(--paper);stroke:var(--ink);stroke-width:1;vector-effect:non-scaling-stroke}
+#dwg .bl text{font-family:var(--mono);font-weight:600;fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+#dwg .bl.new circle{fill:var(--red);stroke:var(--red)}#dwg .bl.new text{fill:#fff}
+#dwg .bl line{stroke:var(--ink);stroke-width:.8;vector-effect:non-scaling-stroke}
+#dwg .lit{fill:var(--red);stroke:var(--ink);stroke-width:.8;vector-effect:non-scaling-stroke}
+.data{display:grid;grid-template-columns:repeat(5,1fr);margin-top:22px;box-shadow:inset 0 2px 0 var(--ink)}
+.data div{padding:12px 14px 4px 0}
+.data small{display:block;font:500 12px/1.2 var(--mono);color:var(--ink2);text-transform:uppercase;letter-spacing:.05em}
+.data b{display:block;font:600 24px/1.2 var(--mono);margin-top:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.data b.neg{color:var(--red)}
+.tb{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.25fr;font:500 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.04em;box-shadow:inset 0 1.5px 0 var(--ink)}
+.tb div{padding:8px 12px;box-shadow:inset 1px 0 0 rgba(28,51,96,.35)}
+.tb div:first-child{box-shadow:none}
+.tb small{display:block;color:var(--ink2);font-size:11px}
+.tb b{font-weight:600;font-size:13px}
+.stamp{color:var(--red);font:700 12px/1.15 var(--mono);letter-spacing:.06em;transform:rotate(-3deg);display:inline-block;padding:4px 7px;box-shadow:inset 0 0 0 1.5px var(--red)}
+.detail{position:absolute;right:16px;top:12px;width:232px;pointer-events:none;visibility:hidden}
+.detail .cap{font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;background:var(--paper);display:inline-block;padding:3px 6px}
+.dphone{background:var(--paper);border-radius:34px;padding:9px;height:330px;box-shadow:inset 0 0 0 1.5px var(--ink)}
+.dphone .scr{height:100%;border-radius:26px;box-shadow:inset 0 0 0 1px var(--ink2);padding:16px 10px 18px;background:repeating-linear-gradient(135deg,transparent 0 7px,rgba(28,51,96,.06) 7px 8px)}
+.dphone .tm{text-align:center;font:600 34px/1 var(--mono);margin:12px 0 4px}.dphone .dy{text-align:center;font:500 11px/1 var(--mono);color:var(--ink2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px}
+.nc{background:#fffdf7;padding:11px 12px;border-radius:14px;box-shadow:0 0 0 1px var(--ink),3px 3px 0 var(--ink)}
+.nc .h{display:flex;gap:8px;align-items:center;font:500 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink2)}
+.nc .h i{font-style:normal;background:var(--ink);color:var(--paper);font-weight:700;padding:3px 4px}
+.nc .h span{margin-left:auto}
+.nc b{display:block;font:700 16px/1.25 var(--cond);margin-top:7px}
+.nc p{font:500 12px/1.4 var(--mono);color:var(--ink2);margin-top:4px}
+.form{display:flex;flex-direction:column}
+.fh{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0 10px;box-shadow:inset 0 -2px 0 var(--ink)}
+.fh b{font:700 22px/1 var(--cond);text-transform:uppercase;letter-spacing:.02em}
+.fh span{font:500 12px/1 var(--mono);color:var(--ink2);text-transform:uppercase;letter-spacing:.06em}
+.li{display:grid;grid-template-columns:34px 1fr auto;gap:4px 10px;padding:13px 0 12px;box-shadow:inset 0 -1px 0 rgba(28,51,96,.28);align-items:center}
+.li .no{font:600 14px/1 var(--mono);color:var(--ink2)}
+.li .nm{font:700 19px/1.15 var(--cond)}
+.li .nm small{display:block;font:400 14px/1.3 var(--cond);color:var(--ink2)}
+.li .pr{font:500 14px/1 var(--mono);text-align:right;white-space:nowrap;color:var(--ink2)}
+.li .pr.on{color:var(--ink);font-weight:600}
+.li .ctl{grid-column:2/4;display:flex;gap:6px;flex-wrap:wrap}
+.opt{min-height:44px;padding:0 13px;font:500 14px/1 var(--mono);text-transform:uppercase;letter-spacing:.03em;box-shadow:inset 0 0 0 1px rgba(28,51,96,.45);background:rgba(255,255,255,.35)}
+.opt[aria-pressed=true]{background:var(--ink);color:var(--paper);box-shadow:none}
+.opt:disabled{opacity:.35;cursor:not-allowed}
+.sp{width:10px}
+.chk{width:44px;height:44px;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--ink);background:rgba(255,255,255,.35)}
+.chk svg{width:22px;height:22px;opacity:0}
+.chk[aria-pressed=true]{background:var(--ink)}.chk[aria-pressed=true] svg{opacity:1}
+.li.t{grid-template-columns:34px 1fr auto 44px}
+.note{font:500 13px/1.4 var(--mono);color:var(--red);min-height:20px;padding-top:8px}
+.tot{margin-top:auto;padding:14px 0 0;position:sticky;bottom:0;background:var(--paper)}
+.tot .r{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:12px;box-shadow:inset 0 2px 0 var(--ink),inset 0 5px 0 var(--paper),inset 0 6px 0 var(--ink)}
+.tot .r span{font:600 13px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.05em}
+.tot .r b{font:600 30px/1 var(--mono);letter-spacing:-.02em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tot small{display:block;font:400 13px/1.3 var(--mono);color:var(--ink2);margin:6px 0 12px}
+.tot .btn{width:100%;min-height:56px;font-size:16px}
+.qs{display:none;clip-path:inset(0 0 100% 0)}
+.qs .qh{display:flex;justify-content:space-between;align-items:center;padding:6px 0 12px;box-shadow:inset 0 -2px 0 var(--ink)}
+.qs .qh b{font:600 26px/1 var(--mono)}
+.qs table{width:100%;border-collapse:collapse;font:500 14px/1.35 var(--mono);margin:6px 0 12px}
+.qs td{padding:7px 0;box-shadow:inset 0 -1px 0 rgba(28,51,96,.22);vertical-align:top}
+.qs td:first-child{color:var(--ink2);text-transform:uppercase;font-size:12px;letter-spacing:.05em;padding-right:10px;width:38%}
+.qs p{font-size:16px;color:var(--ink2);margin-bottom:12px}
+.qs .acts{display:flex;gap:8px}.qs .acts .btn{flex:1}
+section{padding:96px 32px}
+.wrap{max-width:1200px;margin:0 auto}
+.sh{display:flex;align-items:baseline;gap:18px;padding-bottom:12px;box-shadow:inset 0 -2px 0 var(--ink);margin-bottom:30px;flex-wrap:wrap}
+.sh i{font:600 13px/1 var(--mono);font-style:normal;color:var(--red);letter-spacing:.06em}
+h2{font:700 46px/1 var(--cond);text-transform:uppercase}
+.lede{font-size:19px;color:var(--ink2);max-width:680px;margin-bottom:34px}
+.ftab{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.ftab div{padding:18px 20px 22px;box-shadow:inset 1px 0 0 rgba(28,51,96,.3)}
+.ftab div:first-child{box-shadow:none;padding-left:0}
+.ftab b{display:block;font:600 34px/1 var(--mono);margin-bottom:10px}
+.ftab h3{font:700 20px/1.2 var(--cond);margin-bottom:6px}
+.ftab p{color:var(--ink2)}
+.cat{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 40px}
+.cat svg{width:100%;height:110px;display:block;margin-bottom:12px}
+.cat svg path,.cat svg ellipse{fill:var(--paper);stroke:var(--ink);stroke-width:1.1;vector-effect:non-scaling-stroke}
+.cat .pn{font:600 12px/1 var(--mono);color:var(--red);letter-spacing:.06em}
+.cat h3{font:700 22px/1.15 var(--cond);margin:5px 0 4px}
+.cat p{color:var(--ink2)}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.flow li{list-style:none;padding:0 18px 0 0;position:relative}
+.flow .n{width:52px;height:52px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--ink);display:grid;place-items:center;font:600 16px/1 var(--mono);background:var(--paper);position:relative;z-index:1;margin-bottom:16px}
+.flow li:before{content:"";position:absolute;left:52px;right:0;top:26px;height:1.5px;background:var(--ink)}
+.flow li:last-child:before{display:none}
+.flow b{display:block;font:700 20px/1.2 var(--cond)}
+.flow small{display:block;font:500 13px/1.3 var(--mono);color:var(--red);margin:3px 0 6px;text-transform:uppercase;letter-spacing:.04em}
+.flow p{color:var(--ink2)}
+.sched{display:grid;grid-template-columns:repeat(2,1fr);gap:0 50px;font:500 16px/1 var(--mono)}
+.sched div{display:flex;justify-content:space-between;padding:13px 0;box-shadow:inset 0 -1px 0 rgba(28,51,96,.25)}
+.sched span{color:var(--ink2)}
+.area{display:grid;grid-template-columns:1fr 1.2fr;gap:60px}
+.fin{text-align:center;padding:100px 24px}
+.fin h2{font-size:60px;margin-bottom:16px}
+.fin p{font-size:19px;color:var(--ink2);margin-bottom:28px}
+.fin .acts{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+footer{padding:20px 32px 40px;font:500 13px/1.5 var(--mono);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;box-shadow:inset 0 2px 0 var(--ink);margin:0 32px}
+@media (max-width:1180px){.hdr nav{display:none}h1{font-size:52px}}
+@media (max-width:900px){
+ .hdr{padding:10px 16px;gap:10px}.hdr:after{left:16px;right:16px}.logo{flex-direction:column;gap:4px}.logo b{font-size:21px}.logo em{font-style:normal}
+.logo span{font-size:10px}
+ .hdr .btn{min-height:44px;padding:0 14px;font-size:14px}.hdr .q{display:none}
+ .main{grid-template-columns:1fr;padding:14px 16px 0;min-height:0}
+ .ttl{margin-bottom:10px}h1{font-size:38px}.ttl p{display:none}
+ .tab{padding:7px 4px 8px;min-height:48px;text-align:center;font-size:10.5px}.tab b{font-size:16px}
+ .tb{display:none}.data{display:none}
+ .detail{right:8px;left:8px;top:8px;width:auto}.detail .cap,.dphone .tm,.dphone .dy{display:none}.dphone{height:auto;padding:0;box-shadow:none;background:none}.dphone .scr{height:auto;padding:0;background:none}
+ .form{margin-top:4px}.fh{display:none}
+ .li{padding:8px 0;grid-template-columns:26px 1fr auto;gap:2px 8px}.li .nm{font-size:17px}.li .nm small{display:none}.li .pr{font-size:13px}
+ .li.t{grid-template-columns:26px 1fr auto 44px}
+ .li .ctl{grid-column:1/4}.opt{padding:0 9px;font-size:13.5px;flex:1 1 auto}.logo .dk{display:none}.sp{display:none}
+ .note:empty{display:none}
+ .tot{padding:8px 0 12px;display:grid;grid-template-columns:1fr auto;gap:0 12px;align-items:center}
+ .tot .r{display:block;box-shadow:none;padding:0}.tot .r span{font-size:11px;display:block;margin-bottom:4px}.tot .r b{font-size:21px}
+ .tot small{display:none}.tot .btn{width:auto;min-height:52px;font-size:14px;padding:0 16px}
+ section{padding:70px 16px}h2{font-size:34px}
+ .ftab,.cat,.flow,.area,.sched{grid-template-columns:1fr}.ftab div{box-shadow:inset 0 -1px 0 rgba(28,51,96,.3);padding:16px 0}
+ .flow{gap:24px}.flow li:before{display:none}
+ .fin h2{font-size:40px}
+ footer{margin:0 16px;padding:18px 0 34px}
+}
+</style>
+</head>
+<body>
+<header class="hdr">
+ <a class="logo" href="#"><b>RIDGEBACK</b><span><em class="dk">Truck Equipment · </em>Since 1979</span></a>
+ <nav><a href="#build">Build</a><a href="#fleets">Fleets</a><a href="#catalogue">Catalogue</a><a href="#process">Process</a><a href="#area">Area</a></nav>
+ <a class="btn btn-line q" href="#build">Get a quote</a>
+ <a class="btn btn-ink" href="tel:+19785550142">Call (978) 555-0142</a>
+</header>
+
+<div class="main" id="build">
+ <div>
+  <div class="ttl"><h1>Build your rig</h1><p>Pick the chassis. Check the equipment. The drawing and the estimate update as you go.</p></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="sheetwrap">
+   <svg id="dwg" viewBox="-52 -160 424 194" role="img" aria-label="Side elevation of your truck build"></svg>
+   <div class="detail" id="detail"><div class="cap">Detail B · Owner's phone</div><div class="dphone"><div class="scr"><div class="tm">7:42</div><div class="dy">Tue · Haverhill shop</div><div class="nc"><div class="h"><i>RB</i>Ridgeback<span>now</span></div><b id="ntt">New build request</b><p id="ntp"></p></div></div></div></div>
+   <div class="tb" id="tbk"><div><small>Shop</small><b>Ridgeback Truck Equipment</b></div><div><small>Drawing</small><b id="tbd">RB-BYR-F550</b></div><div><small>Scale</small><b>Not to scale</b></div><div><span class="stamp">Exclusive in Essex County, MA</span></div></div>
+  </div>
+  <div class="data" id="data"></div>
+ </div>
+ <div class="form">
+  <div id="bom">
+   <div class="fh"><b>Equipment list</b><span>Est. range, installed</span></div>
+   <div class="li"><span class="no">01</span><span class="nm">Dump body<small>Steel or aluminum, cab shield, hoist</small></span><span class="pr" id="p-dump">—</span>
+    <div class="ctl"><button class="opt" data-k="dump" data-v="none">None</button><button class="opt" data-k="dump" data-v="9">9 ft</button><button class="opt" data-k="dump" data-v="11">11 ft</button><i class="sp"></i><button class="opt" data-k="mat" data-v="steel">Steel</button><button class="opt" data-k="mat" data-v="alum">Alum.</button></div></div>
+   <div class="li"><span class="no">02</span><span class="nm">Snow plow<small>Mount, lights and cab controls</small></span><span class="pr" id="p-plow">—</span>
+    <div class="ctl"><button class="opt" data-k="plow" data-v="none">None</button><button class="opt" data-k="plow" data-v="8">8 ft straight</button><button class="opt" data-k="plow" data-v="9v">9 ft V-plow</button></div></div>
+   <div class="li t"><span class="no">03</span><span class="nm">Salt / sand spreader<small>Tailgate unit, in-cab control</small></span><span class="pr" id="p-spreader">—</span><button class="chk" data-t="spreader" aria-label="Spreader"><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11" fill="none" stroke="#f2eee3" stroke-width="2.6"/></svg></button></div>
+   <div class="li t"><span class="no">04</span><span class="nm">LED strobe package<small>Roof bar, grille and rear heads</small></span><span class="pr" id="p-strobes">—</span><button class="chk" data-t="strobes" aria-label="LED strobes"><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11" fill="none" stroke="#f2eee3" stroke-width="2.6"/></svg></button></div>
+   <div class="li t"><span class="no">05</span><span class="nm">Liftgate<small>Rail gate, 1,600 lb class</small></span><span class="pr" id="p-liftgate">—</span><button class="chk" data-t="liftgate" aria-label="Liftgate"><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11" fill="none" stroke="#f2eee3" stroke-width="2.6"/></svg></button></div>
+   <p class="note" id="note" aria-live="polite"></p>
+  </div>
+  <div class="qs" id="qs" aria-live="polite">
+   <div class="qh"><b id="qn">RB-24117</b><span class="stamp" style="font-size:14px">Sent to shop</span></div>
+   <table id="qt"></table>
+   <p>The estimator calls you within one business day to confirm the chassis and lock the quote.</p>
+   <div class="acts"><button class="btn btn-line" id="edit">Edit build</button><a class="btn btn-line" href="tel:+19785550142">Call shop</a></div>
+  </div>
+  <div class="tot">
+   <div class="r"><span>Estimate range</span><b id="tot">$0</b></div>
+   <small>Estimate range, final quote from the shop.</small>
+   <button class="btn btn-ink" id="send">Send this build →</button>
+  </div>
+ </div>
+</div>
+
+<section id="fleets"><div class="wrap">
+ <div class="sh"><i>SEC. 2</i><h2>Municipal &amp; fleet program</h2></div>
+ <p class="lede">For town DPWs, school districts and contractors running five trucks or fifty. Written to your bid spec, built in batches, checked before every winter.</p>
+ <div class="ftab">
+  <div><b>01</b><h3>Bid-spec quotes</h3><p>Line-item pricing that matches the town's spec sheet.</p></div>
+  <div><b>02</b><h3>Batch upfits</h3><p>Same build, same wiring, every truck in the order.</p></div>
+  <div><b>03</b><h3>Fall readiness</h3><p>Plow, spreader and strobe checks before the first storm.</p></div>
+  <div><b>04</b><h3>One file per truck</h3><p>Build sheet and service notes kept by unit number.</p></div>
+ </div>
+</div></section>
+
+<section id="catalogue" style="background:rgba(233,228,214,.7)"><div class="wrap">
+ <div class="sh"><i>SEC. 3</i><h2>What we install</h2></div>
+ <div class="cat" id="cat"></div>
+</div></section>
+
+<section id="process"><div class="wrap">
+ <div class="sh"><i>SEC. 4</i><h2>How an upfit goes</h2></div>
+ <ol class="flow">
+  <li><div class="n">01</div><b>Walk the truck</b><small>Day 1</small><p>We look at the chassis, the job and the weight it has to carry.</p></li>
+  <li><div class="n">02</div><b>Written quote</b><small>2 business days</small><p>Every line priced before anything is ordered.</p></li>
+  <li><div class="n">03</div><b>Drop-off</b><small>Your date</small><p>Truck goes in a bay with its build sheet.</p></li>
+  <li><div class="n">04</div><b>Build &amp; wire</b><small>1 to 2 weeks</small><p>Mount, hydraulics, wiring, lights, bay test.</p></li>
+  <li><div class="n">05</div><b>Pickup</b><small>Walk-around</small><p>Every function run with you before the keys go back.</p></li>
+ </ol>
+</div></section>
+
+<section id="area" style="background:rgba(233,228,214,.7)"><div class="wrap area">
+ <div><div class="sh"><i>SEC. 5</i><h2>Service area</h2></div><p class="lede">Shop in Haverhill, MA. Mon to Fri 7:00 to 4:30. Saturdays by appointment in plow season.</p><span class="stamp" style="font-size:14px">Exclusive in Essex County, MA</span></div>
+ <div class="sched" id="sched"></div>
+</div></section>
+
+<div class="fin"><h2>Bring us the chassis</h2><p>Call the shop or send a build sheet. You talk to the people who build it.</p><div class="acts"><a class="btn btn-ink" href="tel:+19785550142">Call (978) 555-0142</a><a class="btn btn-line" href="#build">Build your rig</a></div></div>
+<footer><span>Ridgeback Truck Equipment · Haverhill, MA</span><span>Concept demo · fictional business · IC Business Systems</span></footer>
+
+<script src="../vendor/gsap.min.js"></script>
+<script>
+/* ---- Ridgeback build model (shared) ---- */
+const CH={
+ c1:{k:'c1',big:'1-ton',sub:'F-350 class',long:'1-ton / F-350 class',short:'1-ton',wb:145,r:16,fr:34,hoodL:50,hoodH:50,cabTop:80,cabL:62,fo:36,ro:50,ws:20,style:'pickup',f:1,gvwr:14000,curb:7300,w:78},
+ c2:{k:'c2',big:'F-550',sub:'class',long:'F-550 class',short:'F-550',wb:169,r:18,fr:38,hoodL:56,hoodH:57,cabTop:87,cabL:64,fo:40,ro:54,ws:16,style:'md',f:1,gvwr:19500,curb:7800,w:80},
+ c3:{k:'c3',big:'Ram 5500',sub:'class',long:'Ram 5500 class',short:'5500',wb:173,r:18,fr:39,hoodL:58,hoodH:61,cabTop:89,cabL:64,fo:41,ro:54,ws:14,style:'square',f:1.03,gvwr:19500,curb:8000,w:80},
+ c4:{k:'c4',big:'Class 6-7',sub:'6500HD class',long:'Class 6-7 / 6500HD class',short:'Class 6-7',wb:200,r:21,fr:44,hoodL:72,hoodH:68,cabTop:108,cabL:66,fo:44,ro:62,ws:11,style:'conv',f:1.32,gvwr:26000,curb:11500,w:90}
+};
+const PRICE={dump:{'9':{steel:[7800,10400],alum:[10600,13900]},'11':{steel:[10900,14200],alum:[13800,18000]}},plow:{'8':[5600,7200],'9v':[7900,9800]},spreader:[4200,6900],strobes:[1100,2400],liftgate:[3900,6200]};
+const WEIGHT={dump:{'9':{steel:2400,alum:1300},'11':{steel:2900,alum:1600}},plow:{'8':750,'9v':1000},spreader:650,strobes:30,liftgate:1100};
+function estimate(s){const c=CH[s.chassis];let lo=0,hi=0;const add=(r,f)=>{lo+=r[0]*(f||1);hi+=r[1]*(f||1)};
+ if(s.dump!=='none')add(PRICE.dump[s.dump][s.mat],c.f);if(s.plow!=='none')add(PRICE.plow[s.plow],c.f);
+ if(s.spreader)add(PRICE.spreader);if(s.strobes)add(PRICE.strobes);if(s.liftgate)add(PRICE.liftgate);
+ const q=v=>Math.round(v/100)*100;return[q(lo),q(hi)];}
+function addedWeight(s){let w=0;if(s.dump!=='none')w+=WEIGHT.dump[s.dump][s.mat];if(s.plow!=='none')w+=WEIGHT.plow[s.plow];if(s.spreader)w+=WEIGHT.spreader;if(s.strobes)w+=WEIGHT.strobes;if(s.liftgate)w+=WEIGHT.liftgate;return w;}
+function buildParts(s){const p=[];if(s.dump!=='none')p.push(s.dump+' ft '+(s.mat==='alum'?'alum. ':'')+'dump');if(s.plow==='8')p.push('8 ft plow');if(s.plow==='9v')p.push('V‑plow');if(s.spreader)p.push('spreader');if(s.liftgate)p.push('liftgate');if(s.strobes)p.push('LED strobes');return p;}
+function buildName(s){const p=buildParts(s);return CH[s.chassis].short+' · '+(p.length?p.join(' + '):'cab & chassis');}
+function applyRules(s,changed){let note='';
+ if(s.chassis==='c1'&&s.dump==='11'){s.dump='9';note='11 ft bodies need an F-550 class chassis or bigger, so this one is 9 ft.';}
+ if(s.spreader&&s.liftgate){if(changed==='liftgate'){s.spreader=false;note='Liftgate and spreader share the rear of the truck. Spreader taken off.';}else{s.liftgate=false;note='Spreader and liftgate share the rear of the truck. Liftgate taken off.';}}
+ return note;}
+const money=v=>'$'+Math.round(v).toLocaleString('en-US');
+const kmoney=v=>'$'+(Math.round(v/100)/10).toFixed(1)+'K';
+function buildDays(s){let d=2;if(s.dump!=='none')d+=4;if(s.plow!=='none')d+=2;if(s.spreader)d+=1;if(s.liftgate)d+=2;if(s.strobes)d+=1;return[d,d+3];}
+/* path builder: y-up inches, outputs SVG (y flipped) or THREE.Shape */
+function PB(){const c=[];const f=v=>(+v).toFixed(1);const o={
+ M(x,y){c.push(['M',x,y]);return o},L(x,y){c.push(['L',x,y]);return o},Q(a,b,x,y){c.push(['Q',a,b,x,y]);return o},
+ A(cx,cy,R,a0,a1){c.push(['A',cx,cy,R,a0,a1]);return o},Z(){c.push(['Z']);return o},cmds:c,
+ d(){return c.map(q=>{if(q[0]==='M'||q[0]==='L')return q[0]+f(q[1])+' '+f(-q[2]);if(q[0]==='Q')return 'Q'+f(q[1])+' '+f(-q[2])+' '+f(q[3])+' '+f(-q[4]);
+  if(q[0]==='A'){const[,cx,cy,R,a0,a1]=q;const ex=cx+R*Math.cos(a1),ey=cy+R*Math.sin(a1);return 'A'+f(R)+' '+f(R)+' 0 '+(Math.abs(a1-a0)>Math.PI?1:0)+' '+(a1>a0?0:1)+' '+f(ex)+' '+f(-ey);}return 'Z';}).join(' ')},
+ shape(T){const s=new T.Shape();c.forEach(q=>{if(q[0]==='M')s.moveTo(q[1],q[2]);else if(q[0]==='L')s.lineTo(q[1],q[2]);else if(q[0]==='Q')s.quadraticCurveTo(q[1],q[2],q[3],q[4]);else if(q[0]==='A')s.absarc(q[1],q[2],q[3],q[4],q[5],q[5]<q[4]);});return s;}};return o;}
+function rect(x,y,w,h){return PB().M(x,y).L(x+w,y).L(x+w,y+h).L(x,y+h).Z();}
+function rrect(x,y,w,h,r){r=Math.min(r,w/2,h/2);return PB().M(x+r,y).L(x+w-r,y).Q(x+w,y,x+w,y+r).L(x+w,y+h-r).Q(x+w,y+h,x+w-r,y+h).L(x+r,y+h).Q(x,y+h,x,y+h-r).L(x,y+r).Q(x,y,x+r,y).Z();}
+const D=(...a)=>a.map(p=>p.d()).join(' ');
+function rigGeom(s){
+ const c=CH[s.chassis],F=c.fo,R=F+c.wb,E=R+c.ro,r=c.r,fr=c.fr,nose=4,cowl=nose+c.hoodL,back=cowl+c.cabL,bot=fr-7,hH=c.hoodH,top=c.cabTop,ws=c.ws;
+ const g={c,F,R,E,r,fr,nose,cowl,back,bot,hH,top};
+ const Ra=r+4,dy=bot-r,dx=Math.sqrt(Ra*Ra-dy*dy),aa=Math.asin(dy/Ra);
+ const b=PB();let hEnd=hH,lampY=hH-11;
+ if(c.style==='pickup'){b.M(nose+3,bot).L(nose,bot+5).L(nose-1,hH-9).Q(nose-0.5,hH-1,nose+9,hH-1).L(cowl,hH);}
+ else if(c.style==='md'){b.M(nose+1,bot).L(nose,hH-6).Q(nose,hH,nose+6,hH).L(cowl,hH+1);hEnd=hH+1;}
+ else if(c.style==='square'){b.M(nose,bot).L(nose,hH-2.5).Q(nose,hH,nose+2.5,hH).L(cowl,hH);}
+ else{b.M(nose+2,bot).L(nose,bot+6).L(nose,hH-21).Q(nose+1,hH-13,nose+11,hH-12).L(cowl-6,hH-1).Q(cowl-2,hH,cowl,hH);lampY=hH-25;}
+ b.L(cowl+ws-2,top-1.5).Q(cowl+ws,top,cowl+ws+4,top).L(back-4,top).Q(back,top,back,top-4).L(back,bot).L(F+dx,bot).A(F,r,Ra,aa,Math.PI-aa).Z();
+ g.body=b;g.hEnd=hEnd;
+ const belt=hH+4,wt=top-4,xw=y=>cowl+ws*(y-hEnd)/(top-hEnd);g.belt=belt;
+ g.win=PB().M(xw(belt)+3,belt).L(xw(wt)+3,wt).L(back-9,wt).Q(back-7,wt,back-7,wt-2).L(back-7,belt).Z();
+ g.windshield={x0:cowl,y0:hEnd,x1:cowl+ws-2,y1:top-1.5};
+ g.seams=PB().M(cowl+1.5,bot+3).L(cowl+1.5,hEnd+0.5).M(back-4.5,bot+3).L(back-4.5,wt+1).M(cowl+1.5,belt-1).L(back-4.5,belt-1);
+ g.handle=rrect(back-13,belt-6,6,1.8,0.9);
+ g.bumper=rrect(-2,fr-14,11,10,2);
+ g.grille=rect(nose-1.6,bot+4,2.4,lampY-bot-6);
+ g.lamp=rrect(nose-1,lampY,6,5.5,1.5);
+ g.frame=rect(2,fr-8,E-2,8);
+ const tx=back+6,tw=Math.min(38,R-r-12-tx);g.tank=rrect(tx,fr-24,tw,15,5);
+ g.step=rrect(back-24,bot-6,16,3,1);
+ g.stack=c.style==='conv'?D(rrect(back+2,fr,4,top+12-fr,1.5),rect(back+1.4,top+10,5.2,2.5)):null;
+ g.mirror=c.style==='pickup'?D(rrect(cowl-5,belt+1,7,9,2),rect(cowl+1,belt+3,4,1.5)):D(rrect(cowl-6,belt-3,4.5,19,1.5),rect(cowl-2,belt+1,6,1.4),rect(cowl-2,belt+12,6,1.4));
+ g.wheels=[{x:F,y:r,r,dual:false},{x:R,y:r,r,dual:true}];
+ g.flap=rect(R+r+5,4,2.5,fr-12);
+ g.tail=rect(E-3,fr-6.5,3,4);
+ let minX=-2,maxX=E,maxY=top;
+ if(s.dump!=='none'){const L=s.dump==='9'?108:132,H=(s.dump==='9'?24:28)+(c.k==='c4'?6:0),yF=fr+5,yT=yF+H,xf=E-L,xr=E;
+  let ribs=[],ribX=[];if(s.mat==='steel'){const n=s.dump==='9'?6:7,st=(L-14)/n;for(let i=0;i<=n;i++){ribX.push(xf+6+i*st+1.3);ribs.push(rect(xf+6+i*st,yF+1,2.6,H-3.5));}}else{ribs.push(rect(xf+1,yF+H*0.34,L-2,0.9),rect(xf+1,yF+H*0.67,L-2,0.9));}
+  g.dump={L,H,yF,yT,xf,xr,ribX,sub:rect(xf+2,fr,L-4,5),side:rect(xf,yF,L,H),rail:rect(xf-1,yT-2.5,L+2,3.5),ribs:D(...ribs),
+   front:PB().M(xf-4,yF).L(xf-4,top+5).L(xf+3,top+5).L(xf+5,yT).L(xf,yT).L(xf,yF).Z(),canopy:PB().M(xf-20,top+4.5).L(xf+8,top+4).L(xf+8,top+8).L(xf-17,top+7.5).Q(xf-20,top+7.5,xf-20,top+5.5).Z(),gate:rrect(xr,yF-2,3.5,H+4,1),hinge:rect(xr-1,yT-1,5,2.5)};
+  maxX=E+3.5;maxY=Math.max(maxY,top+7);}
+ if(s.plow!=='none'){const v=s.plow==='9v',Hb=(v?35:31)+(c.k==='c4'?5:0),bx=-22;
+  const blade=PB().M(bx-4,1.5).Q(bx+9,Hb*0.45,bx-9,Hb).L(bx-4,Hb+1.5).Q(bx+14,Hb*0.5,bx+3,1.5).Z();
+  g.plow={v,Hb,bx,blade,edge:rect(bx-5,0.5,9,3.2),brace:rect(bx+6,5,3,Hb-11),
+   mount:D(PB().M(bx+8,7).L(-1,fr-13).L(-1,fr-7).L(bx+8,15).Z(),rect(-5,fr-17,4,15)),
+   ram:D(PB().M(bx+8,Hb-9).L(-3,fr-3).L(-3,fr-0.5).L(bx+8,Hb-6).Z()),
+   lights:D(rect(nose-3,fr-3,1.8,hH+10-(fr-3)),rrect(nose-7,hH+9,10,5.5,1.5)),
+   wing:v?PB().M(bx+3,1.5).Q(bx+15,Hb*0.45,bx-1,Hb-3).L(bx+3,Hb-1.5).Q(bx+19,Hb*0.5,bx+9,1.5).Z():null};
+  minX=bx-10;}
+ if(s.spreader){const x0=E+5;g.spr={x0,hopper:PB().M(x0,fr+22).L(x0+26,fr+22).L(x0+19,fr-2).L(x0+7,fr-2).Z(),lip:rect(x0-1,fr+20.5,28,3),arm:rect(E-2,fr+3,8,3),chute:rect(x0+10,fr-8,6,6),spin:{cx:x0+13,cy:fr-10,rx:11,ry:2.2}};maxX=Math.max(maxX,x0+28);}
+ if(s.liftgate){g.lift={plat:rect(E+6,2.5,38,3.5),arms:D(PB().M(E-1,fr-7).L(E+12,6).L(E+15.5,6).L(E+2.5,fr-7).Z(),PB().M(E-4,fr-12).L(E+22,6).L(E+25.5,6).L(E-0.5,fr-12).Z()),box:rrect(E-26,fr-18,20,9,1.5)};maxX=Math.max(maxX,E+44);}
+ if(s.strobes){const ry=(g.dump?g.dump.yT:fr)+0.5;g.str={bar:rrect(cowl+ws+8,top,back-cowl-ws-16,4,1.5),rear:rect(E-5,ry,4,4),front:rect(nose-1.5,lampY-6,3,3.5)};maxY=Math.max(maxY,top+4);}
+ g.dims={minX,maxX,oal:maxX-minX,wb:c.wb,ca:R-back,bodyL:g.dump?g.dump.L:0,height:maxY};
+ return g;}
+
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const S={chassis:'c2',dump:'9',mat:'steel',plow:'none',spreader:false,strobes:false,liftgate:false};
+let quote=24117,sent=false,prevKeys={},lastAdded=null;
+const $=q=>document.querySelector(q),$$=q=>[...document.querySelectorAll(q)];
+const SVGNS='http://www.w3.org/2000/svg',dwg=$('#dwg');
+$('#tabs').innerHTML=Object.values(CH).map((c,i)=>`<button class="tab" data-c="${c.k}" aria-pressed="false">Sheet ${'ABCD'[i]}<b>${c.big}</b>${c.sub}</button>`).join('');
+dwg.innerHTML=`<defs><pattern id="glass" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#e6e6e0"/><line x1="0" y1="0" x2="0" y2="5" stroke="#1c3360" stroke-width=".7" opacity=".5"/></pattern><pattern id="gh" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#1c3360" stroke-width=".6" opacity=".45"/></pattern>
+<marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0 2 L10 5 L0 8 Z" fill="#1c3360"/></marker></defs><g id="gnd"></g><g id="trk"></g><g id="dims"></g><g id="bls"></g>`;
+function el(tag,attrs,parent){const e=document.createElementNS(SVGNS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function scale(){return dwg.clientWidth/424;}
+function fs(px){return Math.max(5.2,px/scale());}
+const PHONE=()=>innerWidth<900;
+function partKeys(s){return{chassis:s.chassis,dump:s.dump==='none'?'':s.dump+s.mat,plow:s.plow==='none'?'':s.plow,spreader:s.spreader?'1':'',liftgate:s.liftgate?'1':'',strobes:s.strobes?'1':''};}
+function draw(changed){
+ const g=rigGeom(S),trk=$('#trk'),K=partKeys(S),full=!prevKeys.chassis||prevKeys.chassis!==K.chassis;
+ trk.innerHTML='';const P=(d,cls,part)=>el('path',{d,class:cls,'data-p':part||'base',pathLength:1},trk);
+ // ground
+ $('#gnd').innerHTML=`<rect x="-50" y="0" width="420" height="5" fill="url(#gh)"/><line x1="-50" x2="370" y1="0" y2="0" stroke="#1c3360" stroke-width="1.2" vector-effect="non-scaling-stroke"/>`;
+ g.wheels.forEach(w=>el('line',{x1:w.x,x2:w.x,y1:-(w.y+w.r+12),y2:6,class:'cl'},trk));
+ P(D(g.frame),'ln');P(g.tank.d(),'ln');P(g.step.d(),'ln');
+ if(g.stack)P(g.stack,'ln');
+ if(g.lift)P(D(g.lift.box)+' '+g.lift.arms,'ln','liftgate'),P(g.lift.plat.d(),'ln','liftgate');
+ if(g.dump){const d=g.dump;P(d.sub.d(),'ln','dump');P(D(d.side),'ln','dump');P(d.ribs,'ln','dump');P(d.rail.d(),'ln','dump');P(d.front.d(),'ln','dump');P(d.canopy.d(),'ln','dump');P(d.gate.d(),'ln','dump');P(d.hinge.d(),'ln','dump');}
+ if(g.spr){const sp=g.spr;P(D(sp.arm,sp.hopper,sp.lip,sp.chute),'ln','spreader');el('ellipse',{cx:sp.spin.cx,cy:-sp.spin.cy,rx:sp.spin.rx,ry:sp.spin.ry,class:'ln','data-p':'spreader',pathLength:1},trk);}
+ P(g.body.d(),'ln');P(g.win.d(),'gl');P(g.seams.d(),'ln2');P(g.handle.d(),'ln');P(g.mirror,'ln');P(g.grille.d(),'ln');P(g.lamp.d(),'ln');P(g.bumper.d(),'ln');P(D(g.flap,g.tail),'ln');
+ g.wheels.forEach(w=>{for(const [r,c] of [[w.r,'ln'],[w.r*.64,'ln2'],[w.r*.58,'ln'],[w.r*.22,'ln']])el('circle',{cx:w.x,cy:-w.y,r,class:c,pathLength:1,'data-p':'base'},trk);
+  for(let i=0;i<8;i++){const a=i/8*Math.PI*2;el('circle',{cx:w.x+Math.cos(a)*w.r*.37,cy:-w.y+Math.sin(a)*w.r*.37,r:1,class:'ln2',pathLength:1,'data-p':'base'},trk);}});
+ if(g.plow){const p=g.plow;P(p.mount+' '+p.ram,'ln','plow');if(p.wing)P(p.wing.d(),'ln','plow');P(p.blade.d(),'ln','plow');P(D(p.edge,p.brace),'ln','plow');P(p.lights,'ln','plow');}
+ if(g.str){$$('#trk [data-p]');for(const r of [g.str.bar,g.str.rear,g.str.front])el('path',{d:r.d(),class:'lit','data-p':'strobes',pathLength:1},trk);}
+ dims(g);balloons(g);
+ // animate: draw-on for new parts or whole truck on chassis change
+ const fresh=[];for(const k of ['dump','plow','spreader','liftgate','strobes'])if(K[k]&&K[k]!==prevKeys[k])fresh.push(k);
+ if(!RM&&window.gsap&&prevKeys.chassis){
+  const sel=full?$$('#trk [pathLength]'):fresh.length?$$(fresh.map(f=>`#trk [data-p=${f}]`).join(',')):[];
+  if(sel.length){gsap.fromTo(sel,{strokeDasharray:1,strokeDashoffset:1},{strokeDashoffset:0,duration:full?1.1:.8,ease:'power2.inOut',stagger:full?.006:.03});}
+  gsap.fromTo('#dims .dline',{strokeDasharray:1,strokeDashoffset:1},{strokeDashoffset:0,duration:.6,ease:'power2.out',delay:.2});}
+ prevKeys=K;lastAdded=fresh[0]||null;}
+function dims(g){const G=$('#dims');G.innerHTML='';const ph=PHONE(),f=fs(ph?11:12.5);
+ const lbl=(x,y,t)=>{const w=t.length*f*.62+f*.8;el('rect',{x:x-w/2,y:y-f*.68,width:w,height:f*1.36,fill:'#f2eee3'},G);const tx=el('text',{x,y,class:'dt','text-anchor':'middle','dominant-baseline':'central','font-size':f},G);tx.textContent=t;};
+ const H=(x0,x1,y,t,yo0,yo1)=>{el('line',{x1:x0,x2:x0,y1:yo0,y2:y+3,class:'dim'},G);el('line',{x1:x1,x2:x1,y1:yo1,y2:y+3,class:'dim'},G);
+  el('line',{x1:x0,x2:x1,y1:y,y2:y,class:'dim dline','marker-start':'url(#ar)','marker-end':'url(#ar)',pathLength:1},G);lbl((x0+x1)/2,y,t);};
+ const d=g.dims;
+ H(d.minX,d.maxX,ph?24:26,'OAL '+Math.round(d.oal)+' in',3,3);
+ if(!ph)H(g.F,g.R,13,'WB '+g.c.wb,3,3);
+ if(!ph)H(g.back,g.R,-(g.top+(g.dump?14:12)),'CA '+d.ca,-(g.top+2),-(g.r+g.r+4));
+ if(g.dump&&!ph)H(g.dump.xf,g.dump.xr,-(g.top+27),'BODY '+(g.dump.L/12)+"'-0\"",-(g.top+6),-(g.dump.yT+2));
+ const hx=d.maxX+(ph?10:12),ht=Math.round(d.height+(g.dump?4:0));
+ el('line',{x1:hx,x2:hx,y1:0,y2:-ht,class:'dim dline','marker-start':'url(#ar)','marker-end':'url(#ar)',pathLength:1},G);el('line',{x1:hx-14,x2:hx+3,y1:-ht,y2:-ht,class:'dim'},G);
+ const t=el('text',{x:hx+f*.9,y:-ht/2,class:'dt','font-size':f,transform:`rotate(-90 ${hx+f*.9} ${-ht/2})`,'text-anchor':'middle'},G);t.textContent='OAH '+ht;}
+function balloons(g){const B=$('#bls');B.innerHTML='';const ph=PHONE(),r=fs(ph?12:13),f=fs(ph?11:12);
+ const items=[];if(g.dump)items.push([1,'dump',g.dump.xf+g.dump.L*.8,-(g.dump.yT-5)]);if(g.plow)items.push([2,'plow',g.plow.bx-6,-g.plow.Hb*.75]);if(g.spr)items.push([3,'spreader',g.spr.x0+20,-(g.fr+12)]);if(g.str)items.push([4,'strobes',g.cowl+g.c.ws+16,-(g.top+3)]);if(g.lift)items.push([5,'liftgate',g.E+30,-5]);
+ const yb=-(g.top+(ph?24:42));
+ items.forEach(([n,k,ax,ay])=>{const bx=Math.min(Math.max(ax+(n===2?-6:n===5?6:0),-40),355),by=n===5?-(g.fr+34):n===3?-(g.fr+48):yb;const grp=el('g',{class:'bl'+(k===lastAddedKey?' new':'')},B);
+  el('line',{x1:bx,y1:by+r,x2:ax,y2:ay},grp);el('circle',{cx:ax,cy:ay,r:1.6,fill:'#1c3360'},grp);el('circle',{cx:bx,cy:by,r},grp);const t=el('text',{x:bx,y:by+.5,'font-size':f},grp);t.textContent=n;});}
+let lastAddedKey=null;
+function prices(){const c=CH[S.chassis],q=v=>Math.round(v/100)*100,r=(a,m)=>money(q(a[0]*(m||1)))+'–'+money(q(a[1]*(m||1))).slice(1);
+ const set=(id,v)=>{const e=$('#p-'+id);e.textContent=v||'—';e.classList.toggle('on',!!v);};
+ set('dump',S.dump!=='none'&&r(PRICE.dump[S.dump][S.mat],c.f));set('plow',S.plow!=='none'&&r(PRICE.plow[S.plow],c.f));
+ set('spreader',S.spreader&&r(PRICE.spreader));set('strobes',S.strobes&&r(PRICE.strobes));set('liftgate',S.liftgate&&r(PRICE.liftgate));}
+const pv={lo:0,hi:0};
+function total(){const e=estimate(S),set=()=>$('#tot').textContent=pv.hi<1?'$0':money(pv.lo)+'–'+money(pv.hi).slice(1);
+ if(RM||!window.gsap){pv.lo=e[0];pv.hi=e[1];set();}else gsap.to(pv,{lo:e[0],hi:e[1],duration:.8,ease:'power1.out',onUpdate:set,snap:{lo:100,hi:100}});}
+function data(){const c=CH[S.chassis],w=addedWeight(S),left=c.gvwr-c.curb-w,d=buildDays(S),f=v=>v.toLocaleString('en-US');
+ $('#data').innerHTML=`<div><small>GVWR, class</small><b>${f(c.gvwr)} lb</b></div><div><small>Chassis, approx.</small><b>${f(c.curb)} lb</b></div><div><small>Equipment adds</small><b>+${f(w)} lb</b></div><div><small>Payload left</small><b class="${left<1500?'neg':''}">${f(left)} lb</b></div><div><small>Bay time</small><b>${d[0]}–${d[1]} days</b></div>`;}
+function render(changed){
+ $$('.tab').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===S.chassis));
+ $$('.opt').forEach(b=>b.setAttribute('aria-pressed',String(S[b.dataset.k])===b.dataset.v));
+ $$('[data-k=mat]').forEach(b=>b.disabled=S.dump==='none');$$('[data-v="11"]').forEach(b=>b.disabled=S.chassis==='c1');
+ $$('.chk').forEach(b=>b.setAttribute('aria-pressed',S[b.dataset.t]));
+ $('#tbd').textContent='RB-BYR-'+CH[S.chassis].short.replace(/[^A-Z0-9]/gi,'').toUpperCase();
+ lastAddedKey=changed&&{dump:'dump',mat:'dump',plow:'plow',spreader:'spreader',strobes:'strobes',liftgate:'liftgate'}[changed]||null;
+ draw(changed);prices();total();data();}
+function change(k,v){if(sent)return;S[k]=v;$('#note').textContent=applyRules(S,k);render(k);}
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)change('chassis',b.dataset.c);});
+$$('.opt').forEach(b=>b.addEventListener('click',()=>change(b.dataset.k,b.dataset.v)));
+$$('.chk').forEach(b=>b.addEventListener('click',()=>change(b.dataset.t,!S[b.dataset.t])));
+function send(){
+ if(sent){sent=false;$('#qs').style.display='none';$('#bom').style.display='';$('#detail').style.visibility='hidden';$('#send').textContent='Send this build →';quote++;return;}
+ sent=true;const c=CH[S.chassis],e=estimate(S),d=buildDays(S);
+ $('#qn').textContent='RB-'+quote;
+ const rows=[['Quote no.','RB-'+quote],['Chassis',c.long+', customer supplied'],['01 Dump body',S.dump==='none'?'—':S.dump+' ft '+(S.mat==='alum'?'aluminum':'steel')],['02 Plow',S.plow==='none'?'—':S.plow==='8'?'8 ft straight':'9 ft V-plow'],['03 Spreader',S.spreader?'Tailgate, salt/sand':'—'],['04 Strobes',S.strobes?'LED package':'—'],['05 Liftgate',S.liftgate?'Rail gate':'—'],['Estimate',e[1]?money(e[0])+' – '+money(e[1]):'$0'],['Bay time',d[0]+'–'+d[1]+' working days']];
+ $('#qt').innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+ $('#ntt').textContent='New build request · '+c.short.replace(/-/g,String.fromCharCode(8209))+' · '+(buildParts(S).slice(0,2).join(' + ')||'cab & chassis');
+ $('#ntp').textContent='RB-'+quote+' · est. '+(e[1]?kmoney(e[0])+'–'+kmoney(e[1]):'$0');
+ $('#bom').style.display='none';const qs=$('#qs');qs.style.display='block';$('#send').textContent='Edit this build';$('#detail').style.visibility='visible';
+ if(!RM&&window.gsap){gsap.fromTo(qs,{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:.8,ease:'power2.inOut'});
+  gsap.fromTo('#qs .stamp',{scale:2.4,rotation:-14},{scale:1,rotation:-3,duration:.35,ease:'power4.in',delay:.6});
+  gsap.fromTo('#detail',{clipPath:'circle(0% at 90% 10%)'},{clipPath:'circle(150% at 90% 10%)',duration:.7,ease:'power2.out',delay:.2});
+  gsap.fromTo('#detail .nc',{y:-60},{y:0,duration:.55,ease:'back.out(1.7)',delay:.75});}
+ else{qs.style.clipPath='none';}}
+$('#send').addEventListener('click',send);$('#edit').addEventListener('click',send);
+addEventListener('resize',()=>{const g=rigGeom(S);dims(g);balloons(g);});
+// catalogue drawings from the same geometry
+(function(){const g=rigGeom({chassis:'c2',dump:'11',mat:'steel',plow:'9v',spreader:true,strobes:true,liftgate:false}),gl=rigGeom({chassis:'c2',dump:'none',mat:'steel',plow:'none',spreader:false,strobes:false,liftgate:true});
+ const svc=D(rect(130,43,120,40),rect(130,43,120,3),rect(150,50,24,28),rect(178,50,24,28),rect(206,50,24,28),rect(234,50,12,28));
+ const it=[['RB-DB','Dump bodies','Steel and aluminum, 9 to 14 ft. Hoist matched to the chassis.',`<path d="${D(g.dump.side,g.dump.front,g.dump.canopy,g.dump.gate)} ${g.dump.ribs}"/>`],
+ ['RB-PL','Snow plows','Straight and V-blades, mounts, lights, joystick in the cab.',`<path d="${g.plow.mount} ${g.plow.ram}"/><path d="${g.plow.wing.d()}"/><path d="${g.plow.blade.d()}"/><path d="${D(g.plow.edge,g.plow.brace)}"/>`],
+ ['RB-SS','Spreaders','Tailgate and V-box units for salt and sand.',`<path d="${D(g.spr.arm,g.spr.hopper,g.spr.lip,g.spr.chute)}"/><ellipse cx="${g.spr.spin.cx}" cy="${-g.spr.spin.cy}" rx="${g.spr.spin.rx}" ry="${g.spr.spin.ry}"/>`],
+ ['RB-SB','Service bodies','Compartments laid out for the trade that drives it.',`<path d="${rect(120,34,140,9).d()}"/><path d="${svc}"/>`],
+ ['RB-LG','Liftgates','Rail and tuck-under gates, 1,300 to 2,500 lb class.',`<path d="${D(gl.lift.box)} ${gl.lift.arms}"/><path d="${gl.lift.plat.d()}"/><path d="${rect(gl.E-70,gl.fr-8,70,8).d()}"/>`],
+ ['RB-LT','Lighting & strobes','LED strobes, bars and work lights, wired and sealed.',`<path d="${g.body.d()}"/><path d="${g.win.d()}"/><path d="${g.str.bar.d()}" style="fill:#cf3b22"/>`]];
+ const h=$('#cat');h.innerHTML=it.map(i=>`<div><svg aria-hidden="true">${i[3]}</svg><span class="pn">${i[0]}</span><h3>${i[1]}</h3><p>${i[2]}</p></div>`).join('');
+ h.querySelectorAll('svg').forEach(s=>{const b=s.getBBox();s.setAttribute('viewBox',`${b.x-3} ${b.y-3} ${b.width+6} ${b.height+6}`);});
+ $('#sched').innerHTML=[['Haverhill','shop'],['Methuen','7 mi'],['Georgetown','9 mi'],['Lawrence','10 mi'],['Salem, NH','10 mi'],['North Andover','11 mi'],['Amesbury','11 mi'],['Andover','14 mi'],['Newburyport','15 mi'],['Ipswich','20 mi'],['Danvers','22 mi'],['Peabody','25 mi'],['Beverly','28 mi'],['Salem','28 mi'],['Lynn','30 mi'],['Gloucester','35 mi']].map(t=>`<div>${t[0]}<span>${t[1]}</span></div>`).join('');})();
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Kettle Rock Diesel Works · Shop Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#edf0f4;--card:#fff;--ink:#0e1726;--ink2:#5b6678;--ink3:#97a1b1;--line:#e3e7ed;--pri:#1d4ed8;--pri2:#e6edff;--ok:#0f9d58;--ok2:#e3f6ec;--warn:#d97706;--warn2:#fdf1dc;--bad:#dc3545;--bad2:#fde8ea;
+  --sans:'Manrope',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--r:16px;--sh:0 1px 2px rgba(14,23,38,.06),0 8px 24px -12px rgba(14,23,38,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:500 16px/1.5 var(--sans);overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:var(--mono)}
+/* app bar */
+.bar{height:68px;display:flex;align-items:center;gap:18px;padding:0 22px;background:var(--card);box-shadow:0 1px 0 var(--line)}
+.logo{display:flex;align-items:center;gap:12px;min-height:44px}
+.logo i{width:38px;height:38px;border-radius:10px;background:var(--ink);color:#fff;font:800 15px/38px var(--mono);text-align:center;font-style:normal;letter-spacing:-.04em}
+.logo b{font:800 17px/1.1 var(--sans);display:block}.logo span{font:600 12.5px var(--sans);color:var(--ink2)}
+.jobpill{margin-left:18px;display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:999px;padding:8px 16px 8px 10px;font:600 14px var(--sans);color:var(--ink2)}
+.jobpill em{font:700 13px var(--mono);font-style:normal;background:var(--ink);color:#fff;border-radius:999px;padding:4px 10px}
+.sp{flex:1}
+.excl{display:flex;align-items:center;gap:8px;font:700 13px var(--sans);color:var(--ink);background:var(--warn2);border-radius:999px;padding:8px 14px 8px 10px}
+.excl svg{width:20px;height:20px}
+.b{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 18px;border-radius:12px;font:700 15px var(--sans);white-space:nowrap}
+.b-pri{background:var(--pri);color:#fff}.b-sec{background:var(--bg);color:var(--ink)}
+.b svg{width:18px;height:18px}
+/* layout */
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:18px;padding:18px 22px;height:calc(100vh - 68px);min-height:720px;max-height:1000px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh)}
+.trk{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;min-height:0}
+.th{display:flex;align-items:center;gap:14px;padding:16px 20px 6px}
+.th h1{font:800 21px/1.2 var(--sans)}.th h1 small{display:block;font:600 13.5px var(--sans);color:var(--ink2)}
+.chip{display:inline-flex;align-items:center;gap:7px;font:700 12.5px var(--sans);border-radius:999px;padding:5px 11px;white-space:nowrap}
+.chip i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.c-live{background:var(--ok2);color:var(--ok)}.c-live i{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(.55)}}
+.c-pri{background:var(--pri2);color:var(--pri)}.c-warn{background:var(--warn2);color:var(--warn)}.c-bad{background:var(--bad2);color:var(--bad)}.c-mute{background:var(--bg);color:var(--ink2)}
+.eta{margin-left:auto;text-align:right;font:600 13px var(--sans);color:var(--ink2)}.eta b{display:block;font:800 17px var(--sans);color:var(--ink)}
+/* stepper */
+.steps{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:10px 20px 6px;position:relative}
+.steps .track{position:absolute;left:calc(20px + (100% - 40px)/14);right:calc(20px + (100% - 40px)/14);top:25px;height:4px;border-radius:4px;background:var(--line)}
+.steps .track i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--pri);transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.steps button{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;min-height:62px;padding:4px 2px}
+.steps .dot{width:24px;height:24px;border-radius:50%;background:var(--card);box-shadow:inset 0 0 0 3px var(--line);display:grid;place-items:center;transition:transform .3s}
+.steps .dot svg{width:12px;height:12px;display:none}
+.steps .nm{font:700 13px/1.15 var(--sans);color:var(--ink3);text-align:center}
+.steps .tm{font:500 11.5px var(--mono);color:var(--ink3)}
+.steps .done .dot{background:var(--pri);box-shadow:none}.steps .done .dot svg{display:block}
+.steps .done .nm{color:var(--ink2)}
+.steps .on .dot{background:var(--pri);box-shadow:0 0 0 6px var(--pri2);transform:scale(1.08)}
+.steps .on .dot svg{display:block}.steps .on .nm{color:var(--ink)}.steps .on .tm{color:var(--pri)}
+/* body */
+.tb{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;padding:10px 20px 6px;min-height:0}
+.photo{position:relative;border-radius:14px;overflow:hidden;background:radial-gradient(ellipse 60% 55% at 52% 45%,#4a4640 0%,#2b2926 55%,#191816 100%);min-height:0}
+.photo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(#1c1b19,#121110);z-index:0}
+.photo svg.eng{position:absolute;inset:6% 3% 4%;width:94%;height:90%;z-index:1;overflow:visible}
+.ph-top{position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;z-index:2;font:600 12px var(--mono);color:rgba(255,255,255,.82);letter-spacing:.04em}
+.ph-top span:first-child::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff4d4f;margin-right:8px;vertical-align:1px}
+.ph-cap{position:absolute;left:14px;bottom:12px;z-index:2;font:700 13px var(--sans);color:#fff;background:rgba(0,0,0,.45);border-radius:8px;padding:6px 10px}
+.stamp{position:absolute;right:5%;top:12%;width:150px;z-index:3;display:none;transform:rotate(-12deg)}
+.stamp.on{display:block}.stamp.land{animation:land .5s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes land{0%{transform:rotate(-22deg) scale(1.8)}100%{transform:rotate(-12deg) scale(1)}}
+.det{display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto;padding-right:2px}
+.det h2{font:800 30px/1.1 var(--sans);letter-spacing:-.01em}
+.det .when{font:600 13.5px var(--mono);color:var(--ink2);margin-top:2px}
+.det p.note{font-size:16px;color:var(--ink)}
+.fnd{display:flex;flex-direction:column;gap:8px}
+.fnd div{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;background:var(--bg);border-radius:12px;padding:10px 12px}
+.fnd b{font:700 15.5px/1.3 var(--sans)}.fnd small{grid-column:1;font:500 14px var(--sans);color:var(--ink2)}
+.fnd .chip{grid-row:1/3;grid-column:2}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tiles div{background:var(--bg);border-radius:12px;padding:10px 12px}
+.tiles b{display:block;font:700 22px/1.1 var(--mono);letter-spacing:-.02em}.tiles small{font:600 12.5px var(--sans);color:var(--ink2)}
+.tiles .g b{color:var(--ok)}.tiles .r b{color:var(--bad)}
+.chart{width:100%;display:block;background:var(--bg);border-radius:12px}
+.chart .gl{stroke:#d5dbe3;stroke-width:1}.chart .hp{fill:none;stroke:var(--pri);stroke-width:3;stroke-linecap:round}.chart .tq{fill:none;stroke:var(--warn);stroke-width:3;stroke-linecap:round}
+.chart .ar{fill:url(#hpFill)}
+.chart text{font:500 10.5px var(--mono);fill:var(--ink3)}.chart .lab{font:700 11.5px var(--mono)}
+.tf{display:flex;align-items:center;gap:10px;padding:10px 20px 16px;flex-wrap:wrap}
+.ctl{display:flex;gap:6px;background:var(--bg);border-radius:14px;padding:4px}
+.ctl button{min-width:46px;min-height:46px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 14.5px var(--sans)}
+.ctl button svg{width:16px;height:16px;fill:currentColor}
+.ctl .play{background:var(--ink);color:#fff;padding:0 16px}
+.tf .b-text{margin-left:auto;background:var(--ok);color:#fff}
+.tf .b-text.set{background:var(--ok2);color:var(--ok)}
+/* side */
+.side{display:flex;flex-direction:column;gap:18px;min-height:0}.side>.card:first-of-type{flex:1}
+.sc{padding:16px 18px;display:flex;flex-direction:column;min-height:0}
+.sc h3{display:flex;align-items:center;justify-content:space-between;font:800 16px var(--sans);margin-bottom:12px}
+.sc h3 small{font:600 12.5px var(--sans);color:var(--ink2)}
+.bays{display:flex;flex-direction:column;gap:7px;overflow:auto;min-height:0}
+.bay{display:grid;grid-template-columns:44px 1fr auto;gap:2px 12px;align-items:center;padding:9px 10px;border-radius:12px;background:var(--bg)}
+.bay .n{grid-row:1/3;width:44px;height:44px;border-radius:10px;background:var(--card);display:grid;place-items:center;font:700 13px var(--mono);color:var(--ink2);text-align:center;line-height:1.05}
+.bay b{font:700 14.5px/1.25 var(--sans)}
+.bay .meter{grid-column:2/4;height:5px;border-radius:5px;background:#dfe4ea;overflow:hidden}
+.bay .meter i{display:block;height:100%;background:var(--pri);border-radius:5px}
+.bay.mine{background:var(--ink);color:#fff}.bay.mine .n{background:var(--pri);color:#fff}.bay.mine .meter{background:#2a3446}.bay.mine .meter i{background:#5b8cff}
+.bay.wait .meter i{background:var(--warn)}.bay.road .meter i{background:var(--bad)}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:auto;padding-top:12px}.sum div{text-align:center}.sum b{display:block;font:800 20px/1.1 var(--sans)}.sum small{font:600 12px/1.2 var(--sans);color:var(--ink2)}
+.map{width:100%;height:auto;display:block;border-radius:12px;background:#e8ecf1}
+.map text{font:600 10.5px var(--sans);fill:#5b6678}
+.notice{display:none;grid-template-columns:40px 1fr;gap:12px;align-items:start;padding:14px 16px;border-radius:16px;background:var(--ink);color:#fff;box-shadow:0 20px 40px -18px rgba(14,23,38,.6)}
+.notice.on{display:grid;animation:pop .45s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes pop{0%{transform:scale(.86)}100%{transform:scale(1)}}
+.notice i{width:40px;height:40px;border-radius:10px;background:var(--ok);font:800 14px/40px var(--mono);text-align:center;font-style:normal}
+.notice b{font:800 14.5px var(--sans)}.notice span{float:right;font:500 12px var(--mono);color:#9fb0c9}.notice p{font-size:15px;line-height:1.4;color:#dbe3ef;margin-top:2px}
+.float{position:fixed;right:22px;bottom:22px;width:360px;z-index:20}
+/* engine shaded mode */
+.eng{--shadow:#000}
+.eng.fin-dirty{--blk:#5d5249;--blk-l:#7d6f62;--blk-d:#302a25;--cov:#4c423a;--cov-l:#6c5f53;--cov-d:#2a2420;--st:#7f7d77;--st-l:#a9a59c;--st-d:#45433f}
+.eng.fin-clean{--blk:#9aa3ab;--blk-l:#d2d8dd;--blk-d:#5c656d;--cov:#a2aab2;--cov-l:#dbe0e5;--cov-d:#646d75;--st:#b8c0c7;--st-l:#eef2f5;--st-d:#6a737b}
+.eng.fin-paint{--blk:#2c3a4f;--blk-l:#5d7395;--blk-d:#141c28;--cov:#344563;--cov-l:#7189ad;--cov-d:#18202d;--st:#b8c0c7;--st-l:#f2f5f8;--st-d:#626b74}
+.eng [class^="f-"]{stroke:rgba(0,0,0,.38);stroke-width:.8}
+.eng .f-blk{fill:url(#d-gB)}.eng .f-blk-l{fill:var(--blk-l)}.eng .f-blk-d{fill:var(--blk-d)}
+.eng .f-cov{fill:url(#d-gC)}.eng .f-cov-l{fill:var(--cov-l)}.eng .f-cov-d{fill:var(--cov-d)}
+.eng .f-st{fill:url(#d-gS)}.eng .f-st-l{fill:var(--st-l)}.eng .f-st-d{fill:var(--st-d)}
+.eng .f-hole{fill:#0c0d0f}.eng .f-bore{fill:#41474e;stroke:none}
+.eng .f-ir{fill:#4a3e36}.eng .f-ir-l{fill:#6e5a4b}.eng.fin-paint .f-ir{fill:#3b3d40}.eng.fin-paint .f-ir-l{fill:#5f6266}
+.eng .f-rub{fill:#1a1a1a}.eng .belt{fill:none;stroke:#121212;stroke-width:7}
+.eng .f-wood{fill:#b48b5c}.eng .f-wood-d{fill:#7c5b39}
+.eng .f-dy{fill:#3e4654}.eng .f-dy-l{fill:#5e6878}.eng .f-dy-d{fill:#222831}
+.eng .f-mach{fill:#4f6f5d}.eng .f-mach-l{fill:#7c9a87}.eng .f-mach-d{fill:#33493c}
+.eng .f-tag{fill:#f3eddc}.eng .t-tag{font:800 17px var(--mono);text-anchor:middle;fill:#0e1726}.eng .t-tag2{font:600 10px var(--mono);text-anchor:middle;fill:#5b6678}
+.eng .t-rdy{display:none}.eng[data-stage=ready] .t-rdy{display:inline}.eng[data-stage=ready] .t-job{display:none}
+.eng .f-strap{fill:#f59e0b}
+.eng .f-grime{fill:#1c140d;opacity:.5;stroke:none}.eng .grime{display:none}.eng.fin-dirty .grime{display:inline}
+.eng .pipe{fill:none;stroke:#2a2a2a;stroke-width:3}.eng .eye{fill:none;stroke:var(--st-d);stroke-width:4}.eng .string{fill:none;stroke:#d9d2bf;stroke-width:1.5}
+.eng .chip{fill:none;stroke:#e9edf1;stroke-width:1.6}
+.eng .mark{fill:none;stroke:#ff5c5c;stroke-width:3;stroke-dasharray:8 6}.eng .mark-l{stroke:#ff5c5c;stroke-width:2}
+.eng .f-mark{fill:#ff5c5c;stroke:none}.eng .t-mark{fill:#fff;font:800 18px var(--mono);text-anchor:middle}
+.eng[data-stage=machining] .b3.f-bore{fill:#e7edf2}.eng[data-stage=inspection] .b3.f-bore{fill:#b4433a}
+/* below */
+.below{max-width:1280px;margin:0 auto;padding:60px 22px 30px;display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.below .card{padding:24px}
+.below h2{font:800 30px/1.15 var(--sans);letter-spacing:-.01em;margin-bottom:6px}
+.below .k{font:700 12.5px var(--mono);color:var(--pri);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;display:block}
+.svc{grid-column:span 8}.svc ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.svc li{background:var(--bg);border-radius:12px;padding:14px 16px}.svc li b{display:block;font:800 16.5px var(--sans)}.svc li span{font-size:15px;color:var(--ink2)}
+.road{grid-column:span 4;background:var(--ink)!important;color:#fff}.road p{color:#c7d2e3;margin-top:8px}.road .big{font:700 34px/1.1 var(--mono);display:block;padding:6px 0;margin:18px 0 14px;letter-spacing:-.03em}
+.road .k{color:#7ea2ff}.road{display:flex;flex-direction:column}.rs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto;padding-top:22px}.rs div{background:#1b2537;border-radius:12px;padding:12px 14px;font:600 13px var(--sans);color:#9fb0c9}.rs b{display:block;font:700 22px var(--mono);color:#fff}
+.brands{grid-column:span 7}.brands p{color:var(--ink2);font-size:17px;line-height:1.75;margin-top:10px}
+.area{grid-column:span 5}.area p{color:var(--ink2);margin-top:10px}
+.rev{grid-column:span 12;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.rev blockquote{font:700 22px/1.4 var(--sans);max-width:60ch}.rev cite{display:block;font:600 13px var(--mono);font-style:normal;color:var(--ink2);margin-top:8px}
+footer{max-width:1280px;margin:0 auto;padding:20px 22px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font:600 13px var(--sans);color:var(--ink2)}
+/* phone */
+@media (max-width:1100px){
+  .bar{height:60px;padding:0 14px;gap:10px}.jobpill,.excl,.bar .b-sec,.logo span{display:none}
+  .logo b{font-size:15.5px}.bar .b-pri{min-height:44px;padding:0 14px;font-size:14.5px}
+  .wrap{display:block;height:auto;max-height:none;min-height:0;padding:10px 10px}
+  .trk{display:flex;flex-direction:column}.tb{display:contents!important}.photo{order:3;margin:6px 12px 0}.tf{order:4}.det{order:5;padding:0 14px 16px}
+  .ph-cap,.ph-top span:first-child{display:none}
+  .th{padding:12px 14px 2px}.th h1{font-size:17px}.th h1 small{font-size:13px}.eta{display:none}
+  .steps{padding:8px 8px 2px}.steps .tm{display:none}.steps .nm{font-size:10.5px}.steps button{min-height:50px}.steps .track{top:21px;left:calc(8px + (100% - 16px)/14);right:calc(8px + (100% - 16px)/14)}
+  .steps .dot{width:20px;height:20px}
+  .steps button:not(.on) .nm{visibility:hidden}
+  .photo{height:240px}
+  .det{margin-top:0;overflow:visible}.det h2{font-size:26px}
+  .det .extra{display:none}
+  .tf{padding:10px 12px 14px;gap:8px}.ctl{flex:1}.ctl .play{flex:1}.tf .b-text{margin-left:0;width:100%}
+  .side{display:flex;flex-direction:column;margin-top:12px}
+  .notice{order:-1}
+  .below{display:flex;flex-direction:column;padding:30px 10px}.svc ul{grid-template-columns:1fr}
+  .stamp{width:104px;top:8%}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="logo" href="#"><i>KR</i><div><b>Kettle Rock Diesel Works</b><span>Shop board · Merrimack Valley</span></div></a>
+  <div class="jobpill"><em>KR-0614</em>Excavator engine, 6-cyl</div>
+  <div class="sp"></div>
+  <span class="excl"><svg viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M12 2l3 6.3 7 .9-5.1 4.8 1.3 6.9L12 17.5 5.8 20.9l1.3-6.9L2 9.2l7-.9z"/></svg>Exclusive in Essex County, MA</span>
+  <a class="b b-sec" href="#quote">Get a quote</a>
+  <a class="b b-pri" href="tel:+19785550129"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call (978) 555-0129</a>
+</header>
+
+<div class="wrap">
+  <section class="card trk" aria-label="Engine tracker">
+    <div class="th">
+      <h1>Engine tracker<small>KR-0614 · Excavator engine, 6-cyl · private link</small></h1>
+      <span class="chip c-live" id="live"><i></i><span id="liveT">On the dyno now</span></span>
+      <div class="eta">Ready by<b>Fri Oct 31, 7 AM</b></div>
+    </div>
+    <div class="steps" id="steps"><div class="track"><i id="trackI"></i></div></div>
+    <div class="tb">
+      <div class="photo" id="photo">
+        <div class="ph-top"><span id="phCam">BAY 4 · CAM 2</span><span id="phTime"></span></div>
+        <div class="ph-cap" id="phCap"></div>
+        <svg class="stamp" id="stamp" viewBox="0 0 200 200" aria-label="Passed dyno"><rect x="8" y="48" width="184" height="104" rx="14" fill="rgba(15,157,88,.12)" stroke="#2fd17a" stroke-width="6"/><text x="100" y="98" text-anchor="middle" font-family="Manrope" font-weight="800" font-size="40" fill="#2fd17a">PASSED</text><text x="100" y="134" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="20" fill="#2fd17a" letter-spacing="5">DYNO ✓</text></svg>
+      </div>
+      <div class="det" aria-live="polite">
+        <div><h2 id="dName"></h2><div class="when" id="dTime"></div></div>
+        <p class="note" id="dNote"></p>
+        <div id="dExtra"></div>
+      </div>
+    </div>
+    <div class="tf">
+      <div class="ctl">
+        <button id="prev" aria-label="Previous stage"><svg viewBox="0 0 16 16"><path d="M11 2 4 8l7 6z"/></svg></button>
+        <button class="play" id="play"><svg viewBox="0 0 16 16" id="pIco"><path d="M4 2l10 6-10 6z"/></svg><span id="pLbl">Play</span></button>
+        <button id="next" aria-label="Next stage"><svg viewBox="0 0 16 16"><path d="M5 2l7 6-7 6z"/></svg></button>
+      </div>
+      <button class="b b-text" id="textMe"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span>Text me when it's ready</span></button>
+    </div>
+  </section>
+  <aside class="side">
+    <div class="notice" id="notice" role="status"><i>KR</i><div><span>now</span><b>Kettle Rock Diesel</b><p>KR-0614 is ready for pickup. Passed dyno at 287 hp. Gate's open 6 AM to 6 PM.</p></div></div>
+    <section class="card sc" aria-label="Shop wall"><h3>Shop wall <small id="clock">6 jobs · live</small></h3><div class="bays" id="bays"></div><div class="sum"><div><b>6</b><small>jobs in the shop</small></div><div><b>9 days</b><small>avg. rebuild</small></div><div><b>4</b><small>road calls this week</small></div></div></section>
+    <section class="card sc"><h3>Road calls <small>24 h · 2 trucks</small></h3>
+      <svg class="map" viewBox="0 0 340 170" aria-label="Service area map, schematic">
+        <path d="M-5,118 C40,112 70,96 104,98 C140,100 160,84 196,80 C232,76 262,58 300,52 C318,49 332,40 345,34" fill="none" stroke="#b9d0ec" stroke-width="9" stroke-linecap="round"/>
+        <path d="M30,-5 C60,40 95,70 120,108 C140,138 190,150 240,138 C280,128 310,100 345,92" fill="none" stroke="#fff" stroke-width="6"/><path d="M30,-5 C60,40 95,70 120,108 C140,138 190,150 240,138 C280,128 310,100 345,92" fill="none" stroke="#c9d1db" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <path d="M150,175 C152,130 150,90 156,40 C158,20 160,8 162,-5" fill="none" stroke="#fff" stroke-width="6"/>
+        <circle cx="140" cy="96" r="58" fill="rgba(29,78,216,.06)" stroke="#1d4ed8" stroke-width="1.2" stroke-dasharray="3 4"/>
+        <g font-family="Manrope"><circle cx="140" cy="96" r="6" fill="#0e1726"/><text x="149" y="90" style="font-weight:800;fill:#0e1726">Shop</text>
+        <circle cx="66" cy="112" r="3.5" fill="#97a1b1"/><text x="48" y="128">Lowell</text><circle cx="126" cy="86" r="3.5" fill="#97a1b1"/><text x="88" y="78">Lawrence</text>
+        <circle cx="196" cy="70" r="3.5" fill="#97a1b1"/><text x="204" y="72">Haverhill</text><circle cx="132" cy="134" r="3.5" fill="#97a1b1"/><text x="86" y="150">Andover</text>
+        <circle cx="300" cy="44" r="3.5" fill="#97a1b1"/><text x="262" y="30">Newburyport</text></g>
+        <g id="truck"><circle r="9" fill="#dc3545"/><circle r="15" fill="none" stroke="#dc3545" stroke-width="1.5" opacity=".5"/><path d="M-4.5,-2.5 h6 v5 h-6z M1.5,-1 h2.5 l1.5,2 v1.5 h-4z" fill="#fff"/></g>
+        <text x="200" y="160" style="font-weight:700;fill:#dc3545">RC-2231 · Rt 495, 22 min out</text>
+        <path id="route" d="M30,-5 C60,40 95,70 120,108 C140,138 190,150 240,138" fill="none"/>
+      </svg>
+    </section>
+  </aside>
+</div>
+
+<main class="below" id="quote">
+  <section class="card svc"><span class="k">What we do</span><h2>Engines, iron and hydraulics. One shop.</h2><ul id="svc"></ul></section>
+  <section class="card road"><span class="k">24 h road service</span><h2>Down on a job site?</h2><p>A mechanic answers day or night. The service truck rolls with the parts most likely to fix it.</p><a class="big" href="tel:+19785550129">(978) 555-0129</a><a class="b b-pri" href="tel:+19785550129">Call the road line</a><div class="rs"><div><b>24 h</b>phone answered</div><div><b>&lt; 90 min</b>typical arrival</div><div><b>2</b>stocked trucks</div><div><b>4</b>calls this week</div></div></section>
+  <section class="card brands"><span class="k">Engines &amp; equipment we work on</span><h2>If it burns diesel, we've had it apart.</h2><p id="brands"></p></section>
+  <section class="card area"><span class="k">Service area</span><h2>Merrimack Valley &amp; southern NH</h2><p id="towns"></p><p style="margin-top:12px"><span class="chip c-warn">Exclusive in Essex County, MA</span></p></section>
+  <section class="card rev"><blockquote>"I watched my engine go from a pile of parts to the dyno without one phone call. That's how a shop should work."<cite>D. P. · fleet manager · sample review</cite></blockquote><a class="b b-pri" href="tel:+19785550129">Get a quote · (978) 555-0129</a></section>
+</main>
+<footer><span>Kettle Rock Diesel Works · Merrimack Valley, MA</span><span>Concept demo · fictional business · IC Business Systems</span></footer>
+
+<script>
+/* ===== Kettle Rock shared: job data + side-elevation engine drawing (code-drawn SVG) ===== */
+const KR = (() => {
+  const JOB = { code: 'KR-0614', unit: 'Excavator engine · 6-cyl', detail: '6.7 L inline six · 31-ton excavator · 14,200 hrs', eta: 'Fri Oct 31' };
+  const STAGES = [
+    { k: 'received', name: 'Received', short: 'In', time: 'Mon Oct 20 · 7:12 AM', note: 'Came in on a lowboy. Running rough, blowing oil out the breather.' },
+    { k: 'teardown', name: 'Teardown', short: 'Apart', time: 'Tue Oct 21 · 2:40 PM', note: 'Head, pan and all six pistons out. Every part tagged and bagged.' },
+    { k: 'inspection', name: 'Inspection', short: 'Checked', time: 'Wed Oct 22 · 11:05 AM', note: 'Hot-tanked, measured, every finding logged with a photo.',
+      findings: [
+        { t: 'Cyl 4 liner scored', d: 'Replacing all six liners', s: 'bad' },
+        { t: 'Main bearings worn', d: 'Down to the copper. Crank to grind .010', s: 'bad' },
+        { t: 'Head checked flat', d: 'Within spec. Reusing it', s: 'ok' }] },
+    { k: 'machining', name: 'Machining', short: 'Machined', time: 'Fri Oct 24 · 9:30 AM', note: 'Block decked, liner bores cut, crank ground .010 under.' },
+    { k: 'assembly', name: 'Assembly', short: 'Built', time: 'Tue Oct 28 · 3:15 PM', note: 'New liners, pistons, rings and bearings. Every bolt torqued and marked.' },
+    { k: 'dyno', name: 'Dyno test', short: 'Dyno', time: 'Thu Oct 30 · 10:20 AM', note: 'Run in under load for 2 hours. No leaks, no blow-by.' },
+    { k: 'ready', name: 'Ready for pickup', short: 'Ready', time: 'Fri Oct 31 · 7:00 AM', note: 'Painted, strapped to the pallet. Gate open 6 AM to 6 PM.' }];
+  const BAYS = [
+    { b: 'Bay 1', u: 'Dozer engine · 6-cyl', s: 'Machining', p: 0.52, c: 'KR-0609' },
+    { b: 'Bay 2', u: 'Dump truck · 15 L', s: 'Assembly', p: 0.70, c: 'KR-0611' },
+    { b: 'Bay 3', u: 'Wheel loader · hydraulics', s: 'Testing', p: 0.86, c: 'KR-0612' },
+    { b: 'Bay 4', u: 'Excavator engine · 6-cyl', s: 'Dyno', p: 0.92, c: 'KR-0614', mine: 1 },
+    { b: 'Bay 5', u: 'Skid steer · final drive', s: 'Waiting on parts', p: 0.34, c: 'KR-0615', wait: 1 },
+    { b: 'Road', u: 'Tri-axle · Rt 495, Andover', s: 'Road call', p: 0.15, c: 'RC-2231', road: 1 }];
+  const SERVICES = [
+    ['In-frame rebuilds', 'Liners, pistons, bearings done with the engine still in the machine. Less downtime, less cost.'],
+    ['Out-of-frame rebuilds', 'Engine pulled, torn down to the bare block, machined, built and run on our dyno.'],
+    ['Heavy equipment repair', 'Excavators, dozers, loaders, skid steers. Undercarriage, final drives, electrical.'],
+    ['Hydraulics', 'Cylinders resealed, pumps and valves rebuilt, hoses made while you wait.'],
+    ['Fleet service', 'PM schedules for dump trucks and tri-axles, DOT inspections, one bill a month.'],
+    ['24 h road calls', 'Service truck rolls day or night. Job site, highway shoulder or your yard.']];
+  const BRANDS = 'Caterpillar · Cummins · Detroit Diesel · John Deere · Komatsu · Volvo · Mack · International · Kenworth · Peterbilt · Case · Kubota · Perkins · Isuzu · Hitachi · Doosan';
+  const TOWNS = 'Lawrence · Methuen · Haverhill · Andover · North Andover · Lowell · Dracut · Tewksbury · Amesbury · Newburyport · Salem NH · Windham NH';
+  const PHONE = '(978) 555-0129', TEL = 'tel:+19785550129';
+
+  // ---- dyno curves: hp peaks 287 @ 2200 (governed after), torque derived ----
+  const DYNO = [];
+  for (let r = 1000; r <= 2400; r += 50) {
+    const hp = r <= 2200 ? 287 - 0.000105 * (2200 - r) ** 2 : 287 - 0.0012 * (r - 2200) ** 2;
+    DYNO.push({ r, hp, tq: hp * 5252 / r });
+  }
+  const PEAK_TQ = DYNO.reduce((a, b) => b.tq > a.tq ? b : a);
+  function dynoPaths(x0, y0, w, h, hpMax = 320, tqMax = 900) {
+    const X = r => x0 + (r - 1000) / 1400 * w;
+    const hpP = DYNO.map((d, i) => (i ? 'L' : 'M') + X(d.r).toFixed(1) + ',' + (y0 + h - d.hp / hpMax * h).toFixed(1)).join('');
+    const tqP = DYNO.map((d, i) => (i ? 'L' : 'M') + X(d.r).toFixed(1) + ',' + (y0 + h - d.tq / tqMax * h).toFixed(1)).join('');
+    return { hpP, tqP, X, peakHp: { x: X(2200), y: y0 + h - 287 / hpMax * h }, peakTq: { x: X(PEAK_TQ.r), y: y0 + h - PEAK_TQ.tq / tqMax * h, v: Math.round(PEAK_TQ.tq), r: PEAK_TQ.r } };
+  }
+
+  // ---- engine drawing ----
+  const CX = [255, 330, 405, 480, 555, 630];
+  const JX = [217.5, 292.5, 367.5, 442.5, 517.5, 592.5, 667.5];
+  const r = (x, y, w, h, rx, c, ex = '') => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" class="${c}" ${ex}/>`;
+  const ci = (x, y, rr, c) => `<circle cx="${x}" cy="${y}" r="${rr}" class="${c}"/>`;
+
+  function piston(i) {
+    const x = CX[i];
+    return `<g data-p="pst${i}">` +
+      `<path class="f-st-d" d="M${x - 8},26 L${x - 6},96 L${x + 6},96 L${x + 8},26Z"/>` +
+      ci(x, 104, 15, 'f-st-d') + ci(x, 104, 7, 'f-hole') +
+      r(x - 25, 0, 50, 36, 4, 'f-st') + r(x - 25, 0, 50, 5, 2, 'f-st-l') +
+      r(x - 25, 9, 50, 2.5, 0, 'f-hole') + r(x - 25, 14, 50, 2.5, 0, 'f-hole') + r(x - 25, 19, 50, 2.5, 0, 'f-hole') +
+      ci(x, 28, 5, 'f-hole') + `</g>`;
+  }
+  function crank() {
+    let s = `<g data-p="crank">` + r(195, -26, 12, 52, 3, 'f-st-d') + r(205, -7, 490, 14, 4, 'f-st') + r(692, -6, 34, 12, 3, 'f-st-d');
+    CX.forEach((x, i) => { const up = i % 2 ? -1 : 1; s += `<path class="f-st-d" d="M${x - 26},0 A26,26 0 0 ${up > 0 ? 0 : 1} ${x + 26},0 Z" transform="scale(1,${up > 0 ? 1.15 : 1.15})" transform-origin="${x} 0"/>` + r(x - 8, up > 0 ? -16 : 2, 16, 14, 3, 'f-st-l'); });
+    JX.forEach(x => { s += r(x - 9, -11, 18, 22, 3, 'f-st-l j') ; });
+    return s + `</g>`;
+  }
+  function grime(blobs) { return `<g class="grime">${blobs.map(b => `<path class="f-grime" d="${b}"/>`).join('')}</g>`; }
+
+  function engineSVG(opt = {}) {
+    const id = opt.id || 'eng';
+    let g = '';
+    g += `<defs>
+      <linearGradient id="${id}-gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--blk-l)"/><stop offset=".35" style="stop-color:var(--blk)"/><stop offset="1" style="stop-color:var(--blk-d)"/></linearGradient>
+      <linearGradient id="${id}-gC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--cov-l)"/><stop offset=".5" style="stop-color:var(--cov)"/><stop offset="1" style="stop-color:var(--cov-d)"/></linearGradient>
+      <linearGradient id="${id}-gS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--st-l)"/><stop offset=".45" style="stop-color:var(--st)"/><stop offset="1" style="stop-color:var(--st-d)"/></linearGradient>
+      <radialGradient id="${id}-gP" cx=".35" cy=".3" r=".8"><stop offset="0" style="stop-color:var(--st-l)"/><stop offset=".6" style="stop-color:var(--st)"/><stop offset="1" style="stop-color:var(--st-d)"/></radialGradient>
+      <radialGradient id="${id}-gSh" cx=".5" cy=".5" r=".5"><stop offset="0" style="stop-color:var(--shadow);stop-opacity:.55"/><stop offset="1" style="stop-color:var(--shadow);stop-opacity:0"/></radialGradient>
+    </defs>`;
+    g += `<g data-p="shadow"><ellipse cx="450" cy="532" rx="330" ry="16" class="f-shadow" fill="url(#${id}-gSh)"/></g>`;
+    // pallet
+    g += `<g data-p="pallet">` + r(180, 500, 540, 10, 2, 'f-wood') + r(180, 510, 52, 13, 1, 'f-wood-d') + r(424, 510, 52, 13, 1, 'f-wood-d') + r(668, 510, 52, 13, 1, 'f-wood-d') + r(180, 523, 540, 8, 1, 'f-wood') +
+      [0, 1, 2, 3, 4, 5, 6, 7].map(k => r(200 + k * 66, 503, 1.5, 5, 0, 'f-wood-d')).join('') + `</g>`;
+    // dyno + cart
+    g += `<g data-p="dyno">` + r(18, 470, 160, 60, 4, 'f-dy-d') + r(28, 352, 116, 120, 12, 'f-dy') + r(28, 352, 116, 10, 5, 'f-dy-l') +
+      ci(86, 414, 42, 'f-dy-d') + ci(86, 414, 30, 'f-dy-l') + ci(86, 414, 11, 'f-hole') + r(36, 318, 12, 40, 3, 'f-dy-d') + r(144, 403, 26, 22, 3, 'f-st') + r(150, 398, 8, 32, 2, 'f-st-d') +
+      
+      r(205, 512, 490, 9, 3, 'f-dy-d') + r(228, 452, 14, 62, 2, 'f-dy-d') + r(646, 446, 14, 68, 2, 'f-dy-d') + ci(240, 528, 9, 'f-hole') + ci(660, 528, 9, 'f-hole') + `</g>`;
+    // internals (behind block)
+    g += crank();
+    for (let i = 0; i < 6; i++) g += piston(i);
+    // flywheel housing
+    g += `<g data-p="bell"><path class="f-blk-d" d="M212,262 C186,268 166,300 162,362 C159,420 172,468 212,480 Z"/>` +
+      [300, 340, 380, 420, 456].map((y, k) => ci([186, 172, 168, 171, 186][k], y, 3.5, 'f-st-l')).join('') + `</g>`;
+    // block
+    let blk = `<g data-p="block"><path class="f-blk" d="M210,282 H675 V408 L668,420 H217 L210,408 Z"/>` +
+      `<path class="f-blk-l" d="M214,268 H671 L677,283 H208 Z"/>`;
+    CX.forEach((x, i) => { blk += `<ellipse class="f-hole bore b${i}" cx="${x}" cy="275.5" rx="28" ry="5.5"/><ellipse class="f-bore b${i}" cx="${x}" cy="277" rx="22" ry="3.2"/>`; });
+    for (let i = 0; i < 5; i++) blk += r(290 + 75 * i, 292, 3, 106, 1, 'f-blk-l') + r(293 + 75 * i, 292, 4, 106, 1, 'f-blk-d');
+    blk += r(214, 396, 457, 7, 2, 'f-blk-d') + r(212, 283, 461, 5, 1, 'f-blk-d');
+    CX.forEach(x => { blk += ci(x, 372, 9, 'f-blk-d') + ci(x, 371, 6.5, 'f-st'); });
+    blk += r(300, 316, 220, 34, 9, 'f-blk-l') + r(300, 340, 220, 10, 6, 'f-blk-d');
+    [312, 360, 410, 460, 508].forEach(x => { blk += ci(x, 333, 3, 'f-st-l'); });
+    blk += r(540, 300, 72, 52, 8, 'f-blk-d');
+    blk += grime(['M230,300 C260,290 300,310 290,330 C280,350 240,345 228,330Z', 'M560,360 C600,350 650,365 645,392 C620,405 575,400 560,385Z', 'M400,375 C430,368 470,380 455,398 C430,405 405,398 400,385Z', 'M330,292 l6,40 l4,0 l-3,-40Z', 'M612,300 l5,60 l4,0 l-2,-60Z']);
+    g += blk + `</g>`;
+    // oil pan
+    g += `<g data-p="pan"><path class="f-blk" d="M216,420 H669 L664,446 Q661,452 652,452 H512 L501,486 Q498,492 488,492 H274 Q264,492 260,484 L222,436 Z"/>` +
+      r(214, 419, 458, 7, 2, 'f-blk-l') + ci(380, 489, 5, 'f-st-d') + [250, 320, 400, 480, 560, 640].map(x => ci(x, 422.5, 2.5, 'f-st-l')).join('') +
+      grime(['M300,440 C340,432 380,446 370,470 C340,482 300,470 300,450Z', 'M455,430 l3,58 l5,0 l-2,-58Z', 'M520,440 C560,436 600,442 590,450 C560,454 525,452 520,445Z']) + `</g>`;
+    // front: timing cover + pulleys + belt
+    g += `<g data-p="front"><path class="f-blk-d" d="M675,262 H698 Q712,262 712,276 V440 Q712,454 698,454 H675 Z"/>` +
+      `<path class="belt" d="M722,277 A23,23 0 0 1 744,293 L762,352 A12,12 0 0 1 760,362 L758,404 A40,40 0 1 1 682,412 L699,302 A23,23 0 0 1 722,277 Z"/>` +
+      ci(722, 300, 22, 'f-st') + ci(722, 300, 9, 'f-hole') + ci(752, 358, 10, 'f-st-l') + ci(752, 358, 3.5, 'f-hole') +
+      ci(722, 420, 38, 'f-st') + ci(722, 420, 29, 'f-blk-d') + ci(722, 420, 12, 'f-st-l') + ci(722, 420, 5, 'f-hole') +
+      [0, 1, 2, 3, 4, 5].map(k => ci(722 + 20 * Math.cos(k * 1.047), 420 + 20 * Math.sin(k * 1.047), 2.6, 'f-st-l')).join('') +
+      grime(['M680,300 C700,296 708,330 696,350 C686,352 680,330 680,300Z']) + `</g>`;
+    // head
+    let hd = `<g data-p="head">` + r(205, 230, 475, 50, 3, 'f-blk') + r(205, 230, 475, 6, 2, 'f-blk-l') + r(205, 275, 475, 5, 1, 'f-blk-d');
+    CX.forEach((x, i) => { hd += r(x - 16, 246, 32, 19, 7, 'f-blk-d') + ci(x + 37.5, 239, 3.6, 'f-st-l'); });
+    hd += ci(222, 239, 3.6, 'f-st-l') + `<path class="eye" d="M240,231 V219 A9,9 0 0 1 258,219 V231"/><path class="eye" d="M640,231 V219 A9,9 0 0 1 658,219 V231"/>`;
+    hd += grime(['M420,240 C460,236 500,245 490,262 C460,270 420,262 420,250Z', 'M240,250 l2,26 l4,0 l-1,-26Z']) + `</g>`;
+    g += hd;
+    // fuel rail + lines + pump
+    let ln = `<g data-p="lines">` + r(556, 296, 66, 50, 7, 'f-st-d') + r(556, 296, 66, 8, 4, 'f-st') + `<path class="pipe" d="M600,296 C600,272 612,262 612,244"/>` + r(240, 238, 386, 6, 3, 'f-st');
+    CX.forEach(x => { ln += r(x - 2, 231, 4, 10, 1, 'f-st-d'); });
+    g += ln + `</g>`;
+    // valve cover
+    let cv = `<g data-p="cover">` + r(225, 198, 432, 33, 12, 'f-cov') + r(225, 226, 432, 5, 2, 'f-cov-d');
+    for (let k = 0; k < 11; k++) cv += r(244 + k * 37, 205, 3, 17, 1.5, 'f-cov-l');
+    cv += r(588, 186, 28, 15, 4, 'f-hole') + r(588, 186, 28, 4, 2, 'f-st-d') + grime(['M300,205 C340,200 360,215 345,226 C320,230 300,222 300,212Z']) + `</g>`;
+    g += cv;
+    // exhaust manifold + turbo
+    let ex = `<g data-p="exhaust">` + CX.map(x => r(x - 12, 249, 24, 22, 6, 'f-ir')).join('') + r(212, 262, 410, 17, 8.5, 'f-ir') + r(212, 262, 410, 5, 2.5, 'f-ir-l');
+    ex += r(164, 290, 26, 70, 5, 'f-ir') + ci(178, 266, 31, 'f-ir') + ci(178, 266, 21, 'f-ir-l') + ci(178, 266, 11, 'f-hole') +
+      r(150, 220, 36, 24, 4, 'f-st-d') + ci(150, 216, 26, 'f-st') + ci(150, 216, 17, 'f-st-l') + ci(150, 216, 8, 'f-hole') + r(138, 150, 24, 50, 6, 'f-rub') + r(134, 146, 32, 10, 3, 'f-st-d');
+    g += ex + grime(['M540,264 C570,260 600,268 590,278 C565,282 545,278 540,270Z']) + `</g>`;
+    // boring bar tool
+    g += `<g data-p="tool">` + r(300, 6, 300, 56, 8, 'f-mach') + r(300, 6, 300, 9, 4, 'f-mach-l') + r(458, 62, 44, 54, 6, 'f-mach-d') + r(472, 116, 16, 156, 3, 'f-st-l') + r(468, 262, 24, 9, 2, 'f-st-d') +
+      `<path class="chip" d="M438,268 q6,-8 12,0 M512,266 q5,-7 10,1 M446,262 q-6,-6 0,-10 M520,270 q8,-4 4,-10"/>` + `</g>`;
+    // inspection marks
+    g += `<g data-p="marks"><ellipse class="mark" cx="480" cy="276" rx="44" ry="17"/><path class="mark-l" d="M512,262 L548,228"/>` + ci(560, 218, 15, 'f-mark') + `<text class="t-mark" x="560" y="224">1</text>` +
+      `<ellipse class="mark" cx="480" cy="490" rx="62" ry="36"/><path class="mark-l" d="M536,474 L580,452"/>` + ci(592, 446, 15, 'f-mark') + `<text class="t-mark" x="592" y="452">2</text></g>`;
+    // tag
+    g += `<g data-p="tag"><path class="string" d="M602,187 C620,150 662,146 700,160"/><g transform="rotate(7 740 176)">` + r(692, 152, 112, 50, 5, 'f-tag') + ci(704, 177, 4, 'f-hole') +
+      `<text class="t-tag t-job" x="758" y="175">${JOB.code}</text><text class="t-tag2 t-job" x="758" y="191">6-CYL · BAY 4</text><text class="t-tag t-rdy" x="758" y="175">READY</text><text class="t-tag2 t-rdy" x="758" y="191">${JOB.code}</text></g></g>`;
+    // straps
+    g += `<g data-p="wrap">` + r(300, 190, 10, 312, 2, 'f-strap') + r(588, 190, 10, 312, 2, 'f-strap') + `</g>`;
+    return `<svg class="eng fin-dirty" viewBox="0 0 900 560" role="img" aria-label="Drawing of the engine at this stage" data-id="${id}">${g}</svg>`;
+  }
+
+  const P = { shadow: 1, pallet: 1, dyno: 1, crank: 1, pst0: 1, pst1: 1, pst2: 1, pst3: 1, pst4: 1, pst5: 1, bell: 1, block: 1, pan: 1, front: 1, head: 1, lines: 1, cover: 1, exhaust: 1, tool: 1, marks: 1, tag: 1, wrap: 1 };
+  const PIN = y => ({ pst0: [0, y[0]], pst1: [0, y[1]], pst2: [0, y[2]], pst3: [0, y[3]], pst4: [0, y[4]], pst5: [0, y[5]] });
+  const FULL = { shadow: [0, 0], bell: [0, 0], block: [0, 0], pan: [0, 0], front: [0, 0], head: [0, 0], lines: [0, 0], cover: [0, 0], exhaust: [0, 0], crank: [0, 410], ...PIN([292, 292, 292, 292, 292, 292]) };
+  const LAYOUT = {
+    received: { fin: 'dirty', p: { ...FULL, pallet: [0, 0], tag: [0, 0] } },
+    teardown: { fin: 'dirty', p: { shadow: [0, 0], block: [0, 0], pan: [0, 30], head: [0, -142], cover: [0, -192], ...PIN([150, 150, 150, 150, 150, 150]) } },
+    inspection: { fin: 'clean', p: { shadow: [0, 0], block: [0, 0], crank: [0, 490], marks: [0, 0] } },
+    machining: { fin: 'clean', p: { shadow: [0, 0], block: [0, 0], tool: [0, 0] } },
+    assembly: { fin: 'clean', p: { shadow: [0, 0], block: [0, 0], pan: [0, 0], front: [0, 0], bell: [0, 0], crank: [0, 410], head: [0, -150], ...PIN([292, 292, 292, 250, 205, 165]) } },
+    dyno: { fin: 'paint', p: { ...FULL, dyno: [0, 0] } },
+    ready: { fin: 'paint', p: { ...FULL, pallet: [0, 0], tag: [0, 0], wrap: [0, 0] } }
+  };
+  const ENTER = { shadow: null, pallet: null, dyno: [-90, 0], tool: [0, -90], marks: null, wrap: [0, -30] };
+  function setEngine(svg, key, anim = true) {
+    const L = LAYOUT[key]; if (!L) return;
+    svg.classList.remove('fin-dirty', 'fin-clean', 'fin-paint'); svg.classList.add('fin-' + L.fin);
+    svg.dataset.stage = key;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    Object.keys(P).forEach(name => {
+      const el = svg.querySelector(`[data-p="${name}"]`); if (!el) return;
+      const v = L.p[name], prev = el._o;
+      if (!v) { el.style.display = 'none'; el._o = null; return; }
+      el.style.display = '';
+      const to = `translate(${v[0]}px,${v[1]}px)`; el.style.transform = to;
+      if (anim && !reduce && svg._shown) {
+        let from = null;
+        if (prev && (prev[0] !== v[0] || prev[1] !== v[1])) from = `translate(${prev[0]}px,${prev[1]}px)`;
+        else if (!prev) { const e = name in ENTER ? ENTER[name] : (name.startsWith('pst') ? [0, -60] : [0, -36]); if (e) from = `translate(${v[0] + e[0]}px,${v[1] + e[1]}px)`; }
+        if (from) el.animate([{ transform: from }, { transform: to }], { duration: prev ? 1150 : 650, easing: 'cubic-bezier(.22,.9,.24,1)', delay: name.startsWith('pst') ? (+name[3]) * 70 : 0, fill: 'backwards' });
+      }
+      el._o = v;
+    });
+    svg._shown = true;
+  }
+  const FOCUS = { received: [110, 120, 700, 420], teardown: [170, 0, 620, 540], inspection: [190, 170, 540, 380], machining: [190, 0, 540, 450], assembly: [170, 60, 640, 480], dyno: [10, 110, 790, 430], ready: [110, 120, 700, 420] };
+  function fitView(svg, key, anim = true, full = false) {
+    const to = full ? [0, 0, 900, 560] : FOCUS[key];
+    const from = (svg.getAttribute('viewBox') || '0 0 900 560').split(' ').map(Number);
+    if (svg._vb) cancelAnimationFrame(svg._vb);
+    if (!anim || matchMedia('(prefers-reduced-motion: reduce)').matches) { svg.setAttribute('viewBox', to.join(' ')); return; }
+    const t0 = performance.now(), D = 1100, ease = t => 1 - Math.pow(1 - t, 3);
+    const step = now => { const t = Math.min(1, (now - t0) / D), e = ease(t); svg.setAttribute('viewBox', from.map((v, i) => (v + (to[i] - v) * e).toFixed(2)).join(' ')); if (t < 1) svg._vb = requestAnimationFrame(step); };
+    svg._vb = requestAnimationFrame(step);
+  }
+  return { LAYOUT, FOCUS, fitView, JOB, STAGES, BAYS, SERVICES, BRANDS, TOWNS, PHONE, TEL, DYNO, PEAK_TQ, dynoPaths, engineSVG, setEngine };
+})();
+
+(() => {
+  const S = KR.STAGES, $ = id => document.getElementById(id);
+  const photo = $('photo');
+  photo.insertAdjacentHTML('afterbegin', KR.engineSVG({ id: 'd' }));
+  const svg = photo.querySelector('svg.eng');
+  const tick = '<svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg>';
+  const steps = $('steps');
+  S.forEach((s, i) => steps.insertAdjacentHTML('beforeend', `<button data-i="${i}" aria-label="${s.name}"><span class="dot">${tick}</span><span class="nm">${s.short === 'Dyno' ? 'Dyno' : s.name.replace(' for pickup', '')}</span><span class="tm">${s.time.split(' · ')[0].replace(/^\w+ /, '')}</span></button>`));
+  steps.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { stop(); go(+b.dataset.i); } });
+  const dp = KR.dynoPaths(34, 26, 290, 100, 300, 1000);
+  const chart = `<svg class="chart" viewBox="0 0 340 150"><defs><linearGradient id="hpFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d4ed8" stop-opacity=".18"/><stop offset="1" stop-color="#1d4ed8" stop-opacity="0"/></linearGradient></defs>
+    ${[0, 1, 2, 3].map(i => `<line class="gl" x1="34" x2="324" y1="${26 + i * 33.3}" y2="${26 + i * 33.3}"/>`).join('')}
+    ${[1000, 1400, 1800, 2200].map(r => `<text x="${dp.X(r)}" y="140" text-anchor="middle">${r}</text>`).join('')}
+    <path class="hp dr" pathLength="1" d="${dp.hpP}"/><path class="tq dr" pathLength="1" d="${dp.tqP}"/>
+    <circle cx="${dp.peakHp.x}" cy="${dp.peakHp.y}" r="5" fill="#1d4ed8" stroke="#fff" stroke-width="2"/>
+    <text class="lab" x="${dp.peakHp.x}" y="${dp.peakHp.y - 11}" text-anchor="middle" style="fill:#1d4ed8">287 HP</text>
+    <text class="lab" x="${dp.X(2400)}" y="${26 + 100 * (1 - KR.DYNO[KR.DYNO.length - 1].tq / 1000) + 20}" text-anchor="end" style="fill:#d97706">${dp.peakTq.v} LB-FT PEAK</text><text x="324" y="140" text-anchor="end">RPM</text></svg>`;
+  const tiles = arr => `<div class="tiles">${arr.map(([v, l, c]) => `<div class="${c || ''}"><b>${v}</b><small>${l}</small></div>`).join('')}</div>`;
+  const X = {
+    received: tiles([['210 psi', 'Compression, cyl 4', 'r'], ['14,200', 'Hours on unit'], ['Rough idle', 'Complaint'], ['Lowboy', 'Came in on']]),
+    teardown: tiles([['214', 'Parts tagged'], ['61', 'Photos in your link'], ['6', 'Bags by cylinder'], ['0', 'Parts missing', 'g']]),
+    inspection: `<div class="fnd">${S[2].findings.map(f => `<div><b>${f.t}</b><span class="chip ${f.s === 'bad' ? 'c-bad' : 'c-live'}">${f.s === 'bad' ? 'Replace' : 'OK'}</span><small>${f.d}</small></div>`).join('')}</div>`,
+    machining: tiles([['4.2130"', 'Liner bore · spec ±.0005', 'g'], ['.0012"', 'Deck flat · max .003', 'g'], ['.010', 'Crank ground under'], ['Done', 'Magnaflux, no cracks', 'g']]),
+    assembly: tiles([['125 + 90°', 'Head bolts, lb-ft', 'g'], ['75 + 60°', 'Rod caps, lb-ft', 'g'], ['.0025"', 'Bearing clearance', 'g'], ['6 / 6', 'Pistons in']]),
+    dyno: chart + tiles([['287 hp', '@ 2,200 rpm', 'g'], ['1.1 cfm', 'Blow-by · max 3.0', 'g']]),
+    ready: tiles([['1,180 lb', 'Shipping weight'], ['12 mo', 'Warranty, parts + labor', 'g'], ['6 AM–6 PM', 'Pickup gate'], ['Pallet 2', 'Loading dock']])
+  };
+  const CAP = { received: 'On the lowboy, as delivered', teardown: 'Torn down · parts tagged', inspection: 'Findings marked 1 and 2', machining: 'Boring bar in cylinder 4', assembly: 'Pistons going in', dyno: 'Under load in the dyno cell', ready: 'Strapped and tagged' };
+  const LIVE = { received: ['c-mute', 'Checked in'], teardown: ['c-pri', 'Being torn down'], inspection: ['c-warn', 'Findings to review'], machining: ['c-pri', 'In the machine shop'], assembly: ['c-pri', 'Being built'], dyno: ['c-live', 'On the dyno now'], ready: ['c-live', 'Ready for pickup'] };
+  let cur = 5, timer = null;
+  function go(i, anim = true) {
+    cur = (i + S.length) % S.length; const s = S[cur];
+    KR.setEngine(svg, s.k, anim); KR.fitView(svg, s.k, anim);
+    $('dName').textContent = s.name; $('dTime').textContent = s.time; $('dNote').textContent = s.note;
+    $('dExtra').innerHTML = X[s.k]; $('dExtra').className = s.k === 'dyno' || s.k === 'inspection' ? '' : 'extra';
+    $('phTime').textContent = s.time.toUpperCase(); $('phCap').textContent = CAP[s.k]; $('phCam').textContent = s.k === 'dyno' ? 'DYNO CELL · CAM 1' : s.k === 'machining' ? 'MACHINE SHOP · CAM 3' : 'BAY 4 · CAM 2';
+    const L = LIVE[s.k]; $('live').className = 'chip ' + L[0]; $('liveT').textContent = L[1];
+    steps.querySelectorAll('button').forEach((b, j) => b.className = j < cur ? 'done' : j === cur ? 'on' : '');
+    $('trackI').style.width = (cur / 6 * 100) + '%';
+    const st = $('stamp'); st.classList.toggle('on', s.k === 'dyno');
+    if (s.k === 'dyno' && anim) { st.classList.remove('land'); void st.offsetWidth; st.classList.add('land');
+      $('dExtra').querySelectorAll('.dr').forEach((p, k) => p.animate([{ strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDasharray: 1, strokeDashoffset: 0 }], { duration: 1500, delay: k * 250, easing: 'ease-out', fill: 'backwards' })); }
+  }
+  function stop() { clearInterval(timer); timer = null; $('pLbl').textContent = 'Play'; $('pIco').innerHTML = '<path d="M4 2l10 6-10 6z"/>'; }
+  function play() { if (timer) return stop(); if (cur === S.length - 1) go(0); timer = setInterval(() => { if (cur === S.length - 1) return stop(); go(cur + 1); }, 2600); $('pLbl').textContent = 'Pause'; $('pIco').innerHTML = '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>'; }
+  $('prev').onclick = () => { stop(); go(cur - 1); }; $('next').onclick = () => { stop(); go(cur + 1); }; $('play').onclick = play;
+  $('textMe').onclick = () => { const b = $('textMe'); b.classList.add('set'); b.querySelector('span').textContent = "You're set · we'll text you"; $('notice').classList.add('on'); };
+  // bays
+  const chipFor = b => b.mine ? 'c-live' : b.wait ? 'c-warn' : b.road ? 'c-bad' : 'c-pri';
+  $('bays').innerHTML = KR.BAYS.map(b => `<div class="bay ${b.mine ? 'mine' : ''} ${b.wait ? 'wait' : ''} ${b.road ? 'road' : ''}"><span class="n">${b.road ? 'RD' : b.b.replace('Bay ', 'B')}</span><b>${b.u}</b><span class="chip ${chipFor(b)}">${b.s}</span><span class="meter"><i style="width:${b.p * 100}%"></i></span></div>`).join('');
+  // road truck along route
+  const route = document.getElementById('route'), truck = document.getElementById('truck'), len = route.getTotalLength();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let t0 = performance.now();
+  const drive = now => { const f = reduce ? .62 : (.35 + ((now - t0) / 22000) % 1 * .45); const p = route.getPointAtLength(len * f); truck.setAttribute('transform', `translate(${p.x},${p.y})`); if (!reduce) requestAnimationFrame(drive); };
+  requestAnimationFrame(drive);
+  $('svc').innerHTML = KR.SERVICES.map(([t, d]) => `<li><b>${t}</b><span>${d}</span></li>`).join('');
+  $('brands').textContent = KR.BRANDS; $('towns').textContent = KR.TOWNS;
+  const q = new URLSearchParams(location.search), si = S.findIndex(s => s.k === q.get('stage'));
+  go(si > -1 ? si : 5, false);
+  if (q.get('play')) setTimeout(play, 600);
+  if (q.get('notify')) $('textMe').click();
+})();
+</script>
+</body>
+</html>
