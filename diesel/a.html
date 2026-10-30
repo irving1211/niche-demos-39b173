@@ -736,6 +736,8 @@ import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
 /* Procedural inline-6 heavy diesel (unbranded, ISB / C7 class), built part by part so it can explode.
    Engine-local axes: x = crank axis (+x = front / damper end), y = up (crank centre = 0, deck = .40), z = sideways (+z = exhaust + turbo side, faces the camera). */
@@ -1221,6 +1223,139 @@ function labels(ph) {
     g.el.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`; g.el.style.clipPath = g.right ? `inset(0 ${cut}% 0 0)` : `inset(0 0 0 ${cut}%)`;
   });
 }
+// ---------- Blender engine (assets/engine.glb, built by _src/build_engine.py) swapped in over the procedural one ----------
+// The procedural engine above renders from the first frame, so the stage is never empty; when the GLB and its textures arrive,
+// each named Blender part replaces the meshes inside the page group of the same name. The groups, their positions and every
+// KRT tween stay exactly as they were, so all 7 stages animate as before. If anything fails, the procedural engine stays.
+const GLB_PARTS = ['block', 'crank', 'bOld', 'bNew', 'bBad', 'pan', 'gasket', 'head', 'rockers', 'fuel', 'cover', 'intake', 'exhaust', 'turbo', 'cwheel', 'pipe',
+  'front', 'damper', 'wp', 'alt', 'fan', 'tens', 'idler', 'bell', 'filters', 'wrap', 'pNew', ...[0, 1, 2, 3, 4, 5].flatMap(i => ['lOld' + i, 'lNew' + i, 'p' + i])];
+window.KRGLB = { state: 'loading' };
+const TRI = `vec4 triS(sampler2D t, vec3 p, vec3 n){ vec3 w = pow(abs(n), vec3(4.0)); w /= (w.x + w.y + w.z + 1e-5); return texture2D(t, p.yz) * w.x + texture2D(t, p.xz) * w.y + texture2D(t, p.xy) * w.z; }`;
+const BUMP = h => `{ float hh = ${h};
+  vec3 sx = dFdx(-vViewPosition), sy = dFdy(-vViewPosition); vec2 dh = vec2(dFdx(hh), dFdy(hh));
+  vec3 r1 = cross(sy, normal), r2 = cross(normal, sx); float det = dot(sx, r1);
+  normal = normalize(abs(det) * normal - sign(det) * (dh.x * r1 + dh.y * r2)); }`;
+function vtx(sh) {
+  sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 vOP; varying vec3 vON;')
+    .replace('#include <begin_vertex>', '#include <begin_vertex>\nvOP = position; vON = objectNormal;');
+}
+// cast parts: bare iron (CC0 Metal052C) / old chipped paint / oily grime / fresh paint, driven by the same U uniforms as before;
+// the baked atlas gives R = local AO, G = wide AO (grime collects in cavities), B = edges (paint chips and wears there first)
+function castGLB({ bare, old, paint = 0, paintable = 0, metal = .55, heat = 0 }, atlas, T) {
+  const m = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .6, metalness: .5, aoMap: atlas, aoMapIntensity: 1 });
+  const u = { tIron: { value: T.iron }, tDet: { value: T.det }, tDet2: { value: T.det2 }, uDirt: U.dirt, uOld: U.old, uPaint: U.paint, uHeat: U.heat,
+    uBare: { value: new THREE.Color(bare) }, uOldC: { value: new THREE.Color(old) }, uPaintC: { value: new THREE.Color(paint) }, uPaintable: { value: paintable }, uMetal: { value: metal }, uHeatable: { value: heat } };
+  m.onBeforeCompile = sh => {
+    Object.assign(sh.uniforms, u); vtx(sh);
+    sh.fragmentShader = sh.fragmentShader.replace('#include <common>', `#include <common>
+uniform sampler2D tIron, tDet, tDet2; uniform float uDirt, uOld, uPaint, uHeat, uPaintable, uMetal, uHeatable; uniform vec3 uBare, uOldC, uPaintC;
+varying vec3 vOP; varying vec3 vON; ${TRI}`)
+      .replace('#include <color_fragment>', `#include <color_fragment>
+vec3 nN = normalize(vON); vec3 Pp = vOP * 2.6;
+vec3 ir = triS(tIron, Pp, nN).rgb; vec4 d1 = triS(tDet, Pp, nN), d2 = triS(tDet, Pp * .43 + .31, nN), e2 = triS(tDet2, Pp * 1.7, nN);
+vec4 mk = texture2D(aoMap, vAoMapUv); float aoS = mk.r, aoL = mk.g, edge = mk.b;
+float lumI = dot(ir, vec3(.3333));
+float ct = triS(tDet, Pp * 2.3 + .5, nN).b;
+float chip = clamp(smoothstep(.12, .55, edge) * smoothstep(.55, .95, aoS) * (.25 + 1.3 * ct) + smoothstep(.78, .92, ct) * .6, 0., 1.);
+float oldA = uOld * (1. - chip);
+float streak = triS(tDet, vOP * vec3(3.2, .55, 3.2) + .7, nN).g;   // stretched vertically: oil runs and drips
+float gm = smoothstep(.34, .72, (1. - aoL) * 1.5 + (d2.g - .5) * 1.0 + (e2.r - .45) * .8 + (streak - .5) * 1.1 + (.2 - vOP.y) * .8);
+gm = max(gm, smoothstep(.6, .85, d2.g) * .7) * (1. - chip * .35);
+float dirtA = uDirt * gm;
+float pm = uPaintable * smoothstep(vOP.x - .07, vOP.x + .07, mix(-.95, .95, uPaint));
+vec3 cc = uBare * (.22 + .62 * lumI / .78);
+cc = mix(cc, uOldC * (.7 + .6 * e2.r), oldA);
+cc = mix(cc, vec3(.014, .013, .012) * (.6 + 1.2 * e2.r), dirtA * .96);
+cc = mix(cc, uPaintC * (.95 + .1 * d1.r), pm);
+cc *= mix(1., aoS * aoS, .75);
+diffuseColor.rgb = cc;
+float kR = mix(mix(.42 + .4 * e2.g, .58 + .14 * d1.g, oldA), .1 + .26 * e2.r * streak, dirtA); kR = mix(kR, .26, pm);
+float kM = mix(mix(uMetal, .05, oldA), .3, dirtA); kM = mix(kM, 0., pm);
+float kB = mix(1.0, .2, max(oldA * .55, max(pm, dirtA * .6)));`)
+      .replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nroughnessFactor = kR;')
+      .replace('#include <metalnessmap_fragment>', '#include <metalnessmap_fragment>\nmetalnessFactor = kM;')
+      .replace('#include <normal_fragment_maps>', '#include <normal_fragment_maps>\n' + BUMP('(d1.r * .8 + e2.r * .2) * .0011 * kB'))
+      .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance += vec3(1.0, .28, .06) * uHeat * uHeatable * (.25 + .75 * d1.r) * .55 * aoS;');
+  };
+  m.customProgramCacheKey = () => 'krglbcast';
+  return m;
+}
+// everything else: the page's own material (colour/roughness/metal, emissive pulses), plus baked AO in the diffuse and
+// brushed / machined micro-variation from CC0 Metal009 + Metal046B (tri-planar, no UV seams)
+function stdGLB(src, atlas, T, brushed) {
+  const m = src.clone(); m.roughnessMap = null; m.aoMap = atlas; m.aoMapIntensity = 1;
+  const u = { tDet2: { value: T.det2 }, uBr: { value: brushed }, uDirt: U.dirt };
+  m.onBeforeCompile = sh => {
+    Object.assign(sh.uniforms, u); vtx(sh);
+    sh.fragmentShader = sh.fragmentShader.replace('#include <common>', `#include <common>\nuniform sampler2D tDet2; uniform float uBr, uDirt; varying vec3 vOP; varying vec3 vON; ${TRI}`)
+      .replace('#include <color_fragment>', `#include <color_fragment>
+vec4 e2 = triS(tDet2, vOP * vec3(9., 9., 9.), normalize(vON)); float aoS = texture2D(aoMap, vAoMapUv).r;
+diffuseColor.rgb *= mix(1., aoS * aoS, .7);
+float gD = uDirt * smoothstep(.3, .75, (1. - aoS) * 1.4 + (e2.r - .35) * 1.3);   // old oil + soot until the hot tank
+diffuseColor.rgb *= mix(1., .22 + .3 * e2.r, gD);`)
+      .replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nroughnessFactor = clamp(mix(roughnessFactor * mix(.7 + .6 * e2.r, .55 + .9 * e2.b, uBr), .2 + .3 * e2.r, gD), .04, 1.);')
+      .replace('#include <normal_fragment_maps>', '#include <normal_fragment_maps>\n' + BUMP('(mix(e2.r, e2.b, uBr)) * .0003'));
+  };
+  m.customProgramCacheKey = () => 'krglbstd';
+  return m;
+}
+const CASTDEF = { block: { bare: 0x6f7378, old: 0x353739, paint: 0x9c3e1c, paintable: 1 }, cover: { bare: 0x8e9296, old: 0x2e3133, paint: 0x121315, paintable: 1, metal: .7 },
+  iron: { bare: 0x4f4c4a, old: 0x4f4c4a, metal: .6, heat: 1 }, aluC: { bare: 0x8f9397, old: 0x8f9397, metal: .8 } };
+const BRUSHED = { steel: 1, dull: 1, journal: 1, linerOld: 1, linerBad: .6, linerNew: 1, pistonOld: .5, pistonBad: .5, pistonNew: 1, bearNew: 1, copper: .7, bearBad: .7, forged: .3, deck: .8 };
+(async () => {
+  const t0 = performance.now();
+  try {
+    const tl = new THREE.TextureLoader();
+    const tex = (u, srgb) => tl.loadAsync(u).then(t => { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; t.colorSpace = srgb ? THREE.SRGBColorSpace : THREE.NoColorSpace; return t; });
+    const [gltf, iron, det, det2] = await Promise.all([new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync('assets/engine.glb'),
+      tex('assets/tex/iron.webp', true), tex('assets/tex/detail.webp'), tex('assets/tex/detail2.webp')]);
+    const T = { iron, det, det2 };
+    let atlas = null; gltf.scene.traverse(o => { if (!atlas && o.isMesh && o.material.aoMap) atlas = o.material.aoMap; });
+    if (!atlas) throw new Error('no baked atlas in engine.glb');
+    atlas.colorSpace = THREE.NoColorSpace; atlas.anisotropy = 4;
+    const made = {};
+    const matFor = gm => {
+      const n = gm.name; if (made[n]) return made[n];
+      let m;
+      if (CASTDEF[n]) m = castGLB(CASTDEF[n], atlas, T);
+      else if (M[n]) m = stdGLB(M[n], atlas, T, BRUSHED[n] || 0);
+      else { m = gm; m.aoMapIntensity = 1; }
+      gm.dispose && gm !== m && gm.dispose();
+      return made[n] = m;
+    };
+    gltf.scene.traverse(o => { if (o.isMesh) { o.material = matFor(o.material); o.castShadow = true; o.receiveShadow = true; } });
+    window.KRGLB.steps = [['loaded', Math.round(performance.now())]];
+    if (renderer.compileAsync) await renderer.compileAsync(gltf.scene, camera, scene);   // shaders ready before the swap: no hitch
+    const missing = [], nextFrame = () => new Promise(r => requestAnimationFrame(r)), mark = n => (window.KRGLB.steps = window.KRGLB.steps || []).push([n, Math.round(performance.now())]);
+    mark('compiled'); for (const t of [atlas, iron, det, det2]) { await nextFrame(); renderer.initTexture(t); mark('tex'); }
+    for (const [k, name] of GLB_PARTS.entries()) {
+      if (k % 6 === 5) await nextFrame();   // a few parts per frame: spreads the geometry upload, no long frame
+      const node = gltf.scene.getObjectByName(name), grp = P[name];
+      if (!node || !grp) { missing.push(name); continue; }
+      for (const ch of [...grp.children]) if (ch.isMesh && ch !== P.crack) { grp.remove(ch); ch.geometry.dispose(); }
+      // node translation/scale = Blender origin + meshopt dequantisation: keep it, minus the part's home origin (group-local geometry)
+      const org = /^(p|lOld|lNew)[0-5]$|^pNew$/.test(name) ? new THREE.Vector3(grp.position.x, 0, 0) : ['damper', 'wp', 'alt', 'fan', 'tens', 'idler', 'cwheel'].includes(name) ? grp.position.clone() : new THREE.Vector3();
+      // positions arrive quantised (KHR_mesh_quantization): bake node scale/offset into float metres so the shaders' object-space
+      // maths (paint sweep along x, tri-planar texture scale, grime height) works in real units, then drop the node transform
+      node.updateMatrix(); const Mq = new THREE.Matrix4().makeTranslation(-org.x, -org.y, -org.z).multiply(node.matrix);
+      node.traverse(o => { if (!o.isMesh) return; const g = o.geometry, p = g.attributes.position, f = new Float32Array(p.count * 3);
+        for (let i = 0; i < p.count; i++) { f[i * 3] = p.getX(i); f[i * 3 + 1] = p.getY(i); f[i * 3 + 2] = p.getZ(i); }
+        const fp = new THREE.BufferAttribute(f, 3); fp.applyMatrix4(Mq); g.setAttribute('position', fp); g.computeBoundingBox(); g.computeBoundingSphere(); });
+      node.removeFromParent(); node.position.set(0, 0, 0); node.rotation.set(0, 0, 0); node.scale.set(1, 1, 1);
+      grp.add(node);
+    }
+    // the page's per-frame code animates these by reference (deck/journal machining, red pulses): point it at the new ones
+    ['deck', 'journal', 'linerBad', 'pistonBad', 'bearBad'].forEach(n => { if (made[n]) M[n] = made[n]; });
+    // warm-up so the dyno smoke and the READY tag don't cost a frame the first time they appear
+    puffs.forEach(p => p.visible = true); if (renderer.compileAsync) await renderer.compileAsync(scene, camera); puffs.forEach(p => p.visible = false);
+    renderer.initTexture(P.tag.userData.rdy); renderer.initTexture(puffs[0].material.map);
+    Object.assign(window.KRGLB, { state: 'ready', ms: Math.round(performance.now() - t0), at: Math.round(performance.now()), missing });
+    if (missing.length) console.warn('engine.glb: missing parts', missing);
+  } catch (e) {
+    console.warn('engine.glb failed, keeping the procedural engine', e);
+    Object.assign(window.KRGLB, { state: 'failed', error: String(e) });
+  }
+})();
 window.KR3 = { scene, camera, renderer, M, P, U, key, kick, rim, sweep, pool };
 requestAnimationFrame(frame);
 </script>
