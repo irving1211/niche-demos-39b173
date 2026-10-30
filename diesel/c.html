@@ -14,7 +14,7 @@
 body{background:var(--blk);color:var(--bone);font:500 17px/1.5 var(--sans);overflow-x:hidden}
 a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* hero / tracker */
-.hero{background:var(--bg);color:var(--fg);min-height:100vh;display:grid;grid-template-rows:auto 1fr auto;position:relative;overflow:hidden}
+.hero{background:var(--bg);color:var(--fg);height:100vh;display:grid;grid-template-rows:auto 1fr auto;position:relative;overflow:hidden}
 .top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 36px}
 .logo{min-height:44px;display:inline-flex;align-items:center;gap:8px;font:400 26px/1 var(--disp);letter-spacing:.01em;text-transform:uppercase}
 .logo span{opacity:.6}
@@ -26,11 +26,10 @@ a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;backgroun
 .stage{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);align-items:center;gap:24px;padding:0 36px;min-height:0}
 .kick{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;font:700 15px var(--sans);text-transform:uppercase;letter-spacing:.1em}
 .kick b{background:var(--fg);color:var(--bg);padding:3px 9px;letter-spacing:.06em}
-.word{font:400 160px/.84 var(--disp);text-transform:uppercase;letter-spacing:-.005em;margin:18px 0 6px;white-space:nowrap}
-.word .ln{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.04em}
-.word .ln span{display:inline-block}
-.word.go .ln span{animation:up .6s cubic-bezier(.2,.9,.2,1) both;animation-delay:calc(var(--i) * 38ms)}
-@keyframes up{from{transform:translateY(105%)}to{transform:translateY(0)}}
+.word{position:relative;height:var(--wh,134px);font:400 160px/.84 var(--disp);text-transform:uppercase;letter-spacing:-.005em;margin:18px 0 6px;white-space:nowrap}
+.word .w{position:absolute;left:0;bottom:0;line-height:.84}
+.word .ln{display:inline-block;overflow:hidden;vertical-align:bottom;padding:.02em 0 .04em}
+.word .ch{display:inline-block;will-change:transform}
 .num{font:400 30px/1 var(--disp);letter-spacing:.02em}
 .num em{font-style:normal;opacity:.45}
 .when{font:700 16px var(--sans);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
@@ -45,11 +44,11 @@ a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;backgroun
 .dyn path{fill:none;stroke:var(--fg);stroke-width:5;stroke-linecap:round}
 .dyn path.t{stroke-dasharray:1 9;stroke-width:5}.dyn path.ax{stroke-width:2;stroke-linecap:butt}
 .dyn text{font:800 12px var(--sans);fill:var(--fg);letter-spacing:.08em}
+.copy{align-self:start;margin-top:clamp(16px,7vh,80px)}
+.eng [data-p=tool] [class*="-l"]{fill:var(--fg)}
 .art{position:relative;height:100%;max-height:640px;display:flex;align-items:center;min-height:0}
 .art svg.eng{width:100%;height:100%;overflow:visible}
-.stamp{position:absolute;left:-2%;top:4%;width:250px;display:none;transform:rotate(-9deg);z-index:3}
-.stamp.on{display:block}.stamp.land{animation:land .5s cubic-bezier(.3,1.6,.5,1) both}
-@keyframes land{0%{transform:rotate(-20deg) scale(2)}100%{transform:rotate(-9deg) scale(1)}}
+.stamp{position:absolute;left:-2%;top:4%;width:250px;visibility:hidden;z-index:3}
 .seal{position:absolute;right:36px;top:84px;width:118px;height:118px;color:var(--fg);z-index:2}
 .foot{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;padding:16px 36px 22px}
 .rail{display:flex;gap:0;align-items:stretch;min-width:0}
@@ -83,6 +82,59 @@ a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;backgroun
 .eng .t-rdy{display:none}.eng[data-stage=ready] .t-rdy{display:inline}.eng[data-stage=ready] .t-job{display:none}
 .eng .f-strap{fill:var(--hi)}
 .eng[data-stage=machining] .b3.f-bore{fill:var(--hi)}.eng[data-stage=inspection] .b3.f-bore{fill:var(--hi)}
+/* reduced motion: static stacked stages */
+.stack{display:none}
+.hero.static{height:auto}.hero.static .seal{position:static;display:block;margin:26px 36px 0 auto}.hero.static .stage,.hero.static .ctl,.hero.static .rail{display:none}.hero.static .stack{display:block}
+.sb{background:var(--bg);color:var(--fg);padding:34px 36px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+.sb h2{font:400 clamp(72px,10vw,150px)/.84 var(--disp);text-transform:uppercase;margin:10px 0 8px}
+.sb .art-s svg{width:100%;height:auto;max-height:320px}
+.sb .st{position:static;visibility:visible;width:200px;transform:rotate(-9deg);margin-top:12px}
+/* owner update mock */
+.own{background:var(--bone);color:var(--blk);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:60px;align-items:center}
+.own h2 em{font-style:normal;display:inline-block;background:var(--yel);padding:.04em .08em 0;margin-top:.1em}
+.steps{list-style:none;margin-top:36px;display:grid;gap:6px}
+.steps li{display:grid;grid-template-columns:62px 1fr;align-items:center;min-height:56px;font:800 24px/1.15 var(--sans);opacity:.35;transition:opacity .4s}
+.steps li b{font:400 46px/1 var(--disp)}
+.steps li.done{opacity:.6}.steps li.on{opacity:1}.steps li.on b{background:var(--yel);text-align:center;width:48px}
+.own-line{margin-top:30px;font:700 22px/1.4 var(--sans);max-width:32ch}
+.own-dev{display:flex;gap:30px;align-items:center}
+.phone{width:300px;height:620px;border-radius:44px;padding:11px;background:var(--blk);flex:none;box-shadow:18px 18px 0 var(--yel)}
+.scr{height:100%;border-radius:34px;background:var(--blk);color:var(--bone);overflow:hidden;padding:40px 16px 16px;display:flex;flex-direction:column;gap:10px;position:relative}
+.scr::before{content:"";position:absolute;top:14px;left:50%;width:56px;height:6px;border-radius:3px;background:#2a2a2a;transform:translateX(-50%)}
+.o-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.o-hd b{font:400 30px/1 var(--disp);text-transform:uppercase;white-space:nowrap}.o-hd small{font:700 12px var(--sans);text-transform:uppercase;letter-spacing:.08em;opacity:.6;white-space:nowrap}
+.o-back{font:800 13px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--yel);min-height:44px}
+.o-job{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:58px;padding:0 14px;background:#1e1e1e;text-align:left;width:100%;color:#bdb9b0}
+.o-job span{font:700 15px/1.2 var(--sans)}.o-job span b{display:block;font:400 18px/1 var(--disp);letter-spacing:.02em}
+.o-job em{font:800 11px var(--sans);font-style:normal;text-transform:uppercase;letter-spacing:.08em;text-align:right}
+.o-job.hot{background:var(--yel);color:var(--blk)}
+.tap{display:block;margin-top:3px;font:400 16px/1 var(--disp);letter-spacing:.04em}
+.o-now{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.1em;opacity:.8}
+.o-now b{display:block;font:400 44px/.9 var(--disp);letter-spacing:0;color:var(--yel);margin-top:6px;opacity:1}
+.o-stages{list-style:none;display:grid;gap:1px;margin:4px 0 auto}
+.o-stages li{font:400 21px/1.15 var(--disp);text-transform:uppercase;opacity:.3}
+.o-stages li.d{opacity:.65}.o-stages li.c{opacity:1;color:var(--yel)}.o-stages li.n{opacity:1}
+.o-big{min-height:58px;width:100%;background:var(--yel);color:var(--blk);font:800 17px var(--sans);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;gap:10px;flex:none}
+.o-big.alt{background:var(--bone)}
+.o-vf{flex:1;min-height:0;position:relative;overflow:hidden;background:#1e1e1e;--bg:#1e1e1e;--fg:#ffd60a}
+.o-vf .vf,.o-thumb .vf{position:absolute;inset:10% 4%}.o-vf .vf svg,.o-thumb .vf svg{width:100%;height:100%;display:block}
+.o-vf .corners{position:absolute;left:12px;top:12px;width:calc(100% - 24px);height:calc(100% - 24px)}
+.o-vf .rec{position:absolute;left:24px;top:22px;font:800 11px var(--sans);letter-spacing:.1em;color:var(--bone)}
+.o-shut{width:72px;height:72px;border-radius:50%;align-self:center;background:var(--bone);box-shadow:inset 0 0 0 5px var(--blk);flex:none}
+.o-shut:active{transform:scale(.92)}
+.o-thumb{height:160px;position:relative;overflow:hidden;flex:none;background:var(--yel);--bg:#ffd60a;--fg:#111}
+.o-msg{background:#1e1e1e;padding:12px 14px;font:600 15px/1.4 var(--sans)}
+.o-msg b{display:block;font:800 11px var(--sans);color:var(--yel);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.o-ok{margin:auto 0}
+.o-ok b{display:block;font:400 92px/.85 var(--disp);text-transform:uppercase;color:var(--yel)}
+.o-ok p{font:600 16px/1.4 var(--sans);margin-top:12px}
+.mir{width:290px;background:var(--mb,#111);color:var(--mf,#f2efe8);padding:22px 20px 20px}
+.mir .k2{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.1em}
+.mir .ln{display:block;overflow:hidden;margin-top:10px;padding:.02em 0 .04em}
+.mir h3{font:400 54px/.86 var(--disp);text-transform:uppercase;will-change:transform}
+.mir p{font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+.mir .up{display:block;min-height:18px;font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.08em;margin-top:10px}
+.mir a{display:inline-flex;align-items:center;min-height:44px;margin-top:6px;font:800 14px var(--sans);text-transform:uppercase;letter-spacing:.06em;box-shadow:inset 0 -3px 0 currentColor}
 /* below */
 .sec{padding:110px 36px;position:relative}
 .sec h2{font:400 clamp(64px,9vw,150px)/.86 var(--disp);text-transform:uppercase;letter-spacing:-.005em}
@@ -120,14 +172,17 @@ footer{background:var(--blk);color:#bdb9b0;padding:24px 36px 40px;display:flex;j
 @media (max-width:900px){
   .top{padding:12px 16px}.logo{font-size:20px}.logo span{display:none}
   .btn{min-height:46px;padding:0 14px;font-size:14px}.btn-call .l{display:none}.btn-call .m{display:inline}.btn-q{display:none}
-  .hero{min-height:0;display:block}
-  .stage{display:flex;flex-direction:column;align-items:stretch;padding:0 16px;gap:0}
+  .hero{height:100vh;height:100svh;display:flex;flex-direction:column}
+  .stage{display:flex;flex-direction:column;align-items:stretch;padding:0 16px;gap:0;flex:1;min-height:0}
+  .sb{grid-template-columns:1fr;padding:28px 16px;gap:8px}.sb h2{font-size:clamp(64px,22vw,110px)}
+  .own{grid-template-columns:1fr;gap:40px}.own-dev{flex-direction:column;gap:30px;align-items:flex-start}.steps li{font-size:20px}.own-line{font-size:19px}
+  .phone{width:290px;height:590px}.mir{width:100%;max-width:330px}
   .kick{font-size:12.5px;letter-spacing:.06em;gap:6px 10px;padding-right:84px}
   .word{margin:10px 0 2px}
   .num{font-size:24px}.when{font-size:13.5px}
   .note{font-size:18px;margin-top:8px}
   .fnd{display:none}.dyn{display:none}
-  .art{height:218px;margin:6px -8px 0;order:5}
+  .art{flex:1 1 auto;min-height:0;height:auto;max-height:none;margin:6px -8px 0;order:5}
   .copy{display:contents}.copy .note{order:6}
   .seal{width:84px;height:84px;top:60px;right:12px}
   .stamp{width:150px;left:auto;right:2%;top:16%}
@@ -145,6 +200,8 @@ footer{background:var(--blk);color:#bdb9b0;padding:24px 36px 40px;display:flex;j
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<script src="../vendor/gsap.min.js"></script>
+<script src="../vendor/ScrollTrigger.min.js"></script>
 </head>
 <body>
 <section class="hero" id="hero" aria-label="Engine tracker">
@@ -152,17 +209,18 @@ footer{background:var(--blk);color:#bdb9b0;padding:24px 36px 40px;display:flex;j
     <a class="logo" href="#">Kettle Rock <span>Diesel Works</span></a>
     <div class="acts"><a class="btn btn-q" href="#quote">Get a quote</a><a class="btn btn-call" href="tel:+19785550129"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span class="l">(978) 555-0129</span><span class="m">Call</span></a></div>
   </div>
+  <div class="stack" id="stack"></div>
   <div class="stage">
     <div class="copy">
       <p class="kick"><b>KR-0614</b><span>Excavator engine, 6-cyl</span><span>Your private tracker</span></p>
-      <h1 class="word" id="word" aria-live="polite"></h1>
-      <p class="num"><span id="num">06</span><em> / 07</em> <span class="when" id="when"></span></p>
+      <h1 class="word" id="word"></h1>
+      <p class="num"><span id="num">01</span><em> / 07</em> <span class="when" id="when"></span></p>
       <p class="note" id="note"></p>
       <ol class="fnd" id="fnd"></ol>
       <div class="dyn" id="dyn"></div>
     </div>
     <div class="art" id="art">
-      <svg class="stamp" id="stamp" viewBox="0 0 250 150" aria-label="Passed dyno"><g transform="translate(125 75)"><rect x="-118" y="-66" width="236" height="132" fill="none" stroke="#e63b2e" stroke-width="8"/><rect x="-106" y="-54" width="212" height="108" fill="#e63b2e"/><text y="10" text-anchor="middle" font-family="Anton" font-size="62" fill="#f2efe8">PASSED</text><text y="42" text-anchor="middle" font-family="Work Sans" font-weight="800" font-size="19" letter-spacing="8" fill="#f2efe8">DYNO · 287 HP</text></g></svg>
+      <svg class="stamp" id="stamp" viewBox="0 0 250 150" aria-label="Passed dyno"><g transform="translate(125 75)"><rect x="-118" y="-66" width="236" height="132" fill="none" stroke="#e63b2e" stroke-width="8"/><rect x="-106" y="-54" width="212" height="108" fill="#e63b2e"/><text y="10" text-anchor="middle" font-family="Anton" font-size="62" fill="#f2efe8">PASSED</text><text y="42" text-anchor="middle" font-family="Work Sans" font-weight="800" font-size="19" letter-spacing="6" textLength="190" lengthAdjust="spacingAndGlyphs" fill="#f2efe8">DYNO · 287 HP</text></g></svg>
     </div>
   </div>
   <svg class="seal" viewBox="0 0 120 120" aria-label="Exclusive in Essex County, MA"><circle cx="60" cy="60" r="58" fill="currentColor"/><path id="sa" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" fill="none"/><text font-family="Work Sans" font-weight="800" font-size="10.4" letter-spacing="1.6" style="fill:var(--bg)"><textPath href="#sa">EXCLUSIVE · ESSEX COUNTY, MA · ONE SHOP ·</textPath></text><text x="60" y="72" text-anchor="middle" font-family="Anton" font-size="32" style="fill:var(--bg)">KR</text></svg>
@@ -180,6 +238,18 @@ footer{background:var(--blk);color:#bdb9b0;padding:24px 36px 40px;display:flex;j
   </div>
 </section>
 
+<section class="sec own" id="own" aria-label="How the shop keeps it updated">
+  <div>
+    <span class="lab">How the shop keeps it updated</span>
+    <h2>Four taps.<br><em>Done.</em></h2>
+    <ol class="steps" id="oSteps"><li><b>1</b>Tap the job</li><li><b>2</b>Tap the next stage</li><li><b>3</b>Snap a photo</li><li><b>4</b>Send. The customer's tracker updates.</li></ol>
+    <p class="own-line">No new software to learn. Works from the phone in your pocket. Can connect to your shop software later.</p>
+  </div>
+  <div class="own-dev">
+    <div class="phone" aria-label="Sample of the owner's update screen"><div class="scr" id="oScr" aria-live="polite"></div></div>
+    <div class="mir" id="mir"><p class="k2">Customer's tracker</p><div class="ln"><h3 id="mW">In.</h3></div><p id="mT"></p><span class="up" id="mUp"></span><a href="#hero" id="mGo">See it on the tracker &uarr;</a></div>
+  </div>
+</section>
 <section class="sec wall" id="wall"><span class="lab">The shop wall · every bay, right now</span><h2>Six jobs.<br>One board.</h2><ol id="bays"></ol></section>
 <section class="sec svc" id="quote"><span class="lab">What we do</span><h2>Diesel. Iron.<br>Hydraulics.</h2><ol id="svc"></ol></section>
 <section class="sec road"><div><span class="lab">Road service</span><h2>24 H.</h2></div><div><p>Down on a job site at 2 AM? A mechanic answers, and the truck rolls with the parts.</p><a class="big" href="tel:+19785550129">(978) 555-0129</a></div></section>
@@ -389,49 +459,204 @@ const KR = (() => {
   return { LAYOUT, FOCUS, fitView, JOB, STAGES, BAYS, SERVICES, BRANDS, TOWNS, PHONE, TEL, DYNO, PEAK_TQ, dynoPaths, engineSVG, setEngine };
 })();
 
+// ---------- scroll-driven tracker: the hero pins and each stage takes about one screen of scroll ----------
 (() => {
   const S = KR.STAGES, $ = id => document.getElementById(id), phone = matchMedia('(max-width:900px)');
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches, HAS = !!(window.gsap && window.ScrollTrigger);
   const BIG = { received: 'In.', teardown: 'Apart.', inspection: 'Checked.', machining: 'Machined.', assembly: 'Built.', dyno: 'Dyno.', ready: 'Ready.' };
   const SCHEME = { received: ['#111', '#f2efe8', '#ffd60a'], teardown: ['#ffd60a', '#111', '#e63b2e'], inspection: ['#e63b2e', '#111', '#f2efe8'], machining: ['#cfd3d6', '#111', '#e63b2e'], assembly: ['#111', '#ffd60a', '#f2efe8'], dyno: ['#ffd60a', '#111', '#e63b2e'], ready: ['#f2efe8', '#111', '#e63b2e'] };
-  const art = $('art'); art.insertAdjacentHTML('afterbegin', KR.engineSVG({ id: 'c' }));
-  const svg = art.querySelector('svg.eng'), hero = $('hero');
-  const rail = $('rail');
-  S.forEach((s, i) => rail.insertAdjacentHTML('beforeend', `<button data-i="${i}" aria-label="${s.name}">${BIG[s.k].replace('.', '')}<small>${s.time.split(' · ')[0]}</small></button>`));
-  rail.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { stop(); go(+b.dataset.i); } });
-  const dp = KR.dynoPaths(4, 8, 300, 92, 300, 1000);
-  let cur = 5, timer = null;
-  function fit() { const w = $('word'), ln = w.querySelector('.ln'); if (!ln) return; w.style.fontSize = ''; const cs = parseFloat(getComputedStyle(w).fontSize), avail = phone.matches ? w.closest('.stage').clientWidth - 32 : w.parentElement.clientWidth, need = ln.getBoundingClientRect().width || 1; const max = phone.matches ? 150 : Math.min(340, innerHeight * .42); w.style.fontSize = Math.min(max, cs * avail / need * .97) + 'px'; }
-  addEventListener('resize', fit); document.fonts && document.fonts.ready.then(fit);
-  function go(i, anim = true) {
-    cur = (i + S.length) % S.length; const s = S[cur], [bg, fg, hi] = SCHEME[s.k];
-    hero.style.setProperty('--bg', bg); hero.style.setProperty('--fg', fg); hero.style.setProperty('--hi', hi);
-    KR.setEngine(svg, s.k, anim); KR.fitView(svg, s.k, anim);
-    const w = $('word'); w.classList.remove('go');
-    w.innerHTML = `<span class="ln">${[...BIG[s.k]].map((c, k) => `<span style="--i:${k}">${c}</span>`).join('')}</span>`;
-    w.setAttribute('aria-label', s.name);
-    fit(); if (anim) { void w.offsetWidth; w.classList.add('go'); }
-    $('num').textContent = String(cur + 1).padStart(2, '0'); $('when').textContent = s.name + ' · ' + s.time;
-    $('note').textContent = s.note;
-    $('fnd').innerHTML = s.findings ? s.findings.map((f, k) => `<li><b>${k + 1}</b><span>${f.t}<small>${f.d}</small></span></li>`).join('') : '';
-    $('note').style.display = s.findings && !phone.matches ? 'none' : '';
-    $('dyn').innerHTML = s.k === 'dyno' ? `<div class="hp">287<small>HP</small></div><svg viewBox="0 0 320 120" aria-label="Dyno sheet: horsepower and torque curves"><path class="ax" d="M4,0 V100 H306"/><path class="h" pathLength="1" d="${dp.hpP}"/><path class="t" d="${dp.tqP}"/><text x="${dp.peakHp.x}" y="${dp.peakHp.y - 12}" text-anchor="middle">HP</text><text x="306" y="${8 + 92 * (1 - KR.DYNO[KR.DYNO.length - 1].tq / 1000) + 22}" text-anchor="end">LB-FT</text><text x="4" y="116">1,000</text><text x="306" y="116" text-anchor="end">2,400 RPM</text></svg>` : '';
-    if (s.k === 'dyno' && anim) $('dyn').querySelector('path.h').animate([{ strokeDasharray: '1 1', strokeDashoffset: 1 }, { strokeDasharray: '1 1', strokeDashoffset: 0 }], { duration: 1300, easing: 'ease-out', fill: 'backwards' });
-    rail.querySelectorAll('button').forEach((b, j) => b.className = j < cur ? 'done' : j === cur ? 'on' : '');
-    const st = $('stamp'); st.classList.toggle('on', s.k === 'dyno');
-    if (s.k === 'dyno' && anim) { st.classList.remove('land'); void st.offsetWidth; st.classList.add('land'); }
-  }
-  function stop() { clearInterval(timer); timer = null; $('pLbl').textContent = 'Play it'; $('pIco').innerHTML = '<path d="M4 2l10 6-10 6z"/>'; }
-  function play() { if (timer) return stop(); if (cur === S.length - 1) go(0); timer = setInterval(() => { if (cur === S.length - 1) return stop(); go(cur + 1); }, 2600); $('pLbl').textContent = 'Pause'; $('pIco').innerHTML = '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>'; }
-  $('prev').onclick = () => { stop(); go(cur - 1); }; $('next').onclick = () => { stop(); go(cur + 1); }; $('play').onclick = play;
-  $('textMe').onclick = () => { $('textMe').querySelector('span').textContent = "You're set"; $('card').classList.add('on'); };
+  const hero = $('hero'), rail = $('rail'), art = $('art');
+  window.KRC = { BIG, SCHEME };
   $('bays').innerHTML = KR.BAYS.map(b => `<li class="${b.mine ? 'mine' : ''} ${b.wait ? 'wait' : ''}"><span class="n">${b.road ? 'RD' : b.b.replace('Bay ', '0')}</span><span class="u">${b.u}<small>${b.c}${b.mine ? ' · your engine' : ''}</small></span><span class="s">${b.s}</span><span class="p">${Math.round(b.p * 100)}%</span></li>`).join('');
   $('svc').innerHTML = KR.SERVICES.map(([t, d], i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><h3>${t}</h3><p>${d}</p></li>`).join('');
   $('brands').textContent = KR.BRANDS.split(' · ').join(' / '); $('towns').textContent = KR.TOWNS;
-  const q = new URLSearchParams(location.search), si = S.findIndex(s => s.k === q.get('stage'));
-  go(si > -1 ? si : 5, false);
-  if (q.get('play')) setTimeout(play, 600);
+  $('textMe').onclick = () => { $('textMe').querySelector('span').textContent = "You're set"; $('card').classList.add('on'); };
+  const q = new URLSearchParams(location.search);
   if (q.get('notify')) $('textMe').click();
+  const dp = KR.dynoPaths(4, 8, 300, 92, 300, 1000);
+  const dynoHTML = `<div class="hp">287<small>HP</small></div><svg viewBox="0 0 320 120" aria-label="Dyno sheet: horsepower and torque curves"><path class="ax" d="M4,0 V100 H306"/><path class="h" pathLength="1" d="${dp.hpP}"/><path class="t" d="${dp.tqP}"/><text x="${dp.peakHp.x}" y="${dp.peakHp.y - 12}" text-anchor="middle">HP</text><text x="306" y="${8 + 92 * (1 - KR.DYNO[KR.DYNO.length - 1].tq / 1000) + 22}" text-anchor="end">LB-FT</text><text x="4" y="116">1,000</text><text x="306" y="116" text-anchor="end">2,400 RPM</text></svg>`;
+  const fndHTML = S[2].findings.map((f, k) => `<li><b>${k + 1}</b><span>${f.t}<small>${f.d}</small></span></li>`).join('');
+
+  // ----- reduced motion (or libs missing): a static stacked list of the 7 stages -----
+  if (RM || !HAS) {
+    hero.classList.add('static');
+    $('stack').innerHTML = S.map((s, i) => { const [bg, fg, hi] = SCHEME[s.k]; return `<article class="sb" style="--bg:${bg};--fg:${fg};--hi:${hi}"><div><p class="num">${String(i + 1).padStart(2, '0')}<em> / 07</em> <span class="when">${s.name} · ${s.time}</span></p><h2>${BIG[s.k]}</h2><p class="note">${s.note}</p>${s.findings ? `<ol class="fnd" style="display:grid">${fndHTML}</ol>` : ''}${s.k === 'dyno' ? `<div class="dyn" style="display:flex">${dynoHTML}</div>` : ''}</div><div class="art-s">${KR.engineSVG({ id: 'k' + i })}${s.k === 'dyno' ? $('stamp').outerHTML.replace('class="stamp" id="stamp"', 'class="stamp st"') : ''}</div></article>`; }).join('');
+    $('stack').querySelectorAll('svg.eng').forEach((svg, i) => { KR.setEngine(svg, S[i].k, false); KR.fitView(svg, S[i].k, false); });
+    window.TRKC = { jump: () => hero.scrollIntoView() };
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+  history.scrollRestoration = 'manual';
+  art.insertAdjacentHTML('afterbegin', KR.engineSVG({ id: 'c' }));
+  const svg = art.querySelector('svg.eng');
+  S.forEach((s, i) => rail.insertAdjacentHTML('beforeend', `<button data-i="${i}" aria-label="${s.name}">${BIG[s.k].replace('.', '')}<small>${s.time.split(' · ')[0]}</small></button>`));
+  $('fnd').innerHTML = fndHTML; $('dyn').innerHTML = dynoHTML;
+  const word = $('word');
+  word.innerHTML = S.map((s, i) => `<span class="w"><span class="ln">${[...BIG[s.k]].map(c => `<span class="ch">${c}</span>`).join('')}</span></span>`).join('');
+  const words = [...word.querySelectorAll('.w')], letters = words.map(w => [...w.querySelectorAll('.ch')]);
+  function fit() {
+    const avail = phone.matches ? word.closest('.stage').clientWidth - 32 : word.parentElement.clientWidth;
+    const max = phone.matches ? Math.min(150, innerHeight * .15) : Math.min(300, innerHeight * .3);
+    let hMax = 0;
+    words.forEach(w => { w.style.fontSize = '100px'; const need = w.getBoundingClientRect().width || 1; const fs = Math.min(max, 100 * avail / need * .97); w.style.fontSize = fs + 'px'; hMax = Math.max(hMax, fs); });
+    word.style.setProperty('--wh', (hMax * .9) + 'px');
+  }
+  fit(); document.fonts && document.fonts.ready.then(() => { fit(); ScrollTrigger.refresh(); });
+  addEventListener('resize', fit);
+
+  // ----- what's on screen for a stage (text, colours, rail): hard cuts, like the poster -----
+  let shown = -1;
+  function show(i) {
+    if (i === shown) return; shown = i; const s = S[i], [bg, fg, hi] = SCHEME[s.k];
+    hero.style.setProperty('--bg', bg); hero.style.setProperty('--fg', fg); hero.style.setProperty('--hi', hi);
+    svg.classList.remove('fin-dirty', 'fin-clean', 'fin-paint'); svg.classList.add('fin-' + KR.LAYOUT[s.k].fin); svg.dataset.stage = s.k;
+    word.setAttribute('aria-label', s.name);
+    $('num').textContent = String(i + 1).padStart(2, '0'); $('when').textContent = s.name + ' · ' + s.time;
+    $('note').textContent = s.note; $('note').style.display = s.findings && !phone.matches ? 'none' : '';
+    $('fnd').style.display = s.findings ? '' : 'none'; $('dyn').style.display = s.k === 'dyno' ? '' : 'none';
+    rail.querySelectorAll('button').forEach((b, j) => b.className = j < i ? 'done' : j === i ? 'on' : '');
+  }
+
+  // ----- one scrubbed timeline: stage i rests on [i, i+.5], the change to i+1 plays on [i+.5, i+1] -----
+  const TOTAL = S.length - .5, CUT = .2;
+  const NAMES = ['shadow', 'pallet', 'dyno', 'crank', 'pst0', 'pst1', 'pst2', 'pst3', 'pst4', 'pst5', 'bell', 'block', 'pan', 'front', 'head', 'lines', 'cover', 'exhaust', 'tool', 'marks', 'tag', 'wrap'];
+  const OFF = { head: [0, -440], cover: [0, -490], exhaust: [0, -440], lines: [0, -440], bell: [-330, 0], front: [360, 0], pan: [0, 320], crank: [620, 0], pallet: [720, 0], dyno: [-440, 0], tool: [0, -400], tag: [0, -400], wrap: [0, -460], shadow: [0, 0] };
+  const off = n => OFF[n] || (n.startsWith('pst') ? [0, -500] : [0, -400]);
+  const part = n => svg.querySelector(`[data-p="${n}"]`);
+  const at = (k, n) => KR.LAYOUT[S[k].k].p[n];
+  NAMES.forEach(n => { const el = part(n), v = at(0, n); gsap.set(el, { x: v ? v[0] : 0, y: v ? v[1] : 0, scale: 1, transformOrigin: '50% 50%', visibility: v ? 'visible' : 'hidden' }); });
+  svg.setAttribute('viewBox', KR.FOCUS.received.join(' '));
+  letters.forEach((L, k) => gsap.set(L, { yPercent: k ? 112 : 0 }));
+  const stamp = $('stamp'), hpPath = $('dyn').querySelector('path.h'), fndLis = [...$('fnd').children];
+  gsap.set(stamp, { rotation: -9, transformOrigin: '50% 50%' }); gsap.set(hpPath, { strokeDasharray: '1 1', strokeDashoffset: 0 });
+  const stageAt = t => { let k = 0; for (let i = 0; i < S.length - 1; i++) if (t >= i + .5 + CUT) k = i + 1; return k; };
+  const tl = gsap.timeline({ paused: true, onUpdate: () => show(stageAt(tl.time())) });
+  for (let i = 0; i < S.length - 1; i++) {
+    const T = i + .5, j = i + 1;
+    // camera reframes across the change
+    tl.to(svg, { attr: { viewBox: KR.FOCUS[S[j].k].join(' ') }, duration: .45, ease: 'power2.inOut' }, T);
+    // parts: leave, move, arrive
+    NAMES.forEach(n => {
+      const el = part(n), a = at(i, n), b = at(j, n), st = n.startsWith('pst') ? +n[3] * .018 : 0;
+      if (a && !b) {
+        if (n === 'marks') tl.to(el, { scale: .01, duration: .14, ease: 'power2.in' }, T);
+        else { const o = off(n); tl.to(el, { x: a[0] + o[0], y: a[1] + o[1], duration: .22, ease: 'power2.in' }, T + st); }
+        tl.set(el, { visibility: 'hidden' }, T + .24 + st);
+      } else if (!a && b) {
+        tl.set(el, { visibility: 'visible' }, T + CUT);
+        if (n === 'marks') tl.fromTo(el, { scale: .01 }, { scale: 1, duration: .16, ease: 'back.out(2)', immediateRender: false }, T + CUT + .06);
+        else { const o = off(n); tl.fromTo(el, { x: b[0] + o[0], y: b[1] + o[1] }, { x: b[0], y: b[1], duration: .26, ease: 'power3.out', immediateRender: false }, T + CUT + st); }
+      } else if (a && b && (a[0] !== b[0] || a[1] !== b[1])) {
+        tl.to(el, { x: b[0], y: b[1], duration: .4, ease: 'power2.inOut' }, T + .04 + st);
+      }
+    });
+    // the giant word: old letters kick up and out, new letters rise in on the colour cut
+    tl.to(letters[i], { yPercent: -112, duration: .16, stagger: .01, ease: 'power2.in' }, T);
+    tl.fromTo(letters[j], { yPercent: 112 }, { yPercent: 0, duration: .24, stagger: .014, ease: 'power3.out', immediateRender: false }, T + CUT);
+    if (S[j].findings) tl.fromTo(fndLis, { y: 60 }, { y: 0, duration: .2, stagger: .04, ease: 'power3.out', immediateRender: false }, T + CUT + .04);
+    if (S[j].k === 'dyno') {
+      tl.fromTo(hpPath, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: .26, ease: 'none', immediateRender: false }, T + CUT + .02);
+      tl.set(stamp, { visibility: 'visible' }, T + CUT + .14);
+      tl.fromTo(stamp, { scale: 2.3, rotation: -24 }, { scale: 1, rotation: -9, duration: .12, ease: 'back.out(2.2)', immediateRender: false }, T + CUT + .14);
+    }
+    if (S[i].k === 'dyno') { tl.to(stamp, { y: -90, scale: .6, rotation: 6, duration: .16, ease: 'power2.in' }, T); tl.set(stamp, { visibility: 'hidden' }, T + .17); }
+  }
+  tl.to({}, { duration: .5 }, S.length - 1);   // rest on Ready
+  show(0);
+
+  const REST = S.map((s, i) => i === 0 ? 0 : i === S.length - 1 ? 1 : (i + .25) / TOTAL);
+  const st = ScrollTrigger.create({
+    trigger: hero, start: 'top top', end: () => '+=' + Math.round(innerHeight * TOTAL), pin: true, anticipatePin: 1,
+    animation: tl, scrub: 1, invalidateOnRefresh: true,
+    // snap to the nearest resting stage from where the reader actually stopped (no velocity fling)
+    snap: { snapTo: (v, self) => { const p = self ? self.progress : v; return REST.reduce((b, r) => Math.abs(r - p) < Math.abs(b - p) ? r : b, 0); }, inertia: false, duration: { min: .3, max: .8 }, delay: .18, ease: 'power1.inOut' }
+  });
+  ScrollTrigger.config({ ignoreMobileResize: true });
+
+  // ----- Prev / Next / rail / Play: move the scroll to a stage -----
+  const proxy = { y: 0 }; let playing = null;
+  const posFor = i => st.start + (st.end - st.start) * REST[i];
+  function scrollToY(y, d) { gsap.killTweensOf(proxy); proxy.y = scrollY; return gsap.to(proxy, { y, duration: d, ease: 'power2.inOut', onUpdate: () => scrollTo(0, proxy.y) }); }
+  function jump(i) { stop(); const y = posFor(Math.max(0, Math.min(S.length - 1, i))); scrollToY(y, Math.min(2.2, Math.max(.7, Math.abs(y - scrollY) / innerHeight * .55))); }
+  function stop() { if (playing) { playing.kill(); playing = null; gsap.killTweensOf(proxy); } $('pLbl').textContent = 'Play it'; $('pIco').innerHTML = '<path d="M4 2l10 6-10 6z"/>'; }
+  function play() {
+    if (playing) return stop();
+    let from = shown; if (from >= S.length - 1) { scrollTo(0, posFor(0)); from = 0; }
+    playing = gsap.timeline({ onComplete: stop });
+    playing.call(() => { proxy.y = scrollY; });
+    if (scrollY < st.start) playing.to(proxy, { y: posFor(from), duration: .8, ease: 'power2.inOut', onUpdate: () => scrollTo(0, proxy.y) });
+    for (let i = from + 1; i < S.length; i++) playing.to(proxy, { y: posFor(i), duration: 1.5, delay: 1.6, ease: 'power1.inOut', onUpdate: () => scrollTo(0, proxy.y) });
+    $('pLbl').textContent = 'Pause'; $('pIco').innerHTML = '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>';
+  }
+  ['wheel', 'touchstart', 'keydown'].forEach(e => addEventListener(e, ev => { if (playing && !(ev.target.closest && ev.target.closest('#play'))) stop(); }, { passive: true }));
+  $('prev').onclick = () => jump(shown - 1); $('next').onclick = () => jump(shown + 1); $('play').onclick = play;
+  rail.addEventListener('click', e => { const b = e.target.closest('button'); if (b) jump(+b.dataset.i); });
+  window.TRKC = { jump, get shown() { return shown; }, tl, st };
+
+  // filming helpers: ?stage=dyno opens on that stage, ?play=1 plays the scroll
+  const si = S.findIndex(s => s.k === q.get('stage'));
+  if (si > 0) requestAnimationFrame(() => { ScrollTrigger.refresh(); scrollTo(0, posFor(si)); ScrollTrigger.update(); const tw = st.getTween && st.getTween(); if (tw) tw.progress(1); tl.progress(st.progress); });
+  else scrollTo(0, 0);
+  if (q.get('play')) setTimeout(play, 700);
 })();
+
+// ---------- owner's update screen (small working mock) ----------
+(() => {
+  const S = KR.STAGES, $ = id => document.getElementById(id), scr = $('oScr'), steps = [...document.querySelectorAll('#oSteps li')];
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches, G = window.gsap;
+  const { BIG, SCHEME } = window.KRC;
+  let step = 0, job = 0;
+  const ARROW = '<svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M5 2l7 6-7 6z"/></svg>';
+  const engine = cls => `<div class="${cls}"><div class="vf">${KR.engineSVG({ id: 'v' })}</div></div>`;
+  function mirror(anim) {
+    const s = S[job], [bg, fg] = SCHEME[s.k], m = $('mir'), h = $('mW');
+    const apply = () => { m.style.setProperty('--mb', bg); m.style.setProperty('--mf', fg); h.textContent = BIG[s.k]; $('mT').textContent = `KR-0614 · ${String(job + 1).padStart(2, '0')} / 07 · ${s.time}`; };
+    if (!anim || RM || !G) return apply();
+    G.killTweensOf(h);
+    G.timeline().to(h, { yPercent: -112, duration: .3, ease: 'power2.in' }).call(apply).fromTo(h, { yPercent: 112 }, { yPercent: 0, duration: .55, ease: 'power3.out' });
+  }
+  function render(anim = true) {
+    const s = S[job], n = S[job + 1];
+    let h = '';
+    if (step === 0) h = `<div class="o-hd"><b>Today's jobs</b><small>Thu Oct 30</small></div>
+      <button class="o-job hot" data-act="job"><span><b>KR-0614</b>Excavator engine</span><em>${s.name}<span class="tap">Tap</span></em></button>
+      <div class="o-job"><span><b>KR-0609</b>Dozer engine</span><em>Machining</em></div>
+      <div class="o-job"><span><b>KR-0611</b>Dump truck · 15 L</span><em>Assembly</em></div>
+      <div class="o-job"><span><b>KR-0612</b>Wheel loader</span><em>Testing</em></div>
+      <div class="o-job"><span><b>KR-0615</b>Skid steer</span><em>Parts</em></div>`;
+    else if (step === 1) h = `<div class="o-hd"><button class="o-back" data-act="back">&larr; Jobs</button><small>KR-0614</small></div>
+      <p class="o-now">Excavator engine · now<b>${BIG[s.k]}</b></p>
+      <ol class="o-stages">${S.map((t, j) => `<li class="${j < job ? 'd' : j === job ? 'c' : j === job + 1 ? 'n' : ''}">${t.name}</li>`).join('')}</ol>
+      ${n ? `<button class="o-big" data-act="stage">Next: ${n.name} ${ARROW}</button>` : `<button class="o-big alt" data-act="reset">Picked up. Start over</button>`}`;
+    else if (step === 2) h = `<div class="o-hd"><b>Photo</b><small>${n.name}</small></div>
+      <div class="o-vf">${engine('vfw')}<svg class="corners" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" stroke="#f2efe8" stroke-width="1.5"><path d="M0,12V0H12M88,0H100V12M100,88V100H88M12,100H0V88" vector-effect="non-scaling-stroke"/></svg><span class="rec">KR-0614 · ${n.name.toUpperCase()}</span></div>
+      <button class="o-shut" data-act="snap" aria-label="Snap a photo"></button>`;
+    else if (step === 3) h = `<div class="o-hd"><b>Send</b><small>KR-0614</small></div>
+      ${engine('o-thumb')}
+      <div class="o-msg"><b>To: customer's tracker</b>Your engine moved to ${n.name}. ${n.note}</div>
+      <button class="o-big" data-act="send" style="margin-top:auto">Send ${ARROW}</button>`;
+    else h = `<div class="o-ok"><b>Sent.</b><p>KR-0614 now reads <strong>${BIG[s.k].toUpperCase()}</strong> on the customer's tracker, with your photo.</p></div>
+      <button class="o-big" data-act="see">See the tracker &uarr;</button><button class="o-big alt" data-act="again">Back to jobs</button>`;
+    scr.innerHTML = h;
+    const k = (step === 2 || step === 3) ? n.k : s.k, svg = scr.querySelector('svg.eng'); if (svg) { KR.setEngine(svg, k, false); KR.fitView(svg, k, false); }
+    steps.forEach((li, j) => li.className = j < step ? 'done' : j === step ? 'on' : '');
+    if (anim && !RM && G) G.fromTo(scr.children, { y: 26, clipPath: 'inset(0 0 100% 0)' }, { y: 0, clipPath: 'inset(0 0 0% 0)', duration: .5, stagger: .06, ease: 'power3.out', clearProps: 'clipPath' });
+  }
+  function act(a) {
+    if (a === 'job') step = 1; else if (a === 'back' || a === 'again') step = 0; else if (a === 'stage') step = 2; else if (a === 'snap') step = 3;
+    else if (a === 'send') { job++; mirror(true); $('mUp').textContent = 'Updated just now · photo added'; step = 4; }
+    else if (a === 'reset') { job = 0; mirror(true); $('mUp').textContent = ''; step = 0; }
+    else if (a === 'see') { window.TRKC.jump(job); return; }
+    render();
+  }
+  scr.addEventListener('click', e => { const b = e.target.closest('[data-act]'); if (b) act(b.dataset.act); });
+  $('mGo').onclick = e => { e.preventDefault(); window.TRKC.jump(job); };
+  mirror(false); render(false);
+  window.OWN = { get job() { return job; } };
+  if (new URLSearchParams(location.search).get('owner')) ['job', 'stage', 'snap', 'send'].forEach((a, k) => setTimeout(() => act(a), 1600 + k * 1700));
+})();
+
 </script>
 </body>
 </html>

@@ -60,9 +60,9 @@ h1 .on b i{display:inline-block;font-style:normal;background:var(--k);color:var(
 .spec li span{color:#8d8a82}
 .spec p{color:#bdb9ae;font-size:16px;margin-bottom:12px}
 .spec .acts{display:flex;gap:6px}.spec .acts a,.spec .acts button{flex:1;min-height:50px;display:flex;align-items:center;justify-content:center;background:#1d1d1d;border-radius:3px;font:800 20px/1 var(--big);text-transform:uppercase;letter-spacing:.04em}
-.ping{position:absolute;left:36px;top:480px;z-index:5;visibility:hidden}
+.ping{position:absolute;right:30px;top:480px;z-index:5;visibility:hidden}
 .hs,.os{display:none}h1 em{font-style:normal}body.sent .hb,body.sent .ob{display:none}body.sent .hs{display:block}body.sent .os{display:block}body.sent h1 .on{font-size:.3em}
-.card{background:var(--w);color:var(--k);border-radius:16px;padding:14px 16px;width:420px;transform:rotate(-2deg);box-shadow:8px 8px 0 var(--k)}
+.card{background:var(--w);color:var(--k);border-radius:16px;padding:14px 16px;width:390px;transform:rotate(-2deg);box-shadow:8px 8px 0 var(--k)}
 .card .h{display:flex;align-items:center;gap:8px;font:600 13px/1 "Work Sans";color:#6c675b}
 .card .h i{font:900 13px/1 var(--big);font-style:normal;background:var(--y);color:var(--k);padding:4px 5px;border-radius:4px}
 .card .h span{margin-left:auto}
@@ -107,20 +107,20 @@ footer{background:var(--k);color:#77736a;padding:26px 36px 44px;font-size:14px;d
 @media (max-width:1100px){.bar nav{display:none}}
 @media (max-width:860px){
  .bar{height:56px;padding:0 14px}.wm{font-size:25px}.call{font-size:19px;padding:0 13px}
- .hero{grid-template-columns:1fr;min-height:0}
+ .hero{grid-template-columns:minmax(0,1fr);min-height:0}
  .left{padding:16px 16px 0}
  h1{font-size:57px;line-height:.86}h1 .br{display:none}h1 .on{font-size:30px;margin-top:6px}
  .truck{min-height:0;height:190px;flex:none;margin:-4px -16px 0}.truck svg{bottom:6px}
  .sticker{width:78px;height:78px;right:12px;top:84px}
  .ctrl{padding:14px 16px 0}
  .lab{display:none}
- .chs{grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px}
- .ch{padding:6px 4px;min-height:52px;text-align:center}.ch b{font-size:22px;white-space:nowrap}.ch small{font-size:11px;white-space:nowrap}
+ .chs{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-bottom:10px}
+ .ch{padding:6px 2px;min-height:52px;text-align:center}.ch b{font-size:21px;white-space:nowrap}.ch small{font-size:11px;white-space:nowrap}
  .pills{gap:5px;margin-bottom:5px}.pl{min-height:44px;font-size:18px;padding:0 12px}.pl.m{font-size:15px}
- .note{min-height:0;font-size:14px;margin:0 0 4px}.lst{display:none}.ch b{font-size:23px}.ch{min-height:52px;padding:6px 4px}.pl{min-height:44px;font-size:18px;padding:0 12px}.pl.m{font-size:15px}
+ .note{min-height:0;font-size:14px;margin:0 0 4px}.lst{display:none}.ch b{font-size:21px}.ch{min-height:52px;padding:6px 4px}.pl{min-height:44px;font-size:18px;padding:0 12px}.pl.m{font-size:15px}
  .pr{position:sticky;bottom:0;background:var(--k);padding:8px 0 12px;display:grid;grid-template-columns:1fr auto;gap:0 10px;align-items:center;margin-top:6px}
  .pr .n{font-size:36px}.pr small{display:none}.send{width:auto;min-height:54px;font-size:22px;padding:0 14px;white-space:nowrap}
- .ping{left:12px;right:12px}.card{width:auto;box-shadow:5px 5px 0 var(--k)}body.sent h1{font-size:50px}body.sent h1 .on{font-size:24px}body.sent .sticker{visibility:hidden}body.sent .hs br{display:none}.card b{font-size:21px}
+ .ping{left:12px;right:12px}.card{transform:rotate(-1deg)}.card{width:auto;box-shadow:5px 5px 0 var(--k)}body.sent h1{font-size:50px}body.sent h1 .on{font-size:24px}body.sent .sticker{visibility:hidden}body.sent .hs br{display:none}.card b{font-size:21px}
  .tick div{font-size:30px}
  section{padding:72px 18px}
  .red .three,.steps{grid-template-columns:1fr;gap:28px}
@@ -304,7 +304,7 @@ const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,G=!RM&&window.gs
 const S={chassis:'c2',dump:'9',mat:'steel',plow:'none',spreader:false,strobes:false,liftgate:false};
 let quote=24117,sent=false,prev=null;
 const $=q=>document.querySelector(q),$$=q=>[...document.querySelectorAll(q)];
-$('#chs').innerHTML=Object.values(CH).map(c=>`<button class="ch" data-c="${c.k}" aria-pressed="false"><b>${c.short}</b><small>${c.k==='c1'?'F-350 class':c.k==='c4'?'6500HD class':c.k==='c3'?'Ram class':'Ford class'}</small></button>`).join('');
+$('#chs').innerHTML=Object.values(CH).map(c=>`<button class="ch" data-c="${c.k}" aria-pressed="false"><b>${c.short}</b><small>${innerWidth<860?(c.gvwr/1000).toLocaleString('en-US')+'K lb':'GVWR '+c.gvwr.toLocaleString('en-US')+' lb'}</small></button>`).join('');
 const COL={body:'#f6f2e8',k:'#0f0f0f',y:'#ffcd14',r:'#e5432a',sh:'#e6b400',g:'#3a3a3a'};
 function keys(s){return{chassis:s.chassis,dump:s.dump==='none'?'':s.dump+s.mat,plow:s.plow,spreader:s.spreader,liftgate:s.liftgate,strobes:s.strobes};}
 function drawTruck(changed){
