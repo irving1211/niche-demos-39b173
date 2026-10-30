@@ -1,0 +1,1131 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Calloway Smile Studio</title>
+<meta name="description" content="Concept demo: a fictional two-office dental practice in Essex County, MA. Implants, veneers, clear aligners, whitening, family care. English and Spanish.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="../vendor/gsap.min.js"></script>
+<script type="importmap">{"imports":{"three":"../vendor/three.module.js","three/addons/":"../vendor/addons/"}}</script>
+<style>
+:root{--bg:#0a0806;--bg2:#120e0b;--bg3:#1a1410;--ink:#f4eee5;--dim:#b3a898;--mute:#857a6c;--acc:#d2b07a;--acc2:#ecd6a8;--rose:#e6a39b;--hair:rgba(244,238,229,.12);
+  --disp:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'JetBrains Mono',ui-monospace,Consolas,monospace;--pad:64px;--vh:1vh}
+*{box-sizing:border-box}
+html{background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%;scroll-behavior:auto}
+body{margin:0;font:400 17px/1.6 var(--disp);overflow-x:hidden}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.x{font-stretch:125%}
+.eyebrow{margin:0;font:500 12.5px/1.3 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
+span[data-t],b[data-t],em[data-t],small[data-t],label[data-t],a[data-t],i[data-t]{display:inline-block}
+.book[data-t],a.book{display:inline-flex}
+.press{transform:scale(.94)!important;transition:transform .12s}
+html.tour,html.tour *{cursor:none!important}
+html.tour{scrollbar-width:none}html.tour::-webkit-scrollbar{display:none}
+:focus-visible{outline:2px solid var(--acc2);outline-offset:3px}
+
+/* ---------- header ---------- */
+.top{position:fixed;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px var(--pad);transition:background-color .35s}
+.top.solid{background:rgba(10,8,6,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.brand{display:flex;flex-direction:column;text-decoration:none;line-height:1;flex:none}
+.brand b{font:500 19px/1 var(--disp);font-stretch:125%;letter-spacing:.24em}
+.brand span{font:500 10px/1 var(--mono);letter-spacing:.36em;color:var(--acc);margin-top:7px}
+nav.links{display:flex;gap:30px}
+nav.links a{font:500 12.5px/1 var(--disp);font-stretch:115%;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:14px 0}
+nav.links a:hover{color:var(--ink)}
+.tools{display:flex;align-items:center;gap:8px;flex:none}
+.lang{display:flex;align-items:center;height:44px;padding:0 4px}
+.lang button{min-width:40px;height:44px;font:500 12.5px var(--mono);letter-spacing:.12em;color:var(--mute);position:relative}
+.lang button[aria-pressed=true]{color:var(--ink)}
+.lang button[aria-pressed=true]::after{content:'';position:absolute;left:12px;right:12px;bottom:9px;height:1.5px;background:var(--acc)}
+.call{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 10px;text-decoration:none;font:500 14px var(--mono);letter-spacing:.02em}
+.call svg{width:18px;height:18px;fill:none;stroke:var(--acc2);stroke-width:1.6}
+.call small{display:block;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.book{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border-radius:999px;background:linear-gradient(180deg,#e2c38e,#c9a46a);color:#1a120a;text-decoration:none;font:600 12.5px/1 var(--disp);font-stretch:118%;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}
+
+/* ---------- hero ---------- */
+#hero{position:relative;height:calc(var(--vh)*100);min-height:680px;max-height:1100px;overflow:hidden;
+  background:radial-gradient(ellipse 52% 62% at 66% 44%,#2a1f17 0%,#140f0b 48%,#0a0806 100%)}
+.stage{position:absolute;inset:0}
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+.poster{position:absolute;inset:0;display:none}
+.poster svg{position:absolute;left:44%;top:12%;width:46%;height:78%}
+.hshade{position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(90deg,rgba(10,8,6,.92) 0%,rgba(10,8,6,.62) 27%,rgba(10,8,6,0) 46%),linear-gradient(0deg,#0a0806 0%,rgba(10,8,6,0) 20%)}
+.hcopy{position:absolute;z-index:4;left:var(--pad);top:50%;transform:translateY(-44%);width:min(540px,40vw)}
+.hcopy h1{margin:20px 0 18px;font:300 clamp(40px,4vw,60px)/1.04 var(--disp);font-stretch:125%;letter-spacing:-.01em}
+.hcopy h1 em{font-style:normal;color:var(--acc2);font-weight:300}
+.hcopy .sub{margin:0 0 30px;color:var(--dim);max-width:450px;font-size:17.5px}
+.ctrl{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.play{display:inline-flex;align-items:center;gap:14px;min-height:58px;padding:0 26px 0 8px;border-radius:999px;background:var(--ink);color:#120d09;font:600 13px/1 var(--disp);font-stretch:118%;letter-spacing:.12em;text-transform:uppercase}
+.play i{flex:none;width:44px;height:44px;border-radius:50%;background:#1c150f;display:grid;place-items:center}
+.play svg{width:14px;height:14px;fill:var(--acc2)}
+.play .lbl{overflow:hidden;display:inline-block}
+.steps{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap}
+.steps button{min-height:44px;padding:10px 18px 12px 0;font:500 12px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--mute);position:relative;text-align:left}
+.steps button span{color:var(--acc);margin-right:7px}
+.steps button::after{content:'';position:absolute;left:0;right:18px;bottom:6px;height:1px;background:var(--hair)}
+.steps button.on{color:var(--ink)}.steps button.on::after{background:var(--acc)}
+.cta2{margin-top:26px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.lnk{display:inline-flex;align-items:center;gap:10px;min-height:46px;text-decoration:none;font:600 12.5px/1.2 var(--disp);font-stretch:118%;letter-spacing:.12em;text-transform:uppercase}
+.lnk svg{width:18px;height:18px;fill:none;stroke:var(--acc2);stroke-width:1.6}
+.lnk .n{font:500 14px var(--mono);letter-spacing:.02em;text-transform:none;color:var(--dim)}
+.assure{position:absolute;z-index:4;left:var(--pad);right:260px;bottom:34px;display:flex;flex-wrap:wrap;gap:8px 28px;margin:0;padding:0;list-style:none}
+.assure li{font:500 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:10px}
+.assure li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--acc)}
+.seal{position:absolute;z-index:4;right:var(--pad);bottom:26px;width:116px;height:116px}
+.seal svg{width:100%;height:100%;overflow:visible}
+.seal text{font:500 8.6px var(--mono);letter-spacing:.16em;fill:var(--acc2)}
+.seal .c{font:300 30px var(--disp);font-stretch:125%;fill:var(--ink);letter-spacing:0}
+/* exploded-view labels */
+.leads{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible}
+.leads line{stroke:rgba(236,214,168,.6);stroke-width:1}
+.leads circle{fill:var(--acc2)}
+.tags{position:absolute;inset:0;z-index:3;pointer-events:none}
+.tg{position:absolute;left:0;top:0;visibility:hidden;white-space:nowrap;padding:7px 14px 8px 12px;border-radius:10px;background:rgba(12,9,7,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);will-change:transform,clip-path}
+.tg i{display:block;font:500 11px/1.4 var(--mono);color:var(--acc);letter-spacing:.16em;font-style:normal}
+.tg b{display:block;font:400 17px/1.2 var(--disp);font-stretch:125%;letter-spacing:.06em;text-transform:uppercase}
+.tg small{display:block;font:400 14px/1.35 var(--disp);color:var(--dim);margin-top:2px}
+
+/* ---------- smile ---------- */
+.smile{position:relative;min-height:min(900px,calc(var(--vh)*100));display:grid;grid-template-columns:minmax(380px,520px) 1fr;align-items:center;background:radial-gradient(ellipse 50% 60% at 68% 50%,#24190f 0%,#110c09 55%,#0a0806 100%);overflow:hidden}
+.scopy{position:relative;z-index:2;padding:110px 0 90px var(--pad);grid-column:1;grid-row:1}
+.sstage{position:relative;height:100%;min-height:620px;grid-column:2;grid-row:1}
+#gl2{position:absolute;inset:0;width:100%;height:100%;display:block;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 48%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 48%,#000 55%,transparent 100%)}
+.sposter{position:absolute;inset:8% 4%;display:none}
+h2{margin:18px 0 18px;font:300 clamp(34px,3.3vw,50px)/1.08 var(--disp);font-stretch:125%;letter-spacing:-.005em}
+h2 em{font-style:normal;color:var(--acc2)}
+.scopy p.lead{color:var(--dim);margin:0 0 34px;max-width:440px}
+.shade{max-width:440px}
+.srow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+.srow label{font:500 12px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink)}
+.srow output{font:500 13px var(--mono);color:var(--acc2)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:linear-gradient(90deg,#b49a70,#d4c19e 45%,#f3eee4)}
+input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:linear-gradient(90deg,#b49a70,#d4c19e 45%,#f3eee4)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;margin-top:-12px;border-radius:50%;background:#f4eee5;box-shadow:0 0 0 5px #1a130d,0 4px 14px rgba(0,0,0,.6)}
+input[type=range]::-moz-range-thumb{width:30px;height:30px;border:0;border-radius:50%;background:#f4eee5;box-shadow:0 0 0 5px #1a130d}
+.ends{display:flex;justify-content:space-between;font:500 11.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+.sw{display:flex;align-items:center;gap:18px;margin-top:30px;min-height:56px;text-align:left}
+.sw .tr{flex:none;width:62px;height:34px;border-radius:999px;background:#2a2119;position:relative;transition:background-color .3s}
+.sw .tr::after{content:'';position:absolute;left:4px;top:4px;width:26px;height:26px;border-radius:50%;background:var(--dim);transition:transform .35s cubic-bezier(.3,1.4,.5,1),background-color .3s}
+.sw[aria-checked=true] .tr{background:#6b5432}.sw[aria-checked=true] .tr::after{transform:translateX(28px);background:var(--acc2)}
+.sw b{display:block;font:500 14px/1.3 var(--disp);font-stretch:118%;letter-spacing:.12em;text-transform:uppercase}
+.sw small{display:block;font-size:15px;color:var(--dim);line-height:1.4}
+.note{margin:30px 0 0;padding-left:16px;max-width:430px;font-size:15px;line-height:1.5;color:var(--dim);position:relative}
+.note::before{content:'';position:absolute;left:0;top:.35em;bottom:.35em;width:2px;background:var(--acc)}
+
+/* ---------- comfort strip ---------- */
+.comfort{padding:96px var(--pad) 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:48px;background:var(--bg)}
+.comfort h3{margin:14px 0 10px;font:400 21px/1.25 var(--disp);font-stretch:118%}
+.comfort p{margin:0;color:var(--dim);font-size:16.5px}
+.comfort .n{font:500 12px var(--mono);color:var(--acc);letter-spacing:.16em}
+
+/* ---------- offices ---------- */
+.offices{padding:110px var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:72px;background:var(--bg)}
+.offices .intro p{color:var(--dim);max-width:460px;margin:0}
+.otabs{display:flex;gap:6px;margin:40px 0 0;position:relative}
+.otabs button{min-height:64px;padding:0 26px 0 0;text-align:left;color:var(--mute)}
+.otabs button b{display:block;font:400 22px/1.1 var(--disp);font-stretch:125%;letter-spacing:.04em}
+.otabs button small{display:block;font:500 12px var(--mono);letter-spacing:.06em;margin-top:6px}
+.otabs button[aria-selected=true]{color:var(--ink)}
+.otabs .bar{position:absolute;left:0;bottom:-6px;height:2px;background:var(--acc);width:100px}
+.ofacts{list-style:none;margin:48px 0 0;padding:0;display:grid;gap:22px;max-width:460px}
+.ofacts li{display:grid;grid-template-columns:120px 1fr;gap:16px;padding-top:18px;border-top:1px solid var(--hair)}
+.ofacts b{font:500 12px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc2)}
+.ofacts span{color:var(--dim);font-size:16px}
+html[lang=es] .hcopy h1{font-size:clamp(36px,3.3vw,50px)}
+.ocard{align-self:start;background:var(--bg2);border-radius:20px;padding:40px 44px}
+.ocard .addr{font:400 20px/1.35 var(--disp);font-stretch:112%;margin:0}
+.ocard .sp{margin:8px 0 0;color:var(--acc2);font-size:15.5px}
+.ocard dl{display:grid;grid-template-columns:auto 1fr;gap:10px 30px;margin:28px 0 30px;font:400 15.5px/1.4 var(--mono)}
+.ocard dt{color:var(--dim)}.ocard dd{margin:0;color:var(--ink)}
+.ocard .btns{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.ocard .phone{font:400 30px/1 var(--disp);font-stretch:118%;letter-spacing:.02em;text-decoration:none;display:inline-block;margin:24px 0 0}
+form.bk{display:none;margin-top:30px;padding-top:28px;border-top:1px solid var(--hair)}
+form.bk.on{display:block}
+form.bk h3{margin:0 0 18px;font:400 20px/1.2 var(--disp);font-stretch:118%}
+.fld{display:block;margin-bottom:18px}
+.fld>span{display:block;font:500 11.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.fld input,.fld select{width:100%;min-height:48px;background:#1d1610;border:0;border-radius:10px;padding:0 14px;font-size:16px;color:var(--ink)}
+.days{display:flex;flex-wrap:wrap;gap:8px}
+.days button{min-width:52px;min-height:44px;border-radius:999px;background:#1d1610;font:500 13px var(--mono);color:var(--dim)}
+.days button[aria-pressed=true]{background:var(--acc);color:#1a120a}
+.done{display:none;margin-top:6px;font-size:17px}
+.done small{display:block;color:var(--dim);font-size:14.5px;margin-top:6px}
+
+/* ---------- services ---------- */
+.services{padding:110px var(--pad);background:linear-gradient(180deg,#0a0806,#100c09)}
+.services .head{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:end;margin-bottom:46px}
+.services .head p{color:var(--dim);margin:0}
+.svl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:72px}
+.svl li{display:grid;grid-template-columns:48px 1fr;gap:4px 10px;padding:22px 0;border-top:1px solid var(--hair)}
+.svl .n{font:500 12px/1.9 var(--mono);color:var(--acc)}
+.svl b{font:400 20px/1.3 var(--disp);font-stretch:118%}
+.svl p{grid-column:2;margin:0;color:var(--dim);font-size:16.5px}
+.ins{margin-top:56px;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:baseline;padding:34px 40px;background:var(--bg3);border-radius:20px}
+.ins p{margin:0;font-size:18px}
+.reviews{padding:100px var(--pad) 110px;display:grid;grid-template-columns:repeat(3,1fr);gap:48px;background:#100c09}
+.reviews .eyebrow{grid-column:1/-1;margin-bottom:-10px}
+.reviews blockquote{margin:0;font:300 22px/1.42 var(--disp);font-stretch:108%}
+.reviews cite{display:block;margin-top:16px;font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-style:normal}
+footer{padding:56px var(--pad) 48px;background:#070504;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px;color:var(--dim);font-size:15px}
+footer b{display:block;color:var(--ink);font:500 15px var(--disp);font-stretch:118%;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+footer a{text-decoration:none}
+footer .demo{grid-column:1/-1;padding-top:26px;border-top:1px solid var(--hair);font:500 12px var(--mono);letter-spacing:.1em;color:var(--mute)}
+
+/* ---------- phone ---------- */
+@media (max-width:820px),(max-aspect-ratio:3/4){
+  :root{--pad:20px}
+  body{font-size:16.5px}
+  nav.links{display:none}
+  .top{padding:8px 12px 8px 16px;gap:6px}
+  .brand b{font-size:14px;letter-spacing:.16em}.brand span{font-size:8px;letter-spacing:.26em;margin-top:6px}
+  .tools{gap:0}.lang{padding:0}.lang button{min-width:34px}.lang button[aria-pressed=true]::after{left:9px;right:9px}
+  .call{padding:0 8px}.call .num{display:none}
+  .book{padding:0 13px;font-size:11px;letter-spacing:.08em;min-height:44px}
+  .top .book{max-width:132px}
+  #hero{height:auto;min-height:0;max-height:none;background:radial-gradient(ellipse 90% 40% at 50% 26%,#2a1f17 0%,#140f0b 55%,#0a0806 100%)}
+  .stage{position:relative;height:calc(var(--vh)*50);min-height:390px;max-height:560px}
+  .hshade{background:linear-gradient(0deg,#0a0806 0%,rgba(10,8,6,0) 14%);bottom:auto;height:calc(var(--vh)*50);min-height:390px;max-height:560px}
+  .hcopy{position:relative;left:auto;top:auto;transform:none;width:auto;padding:0 var(--pad) 26px;margin-top:-6px}
+  .hcopy h1{font-size:31px;margin:10px 0 10px}
+  .hcopy .sub{font-size:16px;margin-bottom:16px;line-height:1.5}
+  .play{min-height:54px;padding-right:22px}
+  .play i{width:40px;height:40px}
+  .steps{margin-top:8px}.steps button{padding-right:13px;font-size:11px;letter-spacing:.08em}.steps button::after{right:13px}
+  .cta2{margin-top:14px;gap:6px 18px}
+  .assure{position:relative;left:auto;right:auto;bottom:auto;padding:4px var(--pad) 30px;gap:8px 18px}
+  .assure li{font-size:11.5px}
+  .seal{position:relative;right:auto;bottom:auto;width:96px;height:96px;margin:0 0 30px var(--pad)}
+  .poster svg{left:15%;top:8%;width:70%;height:84%}
+  .tg{padding:5px 10px 6px 9px}.tg b{font-size:13.5px}.tg i{font-size:9.5px}.tg small{display:none}
+  .smile{grid-template-columns:1fr;min-height:0}
+  .sstage{grid-column:1;grid-row:1;height:300px;min-height:0}
+  .scopy{grid-column:1;grid-row:2;padding:0 var(--pad) 64px}
+  .scopy h2{margin:10px 0 10px}.scopy p.lead{margin-bottom:18px;font-size:16px;line-height:1.5}.sw{margin-top:14px}.note{margin-top:20px}
+  .comfort{grid-template-columns:1fr;gap:30px;padding:64px var(--pad) 20px}
+  .offices{grid-template-columns:1fr;gap:30px;padding:70px var(--pad)}
+  .otabs button{padding-right:18px}.otabs button b{font-size:18px}
+  .ofacts{margin-top:34px}.ofacts li{grid-template-columns:1fr;gap:4px}
+  html[lang=es] .hcopy h1{font-size:28px}
+  .ocard{padding:28px 22px;border-radius:16px}
+  .ocard .phone{font-size:26px}
+  .services{padding:70px var(--pad)}
+  .services .head{grid-template-columns:1fr;gap:16px}
+  .svl{grid-template-columns:1fr}
+  .ins{grid-template-columns:1fr;gap:12px;padding:26px 22px}
+  .reviews{grid-template-columns:1fr;gap:34px;padding:70px var(--pad)}
+  footer{grid-template-columns:1fr;gap:24px;padding:44px var(--pad)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <a class="brand" href="#hero" aria-label="Calloway Smile Studio, home"><b>CALLOWAY</b><span>SMILE STUDIO</span></a>
+  <nav class="links" aria-label="Main">
+    <a href="#hero" data-t="nav_impl">Implants</a><a href="#smile" data-t="nav_smile">Your smile</a><a href="#offices" data-t="nav_off">Offices</a><a href="#services" data-t="nav_serv">Services</a>
+  </nav>
+  <div class="tools">
+    <div class="lang" role="group" aria-label="Language / Idioma"><button id="lEN" aria-pressed="true" lang="en">EN</button><button id="lES" aria-pressed="false" lang="es">ES</button></div>
+    <a class="call" id="hCall" href="tel:+19785550188" aria-label="Call Mill District (978) 555-0188"><svg viewBox="0 0 24 24"><path d="M6.6 3.5h3l1.4 4.2-2.1 1.5a12 12 0 0 0 5.9 5.9l1.5-2.1 4.2 1.4v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg><span class="num"><small id="hOff">Mill District</small><span id="hNum">(978) 555-0188</span></span></a>
+    <a class="book" href="#offices" data-book data-t="book">Book a visit</a>
+  </div>
+</header>
+
+<main>
+<section id="hero" aria-label="What a dental implant is">
+  <div class="stage" id="stage">
+    <canvas id="gl" role="img" aria-label="3D model of a dental implant in a cut-away of gum and jawbone"></canvas>
+    <div class="poster" id="poster"></div>
+    <svg class="leads" id="leads" aria-hidden="true"></svg>
+    <div class="tags" id="tags" aria-hidden="true"></div>
+  </div>
+  <div class="hshade"></div>
+  <div class="hcopy">
+    <p class="eyebrow" data-t="h_eb">Implants · Veneers · Family dentistry</p>
+    <h1 data-t="h_h1">A missing tooth, <em>gently replaced.</em></h1>
+    <p class="sub" data-t="h_sub">Tap to see what an implant really is, piece by piece. We explain every step before we start, and you get the full price in writing.</p>
+    <div class="ctrl"><button class="play" id="play"><i><svg viewBox="0 0 16 16" id="pIco"><path d="M4 2l10 6-10 6z"/></svg></i><span class="lbl"><span id="pLbl">See how it works</span></span></button></div>
+    <ol class="steps" id="steps">
+      <li><button data-k="0"><span>01</span><em data-t="st1">Crown</em></button></li>
+      <li><button data-k="1"><span>02</span><em data-t="st2">Abutment</em></button></li>
+      <li><button data-k="2"><span>03</span><em data-t="st3">Post</em></button></li>
+      <li><button data-k="3"><span>04</span><em data-t="st4">Bone</em></button></li>
+    </ol>
+    <div class="cta2">
+      <a class="book" href="#offices" data-book data-t="book">Book a visit</a>
+      <a class="lnk" id="heroCall" href="tel:+19785550188"><svg viewBox="0 0 24 24"><path d="M6.6 3.5h3l1.4 4.2-2.1 1.5a12 12 0 0 0 5.9 5.9l1.5-2.1 4.2 1.4v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg><span><span data-t="callthis">Call this office</span><br><span class="n" id="heroNum">Mill District · (978) 555-0188</span></span></a>
+    </div>
+  </div>
+  <ul class="assure">
+    <li data-t="as1">New patients welcome</li><li data-t="as2">Same-day emergencies</li><li data-t="as3">Most PPO plans</li><li data-t="as4">Monthly payments</li><li data-t="as5">Hablamos español</li>
+  </ul>
+  <div class="seal" aria-label="Exclusive in Essex County, MA">
+    <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="sp" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs>
+      <circle cx="60" cy="60" r="57" fill="none" stroke="#d2b07a" stroke-opacity=".45" stroke-width=".8"/>
+      <circle cx="60" cy="60" r="35" fill="none" stroke="#d2b07a" stroke-opacity=".3" stroke-width=".6"/>
+      <text><textPath id="sealTxt" href="#sp" textLength="292" lengthAdjust="spacingAndGlyphs">EXCLUSIVE IN ESSEX COUNTY, MA · CALLOWAY ·</textPath></text>
+      <text class="c" x="60" y="71" text-anchor="middle">C</text></svg>
+  </div>
+</section>
+
+<section id="smile" class="smile" aria-label="Smile preview">
+  <div class="sstage" id="sstage"><canvas id="gl2" role="img" aria-label="3D sample smile: upper and lower front teeth"></canvas><div class="sposter" id="sposter"></div></div>
+  <div class="scopy">
+    <p class="eyebrow" data-t="s_eb">Smile preview</p>
+    <h2 data-t="s_h">See your <em>new smile.</em></h2>
+    <p class="lead" data-t="s_p">Slide from the shade you have today to a bright, natural white. Turn on veneers to even out a chipped tooth and close a small gap.</p>
+    <div class="shade">
+      <div class="srow"><label for="shade" data-t="s_shade">Shade</label><output id="shadeOut" for="shade">3 / 10</output></div>
+      <input type="range" id="shade" min="1" max="10" step="0.01" value="2" aria-describedby="shadeOut">
+      <div class="ends"><span data-t="s_today">Today</span><span data-t="s_bright">Bright natural</span></div>
+    </div>
+    <button class="sw" id="ven" role="switch" aria-checked="false"><span class="tr"></span><span><b data-t="s_ven">Veneers</b><small data-t="s_ven2">Even out the chip and close the gap</small></span></button>
+    <p class="note" data-t="s_note">Preview only. Your dentist matches shade and shape in person.</p>
+  </div>
+</section>
+
+<section class="comfort" aria-label="Comfort">
+  <div><span class="n">01</span><h3 data-t="c1h">We explain every step</h3><p data-t="c1p">You see the plan, the model and the price before anything starts. Ask as many questions as you like.</p></div>
+  <div><span class="n">02</span><h3 data-t="c2h">Gentle, at your pace</h3><p data-t="c2p">Gentle numbing, warm blankets, headphones, and a break whenever you raise your hand.</p></div>
+  <div><span class="n">03</span><h3 data-t="c3h">No surprises on the bill</h3><p data-t="c3p">We check your insurance first and give you the full price in writing. Monthly payments if you need them.</p></div>
+</section>
+
+<section id="offices" class="offices" aria-label="Our offices">
+  <div class="intro">
+    <p class="eyebrow" data-t="o_eb">Two offices</p>
+    <h2 data-t="o_h">Same team. <em>Two doors.</em></h2>
+    <p data-t="o_p">Pick the office closer to you. New patients are welcome at both, and both have Spanish-speaking staff.</p>
+    <div class="otabs" role="tablist" id="otabs">
+      <button role="tab" aria-selected="true" data-o="mill"><b>Mill District</b><small>(978) 555-0188</small></button>
+      <button role="tab" aria-selected="false" data-o="lake"><b>Lakeside</b><small>(978) 555-0191</small></button>
+      <span class="bar" id="obar"></span>
+    </div>
+    <ul class="ofacts">
+      <li><b data-t="of1">First visit</b><span data-t="of1p">About an hour: a gentle exam, X-rays if you need them, and a plan in plain words.</span></li>
+      <li><b data-t="of2">Tooth pain?</b><span data-t="of2p">Call before noon and we will see you the same day at either office.</span></li>
+      <li><b data-t="of3">Bring</b><span data-t="of3p">Your insurance card and a list of medicines. That is all.</span></li>
+    </ul>
+  </div>
+  <div class="ocard" id="ocard" role="tabpanel">
+    <p class="eyebrow" id="oName">Mill District</p>
+    <a class="phone" id="oPhone" href="tel:+19785550188">(978) 555-0188</a>
+    <p class="addr" id="oAddr" style="margin-top:14px">18 Weaver Row, Suite 3</p>
+    <p class="sp" data-t="o_sp">Se habla español · Free parking</p>
+    <dl id="oHours"></dl>
+    <div class="btns">
+      <button class="book" id="oBook"><span id="oBookT">Book at Mill District</span></button>
+      <a class="lnk" id="oCall" href="tel:+19785550188"><svg viewBox="0 0 24 24"><path d="M6.6 3.5h3l1.4 4.2-2.1 1.5a12 12 0 0 0 5.9 5.9l1.5-2.1 4.2 1.4v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg><span data-t="callthis">Call this office</span></a>
+    </div>
+    <form class="bk" id="bk" novalidate>
+      <h3 id="fH">Book a visit at Mill District</h3>
+      <label class="fld"><span data-t="f_name">Your name</span><input id="fName" autocomplete="name"></label>
+      <label class="fld"><span data-t="f_phone">Phone</span><input id="fPhone" type="tel" autocomplete="tel" inputmode="tel"></label>
+      <label class="fld"><span data-t="f_for">What is the visit for?</span><select id="fFor"></select></label>
+      <div class="fld"><span data-t="f_day">Best day</span><div class="days" id="fDays"></div></div>
+      <button class="book" id="fSend" type="submit"><span data-t="f_send">Send request</span></button>
+      <p class="done" id="fDone"></p>
+    </form>
+  </div>
+</section>
+
+<section id="services" class="services" aria-label="Services">
+  <div class="head">
+    <div><p class="eyebrow" data-t="sv_eb">What we do</p><h2 data-t="sv_h">Care for the whole family. <em>Cases that change a smile.</em></h2></div>
+    <p data-t="sv_p">From a child's first cleaning to a full set of implants, under one roof, with the same team who knows your name.</p>
+  </div>
+  <ul class="svl">
+    <li><span class="n">01</span><b data-t="v1">Implants</b><p data-t="v1p">Replace a missing tooth with one that looks, feels and chews like your own.</p></li>
+    <li><span class="n">02</span><b data-t="v2">Veneers</b><p data-t="v2p">Thin porcelain fronts for chips, gaps and stains that whitening can't fix.</p></li>
+    <li><span class="n">03</span><b data-t="v3">Clear aligners</b><p data-t="v3p">Straighten your teeth without metal braces. Take them out to eat.</p></li>
+    <li><span class="n">04</span><b data-t="v4">Whitening</b><p data-t="v4p">In-office whitening in about an hour, or gentle take-home trays.</p></li>
+    <li><span class="n">05</span><b data-t="v5">Crowns</b><p data-t="v5p">Cover and protect a cracked or weak tooth, shaded to match.</p></li>
+    <li><span class="n">06</span><b data-t="v6">Cleanings &amp; family care</b><p data-t="v6p">Checkups for kids and grown-ups, in the same visit if you like.</p></li>
+    <li><span class="n">07</span><b data-t="v7">Emergencies</b><p data-t="v7p">Tooth pain or a broken tooth? Call us. We keep time open every day.</p></li>
+  </ul>
+  <div class="ins"><p class="eyebrow" data-t="ins_eb">Insurance &amp; financing</p><p data-t="ins">We take most PPO dental plans and check your benefits before your visit. Monthly payment plans for implants, veneers and aligners.</p></div>
+</section>
+
+<section class="reviews" aria-label="Sample reviews">
+  <p class="eyebrow" data-t="rv_eb">What patients say · sample reviews</p>
+  <div><blockquote data-t="rv1">"They showed me every piece of the implant before we started. I knew exactly what I was paying."</blockquote><cite data-t="rv1a">M.R. · sample review</cite></div>
+  <div><blockquote data-t="rv2">"My mother only speaks Spanish. The front desk and the dentist explained everything to her, calmly."</blockquote><cite data-t="rv2a">J.P. · sample review</cite></div>
+  <div><blockquote data-t="rv3">"I hid a chipped front tooth for ten years. Two visits for veneers and now I smile in photos."</blockquote><cite data-t="rv3a">A.C. · sample review</cite></div>
+</section>
+</main>
+
+<footer>
+  <div><b>Calloway Smile Studio</b><span data-t="ft1">Family, cosmetic and implant dentistry in Essex County, MA.</span></div>
+  <div><b>Mill District</b>18 Weaver Row, Suite 3<br><a href="tel:+19785550188">(978) 555-0188</a></div>
+  <div><b>Lakeside</b>4 Shore Road<br><a href="tel:+19785550191">(978) 555-0191</a></div>
+  <div class="demo" data-t="ft_demo">Concept demo · fictional business · IC Business Systems</div>
+</footer>
+
+<script>
+(() => {
+const Q = new URLSearchParams(location.search), TOUR = Q.get('tour') === '1';
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+window.RM = RM; window.TOUR = TOUR;
+if (navigator.webdriver) gsap.ticker.lagSmoothing(0);
+const root = document.documentElement, $ = id => document.getElementById(id);
+// tour: zoom the page so 1080x1920 lays out like a 420 px phone and 1920x1080 like the 1440 desktop design
+if (TOUR) {
+  root.classList.add('tour'); if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const W = innerWidth, H = innerHeight, z = H > W ? (W > 520 ? W / 420 : 1) : (W > 1500 ? W / 1440 : 1);
+  if (z !== 1) root.style.zoom = z;
+  root.style.setProperty('--vh', (H / z / 100) + 'px'); window.CZOOM = z;
+} else root.style.setProperty('--vh', (innerHeight / 100) + 'px');
+addEventListener('resize', () => { if (!TOUR) root.style.setProperty('--vh', (innerHeight / 100) + 'px'); });
+
+// ---------------- words (EN / ES) ----------------
+const T = {
+en: { nav_impl:'Implants', nav_smile:'Your smile', nav_off:'Offices', nav_serv:'Services', book:'Book a visit', callthis:'Call this office',
+  h_eb:'Implants · Veneers · Family dentistry', h_h1:'A missing tooth, <em>gently replaced.</em>',
+  h_sub:'Tap to see what an implant really is, piece by piece. We explain every step before we start, and you get the full price in writing.',
+  p_go:'See how it works', p_back:'Put it back together', p_pause:'Pause', p_resume:'Keep going',
+  st1:'Crown', st2:'Abutment', st3:'Post', st4:'Bone',
+  as1:'New patients welcome', as2:'Same-day emergencies', as3:'Most PPO plans', as4:'Monthly payments', as5:'Hablamos español',
+  seal:'EXCLUSIVE IN ESSEX COUNTY, MA · CALLOWAY ·',
+  l1:'Crown', l1s:'Porcelain, shaded to match your teeth', l2:'Abutment', l2s:'Joins the crown to the post', l3:'Implant post', l3s:'Titanium. It takes the place of the root',
+  l4:'Your jawbone', l4s:'Holds the post, just like a root', l5:'Bone grows onto it', l5s:'Usually 3 to 4 months',
+  s_eb:'Smile preview', s_h:'See your <em>new smile.</em>', s_p:'Slide from the shade you have today to a bright, natural white. Turn on veneers to even out a chipped tooth and close a small gap.',
+  s_shade:'Shade', s_of:'of', s_today:'Today', s_bright:'Bright natural', s_ven:'Veneers', s_ven2:'Even out the chip and close the gap',
+  s_note:'Preview only. Your dentist matches shade and shape in person.',
+  c1h:'We explain every step', c1p:'You see the plan, the model and the price before anything starts. Ask as many questions as you like.',
+  c2h:'Gentle, at your pace', c2p:'Gentle numbing, warm blankets, headphones, and a break whenever you raise your hand.',
+  c3h:'No surprises on the bill', c3p:'We check your insurance first and give you the full price in writing. Monthly payments if you need them.',
+  o_eb:'Two offices', o_h:'Same team. <em>Two doors.</em>', o_p:'Pick the office closer to you. New patients are welcome at both, and both have Spanish-speaking staff.',
+  o_sp:'Se habla español · Free parking', o_bookat:'Book at ', o_fh:'Book a visit at ',
+  d_mon_thu:'Mon – Thu', d_fri:'Fri', d_sat:'Sat', d_mon:'Mon', d_tue_wed:'Tue – Wed', d_thu:'Thu',
+  h_8_6:'8 am – 6 pm', h_8_2:'8 am – 2 pm', h_satm:'1st &amp; 3rd, by appointment', h_10_7:'10 am – 7 pm', h_8_5:'8 am – 5 pm', h_closed:'Closed', h_8_1:'8 am – 1 pm',
+  f_name:'Your name', f_phone:'Phone', f_for:'What is the visit for?', f_day:'Best day', f_send:'Send request',
+  f_opts:['New patient checkup','Implant consult','Veneers','Clear aligners','Whitening','Crown','Cleaning','Tooth pain / emergency'],
+  f_days:['Mon','Tue','Wed','Thu','Fri','Sat'],
+  f_thanks:n => `Thank you. The ${n} office will call you back within one business day.`, f_demo:'Demo only: nothing was sent.',
+  sv_eb:'What we do', sv_h:'Care for the whole family. <em>Cases that change a smile.</em>', sv_p:'From a child’s first cleaning to a full set of implants, under one roof, with the same team who knows your name.',
+  v1:'Implants', v1p:'Replace a missing tooth with one that looks, feels and chews like your own.', v2:'Veneers', v2p:'Thin porcelain fronts for chips, gaps and stains that whitening can’t fix.',
+  v3:'Clear aligners', v3p:'Straighten your teeth without metal braces. Take them out to eat.', v4:'Whitening', v4p:'In-office whitening in about an hour, or gentle take-home trays.',
+  v5:'Crowns', v5p:'Cover and protect a cracked or weak tooth, shaded to match.', v6:'Cleanings &amp; family care', v6p:'Checkups for kids and grown-ups, in the same visit if you like.',
+  v7:'Emergencies', v7p:'Tooth pain or a broken tooth? Call us. We keep time open every day.',
+  ins_eb:'Insurance &amp; financing', ins:'We take most PPO dental plans and check your benefits before your visit. Monthly payment plans for implants, veneers and aligners.',
+  rv_eb:'What patients say · sample reviews', rv1:'"They showed me every piece of the implant before we started. I knew exactly what I was paying."', rv1a:'M.R. · sample review',
+  rv2:'"My mother only speaks Spanish. The front desk and the dentist explained everything to her, calmly."', rv2a:'J.P. · sample review',
+  rv3:'"I hid a chipped front tooth for ten years. Two visits for veneers and now I smile in photos."', rv3a:'A.C. · sample review',
+  ft1:'Family, cosmetic and implant dentistry in Essex County, MA.', ft_demo:'Concept demo · fictional business · IC Business Systems', call_aria:'Call ',
+  of1:'First visit', of1p:'About an hour: a gentle exam, X-rays if you need them, and a plan in plain words.', of2:'Tooth pain?', of2p:'Call before noon and we will see you the same day at either office.', of3:'Bring', of3p:'Your insurance card and a list of medicines. That is all.' },
+es: { nav_impl:'Implantes', nav_smile:'Su sonrisa', nav_off:'Oficinas', nav_serv:'Servicios', book:'Reservar cita', callthis:'Llamar a esta oficina',
+  h_eb:'Implantes · Carillas · Odontología familiar', h_h1:'Un diente que falta, <em>reemplazado con cuidado.</em>',
+  h_sub:'Toque para ver qué es un implante, pieza por pieza. Le explicamos cada paso antes de empezar y le damos el precio completo por escrito.',
+  p_go:'Vea cómo funciona', p_back:'Volver a armarlo', p_pause:'Pausa', p_resume:'Continuar',
+  st1:'Corona', st2:'Pilar', st3:'Implante', st4:'Hueso',
+  as1:'Pacientes nuevos bienvenidos', as2:'Emergencias el mismo día', as3:'La mayoría de planes PPO', as4:'Pagos mensuales', as5:'We speak English',
+  seal:'EXCLUSIVO EN EL CONDADO DE ESSEX, MA · CALLOWAY ·',
+  l1:'Corona', l1s:'Porcelana del tono de sus dientes', l2:'Pilar', l2s:'Une la corona con el implante', l3:'Implante', l3s:'De titanio. Toma el lugar de la raíz',
+  l4:'Su hueso', l4s:'Sostiene el implante como una raíz', l5:'El hueso se une al implante', l5s:'Por lo general, de 3 a 4 meses',
+  s_eb:'Vista previa de su sonrisa', s_h:'Vea su <em>nueva sonrisa.</em>', s_p:'Mueva el tono desde el color que tiene hoy hasta un blanco brillante y natural. Active las carillas para emparejar un diente astillado y cerrar un pequeño espacio.',
+  s_shade:'Tono', s_of:'de', s_today:'Hoy', s_bright:'Blanco natural', s_ven:'Carillas', s_ven2:'Emparejan el diente astillado y cierran el espacio',
+  s_note:'Es solo una vista previa. Su dentista escoge el tono y la forma en persona.',
+  c1h:'Le explicamos cada paso', c1p:'Usted ve el plan, el modelo y el precio antes de empezar. Pregunte todo lo que quiera.',
+  c2h:'Con cuidado, a su ritmo', c2p:'Anestesia suave, mantas tibias, audífonos y una pausa cada vez que levante la mano.',
+  c3h:'Sin sorpresas en la cuenta', c3p:'Revisamos su seguro primero y le damos el precio completo por escrito. Pagos mensuales si los necesita.',
+  o_eb:'Dos oficinas', o_h:'El mismo equipo. <em>Dos puertas.</em>', o_p:'Escoja la oficina que le quede más cerca. En las dos recibimos pacientes nuevos y tenemos personal que habla español.',
+  o_sp:'Se habla español · Estacionamiento gratis', o_bookat:'Reservar en ', o_fh:'Reservar cita en ',
+  d_mon_thu:'Lun – Jue', d_fri:'Vie', d_sat:'Sáb', d_mon:'Lun', d_tue_wed:'Mar – Mié', d_thu:'Jue',
+  h_8_6:'8 a. m. – 6 p. m.', h_8_2:'8 a. m. – 2 p. m.', h_satm:'1.º y 3.º, con cita', h_10_7:'10 a. m. – 7 p. m.', h_8_5:'8 a. m. – 5 p. m.', h_closed:'Cerrado', h_8_1:'8 a. m. – 1 p. m.',
+  f_name:'Su nombre', f_phone:'Teléfono', f_for:'¿Para qué es la cita?', f_day:'Mejor día', f_send:'Enviar solicitud',
+  f_opts:['Chequeo de paciente nuevo','Consulta de implante','Carillas','Alineadores transparentes','Blanqueamiento','Corona','Limpieza','Dolor de muela / emergencia'],
+  f_days:['Lun','Mar','Mié','Jue','Vie','Sáb'],
+  f_thanks:n => `Gracias. La oficina de ${n} le llamará dentro de un día hábil.`, f_demo:'Solo es una demo: no se envió nada.',
+  sv_eb:'Lo que hacemos', sv_h:'Cuidado para toda la familia. <em>Casos que cambian una sonrisa.</em>', sv_p:'Desde la primera limpieza de un niño hasta un juego completo de implantes, bajo el mismo techo y con el mismo equipo que lo conoce por su nombre.',
+  v1:'Implantes', v1p:'Reemplace un diente que le falta con uno que se ve, se siente y mastica como el suyo.', v2:'Carillas', v2p:'Láminas finas de porcelana para dientes astillados, espacios y manchas que el blanqueamiento no quita.',
+  v3:'Alineadores transparentes', v3p:'Enderece sus dientes sin frenos de metal. Se los quita para comer.', v4:'Blanqueamiento', v4p:'Blanqueamiento en la oficina en más o menos una hora, o con férulas suaves para la casa.',
+  v5:'Coronas', v5p:'Cubren y protegen un diente roto o débil, del mismo tono que los demás.', v6:'Limpiezas y cuidado familiar', v6p:'Chequeos para niños y adultos, en la misma cita si usted quiere.',
+  v7:'Emergencias', v7p:'¿Dolor de muela o un diente roto? Llámenos. Dejamos espacio libre todos los días.',
+  ins_eb:'Seguro y financiamiento', ins:'Aceptamos la mayoría de los planes dentales PPO y revisamos sus beneficios antes de la cita. Planes de pago mensuales para implantes, carillas y alineadores.',
+  rv_eb:'Lo que dicen los pacientes · reseñas de muestra', rv1:'"Me enseñaron cada pieza del implante antes de empezar. Supe exactamente lo que iba a pagar."', rv1a:'M.R. · reseña de muestra',
+  rv2:'"Mi mamá solo habla español. La recepción y la dentista le explicaron todo con calma."', rv2a:'J.P. · reseña de muestra',
+  rv3:'"Escondí un diente de enfrente astillado por diez años. Dos citas para carillas y ahora sonrío en las fotos."', rv3a:'A.C. · reseña de muestra',
+  ft1:'Odontología familiar, estética y de implantes en el condado de Essex, MA.', ft_demo:'Demo conceptual · negocio ficticio · IC Business Systems', call_aria:'Llamar a ',
+  of1:'Primera cita', of1p:'Más o menos una hora: un examen con cuidado, radiografías si hacen falta y un plan explicado en palabras sencillas.', of2:'¿Dolor de muela?', of2p:'Llame antes del mediodía y le atendemos el mismo día en cualquiera de las dos oficinas.', of3:'Traiga', of3p:'Su tarjeta del seguro y la lista de sus medicinas. Nada más.' }
+};
+const OFF = {
+  mill: { name:'Mill District', phone:'(978) 555-0188', tel:'+19785550188', addr:'18 Weaver Row, Suite 3', hours:[['d_mon_thu','h_8_6'],['d_fri','h_8_2'],['d_sat','h_satm']] },
+  lake: { name:'Lakeside', phone:'(978) 555-0191', tel:'+19785550191', addr:'4 Shore Road', hours:[['d_mon','h_10_7'],['d_tue_wed','h_8_5'],['d_thu','h_10_7'],['d_fri','h_closed'],['d_sat','h_8_1']] }
+};
+let lang = 'en', office = 'mill';
+try { const s = sessionStorage.getItem('cssLang'); if (s === 'es' || s === 'en') lang = s; } catch (e) {}
+if (Q.get('lang') === 'es' || Q.get('lang') === 'en') lang = Q.get('lang');
+const L = k => T[lang][k];
+window.L = L; window.getLang = () => lang;
+
+// text roll: old text wipes up out of its box, new text wipes up in (a clip, not a fade)
+function roll(el, html, anim) {
+  if (el.innerHTML === html) return;
+  if (!anim || RM) { gsap.killTweensOf(el); el.innerHTML = html; gsap.set(el, { clearProps: 'clipPath,transform' }); return; }
+  const r = el.getBoundingClientRect(), vis = r.bottom > 0 && r.top < innerHeight && r.width > 0;
+  if (!vis) { el.innerHTML = html; return; }
+  gsap.killTweensOf(el);
+  gsap.timeline().to(el, { clipPath: 'inset(0% 0% 100% 0%)', y: -7, duration: .17, ease: 'power2.in' })
+    .call(() => { el.innerHTML = html; })
+    .fromTo(el, { clipPath: 'inset(100% 0% 0% 0%)', y: 8 }, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: .34, ease: 'power3.out', clearProps: 'clipPath,transform' });
+}
+window.roll = roll;
+
+function applyLang(anim) {
+  root.lang = lang;
+  document.querySelectorAll('[data-t]').forEach(el => { const v = L(el.dataset.t); if (typeof v === 'string') roll(el, v, anim); });
+  $('lEN').setAttribute('aria-pressed', lang === 'en'); $('lES').setAttribute('aria-pressed', lang === 'es');
+  $('sealTxt').textContent = L('seal');
+  const sel = $('fFor'), si = sel.selectedIndex; sel.innerHTML = L('f_opts').map(o => `<option>${o}</option>`).join(''); sel.selectedIndex = Math.max(0, si);
+  const days = $('fDays'), on = [...days.children].findIndex(b => b.getAttribute('aria-pressed') === 'true');
+  days.innerHTML = L('f_days').map((d, i) => `<button type="button" aria-pressed="${i === on}">${d}</button>`).join('');
+  setOffice(office, anim, true); playUI(anim, true); shadeOut();
+  if ($('fDone').style.display === 'block') $('fDone').innerHTML = L('f_thanks')(OFF[office].name) + `<small>${L('f_demo')}</small>`;
+  try { sessionStorage.setItem('cssLang', lang); } catch (e) {}
+  dispatchEvent(new Event('langchange'));
+}
+$('fDays').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; [...$('fDays').children].forEach(x => x.setAttribute('aria-pressed', x === b)); });
+$('lEN').onclick = () => { if (lang !== 'en') { lang = 'en'; applyLang(true); } };
+$('lES').onclick = () => { if (lang !== 'es') { lang = 'es'; applyLang(true); } };
+
+// ---------------- offices ----------------
+function setOffice(k, anim, force) {
+  if (k === office && !force && !anim) return;
+  office = k; const o = OFF[k];
+  [...$('otabs').querySelectorAll('[role=tab]')].forEach(b => b.setAttribute('aria-selected', b.dataset.o === k));
+  const tab = $('otabs').querySelector(`[data-o=${k}]`), bar = $('obar');
+  const to = { x: tab.offsetLeft, width: tab.offsetWidth - (innerWidth < 821 ? 18 : 26) };
+  if (anim && !RM) gsap.to(bar, { ...to, duration: .5, ease: 'power3.inOut' }); else gsap.set(bar, to);
+  roll($('oName'), o.name, anim); roll($('oPhone'), o.phone, anim); roll($('oAddr'), o.addr, anim);
+  ['oPhone', 'oCall', 'hCall', 'heroCall'].forEach(id => $(id).href = 'tel:' + o.tel);
+  $('hCall').setAttribute('aria-label', L('call_aria') + o.name + ' ' + o.phone);
+  roll($('hOff'), o.name, anim); roll($('hNum'), o.phone, anim); roll($('heroNum'), o.name + ' · ' + o.phone, anim);
+  roll($('oBookT'), L('o_bookat') + o.name, anim); roll($('fH'), L('o_fh') + o.name, anim);
+  roll($('oHours'), o.hours.map(([d, h]) => `<dt>${L(d)}</dt><dd>${L(h)}</dd>`).join(''), anim);
+}
+$('otabs').addEventListener('click', e => { const b = e.target.closest('[role=tab]'); if (b) setOffice(b.dataset.o, true); });
+function openForm(scroll) {
+  const f = $('bk'); const was = f.classList.contains('on'); f.classList.add('on');
+  if (!was && !RM) gsap.fromTo(f, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .6, ease: 'power3.out', clearProps: 'clipPath' });
+  if (scroll && !TOUR) $('ocard').scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'start' });
+}
+window.openForm = openForm;
+$('oBook').onclick = () => openForm(false);
+document.querySelectorAll('[data-book]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); openForm(true); }));
+$('bk').addEventListener('submit', e => {
+  e.preventDefault(); const d = $('fDone');
+  d.innerHTML = L('f_thanks')(OFF[office].name) + `<small>${L('f_demo')}</small>`; d.style.display = 'block';
+  if (!RM) gsap.fromTo(d, { clipPath: 'inset(0% 0% 100% 0%)', y: 8 }, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: .5, ease: 'power3.out', clearProps: 'clipPath,transform' });
+});
+
+// header turns solid once you scroll
+const top = $('top'); const solid = () => top.classList.toggle('solid', scrollY > 40); addEventListener('scroll', solid, { passive: true }); solid();
+
+// ---------------- the implant: ONE master timeline (window.CNT) ----------------
+// FX holds every animated value; the WebGL module reads it each frame. Break-apart 0 to 7.5 s, reassembly 7.5 to 15 s.
+const FX = window.FX = { crown: 0, abut: 0, post: 0, prot: 0, heal: 1, rakeI: 0, rakeX: 0, seat: 0, click: 0, l1: 0, l2: 0, l3: 0, l4: 0, l5: 0 };
+const CUR = { ...FX }, MID = 7.5, END = 15;
+const CNT = window.CNT = gsap.timeline({ paused: true });
+CNT.to({}, { duration: END }, 0);
+function mv(to, at, dur, ease = 'power3.inOut') { const from = {}; for (const k in to) { from[k] = CUR[k]; CUR[k] = to[k]; } CNT.fromTo(FX, from, { ...to, duration: dur, ease, immediateRender: false }, at); }
+// 1. crown lifts, abutment rises, the post unscrews out of the bone
+mv({ rakeI: 1 }, 0, .4, 'power2.out'); mv({ rakeX: 1 }, 0, 2.8, 'sine.inOut'); mv({ rakeI: 0 }, 2.3, .5, 'power2.in');
+mv({ heal: 0 }, .6, 1.1, 'power1.inOut');
+mv({ crown: 1 }, .35, 1.55); mv({ l1: 1 }, 1.65, .5, 'power2.out');
+mv({ abut: 1 }, 1.45, 1.45); mv({ l2: 1 }, 2.7, .5, 'power2.out');
+mv({ rakeI: 1 }, 2.85, .45, 'power2.out'); mv({ rakeX: 0 }, 2.85, 2.5, 'sine.inOut');
+mv({ post: .4, prot: -4 }, 2.9, 1.75, 'power1.inOut');          // threads ride out: 4 turns for 0.4 of rise (pitch 0.1)
+mv({ post: 1.25, prot: -4.55 }, 4.65, 1.2, 'power2.inOut');
+mv({ rakeI: 0 }, 5.1, .6, 'power2.in');
+mv({ l3: 1 }, 5.3, .5, 'power2.out'); mv({ l4: 1 }, 5.8, .5, 'power2.out');
+// 2. it goes back: post screws in, bone grows onto it, abutment, crown seats
+mv({ l1: 0, l2: 0, l3: 0, l4: 0 }, 7.55, .3, 'power2.in');
+mv({ post: .4, prot: -4 }, 7.65, 1.0, 'power2.inOut');
+mv({ rakeI: 1 }, 8.5, .45, 'power2.out'); mv({ rakeX: 1 }, 8.5, 2.3, 'sine.inOut');
+mv({ post: 0, prot: 0 }, 8.65, 1.55, 'power1.inOut');
+mv({ heal: 1 }, 9.8, 1.8, 'power2.out'); mv({ l5: 1 }, 10.0, .5, 'power2.out');
+mv({ rakeI: 0 }, 10.5, .5, 'power2.in');
+mv({ abut: 0 }, 11.0, 1.1, 'power3.inOut');
+mv({ l5: 0 }, 12.3, .3, 'power2.in');
+mv({ crown: 0 }, 12.0, 1.25, 'power3.in');
+mv({ seat: 1, click: 1 }, 13.25, .07, 'power2.out'); mv({ seat: 0 }, 13.32, .4, 'power2.out'); mv({ click: 0 }, 13.32, .9, 'power2.out');
+
+const STEP_T = [2.0, 3.2, 5.8, 7.5];
+let seg = null;
+function playTo(t) {
+  if (seg) seg.kill();
+  if (RM) { CNT.time(t >= END ? 0 : t); seg = null; playUI(true); return; }
+  const from = CNT.time();
+  seg = CNT.tweenTo(t, { duration: Math.abs(t - from), ease: 'none', onUpdate: () => playUI(true), onComplete: () => { seg = null; if (t >= END) CNT.time(0); playUI(true); } });
+  playUI(true);
+}
+function seekTo(t) {
+  if (seg) seg.kill();
+  if (RM) { CNT.time(t); seg = null; playUI(true); return; }
+  seg = CNT.tweenTo(t, { duration: Math.min(1.9, .7 + Math.abs(t - CNT.time()) * .12), ease: 'power2.inOut', onUpdate: () => playUI(true), onComplete: () => { seg = null; playUI(true); } });
+}
+let lastLbl = '';
+function playUI(anim, force) {
+  const t = CNT.time(), active = seg && seg.isActive(), paused = seg && seg.paused();
+  const key = active ? 'p_pause' : paused ? 'p_resume' : (t < MID - .01 ? 'p_go' : 'p_back');
+  if (key !== lastLbl || force) { lastLbl = key; roll($('pLbl'), L(key), anim && !force); $('pIco').innerHTML = active ? '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>' : '<path d="M4 2l10 6-10 6z"/>'; }
+  const k = t >= 5.75 && t < MID + .3 ? 3 : t >= 4.6 && t < MID ? 2 : t >= 1.4 && t < MID ? 1 : t >= .35 && t < MID ? 0 : -1;
+  [...$('steps').querySelectorAll('button')].forEach((b, i) => b.classList.toggle('on', t < MID + .3 ? i <= k : false));
+}
+$('play').onclick = () => {
+  if (seg && seg.isActive()) { seg.pause(); playUI(true); return; }
+  if (seg && seg.paused()) { seg.resume(); playUI(true); return; }
+  playTo(CNT.time() < MID - .01 ? MID : END);
+};
+$('steps').addEventListener('click', e => { const b = e.target.closest('button'); if (b) seekTo(STEP_T[+b.dataset.k]); });
+window.playTo = playTo; window.seekTo = seekTo;
+// a first scroll inside the hero also starts the break-apart (once)
+let autoed = false;
+addEventListener('scroll', () => { if (!autoed && !TOUR && scrollY > 30 && scrollY < innerHeight * .6 && CNT.time() === 0 && !seg) { autoed = true; playTo(MID); } }, { passive: true });
+if (Q.get('t')) { CNT.time(+Q.get('t')); }
+
+// ---------------- smile preview state ----------------
+const SM = window.SM = { shade: 1 / 9, ven: 0, dirty: true };
+const sh = $('shade');
+function shadeOut() { const n = Math.round(+sh.value); $('shadeOut').textContent = `${n} ${L('s_of')} 10`; }
+sh.addEventListener('input', () => { shadeOut(); gsap.to(SM, { shade: (+sh.value - 1) / 9, duration: RM ? 0 : .35, ease: 'power2.out', onUpdate: () => SM.dirty = true }); });
+$('ven').onclick = () => { const on = $('ven').getAttribute('aria-checked') !== 'true'; $('ven').setAttribute('aria-checked', on); gsap.to(SM, { ven: on ? 1 : 0, duration: RM ? 0 : 1.2, ease: 'power3.inOut', onUpdate: () => SM.dirty = true }); };
+if (Q.get('shade')) { sh.value = Q.get('shade'); SM.shade = (+sh.value - 1) / 9; }
+if (Q.get('ven') === '1') { $('ven').setAttribute('aria-checked', 'true'); SM.ven = 1; }
+if (Q.get('office') === 'lake') office = 'lake';
+
+applyLang(false);
+requestAnimationFrame(() => setOffice(office, false, true));
+const realign = () => { const tab = $('otabs').querySelector('[aria-selected=true]'); gsap.set($('obar'), { x: tab.offsetLeft, width: tab.offsetWidth - (innerWidth < 821 ? 18 : 26) }); };
+if (document.fonts) document.fonts.ready.then(realign); addEventListener('load', realign); addEventListener('resize', realign);
+if (Q.get('book') === '1') openForm(false);
+
+// ---------------- ?tour=1 : hands-free run for screen recording ----------------
+async function runTour() {
+  const w = ms => new Promise(r => setTimeout(r, ms)), T0 = performance.now();
+  window.TOUR_T = () => (performance.now() - T0) / 1000;
+  const log = window.TOUR_LOG = []; const mark = s => log.push([+(window.TOUR_T()).toFixed(2), s]);
+  const tap = async el => { el.classList.add('press'); await w(170); el.classList.remove('press'); };
+  const glide = (y, d) => new Promise(r => { const o = { y: scrollY }; gsap.to(o, { y, duration: d, ease: 'power2.inOut', onUpdate: () => scrollTo(0, o.y), onComplete: r }); });
+  const yOf = (el, off) => el.getBoundingClientRect().top + scrollY - off;
+  const ph = innerHeight > innerWidth;
+  mark('start: assembled implant, slow drift'); await w(900);
+  await tap($('play')); $('play').click(); mark('break-apart starts'); await w(8300);
+  mark('exploded hold, 4 labels'); await tap($('play')); $('play').click(); mark('reassembly starts'); await w(7900);
+  mark('crown seated, scroll to smile'); await glide(yOf($('smile'), ph ? 6 : 0), 1.5); await w(300);
+  mark('shade slides dull to bright');
+  await new Promise(r => { const o = { v: +sh.value }; gsap.to(o, { v: 10, duration: 2.2, ease: 'power1.inOut', onUpdate: () => { sh.value = o.v; sh.dispatchEvent(new Event('input')); }, onComplete: r }); });
+  await w(400); await tap($('ven')); $('ven').click(); mark('veneers on: chip fixed, gap closes'); await w(1700);
+  await tap($('lES')); $('lES').click(); mark('flip to Español'); await w(1200);
+  mark('scroll to offices'); await glide(yOf(ph ? $('otabs') : $('offices'), ph ? 80 : 60), 1.4); await w(300);
+  const lk = $('otabs').querySelector('[data-o=lake]'); await tap(lk); lk.click(); mark('switch to Lakeside'); await w(1100);
+  if (ph) await glide(yOf($('oBook'), 420), .9);
+  await tap($('oBook')); openForm(false); mark('Book at Lakeside: form opens'); await w(400);
+  await glide(yOf(ph ? $('bk') : $('ocard'), ph ? 70 : 90), 1.0);
+  const type = async (el, s) => { for (const ch of s) { el.value += ch; await w(35); } };
+  await type($('fName'), 'María R.'); await w(150); await type($('fPhone'), '(978) 555-0123'); await w(200);
+  $('fFor').selectedIndex = 1; await w(300); const d = $('fDays').children[3]; await tap(d); d.click(); await w(300);
+  if (ph) await glide(yOf($('fSend'), 360), .7);
+  await tap($('fSend')); $('fSend').click(); mark('request sent (demo)'); await w(1500);
+  mark('back to top'); await glide(0, 1.6); await w(200);
+  await tap($('play')); $('play').click(); mark('break-apart again, Spanish labels'); await w(6400);
+  mark('end'); window.TOUR_DONE = true;
+}
+if (TOUR) addEventListener('load', () => setTimeout(runTour, 800));
+})();
+</script>
+
+<script>
+// ---------- no-WebGL posters (drawn SVG) ----------
+window.showPoster = () => {
+  const p = document.getElementById('poster'); p.style.display = 'block'; document.getElementById('gl').style.display = 'none';
+  let th = ''; for (let i = 0; i < 9; i++) { const y = 318 + i * 15; th += `<path d="M172 ${y} L268 ${y - 7}" stroke="#f3efe8" stroke-opacity=".5" stroke-width="2"/>`; }
+  p.innerHTML = `<svg viewBox="0 0 440 520"><defs><linearGradient id="pg" x1="0" x2="1"><stop offset="0" stop-color="#7d7871"/><stop offset=".45" stop-color="#e6e2dc"/><stop offset="1" stop-color="#6f6a63"/></linearGradient>
+  <linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#a7834b"/><stop offset=".5" stop-color="#f0d9a6"/><stop offset="1" stop-color="#94733f"/></linearGradient>
+  <radialGradient id="cg" cx=".4" cy=".35"><stop offset="0" stop-color="#fffaf1"/><stop offset=".7" stop-color="#e9dfcd"/><stop offset="1" stop-color="#b9ab92"/></radialGradient></defs>
+  <path d="M40 300 Q220 270 400 300 L400 520 L40 520Z" fill="#e6d8bd"/><path d="M40 300 Q220 262 400 300 L400 330 Q220 300 40 330Z" fill="#d98b8f"/>
+  <path d="M172 300 L268 300 L262 450 Q220 486 178 450Z" fill="url(#pg)"/>${th}
+  <path d="M184 196 L256 196 L262 268 L178 268Z" fill="url(#gg)"/>
+  <path d="M150 40 Q220 10 290 40 Q312 60 300 120 Q290 160 262 160 L178 160 Q150 160 140 120 Q128 60 150 40Z" fill="url(#cg)"/></svg>`;
+};
+window.showSmilePoster = () => {
+  const p = document.getElementById('sposter'); p.style.display = 'block'; document.getElementById('gl2').style.display = 'none';
+  const w = [62, 48, 54, 50], xs = []; let x = 220 + 3; const T = []; [1, -1].forEach(sg => { let cx = 0; w.forEach((tw, i) => { const c = cx + tw / 2; cx += tw + 3; T.push([220 + sg * (c + 3), tw, i]); }); });
+  p.innerHTML = `<svg viewBox="0 0 440 260" style="width:100%;height:100%"><path d="M20 70 Q220 20 420 70 L420 110 Q220 80 20 110Z" fill="#d07f86"/>${T.map(([cx, tw, i]) => `<rect class="pt" x="${cx - tw / 2}" y="${84 - i * 2}" width="${tw}" height="${92 - i * 10}" rx="14" fill="#e6dcc9"/>`).join('')}</svg>`;
+  const upd = () => p.querySelectorAll('.pt').forEach(r => r.setAttribute('fill', SM.shade > .5 ? '#f4efe6' : '#d8c6a2'));
+  setInterval(upd, 300);
+};
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+const FX = window.FX, CNT = window.CNT, SM = window.SM, ZOOM = window.CZOOM || 1, RM = window.RM;
+const phoneMQ = matchMedia('(max-width:820px), (max-aspect-ratio:3/4)'), isPhone = () => phoneMQ.matches, LOW = isPhone();
+const sm = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+const se = (q, n) => Math.sign(q) * Math.pow(Math.abs(q), 2 / n);
+const sq = (th, p) => { const c = Math.cos(th), s = Math.sin(th), r = 1 / Math.pow(Math.pow(Math.abs(c), p) + Math.pow(Math.abs(s), p), 1 / p); return [c * r, s * r]; };
+const fract = x => x - Math.floor(x), lerp = (a, b, t) => a + (b - a) * t, TAU = Math.PI * 2;
+let sd = 7; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+const PRQ = +new URLSearchParams(location.search).get('pr') || 0;   // test-only override (headless capture)
+const PR = () => PRQ || (ZOOM > 1 ? Math.min(devicePixelRatio * ZOOM, 2.6) : Math.min(devicePixelRatio, isPhone() ? 1.5 : 1.75));
+function makeRenderer(canvas) {
+  const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  if (!r.getContext()) throw new Error('no gl');
+  r.setPixelRatio(PR()); r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1.0; r.outputColorSpace = THREE.SRGBColorSpace; r.setClearColor(0, 0);
+  return r;
+}
+// a warm product-photo studio, used as the reflection environment (soft boxes + champagne rim strips)
+function studioEnv(renderer) {
+  const s = new THREE.Scene(); s.background = new THREE.Color(0x060403);
+  const strip = (w, h, x, y, z, col, k) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(col).multiplyScalar(k), side: THREE.DoubleSide })); m.position.set(x, y, z); m.lookAt(0, 0, 0); s.add(m); };
+  strip(7, 2.2, 0, 8, 2, 0xfff1df, 2.2);      // overhead soft box
+  strip(1.2, 8, -7, 1.5, 4, 0xffeedd, 5);     // key strip, front left
+  strip(.7, 9, 6.5, 1, -5, 0xf6cf8e, 8);      // champagne rim strip, back right
+  strip(.5, 9, -6, 1, -6, 0xffd9b8, 3.5);     // warm rim strip, back left
+  strip(9, .6, 0, -3.5, 6, 0x8a6a4a, 1.2);    // low warm bounce
+  strip(5, 3, 1.5, .5, 8, 0xffe2bd, .55);     // dim warm front card (so gold and titanium read from the front)
+  const pm = new THREE.PMREMGenerator(renderer), t = pm.fromScene(s, .02).texture; pm.dispose(); return t;
+}
+// surface of revolution-like grid: fn(u,v) -> [x,y,z]; u wraps (no seam), v from bottom to top; caps both ends
+function radial(nu, nv, fn) {
+  const n = (nv + 1) * nu, pos = new Float32Array((n + 2) * 3), V = new Float32Array(n + 2); let k = 0;
+  for (let j = 0; j <= nv; j++) { const v = j / nv; for (let i = 0; i < nu; i++) { const p = fn(i / nu, v); pos[k * 3] = p[0]; pos[k * 3 + 1] = p[1]; pos[k * 3 + 2] = p[2]; V[k++] = v; } }
+  const idx = [];
+  for (let j = 0; j < nv; j++) for (let i = 0; i < nu; i++) { const a = j * nu + i, b = j * nu + (i + 1) % nu, c = a + nu, d = b + nu; idx.push(a, c, b, b, c, d); }
+  const cap = (ring, ci, top) => { let x = 0, y = 0, z = 0; for (let i = 0; i < nu; i++) { const q = (ring * nu + i) * 3; x += pos[q]; y += pos[q + 1]; z += pos[q + 2]; } pos.set([x / nu, y / nu, z / nu], ci * 3); V[ci] = top ? 1 : 0;
+    for (let i = 0; i < nu; i++) { const a = ring * nu + i, b = ring * nu + (i + 1) % nu; top ? idx.push(ci, b, a) : idx.push(ci, a, b); } };
+  cap(0, n, false); cap(nv, n + 1, true);
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('aV', new THREE.BufferAttribute(V, 1)); g.setIndex(idx); g.computeVertexNormals();
+  g.userData.rowIdx = j => j * nu * 6; return g;
+}
+// half surface (theta from pi to 2pi: the z<=0 half), seen from inside (for the socket in the bone)
+function halfRadial(nu, nv, fn) {
+  const pos = [], uv = [], idx = [];
+  for (let j = 0; j <= nv; j++) for (let i = 0; i <= nu; i++) { const p = fn(.5 + .5 * i / nu, j / nv); pos.push(...p); uv.push(i / nu * 1.4, j / nv * 2.2); }
+  for (let j = 0; j < nv; j++) for (let i = 0; i < nu; i++) { const a = j * (nu + 1) + i, b = a + 1, c = a + nu + 1, d = c + 1; idx.push(a, b, c, b, d, c); }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2)); g.setIndex(idx); g.computeVertexNormals(); return g;
+}
+function cvs(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+// soft value-noise texture (bumps + growth pattern)
+const NOISE = (() => {
+  const N = 128, c = cvs(N, N), g = c.getContext('2d'), im = g.createImageData(N, N), grid = 16, gv = new Float32Array(grid * grid).map(rnd);
+  const at = (i, j) => gv[((j % grid + grid) % grid) * grid + ((i % grid + grid) % grid)];
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) { const fx = x / N * grid, fy = y / N * grid, x0 = Math.floor(fx), y0 = Math.floor(fy), tx = fx - x0, ty = fy - y0, sx = tx * tx * (3 - 2 * tx), sy = ty * ty * (3 - 2 * ty);
+    const v = lerp(lerp(at(x0, y0), at(x0 + 1, y0), sx), lerp(at(x0, y0 + 1), at(x0 + 1, y0 + 1), sx), sy) * .75 + rnd() * .25, k = (y * N + x) * 4; im.data[k] = im.data[k + 1] = im.data[k + 2] = v * 255; im.data[k + 3] = 255; }
+  g.putImageData(im, 0, 0); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t;
+})();
+// light, friendly spongy bone (chairside-model look): pale trabeculae, soft warm-tan pores
+function trab(w, h, cell, dens) {
+  const c = cvs(w, h), g = c.getContext('2d'), im = g.createImageData(w, h), D = im.data;
+  const gx = Math.ceil(w / cell) + 2, gy = Math.ceil(h / cell) + 2, P = new Float32Array(gx * gy * 2);
+  for (let j = 0; j < gy; j++) for (let i = 0; i < gx; i++) { const q = (j * gx + i) * 2; P[q] = (i - 1 + .1 + .8 * rnd()) * cell; P[q + 1] = (j - 1 + .1 + .8 * rnd()) * cell; }
+  const B = [238, 229, 210], R = [214, 186, 150], C = [181, 146, 112];
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const ci = Math.floor(x / cell) + 1, cj = Math.floor(y / cell) + 1; let d1 = 1e9, d2 = 1e9;
+    for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) { const q = ((cj + dj) * gx + ci + di) * 2, dx = x - P[q], dy = y - P[q + 1], dd = dx * dx + dy * dy; if (dd < d1) { d2 = d1; d1 = dd; } else if (dd < d2) d2 = dd; }
+    const e = Math.sqrt(d2) - Math.sqrt(d1), lf = .5 + .5 * Math.sin(x * .021 + Math.sin(y * .013) * 2.2) * Math.sin(y * .017 + 1.3);
+    const th = cell * (.12 + .1 * lf + .1 * dens(x / w, y / h));
+    const bone = 1 - sm(th - 1.3, th + 1.3, e), rim = 1 - sm(th, th + cell * .32, e), gr = .93 + .1 * rnd(), k = (y * w + x) * 4;
+    for (let ch = 0; ch < 3; ch++) { const pore = lerp(C[ch], R[ch], rim); D[k + ch] = lerp(pore, B[ch] * gr, bone); }
+    D[k + 3] = 255;
+  }
+  g.putImageData(im, 0, 0); return c;
+}
+
+// =====================================================================
+// HERO: the implant in a cut-away of gum + jawbone
+// =====================================================================
+const canvas = document.getElementById('gl'), stage = document.getElementById('stage');
+let R;
+try { R = makeRenderer(canvas); } catch (e) { window.showPoster(); }
+if (R) {
+R.shadowMap.enabled = !LOW; R.shadowMap.type = THREE.PCFSoftShadowMap;
+const scene = new THREE.Scene();
+scene.environment = studioEnv(R); scene.environmentIntensity = .8;
+const camera = new THREE.PerspectiveCamera(30, 1, .1, 80);
+
+// ---- lights: warm key, champagne + warm-rose rims, a raking spot that sweeps the threads ----
+const key = new THREE.DirectionalLight(0xffeedb, 2.3); key.position.set(-3.2, 5.5, 4.5); scene.add(key);
+if (!LOW) { key.castShadow = true; key.shadow.mapSize.set(2048, 2048); const sc = key.shadow.camera; sc.left = -3; sc.right = 3; sc.top = 4.5; sc.bottom = -2.5; sc.near = 1; sc.far = 20; key.shadow.bias = -.0004; key.shadow.normalBias = .02; }
+const rimW = new THREE.DirectionalLight(0xffcf8a, 3.2); rimW.position.set(4.5, 2.6, -4); scene.add(rimW);
+const rimR = new THREE.DirectionalLight(0xffc6b0, 1.6); rimR.position.set(-4.5, 1.6, -3.5); scene.add(rimR);
+scene.add(new THREE.HemisphereLight(0x3a2a1e, 0x0a0705, .5));
+const rake = new THREE.SpotLight(0xfff0d6, 0, 0, .2, .7, 0); rake.position.set(-2.5, 1.2, 3.4); scene.add(rake); scene.add(rake.target);
+
+// ---- materials ----
+const M = {
+  enamel: new THREE.MeshPhysicalMaterial({ color: 0xffffff, vertexColors: true, roughness: .2, clearcoat: 1, clearcoatRoughness: .1, sheen: .45, sheenRoughness: .5, sheenColor: new THREE.Color(0xfff0dc), ior: 1.6 }),
+  ti: new THREE.MeshPhysicalMaterial({ color: 0xbab3a8, metalness: 1, roughness: .24 }),
+  tiPol: new THREE.MeshPhysicalMaterial({ color: 0xd2ccc2, metalness: 1, roughness: .1 }),
+  gold: new THREE.MeshPhysicalMaterial({ color: 0xd6b679, metalness: 1, roughness: .17 }),
+  gum: new THREE.MeshPhysicalMaterial({ color: 0xd9848a, roughness: .42, clearcoat: .55, clearcoatRoughness: .3, sheen: 1, sheenColor: new THREE.Color(0xffc2c4), sheenRoughness: .55, side: THREE.DoubleSide }),
+  bone: new THREE.MeshStandardMaterial({ color: 0xece0c8, roughness: .62, bumpMap: NOISE, bumpScale: .6, side: THREE.DoubleSide }),
+  dark: new THREE.MeshStandardMaterial({ color: 0x2a221b, roughness: .5, metalness: .4 })
+};
+M.bone.map = null; NOISE.repeat.set(3, 3);
+
+// ---- jaw cross-section (in the z,y plane): bone outline + gum shell over the crest ----
+const BOT = -2.3, GUMLOW = -.5;
+const BONE = []; { const N = 140; for (let i = 0; i < N; i++) { const ph = i / N * TAU, c = Math.cos(ph), s = Math.sin(ph), n = s > 0 ? 2.3 : 3.4;
+  const y = -1.15 + 1.15 * se(s, n), taper = .78 + .22 * Math.min(1, Math.max(0, -y / 1.4)); BONE.push([.57 * taper * se(c, n), y]); } }
+const nrm = (P, i) => { const a = P[(i - 1 + P.length) % P.length], b = P[(i + 1) % P.length], dz = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dz, dy) || 1; return [dy / l, -dz / l]; };
+const gumTh = (z, y) => (.07 + .17 * sm(-.35, 0, y) * Math.max(0, 1 - (z / .42) ** 2)) * sm(GUMLOW, GUMLOW + .2, y);
+const GUM = []; BONE.forEach((p, i) => { if (p[1] > GUMLOW) { const n = nrm(BONE, i), t = gumTh(p[0], p[1]); GUM.push([p[0] + n[0] * t, p[1] + n[1] * t, i]); } });
+// GUM runs from the +z side up over the crest to the -z side (BONE is counter-clockwise from +z)
+const BONE_LOW = []; { const s = GUM[GUM.length - 1][2], e = GUM[0][2]; for (let i = s; ; i++) { const k = i % BONE.length; BONE_LOW.push(BONE[k]); if (k === e) break; } }
+const OUTER = [...GUM.map(p => [p[0], p[1]]), ...BONE_LOW.slice(1, -1)];          // full outer outline (closed)
+const GUMTOP = GUM.reduce((m, p) => Math.max(m, p[1]), -9);         // gum height at the crest (about .24)
+const gumYat = z => { let best = null; for (let i = 0; i < GUM.length - 1; i++) { const a = GUM[i], b = GUM[i + 1]; if ((a[0] - z) * (b[0] - z) <= 0 && a[1] > -.1) { const t = (z - a[0]) / ((b[0] - a[0]) || 1e-6); const y = lerp(a[1], b[1], t); if (best === null || y > best) best = y; } } return best ?? GUMTOP; };
+
+const PITCH = .1, W_N = .5, XL = -1.42, XR = 1.66;          // notch half-width and block ends
+// section textures: canvas pixels per unit
+const PX = LOW ? 240 : 380;
+function sectionTex(kind) {
+  // kind 'x': the jaw's cross-section (z,y) for the block ends; 'z': the long cut face at z=0 (x,y) behind the implant
+  const zx0 = kind === 'x' ? -.72 : -W_N, zx1 = -zx0, y0 = -2.42, y1 = .4, w = Math.round((zx1 - zx0) * PX), h = Math.round((y1 - y0) * PX);
+  const c = cvs(w, h), g = c.getContext('2d'), X = z => (z - zx0) * PX, Y = y => (y1 - y) * PX;
+  const poly = (P, close = true) => { g.beginPath(); P.forEach((p, i) => i ? g.lineTo(X(p[0]), Y(p[1])) : g.moveTo(X(p[0]), Y(p[1]))); if (close) g.closePath(); };
+  const tb = trab(w, h, LOW ? 15 : 24, (u, v) => sm(.25, 0, v) * 1.2);
+  if (kind === 'x') {
+    // gum region
+    poly([...GUM.map(p => [p[0], p[1]]), ...GUM.slice().reverse().map(p => BONE[p[2]])]);
+    const gg = g.createLinearGradient(0, Y(.3), 0, Y(-.5)); gg.addColorStop(0, '#e9a0a0'); gg.addColorStop(1, '#d7868d'); g.fillStyle = gg; g.fill();
+    g.save(); g.clip(); g.strokeStyle = 'rgba(255,214,210,.75)'; g.lineWidth = PX * .03; poly(GUM.map(p => [p[0], p[1]]), false); g.stroke();
+    for (let i = 0; i < 260; i++) { const x = rnd() * w, y = Y(.3) + rnd() * (Y(-.5) - Y(.3)); g.strokeStyle = `rgba(${rnd() > .5 ? '255,220,215' : '190,110,115'},.18)`; g.lineWidth = 1; g.beginPath(); g.moveTo(x, y); g.lineTo(x + (rnd() - .5) * 18, y + (rnd() - .5) * 8); g.stroke(); }
+    g.restore();
+    // cortical shell
+    poly(BONE); g.fillStyle = '#f1e7d4'; g.fill();
+    g.save(); g.clip(); for (let i = 0; i < 6; i++) { g.strokeStyle = 'rgba(200,180,150,.25)'; g.lineWidth = 1; const s = 1 - i * .012; g.beginPath(); BONE.forEach((p, k) => { const x = X(p[0] * s), y = Y(-1.15 + (p[1] + 1.15) * s); k ? g.lineTo(x, y) : g.moveTo(x, y); }); g.closePath(); g.stroke(); } g.restore();
+    // spongy bone inside
+    const IN = BONE.map((p, i) => { const n = nrm(BONE, i), t = p[1] < -1.95 ? .13 : p[1] > -.15 ? .05 : .065; return [p[0] - n[0] * t, p[1] - n[1] * t]; });
+    g.save(); poly(IN); g.clip(); g.drawImage(tb, 0, 0); g.restore();
+    g.strokeStyle = 'rgba(150,120,90,.35)'; g.lineWidth = 1.2; poly(IN); g.stroke();
+  } else {
+    // long face: gum band on top, thin cortical crest, spongy bone, thicker floor
+    g.fillStyle = '#f1e7d4'; g.fillRect(0, Y(0), w, Y(BOT) - Y(0));
+    g.drawImage(tb, 0, Y(-.05), w, Y(-2.17) - Y(-.05), 0, Y(-.05), w, Y(-2.17) - Y(-.05));
+    g.fillStyle = 'rgba(150,120,90,.35)'; g.fillRect(0, Y(-.05), w, 1.2); g.fillRect(0, Y(-2.17), w, 1.2);
+    const gg = g.createLinearGradient(0, Y(GUMTOP), 0, Y(0)); gg.addColorStop(0, '#eaa3a2'); gg.addColorStop(.12, '#dc8d92'); gg.addColorStop(1, '#d07c86');
+    g.fillStyle = gg; g.fillRect(0, Y(GUMTOP + .02), w, Y(0) - Y(GUMTOP + .02));
+    g.fillStyle = 'rgba(255,214,210,.7)'; g.fillRect(0, Y(GUMTOP + .02), w, PX * .025);
+    for (let i = 0; i < 160; i++) { const x = rnd() * w, y = Y(GUMTOP) + rnd() * (Y(0) - Y(GUMTOP)); g.strokeStyle = `rgba(${rnd() > .5 ? '255,220,215' : '190,110,115'},.18)`; g.beginPath(); g.moveTo(x, y); g.lineTo(x + (rnd() - .5) * 20, y + (rnd() - .5) * 4); g.stroke(); }
+  }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4;
+  t.repeat.set(1 / (zx1 - zx0), 1 / (y1 - y0)); t.offset.set(-zx0 / (zx1 - zx0), -y0 / (y1 - y0));
+  const b = new THREE.CanvasTexture(c); b.repeat.copy(t.repeat); b.offset.copy(t.offset);
+  return [t, b];
+}
+const [txX, bxX] = sectionTex('x'), [txZ, bxZ] = sectionTex('z');
+const HEAL = { value: 1 };
+function healPatch(mat, wall) {
+  mat.onBeforeCompile = sh => {
+    sh.uniforms.uHeal = HEAL; sh.uniforms.tN = { value: NOISE };
+    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 vWp;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvWp = (modelMatrix * vec4(transformed, 1.0)).xyz;');
+    sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\nvarying vec3 vWp; uniform float uHeal; uniform sampler2D tN;')
+      .replace('#include <map_fragment>', `#include <map_fragment>
+        float hn = texture2D(tN, vWp.xy * 2.3 + vWp.z).r;
+        float hd = ${wall ? 'abs(vWp.x) - 0.214' : '0.0'};
+        float reach = uHeal * 0.15;
+        float hm = (1.0 - smoothstep(reach - 0.03, reach, hd + (hn - 0.5) * 0.06)) * step(vWp.y, 0.01) * step(-1.02, vWp.y) * smoothstep(0.0, 0.1, uHeal);
+        diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.92, 0.86, 0.74) * (0.9 + 0.2 * hn), hm * 0.75);`);
+  };
+}
+const secX = new THREE.MeshStandardMaterial({ map: txX, bumpMap: bxX, bumpScale: 2.2, roughness: .66, side: THREE.DoubleSide });
+const secZ = new THREE.MeshStandardMaterial({ map: txZ, bumpMap: bxZ, bumpScale: 2.2, roughness: .66, side: THREE.DoubleSide }); healPatch(secZ, true);
+const tbTile = (() => { const t = new THREE.CanvasTexture(trab(256, 256, LOW ? 18 : 26, () => 0)); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; return t; })();
+const sock = new THREE.MeshStandardMaterial({ map: tbTile, color: 0xd8cbb4, roughness: .7, side: THREE.BackSide }); healPatch(sock, false);
+const gumIn = new THREE.MeshStandardMaterial({ color: 0xc9737c, roughness: .55, side: THREE.BackSide });
+
+const jaw = new THREE.Group(); scene.add(jaw);
+function ribbon(P, x0, x1, nx = 24) {
+  const pos = [], idx = [], m = P.length;
+  for (let i = 0; i <= nx; i++) { const x = lerp(x0, x1, i / nx); for (const p of P) pos.push(x, p[1], p[0]); }
+  for (let i = 0; i < nx; i++) for (let j = 0; j < m - 1; j++) { const a = i * m + j, b = a + 1, c = a + m, d = c + 1; idx.push(a, c, b, b, c, d); }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setIndex(idx); g.computeVertexNormals(); return g;
+}
+function capAt(x, P, mat, flip) { const sh = new THREE.Shape(P.map(p => new THREE.Vector2(flip ? -p[0] : p[0], p[1]))); const m = new THREE.Mesh(new THREE.ShapeGeometry(sh, 24), mat); m.rotation.y = flip ? Math.PI / 2 : -Math.PI / 2; m.position.x = x; m.receiveShadow = true; return m; }
+const add = (g, mat, cast = false) => { const m = new THREE.Mesh(g, mat); m.receiveShadow = true; m.castShadow = cast; jaw.add(m); return m; };
+// the two full blocks either side of the cut
+for (const [a, b] of [[XL, -W_N], [W_N, XR]]) {
+  add(ribbon(GUM.map(p => [p[0], p[1]]), a, b), M.gum); add(ribbon(BONE_LOW, a, b), M.bone);
+  jaw.add(capAt(a, OUTER, secX, false)); jaw.add(capAt(b, OUTER, secX, true));
+}
+// the middle block: only its back half (z <= 0) remains, so the implant is seen in its socket
+{
+  const gb = GUM.filter(p => p[0] <= 0).map(p => [p[0], p[1]]); gb.unshift([0, gumYat(0)]);
+  const bb = BONE_LOW.filter(p => p[0] <= 0); bb.push([0, BOT]);
+  // gum top as a grid with a round opening where the abutment comes through
+  const nx = 40, pos = [], idx = [], m = gb.length, RC = .285;
+  for (let i = 0; i <= nx; i++) { const x = lerp(-W_N, W_N, i / nx); for (const p of gb) { let X = x, Z = p[0], Y = p[1]; const r = Math.hypot(X, Z); if (r < RC && Y > -.05) { const s = RC / (r || 1e-4); X *= s; Z = Math.min(0, Z * s); Y = gumYat(Z); } pos.push(X, Y, Z); } }
+  for (let i = 0; i < nx; i++) for (let j = 0; j < m - 1; j++) { const a = i * m + j, b = a + 1, c = a + m, d = c + 1; idx.push(a, c, b, b, c, d); }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setIndex(idx); g.computeVertexNormals(); add(g, M.gum);
+  add(ribbon(bb, -W_N, W_N, 10), M.bone);
+  // the cut face at z=0, with the socket channel open in it
+  const gt = gumYat(0) + .005, sh = new THREE.Shape([[-W_N, BOT], [W_N, BOT], [W_N, gt], [RC, gt], [RC, 0], [.222, 0], [.222, -.94], [0, -1.0], [-.222, -.94], [-.222, 0], [-RC, 0], [-RC, gt], [-W_N, gt]].map(p => new THREE.Vector2(p[0], p[1])));
+  const face = new THREE.Mesh(new THREE.ShapeGeometry(sh, 24), secZ); face.receiveShadow = true; jaw.add(face);
+  // socket: threaded half-channel in the bone, gum channel above it, and the bone ledge between
+  const sk = new THREE.Mesh(halfRadial(LOW ? 32 : 48, LOW ? 120 : 200, (u, v) => { const p = postPt(u, v); const r = Math.hypot(p[0], p[2]) + .008, th = u * TAU; return [r * Math.cos(th), p[1], r * Math.sin(th)]; }), sock); sk.receiveShadow = true; jaw.add(sk);
+  const gc = new THREE.Mesh(halfRadial(32, 6, (u, v) => { const th = u * TAU; return [RC * Math.cos(th), v * gt, RC * Math.sin(th)]; }), gumIn); jaw.add(gc);
+  const ledge = new THREE.Mesh(new THREE.RingGeometry(.222, RC, 40, 1, 0, Math.PI), secZ); ledge.rotation.x = -Math.PI / 2; ledge.position.y = .001; jaw.add(ledge);
+}
+
+// ---- the implant post: real helical thread (pitch 0.1), polished collar, rounded apex ----
+function postR(u, y) {
+  if (y > -.11) return .214 - .016 * sm(-.03, 0, y);
+  const core = .168 - .03 * sm(-.62, -.96, y), dep = .047 * sm(-.115, -.17, y) * (1 - .45 * sm(-.8, -.98, y));
+  const ph = fract(y / PITCH - u), tri = 1 - Math.abs(2 * ph - 1), prof = sm(.06, .94, tri);
+  let r = core + dep * prof; r = lerp(r, .214, sm(-.15, -.11, y));
+  return r * Math.sqrt(1 - (1 - Math.min(1, (y + 1) / .07)) ** 2);
+}
+function postPt(u, v) { const y = -1 + v, r = postR(u, y), th = u * TAU; return [r * Math.cos(th), y, r * Math.sin(th)]; }
+const parts = {};
+{
+  const nu = LOW ? 56 : 84, nv = LOW ? 210 : 320, g = radial(nu, nv, postPt), split = Math.floor(.885 * nv), si = g.userData.rowIdx(split);
+  g.addGroup(0, si, 0); g.addGroup(si, g.index.count - si, 1);
+  const post = new THREE.Mesh(g, [M.ti, M.tiPol]); post.castShadow = post.receiveShadow = true;
+  const hex = new THREE.Mesh(new THREE.CircleGeometry(.085, 6), M.dark); hex.rotation.x = -Math.PI / 2; hex.position.y = .0015; post.add(hex);
+  parts.post = new THREE.Group(); parts.post.add(post); scene.add(parts.post);
+}
+// ---- abutment (gold-tone titanium) + its screw ----
+{
+  const pr = [[0, 0], [.17, 0], [.19, .02], [.2, .06], [.226, .12], [.258, .175], [.274, .205], [.27, .222], [.232, .23], [.216, .245], [.205, .33], [.199, .343], [.206, .356], [.197, .42], [.191, .433], [.199, .446], [.188, .56], [.168, .607], [.13, .622], [.062, .622], [.058, .6], [0, .6]].map(p => new THREE.Vector2(p[0], p[1]));
+  const ab = new THREE.Mesh(new THREE.LatheGeometry(pr, LOW ? 48 : 72), M.gold); ab.castShadow = ab.receiveShadow = true;
+  const sc = new THREE.Mesh(radial(LOW ? 28 : 40, LOW ? 90 : 130, (u, v) => { const y = -.32 + v * .34, ph = fract(y / .045 - u), tri = 1 - Math.abs(2 * ph - 1); let r = .058 + .016 * sm(.1, .9, tri) * sm(.0, -.05, y); r *= Math.sqrt(1 - (1 - Math.min(1, (y + .32) / .03)) ** 2); return [r * Math.cos(u * TAU), y, r * Math.sin(u * TAU)]; }), M.ti);
+  sc.castShadow = true;
+  parts.abut = new THREE.Group(); parts.abut.add(ab, sc); scene.add(parts.abut);
+}
+// ---- crowns: the implant crown + natural neighbours (a premolar and a molar) ----
+function crownGeo({ a = .5, b = .46, h = .76, n = 3.0, cusps }) {
+  const field = (x, z) => { let v = 0; for (const c of cusps) v += c[2] * Math.exp(-((x - c[0]) ** 2 + (z - c[1]) ** 2) / (c[3] * c[3])); v -= .05 * Math.exp(-(x * x + z * z) / .012); v -= .03 * Math.exp(-(z * z) / .0011) * sm(.34, .2, Math.abs(x)); return v; };
+  const WALL = .7;
+  const g = radial(LOW ? 64 : 96, LOW ? 48 : 72, (u, v) => {
+    const th = u * TAU, q = sq(th, n), rx = q[0] * a, rz = q[1] * b; let k, y;
+    if (v <= WALL) { const t = v / WALL; k = .7 + .3 * Math.sin(Math.min(1, t / .45) * Math.PI / 2) - .1 * sm(.45, 1, t) ** 1.5; y = t * h * .62; }
+    else { const ph = (v - WALL) / (1 - WALL) * Math.PI / 2; k = .9 * Math.cos(ph); y = h * .62 + h * .12 * Math.sin(ph); }
+    const x = rx * k, z = rz * k; if (v > WALL * .9) y += field(x, z) * sm(WALL * .9, 1, v);
+    return [x, y, z];
+  });
+  const P = g.attributes.position, col = new Float32Array(P.count * 3), c0 = new THREE.Color(0xfbf8f2), cC = new THREE.Color(0xefe3cc), cF = new THREE.Color(0xd8c19a), cc = new THREE.Color();
+  for (let i = 0; i < P.count; i++) { const x = P.getX(i), y = P.getY(i), z = P.getZ(i); cc.copy(c0).lerp(cC, 1 - sm(0, .3, y)); if (y > h * .6) { const f = field(x, z); cc.lerp(cF, sm(.0, -.04, f) * .7); } col.set([cc.r, cc.g, cc.b], i * 3); }
+  g.setAttribute('color', new THREE.BufferAttribute(col, 3)); return g;
+}
+const MOLAR = [[.21, .17, .15, .16], [-.19, .17, .14, .16], [.2, -.16, .14, .16], [-.19, -.16, .12, .16], [-.02, .27, .06, .1]];
+{
+  const c = new THREE.Mesh(crownGeo({ cusps: MOLAR }), M.enamel); c.castShadow = c.receiveShadow = true;
+  parts.crown = new THREE.Group(); parts.crown.add(c); scene.add(parts.crown);
+  const gy = gumYat(0) - .03;
+  const pm = new THREE.Mesh(crownGeo({ a: .355, b: .43, h: .76, cusps: [[0, .16, .18, .17], [0, -.16, .12, .15]] }), M.enamel); pm.position.set(-.89, gy, 0); pm.castShadow = pm.receiveShadow = true; jaw.add(pm);
+  const mo = new THREE.Mesh(crownGeo({ a: .49, b: .47, h: .72, cusps: MOLAR }), M.enamel); mo.position.set(1.03, gy, 0); mo.rotation.y = Math.PI; mo.castShadow = mo.receiveShadow = true; jaw.add(mo);
+  for (const [x, a, b] of [[-.89, .3, .35], [1.03, .4, .38]]) { const cf = new THREE.Mesh(new THREE.TorusGeometry(1, .07, 12, 48), M.gum); cf.rotation.x = Math.PI / 2; cf.scale.set(a, b, .9); cf.position.set(x, gy + .03, 0); cf.receiveShadow = true; jaw.add(cf); }
+}
+
+// ---- labels (leader lines to a tidy column right of the stack) ----
+const leads = document.getElementById('leads'), tagsEl = document.getElementById('tags');
+const TAGS = [['l1', '01', parts.crown, [.47, .36, .1]], ['l2', '02', parts.abut, [.24, .42, .05]], ['l3', '03', parts.post, [.2, -.45, .06]], ['l4', '04', null, [.34, -.62, .002]], ['l5', '', null, [.23, -.3, .002]]].map(([id, n, obj, p]) => {
+  const el = document.createElement('div'); el.className = 'tg'; el.innerHTML = `${n ? `<i>${n}</i>` : '<i>&nbsp;</i>'}<b data-t="${id}">${window.L(id)}</b><small data-t="${id}s">${window.L(id + 's')}</small>`; tagsEl.appendChild(el);
+  const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line'), dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); dot.setAttribute('r', 3); leads.append(ln, dot);
+  ln.style.visibility = dot.style.visibility = 'hidden';
+  return { id, el, ln, dot, obj, p: new THREE.Vector3(...p), w: 0, h: 0, on: false };
+});
+addEventListener('langchange', () => setTimeout(() => TAGS.forEach(t => t.w = 0), 600));
+const V = new THREE.Vector3(), V2 = new THREE.Vector3();
+function labels() {
+  const Wd = stage.clientWidth, H = stage.clientHeight, ph = isPhone(), vis = [];
+  camera.updateMatrixWorld();
+  V2.set(ph ? .62 : .78, .6, 0).project(camera); const colX = (V2.x * .5 + .5) * Wd + (ph ? 10 : 34);
+  for (const g of TAGS) {
+    const r = FX[g.id];
+    if (r <= .002) { if (g.on) { g.on = false; g.el.style.visibility = g.ln.style.visibility = g.dot.style.visibility = 'hidden'; } continue; }
+    if (!g.on) { g.on = true; g.el.style.visibility = g.ln.style.visibility = g.dot.style.visibility = 'visible'; }
+    if (!g.w) { g.w = g.el.offsetWidth; g.h = g.el.offsetHeight; }
+    V.copy(g.p); if (g.obj) g.obj.localToWorld(V); V.project(camera);
+    g.sx = (V.x * .5 + .5) * Wd; g.sy = (-V.y * .5 + .5) * H; g.r = r; g.ly = g.sy; vis.push(g);
+  }
+  vis.sort((a, b) => a.ly - b.ly); const top = ph ? 70 : 96, bot = H - (ph ? 30 : 165);
+  for (let k = 0; k < vis.length; k++) { vis[k].ly = Math.max(top + vis[k].h / 2, Math.min(bot - vis[k].h / 2, vis[k].ly)); if (k) vis[k].ly = Math.max(vis[k].ly, vis[k - 1].ly + vis[k - 1].h / 2 + vis[k].h / 2 + 8); }
+  for (let k = vis.length - 2; k >= 0; k--) if (vis[k + 1].ly + vis[k + 1].h / 2 > bot) vis[k].ly = Math.min(vis[k].ly, vis[k + 1].ly - vis[k + 1].h / 2 - vis[k].h / 2 - 8);
+  for (const g of vis) {
+    const x = Math.min(Wd - g.w - 8, Math.max(colX, g.sx + 26)), e = Math.min(1, g.r * 1.6), ex = x - 4;
+    g.ln.setAttribute('x1', g.sx.toFixed(1)); g.ln.setAttribute('y1', g.sy.toFixed(1)); g.ln.setAttribute('x2', (g.sx + (ex - g.sx) * e).toFixed(1)); g.ln.setAttribute('y2', (g.sy + (g.ly - g.sy) * e).toFixed(1));
+    g.dot.setAttribute('cx', g.sx.toFixed(1)); g.dot.setAttribute('cy', g.sy.toFixed(1));
+    const cut = ((1 - Math.max(0, (g.r - .3) / .7)) * 100).toFixed(1);
+    g.el.style.transform = `translate(${x.toFixed(1)}px,${(g.ly - g.h / 2).toFixed(1)}px)`; g.el.style.clipPath = `inset(0 ${cut}% 0 0)`;
+  }
+}
+
+// ---- camera: one smooth spline through the master timeline (az, el, dist, target y) ----
+const K = [[0, .5, .2, 7.0, -.2], [1.6, .44, .18, 7.4, .5], [3.2, .36, .15, 8.2, 1.0], [5.4, .28, .12, 9.4, 1.18], [7.5, .2, .1, 9.2, 1.15],
+  [8.8, .14, .08, 7.0, .35], [10.4, .1, .07, 6.1, -.15], [11.8, .22, .11, 6.8, .45], [13.4, .4, .17, 6.8, .1], [15, .5, .2, 7.0, -.2]];
+const cam = [0, 0, 0, 0];
+function camAt(t) {
+  t = Math.max(0, Math.min(15, t)); let i = 0; while (i < K.length - 2 && t > K[i + 1][0]) i++;
+  const p0 = K[Math.max(0, i - 1)], p1 = K[i], p2 = K[i + 1], p3 = K[Math.min(K.length - 1, i + 2)], hh = p2[0] - p1[0], u = (t - p1[0]) / hh;
+  const h00 = 2 * u ** 3 - 3 * u * u + 1, h10 = u ** 3 - 2 * u * u + u, h01 = -2 * u ** 3 + 3 * u * u, h11 = u ** 3 - u * u;
+  for (let k = 1; k < 5; k++) { const m1 = (p2[k] - p0[k]) / Math.max(1e-3, p2[0] - p0[0]) * hh, m2 = (p3[k] - p1[k]) / Math.max(1e-3, p3[0] - p1[0]) * hh; cam[k - 1] = h00 * p1[k] + h10 * m1 + h01 * p2[k] + h11 * m2; }
+  return cam;
+}
+function size() {
+  const w = stage.clientWidth, h = stage.clientHeight; R.setPixelRatio(PR()); R.setSize(w, h, false);
+  camera.aspect = w / h; camera.fov = isPhone() ? 32 : 30;
+  if (isPhone()) camera.setViewOffset(w, h, w * .1, h * .02, w, h); else camera.setViewOffset(w, h, -w * .17, -h * .01, w, h);
+  camera.updateProjectionMatrix(); TAGS.forEach(t => t.w = 0);
+}
+addEventListener('resize', size); size();
+let visible = true; new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(stage);
+const CY = .23;
+let lt = 0;
+function frame(now) {
+  const t = now / 1000; lt = t;
+  const ph = isPhone(), T = CNT.time();
+  HEAL.value = FX.heal;
+  const c = FX.crown, a = FX.abut;
+  parts.crown.position.set(0, CY + c * 2.42 - FX.seat * .014, 0); parts.crown.rotation.set(c * .3, c * .55, Math.sin(Math.PI * c) * .05);
+  parts.abut.position.set(0, a * 1.72, 0); parts.abut.rotation.set(0, a * .7, 0);
+  parts.post.position.y = FX.post; parts.post.rotation.y = FX.prot * TAU;
+  // raking light: sweeps across the threads (FX.rakeX 0..1), plus the "click" kick when the crown seats
+  rake.intensity = RM ? 0 : FX.rakeI * 9; rake.position.set(lerp(-2.6, 2.6, FX.rakeX), .9 + FX.post * .6, 3.2); rake.target.position.set(0, -.35 + FX.post, 0);
+  rimW.intensity = 3.2 + FX.click * 3.5;
+  scene.environmentRotation.y = RM ? 0 : Math.sin(t * .12) * .45 - .2;
+  const k = camAt(T), sway = RM ? 0 : Math.sin(t * .21) * .05, dk = ph ? 1.28 : 1;
+  const az = k[0] + sway, el = k[1], r = k[2] * dk, ty = k[3] + (ph ? .12 : 0);
+  camera.position.set(r * Math.cos(el) * Math.sin(az), ty + r * Math.sin(el), r * Math.cos(el) * Math.cos(az)); camera.lookAt(0, ty, 0);
+  if (visible) { R.render(scene, camera); labels(); }
+  requestAnimationFrame(frame);
+}
+window.C3 = { scene, camera, R, parts, M, key, rimW, rake };
+requestAnimationFrame(frame);
+}
+
+// =====================================================================
+// SMILE PREVIEW: upper + lower front teeth in gum, shade + veneers
+// =====================================================================
+const gl2 = document.getElementById('gl2'), sstage = document.getElementById('sstage');
+let R2;
+try { R2 = makeRenderer(gl2); } catch (e) { window.showSmilePoster(); }
+if (R2) {
+R2.toneMappingExposure = 1.02;
+const s2 = new THREE.Scene(); s2.environment = studioEnv(R2); s2.environmentIntensity = .85;
+const cam2 = new THREE.PerspectiveCamera(20, 1, .1, 80);
+const k2 = new THREE.DirectionalLight(0xfff0de, 2.4); k2.position.set(1.4, 3.2, 8); s2.add(k2);
+const r2a = new THREE.DirectionalLight(0xffcf8c, 3.2); r2a.position.set(6, 2, -3); s2.add(r2a);
+const r2b = new THREE.DirectionalLight(0xffd2c0, 2.0); r2b.position.set(-6, 2, -3); s2.add(r2b);
+const f2 = new THREE.DirectionalLight(0x6a4c38, .7); f2.position.set(0, -4, 4); s2.add(f2);
+const toothMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, vertexColors: true, roughness: .3, clearcoat: .5, clearcoatRoughness: .22, sheen: .3, sheenColor: new THREE.Color(0xffffff), sheenRoughness: .5, ior: 1.6 });
+const gumMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, vertexColors: true, roughness: .42, clearcoat: .6, clearcoatRoughness: .25, sheen: .8, sheenColor: new THREE.Color(0xffb0b4), sheenRoughness: .55, side: THREE.DoubleSide });
+
+function toothGeo(o, full) {
+  const nu = LOW ? 48 : 72, nv = LOW ? 40 : 60, a0 = o.W / 2, b0 = o.D / 2, thin = o.type === 'inc' ? .17 : o.type === 'can' ? .42 : .74, e = .05;
+  return radial(nu, nv, (u, v) => {
+    const th = u * TAU, c = Math.cos(th), s = Math.sin(th);
+    const a = a0 * (.72 + .28 * sm(0, .42, v)), b = b0 * lerp(1, thin, sm(.08, .98, v));
+    const q = sq(th, 2.6); let x = q[0] * a, z = q[1] * b, y;
+    if (v <= .9) y = -v / .9 * (o.H - e);
+    else { const ph = (v - .9) / .1 * Math.PI / 2; x *= Math.pow(Math.cos(ph), .22); z *= Math.cos(ph); y = -(o.H - e) - e * Math.sin(ph); }
+    z += -.08 * v * v * o.H + .025 * Math.sin(Math.PI * v);
+    if (o.cusp) y -= o.cusp * sm(.5, 1, v) * Math.max(0, 1 - Math.pow(Math.min(1, Math.abs(x) / (a0 * .96)), 1.3));
+    if (o.chip && !full && x > .02) { const yl = -o.H + (x - .02) / (a0 - .02) * .3 + .015; if (y < yl) y = yl + (y - yl) * .05; }
+    return [x, y, z];
+  });
+}
+// arch: parabola z = z0 - c x^2, measured by arc length s from the midline
+function arch(c, z0) {
+  const xs = [0], ss = [0]; for (let i = 1; i <= 900; i++) { const x = i * .006, dx = .006, dz = c * (x * x - (x - dx) ** 2); xs.push(x); ss.push(ss[i - 1] + Math.hypot(dx, dz)); }
+  return s => { const as = Math.abs(s); let lo = 0, hi = ss.length - 1; while (hi - lo > 1) { const m = (lo + hi) >> 1; ss[m] < as ? lo = m : hi = m; } const x = lerp(xs[lo], xs[hi], (as - ss[lo]) / (ss[hi] - ss[lo])) * Math.sign(s || 1); const nx = 2 * c * x, l = Math.hypot(nx, 1); return { x, z: z0 - c * x * x, nx: nx / l, nz: 1 / l, a: Math.atan(2 * c * x) }; };
+}
+const UP = [{ W: .86, H: 1.2, D: .72, type: 'inc', zen: 0 }, { W: .66, H: 1.04, D: .62, type: 'inc', zen: -.07 }, { W: .78, H: 1.16, D: .8, type: 'can', cusp: .13, zen: .03 }, { W: .7, H: .98, D: .86, type: 'pm', cusp: .09, zen: -.02 }, { W: .68, H: .92, D: .86, type: 'pm', cusp: .08, zen: -.05 }];
+const LO = [{ W: .54, H: 1.05, D: .6, type: 'inc', zen: 0 }, { W: .6, H: 1.08, D: .62, type: 'inc', zen: .02 }, { W: .7, H: 1.12, D: .76, type: 'can', cusp: .11, zen: -.03 }, { W: .7, H: .98, D: .82, type: 'pm', cusp: .08, zen: 0 }, { W: .72, H: .94, D: .86, type: 'pm', cusp: .06, zen: .03 }];
+const SINK = .14;   // the top of each crown sits this far up inside the gum
+const AU = arch(.15, 0), AL = arch(.19, -.4), YU = 0, YL = -1.8;
+const teeth = [];
+function layout(list, side) { const out = []; let s = 0; list.forEach((t, i) => { out.push({ ...t, i, side, s: side * (s + t.W / 2) }); s += t.W + .015; }); return out; }
+function buildArch(list, A, y0, upper) {
+  const slots = [...layout(list, 1), ...layout(list, -1)];
+  for (const t of slots) {
+    const chip = upper && t.i === 0 && t.side === 1;
+    const g = toothGeo({ ...t, chip }, false);
+    if (chip) { const gf = toothGeo({ ...t, chip }, true); const d = new Float32Array(g.attributes.position.array.length), dn = new Float32Array(d.length);
+      for (let i = 0; i < d.length; i++) { d[i] = gf.attributes.position.array[i] - g.attributes.position.array[i]; dn[i] = gf.attributes.normal.array[i] - g.attributes.normal.array[i]; }
+      g.morphAttributes.position = [new THREE.BufferAttribute(d, 3)]; g.morphAttributes.normal = [new THREE.BufferAttribute(dn, 3)]; g.morphTargetsRelative = true; }
+    g.setAttribute('color', new THREE.BufferAttribute(new Float32Array(g.attributes.position.count * 3), 3));
+    const m = new THREE.Mesh(g, toothMat); if (chip) m.morphTargetInfluences = [0];
+    if (!upper) m.scale.y = -1;
+    s2.add(m); teeth.push({ m, t, A, y0, upper, chip });
+  }
+  // gum: a band along the arch with a scalloped edge (papillae between teeth), fading up into the dark (upper only: the lower teeth sit in the mouth's shade)
+  if (!upper) return;
+  const S = slots.filter(t => t.side === 1), Smax = S[S.length - 1].s + S[S.length - 1].W / 2 + .2, cols = LOW ? 110 : 170, rows = LOW ? 22 : 34, Hg = .62;
+  const pos = [], col = [], idx = [], cc = new THREE.Color(), cM = new THREE.Color(0xeca2a3), cA = new THREE.Color(0xdc8189), cD = new THREE.Color(0xb7505c);
+  for (let i = 0; i <= cols; i++) {
+    const s = lerp(-Smax, Smax, i / cols), as = Math.abs(s); let ti = S.length - 1; for (let k = 0; k < S.length; k++) if (as <= S[k].s + S[k].W / 2 + .008) { ti = k; break; }
+    const T0 = S[ti], hw = T0.W / 2, f = Math.min(1, Math.abs(as - T0.s) / hw), nb = as > T0.s ? S[ti + 1] : S[ti - 1] || S[ti];
+    const zenB = ((T0.zen + (nb ? nb.zen : T0.zen)) / 2), pD = .2 - ti * .025, zen = lerp(T0.zen, zenB - pD, Math.pow(f, 2.6));
+    const P = A(s), base = T0.D / 2 + .015;
+    for (let j = 0; j <= rows; j++) {
+      const h = j / rows, sg = upper ? 1 : -1, y = y0 + sg * (SINK * 0 + zen + h * Hg) * 1;
+      const d = base + .03 * Math.cos(f * Math.PI / 2) * sm(.1, .5, h) * (1 - sm(.6, 1, h)) - .1 * sm(.45, 1, h) - .04 * (1 - sm(0, .12, h));
+      pos.push(P.x + P.nx * d, upper ? y0 + zen + h * Hg : y0 - zen - h * Hg, P.z + P.nz * d);
+      cc.copy(cM).lerp(cA, sm(0, .3, h)).lerp(cD, sm(.3, .8, h)).multiplyScalar(1 - .98 * sm(.16, .78, h)); col.push(cc.r, cc.g, cc.b);
+    }
+  }
+  for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) { const a = i * (rows + 1) + j, b = a + 1, c = a + rows + 1, d = c + 1; upper ? idx.push(a, c, b, b, c, d) : idx.push(a, b, c, b, d, c); }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3)); g.setIndex(idx); g.computeVertexNormals();
+  s2.add(new THREE.Mesh(g, gumMat));
+}
+buildArch(UP, AU, YU, true); buildArch(LO, AL, YL, false);
+// lip shadow: a dark band in front of the lower arch, soft top edge, so only the lower teeth's edges show (as in a real smile)
+{ const pos = [], col = [], idx = [], cols = 80, rows = 8;
+  for (let i = 0; i <= cols; i++) { const sx = lerp(-4.2, 4.2, i / cols), P = AL(sx); for (let j = 0; j <= rows; j++) { const h = j / rows, y = -1.3 - h * h * 2.2; pos.push(P.x + P.nx * .55, y, P.z + P.nz * .55); col.push(.011, .0075, .0048, sm(0, .4, h)); } }
+  for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) { const a = i * (rows + 1) + j, b = a + 1, c = a + rows + 1, d = c + 1; idx.push(a, b, c, b, d, c); }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(col, 4)); g.setIndex(idx);
+  const lip = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ vertexColors: true, transparent: true, side: THREE.DoubleSide, depthWrite: false, toneMapped: false })); lip.renderOrder = 2; s2.add(lip); }
+function placeTeeth() {
+  const gap = .13 * (1 - SM.ven), shift = [gap / 2, gap * .32, gap * .1, 0, 0];
+  for (const q of teeth) {
+    const t = q.t, s = t.s + t.side * (q.upper ? shift[t.i] : 0), P = q.A(s), rot = q.upper && t.i === 1 && t.side === -1 ? .16 * (1 - SM.ven) : 0;
+    const out = q.upper && t.i === 1 && t.side === -1 ? .02 * (1 - SM.ven) : 0;
+    q.m.position.set(P.x + P.nx * out, q.upper ? q.y0 + t.zen + SINK : q.y0 - t.zen - SINK, P.z + P.nz * out);
+    q.m.rotation.y = P.a + rot * t.side;
+    if (q.chip) q.m.morphTargetInfluences[0] = SM.ven;
+  }
+}
+const DULL = [0x9e8158, 0xc9b088, 0xb8ab94].map(h => new THREE.Color(h)), BRIGHT = [0xe9dfcb, 0xf7f3ec, 0xdee3e7].map(h => new THREE.Color(h)), c1 = new THREE.Color(), c2 = new THREE.Color(), c3 = new THREE.Color();
+function shadeTeeth() {
+  const s = SM.shade;
+  for (const q of teeth) {
+    const extra = q.t.type === 'can' ? .14 : q.t.type === 'pm' ? .06 : 0, k = Math.max(0, s - extra * (1 - s)), dim = q.upper ? 1 : .6;
+    const cv = q.m.geometry.attributes.aV, col = q.m.geometry.attributes.color, H = q.t.H;
+    const cer = c1.copy(DULL[0]).lerp(BRIGHT[0], k), body = c2.copy(DULL[1]).lerp(BRIGHT[1], k), edge = c3.copy(DULL[2]).lerp(BRIGHT[2], k);
+    for (let i = 0; i < cv.count; i++) { const v = cv.getX(i), cc = col.array; const w1 = sm(.12, .55, v), w2 = sm(.8, 1, v) * .8, dv = q.upper ? 1 : dim * (.35 + .65 * sm(.5, .95, v));
+      cc[i * 3] = lerp(lerp(cer.r, body.r, w1), edge.r, w2) * dv; cc[i * 3 + 1] = lerp(lerp(cer.g, body.g, w1), edge.g, w2) * dv; cc[i * 3 + 2] = lerp(lerp(cer.b, body.b, w1), edge.b, w2) * dv; }
+    col.needsUpdate = true;
+  }
+  toothMat.roughness = lerp(.38, .24, s); toothMat.clearcoat = lerp(.25, .6, s);
+}
+function size2() {
+  const w = sstage.clientWidth, h = sstage.clientHeight; R2.setPixelRatio(PR()); R2.setSize(w, h, false); cam2.aspect = w / h;
+  const vf = THREE.MathUtils.degToRad(cam2.fov), tv = Math.tan(vf / 2); cam2.userData.d = Math.max(2.75 / (tv * cam2.aspect), 1.3 / tv);
+  cam2.updateProjectionMatrix();
+}
+addEventListener('resize', size2); size2();
+let vis2 = false; new IntersectionObserver(e => { vis2 = e[0].isIntersecting; }).observe(sstage);
+let drawn = false;
+function frame2(now) {
+  const t = now / 1000;
+  if (SM.dirty || !drawn) { placeTeeth(); shadeTeeth(); SM.dirty = false; }
+  if (vis2 || !drawn) {
+    const az = RM ? 0 : Math.sin(t * .19) * .06, d = cam2.userData.d, ty = -.68;
+    cam2.position.set(Math.sin(az) * d, ty + .55 + (RM ? 0 : Math.sin(t * .13) * .05), Math.cos(az) * d - .4); cam2.lookAt(0, ty, -.4);
+    R2.render(s2, cam2); drawn = true;
+  }
+  requestAnimationFrame(frame2);
+}
+window.C3S = { s2, cam2, R2, teeth };
+requestAnimationFrame(frame2);
+}
+</script>
+</body>
+</html>

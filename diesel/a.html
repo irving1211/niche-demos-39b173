@@ -17,7 +17,7 @@ body{background:var(--bg);color:var(--fg);font:400 17px/1.55 var(--sans);overflo
 a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .x{font-family:var(--disp);font-stretch:125%;text-transform:uppercase}
 /* hero */
-.hero{position:relative;height:100vh;min-height:720px;max-height:1100px;overflow:hidden}
+.hero{position:relative;height:calc(var(--vh,1vh)*100);min-height:720px;max-height:1100px;overflow:hidden}
 .stagewrap{position:absolute;inset:0}
 #gl,.poster{position:absolute;inset:0;width:100%;height:100%;display:block}
 .poster{display:none;background:radial-gradient(ellipse 50% 60% at 62% 52%,#2a2622 0%,#121110 55%,#070809 100%)}
@@ -119,11 +119,11 @@ header{position:absolute;left:0;right:0;top:0;z-index:5;display:flex;align-items
 .last a.num{display:block;font:800 clamp(52px,8vw,124px)/1 var(--disp);font-stretch:125%;margin:16px 0 26px}
 footer{max-width:1240px;margin:0 auto;padding:26px 40px 44px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font:400 13px var(--mono);color:var(--dim);box-shadow:0 -1px 0 #1e1f23}
 /* phone */
-@media (max-width:900px){
+@media (max-width:900px),(max-aspect-ratio:3/4){
   .hero{height:auto;min-height:0;max-height:none}
   header{padding:12px 16px}.brand span,.q{display:none}.brand b{font-size:18px}
   .call{min-height:46px;padding:0 14px;font-size:15px}.call .l{display:none}.call .m{display:inline}
-  .stagewrap{position:relative;height:47vh;min-height:330px;max-height:420px}
+  .stagewrap{position:relative;height:calc(var(--vh,1vh)*52);min-height:340px;max-height:470px}
   .shade{background:linear-gradient(0deg,rgba(7,8,9,1) 0%,rgba(7,8,9,0) 30%),linear-gradient(180deg,rgba(7,8,9,.8) 0%,rgba(7,8,9,0) 22%)}
   .poster svg{left:3%;top:16%;width:94%;height:76%}
   .title{display:none}
@@ -199,14 +199,47 @@ footer{max-width:1240px;margin:0 auto;padding:26px 40px 44px;display:flex;justif
 .mir p{font:400 13px var(--mono);color:var(--acc);margin-top:8px;letter-spacing:.04em}
 .mir .q{margin-top:10px}
 .mir .up{display:block;font:500 11.5px var(--mono);color:#7fd1a0;letter-spacing:.1em;text-transform:uppercase;margin-top:12px;min-height:16px}
-@media (max-width:900px){
+@media (max-width:900px),(max-aspect-ratio:3/4){
   .own{grid-template-columns:1fr;gap:34px;margin-bottom:90px}
   .steps li{font-size:18px;min-height:46px}
   .own-dev{flex-direction:column;gap:20px}
   .phone{width:290px;height:590px}
   .mir{width:100%;max-width:340px}
 }
+@media (min-width:901px) and (min-aspect-ratio:3/4) and (max-height:980px){.list button{min-height:33px}.fnd{gap:6px;margin-top:8px}.fnd li{font-size:15px}.fnd li small{font-size:13.5px;line-height:1.3}.det{margin-top:8px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* round 3: exploded-view labels, dyno gauge, stamp, tour */
+.stamp{display:block;visibility:hidden;right:40px;top:330px;width:210px;transform-origin:50% 50%;will-change:transform}
+.tagl{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible}
+.tagl line{stroke:rgba(241,239,233,.62);stroke-width:1}
+.tagl circle{fill:var(--acc)}.tagl circle.bad{fill:#e4483b}
+.tags{position:absolute;inset:0;z-index:3;pointer-events:none}
+.tg{position:absolute;left:0;top:0;visibility:hidden;display:flex;align-items:center;gap:8px;white-space:nowrap;padding:5px 10px 5px 6px;background:rgba(7,8,9,.84);border-radius:2px;font:600 15px/1.15 var(--sans);color:var(--fg);will-change:transform,clip-path}
+.tg b{flex:none;width:22px;height:22px;border-radius:50%;background:var(--acc);color:#140a04;font:500 12px/22px var(--mono);text-align:center}
+.tg.bad b{background:#e4483b;color:#fff}.tg.new b{background:#f1efe9}
+.tg small{display:block;font:400 12px var(--mono);color:var(--dim);letter-spacing:.04em;margin-top:1px}
+.tg.bad small{color:#ff8a7e}
+.legend{display:none}
+.gauge{position:absolute;z-index:3;right:40px;top:132px;width:230px;visibility:hidden;pointer-events:none}
+.gauge .bg{fill:none;stroke:#26272b;stroke-width:9}.gauge .fg{fill:none;stroke:var(--acc);stroke-width:9}
+.gauge .tk{stroke:#5d5e64;stroke-width:1.5}.gauge text{font:400 11px var(--mono);fill:var(--dim)}
+.gauge .v{font:800 40px var(--disp);font-stretch:118%;fill:var(--fg)}.gauge .u{font:500 12px var(--mono);fill:var(--acc);letter-spacing:.12em}
+.gauge .nd{stroke:var(--fg);stroke-width:3;stroke-linecap:round}
+.press{transform:scale(.93)!important;transition:transform .12s}
+html.tour,html.tour *{cursor:none!important}
+@media (max-width:900px),(max-aspect-ratio:3/4){
+  .stamp{width:118px;right:16px;top:auto;bottom:62px}
+  .tagl line{display:none}
+  .tg{padding:0;background:none;gap:0}.tg span{display:none}
+  .tg b{width:22px;height:22px;font-size:12px;line-height:22px}
+  .legend{position:absolute;z-index:3;left:16px;right:16px;bottom:10px;display:grid;grid-template-columns:1fr 1fr;gap:3px 14px;list-style:none;pointer-events:none}
+  .legend li{display:flex;align-items:center;gap:7px;font:600 13.5px/1.2 var(--sans);color:#e9e6df;white-space:nowrap;overflow:hidden}
+  .legend li i{flex:none;width:18px;height:18px;border-radius:50%;background:var(--acc);color:#140a04;font:500 10.5px/18px var(--mono);font-style:normal;text-align:center}
+  .legend li.bad i{background:#e4483b;color:#fff}.legend li.new i{background:#f1efe9}
+  .gauge{right:auto;left:12px;top:62px;width:136px}
+  .cam{top:66px;bottom:auto;right:16px}
+}
+
 </style>
 </head>
 <body>
@@ -215,7 +248,15 @@ footer{max-width:1240px;margin:0 auto;padding:26px 40px 44px;display:flex;justif
     <canvas id="gl" aria-label="3D view of the engine at this stage"></canvas>
     <div class="poster" id="poster"></div>
     <div class="shade"></div>
+    <svg class="tagl" id="tagL" aria-hidden="true"></svg>
+    <div class="tags" id="tags" aria-hidden="true"></div>
+    <ol class="legend" id="legend" aria-label="Parts shown"></ol>
     <div class="cam"><i></i><span id="cam">Bay 4 · Cam 2</span></div>
+    <svg class="gauge" id="gauge" viewBox="0 0 220 150" aria-label="Dyno reading">
+      <path class="bg" d="M40.7,140 A80,80 0 1 1 179.3,140"/><path class="fg" id="gArc" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" d="M40.7,140 A80,80 0 1 1 179.3,140"/>
+      <g id="gTk"></g><line class="nd" id="gN" x1="110" y1="100" x2="172" y2="100"/><circle cx="110" cy="100" r="6" fill="#f1efe9"/>
+      <text class="v" id="gV" x="110" y="138" text-anchor="middle">0</text><text class="u" x="110" y="66" text-anchor="middle">DYNO · HP</text><text id="gR" x="110" y="150" text-anchor="middle">1,000 RPM</text>
+    </svg>
     <svg class="stamp" id="stamp" viewBox="0 0 230 120" aria-label="Passed dyno"><rect x="5" y="5" width="220" height="110" fill="none" stroke="#ff6b1a" stroke-width="4"/><rect x="13" y="13" width="204" height="94" fill="none" stroke="#ff6b1a" stroke-width="1.5"/><text x="115" y="66" text-anchor="middle" font-family="Saira" font-stretch="125%" font-weight="800" font-size="40" fill="#ff6b1a">PASSED</text><text x="115" y="93" text-anchor="middle" font-family="DM Mono" font-size="15" fill="#ff6b1a" letter-spacing="5">DYNO · 287 HP</text></svg>
     <div class="title"><p class="k" id="tK">Stage 01 of 07</p><div class="tw"><h2 id="tH">Received<em>.</em></h2></div></div>
     <div class="seal"><svg viewBox="0 0 40 40" fill="none" stroke="#9a9aa0" stroke-width="1.2"><circle cx="20" cy="20" r="18"/><path d="M20 9l3 6.4 7 .9-5.1 4.8 1.3 6.9L20 24.6l-6.2 3.4 1.3-6.9-5.1-4.8 7-.9z"/></svg>Exclusive in Essex County, MA</div>
@@ -240,6 +281,7 @@ footer{max-width:1240px;margin:0 auto;padding:26px 40px 44px;display:flex;justif
     <div class="ncard" id="ncard" role="status"><i>KR</i><div><time>now</time><b>Kettle Rock Diesel</b><p>KR-0614 is ready for pickup. Passed dyno at 287 hp. Gate's open 6 AM to 6 PM.</p></div></div>
   </div>
 </section>
+
 
 <main class="below" id="quote">
   <section class="own" id="own" aria-label="How the shop keeps it updated">
@@ -277,15 +319,15 @@ const KR = (() => {
   const JOB = { code: 'KR-0614', unit: 'Excavator engine · 6-cyl', detail: '6.7 L inline six · 31-ton excavator · 14,200 hrs', eta: 'Fri Oct 31' };
   const STAGES = [
     { k: 'received', name: 'Received', short: 'In', time: 'Mon Oct 20 · 7:12 AM', note: 'Came in on a lowboy. Running rough, blowing oil out the breather.' },
-    { k: 'teardown', name: 'Teardown', short: 'Apart', time: 'Tue Oct 21 · 2:40 PM', note: 'Head, pan and all six pistons out. Every part tagged and bagged.' },
-    { k: 'inspection', name: 'Inspection', short: 'Checked', time: 'Wed Oct 22 · 11:05 AM', note: 'Hot-tanked, measured, every finding logged with a photo.',
+    { k: 'teardown', name: 'Teardown', short: 'Apart', time: 'Tue Oct 21 · 2:40 PM', note: 'Taken down to the bare block. Every part tagged, bagged and laid out in order.' },
+    { k: 'inspection', name: 'Inspection', short: 'Checked', time: 'Wed Oct 22 · 11:05 AM', note: 'Hot-tanked and measured. Head is flat and reusable. Three problems, each with a photo in your file:',
       findings: [
-        { t: 'Cyl 4 liner scored', d: 'Replacing all six liners', s: 'bad' },
-        { t: 'Main bearings worn', d: 'Down to the copper. Crank to grind .010', s: 'bad' },
-        { t: 'Head checked flat', d: 'Within spec. Reusing it', s: 'ok' }] },
-    { k: 'machining', name: 'Machining', short: 'Machined', time: 'Fri Oct 24 · 9:30 AM', note: 'Block decked, liner bores cut, crank ground .010 under.' },
-    { k: 'assembly', name: 'Assembly', short: 'Built', time: 'Tue Oct 28 · 3:15 PM', note: 'New liners, pistons, rings and bearings. Every bolt torqued and marked.' },
-    { k: 'dyno', name: 'Dyno test', short: 'Dyno', time: 'Thu Oct 30 · 10:20 AM', note: 'Run in under load for 2 hours. No leaks, no blow-by.' },
+        { t: 'Cyl 4 liner scored', d: 'Deep vertical scratches. Replacing all six liners', s: 'bad' },
+        { t: 'Cyl 4 piston cracked', d: 'Crack at the bowl rim. New piston, new rings in all six', s: 'bad' },
+        { t: 'No. 4 main bearing spun', d: 'Down to the copper. Crank to grind .010 under', s: 'bad' }] },
+    { k: 'machining', name: 'Machining', short: 'Machined', time: 'Fri Oct 24 · 9:30 AM', note: 'New liners fitted, block decked, crank ground .010 under. New piston for cylinder 4.' },
+    { k: 'assembly', name: 'Assembly', short: 'Built', time: 'Tue Oct 28 · 3:15 PM', note: 'Built back up with new rings and bearings. Every bolt torqued and paint-marked.' },
+    { k: 'dyno', name: 'Dyno test', short: 'Dyno', time: 'Thu Oct 30 · 10:20 AM', note: 'Run in under load for 2 hours. 287 hp, no leaks, no blow-by.' },
     { k: 'ready', name: 'Ready for pickup', short: 'Ready', time: 'Fri Oct 31 · 7:00 AM', note: 'Painted, strapped to the pallet. Gate open 6 AM to 6 PM.' }];
   const BAYS = [
     { b: 'Bay 1', u: 'Dozer engine · 6-cyl', s: 'Machining', p: 0.52, c: 'KR-0609' },
@@ -479,73 +521,135 @@ const KR = (() => {
   return { LAYOUT, FOCUS, fitView, JOB, STAGES, BAYS, SERVICES, BRANDS, TOWNS, PHONE, TEL, DYNO, PEAK_TQ, dynoPaths, engineSVG, setEngine };
 })();
 
-// ---------- tracker UI (works with or without WebGL) ----------
+
+// ---------- tracker UI: ONE master timeline (window.KRT) drives the engine, the labels and the list ----------
+// Stage word/list switch at BOUND times; arrows/list seek the playhead (eased) to REST times; Play just plays it.
+window.FX = { dirt: 1, old: 1, paint: 0, run: 0, heat: 0, hl: 0, deck: 0, grind: 0, ready: 0, sweep: 0, sweepI: 0, gauge: 0, gaugeOn: 0, stamp: 0 };
+if (navigator.webdriver) gsap.ticker.lagSmoothing(0);   // headless capture renders slowly; keep the timeline on real time there
 window.TRK = (() => {
   const S = KR.STAGES, $ = id => document.getElementById(id), subs = [];
+  const BOUND = [0, 3.3, 9.9, 14.8, 19.8, 25.8, 31.4], REST = [0, 9.3, 13.3, 18.5, 25.3, 30.3, 36.4], DUR = 36.4;
   const BIG = { received: 'Received', teardown: 'Teardown', inspection: 'Inspection', machining: 'Machining', assembly: 'Assembly', dyno: 'Dyno', ready: 'Ready' };
   const CAM = { received: 'Receiving dock · Cam 1', teardown: 'Bay 4 · Cam 2', inspection: 'Bay 4 · Cam 2', machining: 'Machine shop · Cam 3', assembly: 'Bay 4 · Cam 2', dyno: 'Dyno cell · Cam 1', ready: 'Shipping · Cam 4' };
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches, q = new URLSearchParams(location.search), TOUR = !!q.get('tour');
+  // tour: scale the page so 1080x1920 reads like a phone and 1920x1080 like the 1440 desktop design
+  if (TOUR) {
+    document.documentElement.classList.add('tour');
+    const W = innerWidth, H = innerHeight, z = H > W ? (W > 520 ? W / 420 : 1) : (W > 1500 ? W / 1440 : 1);
+    if (z !== 1) { document.documentElement.style.zoom = z; document.documentElement.style.setProperty('--vh', (H / z / 100) + 'px'); }
+    window.KRZOOM = z;
+  }
   const list = $('list'), segs = $('segs');
   S.forEach((s, i) => {
     list.insertAdjacentHTML('beforeend', `<li><button data-i="${i}"><span class="n">0${i + 1}</span><span class="nm">${s.name}</span><span class="t">${s.time.split(' · ')[0]}</span></button></li>`);
     segs.insertAdjacentHTML('beforeend', `<button data-i="${i}" aria-label="${s.name}"></button>`);
   });
-  [list, segs].forEach(el => el.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { stop(); go(+b.dataset.i); } }));
+  [list, segs].forEach(el => el.addEventListener('click', e => { const b = e.target.closest('button'); if (b) seek(+b.dataset.i); }));
   const dp = KR.dynoPaths(30, 24, 330, 84, 300, 1000);
   const chart = () => `<svg class="dy" viewBox="0 0 380 126" aria-label="Dyno sheet: horsepower and torque">${[0, 1, 2, 3].map(i => `<line class="gl" x1="30" x2="360" y1="${24 + i * 28}" y2="${24 + i * 28}"/>`).join('')}
     ${[1000, 1400, 1800, 2200].map(r => `<text x="${dp.X(r)}" y="122" text-anchor="middle">${r}</text>`).join('')}
     <path class="hp dr" pathLength="1" d="${dp.hpP}"/><path class="tq" d="${dp.tqP}"/><circle cx="${dp.peakHp.x}" cy="${dp.peakHp.y}" r="4.5" fill="#ff6b1a"/>
     <text class="lab" x="${dp.peakHp.x}" y="${dp.peakHp.y - 10}" text-anchor="middle">287 HP</text><text class="lab" x="360" y="${24 + 84 * (1 - KR.DYNO[KR.DYNO.length - 1].tq / 1000) + 18}" text-anchor="end">${dp.peakTq.v} LB-FT PEAK</text></svg>`;
-  let cur = 0, timer = null;
-  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   // text that changes rolls out of a mask and the new text rolls in (no fades)
   function roll(el, html, anim) {
     el._want = html;
     if (!anim) { gsap.killTweensOf(el); el.innerHTML = html; gsap.set(el, { yPercent: 0 }); return; }
+    if (el.innerHTML === html && !gsap.isTweening(el)) return;
     gsap.killTweensOf(el);
-    gsap.timeline().to(el, { yPercent: -112, duration: .38, ease: 'power2.in' })
-      .call(() => { el.innerHTML = el._want; }).fromTo(el, { yPercent: 112 }, { yPercent: 0, duration: .7, ease: 'power3.out' });
+    gsap.timeline().to(el, { yPercent: -112, duration: .3, ease: 'power2.in' })
+      .call(() => { el.innerHTML = el._want; }).fromTo(el, { yPercent: 112 }, { yPercent: 0, duration: .55, ease: 'power3.out' });
   }
   window.ROLL = roll;
+  let shown = -1;
   function marker(anim) {
-    const b = list.querySelectorAll('button')[cur]; if (!b || !b.offsetParent) return;
+    const b = list.querySelectorAll('button')[shown]; if (!b || !b.offsetParent) return;
     const y = b.offsetTop + b.offsetHeight / 2;
-    gsap.to('#lFill', { height: y, duration: anim ? 1.1 : 0, ease: 'power3.inOut' });
-    gsap.to('#lDot', { y, duration: anim ? 1.1 : 0, ease: 'power3.inOut' });
+    gsap.to('#lFill', { height: y, duration: anim ? .9 : 0, ease: 'power3.inOut' });
+    gsap.to('#lDot', { y, duration: anim ? .9 : 0, ease: 'power3.inOut' });
   }
   addEventListener('resize', () => marker(false));
-  function go(i, anim = true) {
-    anim = anim && !RM;
-    cur = (i + S.length) % S.length; const s = S[cur];
-    list.querySelectorAll('button').forEach((b, j) => b.className = j < cur ? 'done' : j === cur ? 'on' : '');
-    segs.querySelectorAll('button').forEach((b, j) => b.className = j < cur ? 'done' : j === cur ? 'on' : '');
+  function show(i, anim) {
+    anim = anim && !RM; shown = i; const s = S[i];
+    list.querySelectorAll('button').forEach((b, j) => b.className = j < i ? 'done' : j === i ? 'on' : '');
+    segs.querySelectorAll('button').forEach((b, j) => b.className = j < i ? 'done' : j === i ? 'on' : '');
     $('note').textContent = s.note;
     $('extra').innerHTML = s.findings ? `<ul class="fnd">${s.findings.map((f, k) => `<li class="${f.s}"><i>${k + 1}</i><span>${f.t}<small>${f.d}</small></span></li>`).join('')}</ul>` : s.k === 'dyno' ? chart() : '';
-    if (s.k === 'dyno' && anim) $('extra').querySelector('.dr').animate([{ strokeDasharray: '1 1', strokeDashoffset: 1 }, { strokeDasharray: '1 1', strokeDashoffset: 0 }], { duration: 1800, delay: 400, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'backwards' });
-    $('tK').textContent = `Stage 0${cur + 1} of 07 · ${s.time}`; roll($('tH'), `${BIG[s.k]}<em>.</em>`, anim);
+    if (s.k === 'dyno' && anim) $('extra').querySelector('.dr').animate([{ strokeDasharray: '1 1', strokeDashoffset: 1 }, { strokeDasharray: '1 1', strokeDashoffset: 0 }], { duration: 2600, delay: 500, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'backwards' });
+    $('tK').textContent = `Stage 0${i + 1} of 07 · ${s.time}`; roll($('tH'), `${BIG[s.k]}<em>.</em>`, anim);
     roll($('sH'), s.name, anim); $('sT').textContent = s.time;
     marker(anim);
-    if (anim) gsap.fromTo([$('note'), $('extra')], { clipPath: 'inset(0 0 100% 0)', y: 14 }, { clipPath: 'inset(0 0 0% 0)', y: 0, duration: .8, delay: .25, stagger: .1, ease: 'power3.out', clearProps: 'clipPath' });
+    if (anim) gsap.fromTo([$('note'), $('extra')], { clipPath: 'inset(0 0 100% 0)', y: 14 }, { clipPath: 'inset(0 0 0% 0)', y: 0, duration: .7, delay: .2, stagger: .1, ease: 'power3.out', clearProps: 'clipPath' });
     $('cam').textContent = `${CAM[s.k]} · ${s.time.replace(' · ', ' ')}`;
-    const st = $('stamp'), was = st.classList.contains('on'); gsap.killTweensOf(st);
-    if (s.k === 'dyno') { if (anim) { st.classList.remove('on'); gsap.fromTo(st, { scale: 1.9, rotation: -22 }, { scale: 1, rotation: -10, duration: .55, delay: 1.6, ease: 'back.out(2.4)', onStart: () => st.classList.add('on') }); } else { st.classList.add('on'); gsap.set(st, { scale: 1, rotation: -10 }); } }
-    else if (was && anim) gsap.to(st, { y: -60, scale: .7, rotation: 4, duration: .45, ease: 'power2.in', onComplete: () => { st.classList.remove('on'); gsap.set(st, { y: 0 }); } });
-    else st.classList.remove('on');
     subs.forEach(f => f(s.k, anim));
   }
-  function stop() { clearInterval(timer); timer = null; $('pLbl').textContent = 'Play the rebuild'; $('pIco').innerHTML = '<path d="M4 2l10 6-10 6z"/>'; }
-  function play() { if (timer) return stop(); if (cur === S.length - 1) go(0); timer = setInterval(() => { if (cur === S.length - 1) return stop(); go(cur + 1); }, 3800); $('pLbl').textContent = 'Pause'; $('pIco').innerHTML = '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>'; }
-  $('prev').onclick = () => { stop(); go(cur - 1); }; $('next').onclick = () => { stop(); go(cur + 1); }; $('play').onclick = play;
+  // ---- gauge + stamp are drawn from FX every time the playhead moves ----
+  const gTk = $('gTk'), gN = $('gN'), gV = $('gV'), gR = $('gR'), gArc = $('gArc'), gauge = $('gauge'), stamp = $('stamp');
+  for (let k = 0; k <= 4; k++) { const a = (150 + 60 * k) * Math.PI / 180; gTk.insertAdjacentHTML('beforeend', `<line class="tk" x1="${110 + 70 * Math.cos(a)}" y1="${100 + 70 * Math.sin(a)}" x2="${110 + 62 * Math.cos(a)}" y2="${100 + 62 * Math.sin(a)}"/><text x="${110 + 52 * Math.cos(a)}" y="${104 + 52 * Math.sin(a)}" text-anchor="middle">${k * 80}</text>`); }
+  const last = {};
+  function dom() {
+    if (FX.gaugeOn !== last.go) { last.go = FX.gaugeOn; gauge.style.visibility = FX.gaugeOn > .002 ? 'visible' : 'hidden'; gauge.style.clipPath = `inset(0 ${((1 - FX.gaugeOn) * 100).toFixed(1)}% 0 0)`; }
+    if (FX.gauge !== last.g) {
+      last.g = FX.gauge; const hp = 287 * FX.gauge;
+      gN.setAttribute('transform', `rotate(${(150 + 240 * hp / 320).toFixed(2)} 110 100)`); gArc.setAttribute('stroke-dashoffset', (1 - hp / 320).toFixed(4));
+      gV.textContent = Math.round(hp); gR.textContent = `${Math.round(1000 + 1200 * FX.gauge).toLocaleString('en-US')} RPM`;
+    }
+    if (FX.stamp !== last.s) { last.s = FX.stamp; const s = FX.stamp; stamp.style.visibility = s > .002 ? 'visible' : 'hidden'; stamp.style.transform = `rotate(${(-24 + 14 * s).toFixed(2)}deg) scale(${(2 - s).toFixed(3)})`; }
+  }
+  // ---- the master timeline (3D tweens are added to it by the WebGL module) ----
+  const KRT = window.KRT = gsap.timeline({ paused: true, onUpdate: sync, onComplete: ended });
+  KRT.to({}, { duration: DUR }, 0);
+  KRT.fromTo(FX, { gaugeOn: 0 }, { gaugeOn: 1, duration: .45, ease: 'power2.out', immediateRender: false }, 26.2)
+    .fromTo(FX, { gauge: 0 }, { gauge: 1, duration: 2.8, ease: 'power1.inOut', immediateRender: false }, 26.4)
+    .fromTo(FX, { stamp: 0 }, { stamp: 1, duration: .55, ease: 'back.out(2.4)', immediateRender: false }, 29.4)
+    .fromTo(FX, { stamp: 1 }, { stamp: 0, duration: .35, ease: 'power2.in', immediateRender: false }, 31.5)
+    .fromTo(FX, { gaugeOn: 1 }, { gaugeOn: 0, duration: .35, ease: 'power2.in', immediateRender: false }, 31.6)
+    .fromTo(FX, { gauge: 1 }, { gauge: 0, duration: .01, immediateRender: false }, 32.0);
+  let seeking = false, playing = false;
+  const idxAt = t => { let i = 0; BOUND.forEach((b, k) => { if (t >= b - 1e-4) i = k; }); return i; };
+  function sync() { dom(); if (seeking) return; const i = idxAt(KRT.time()); if (i !== shown) show(i, true); }
+  function setPlaying(p) { playing = p; $('pLbl').textContent = p ? 'Pause' : (KRT.time() >= DUR - .05 ? 'Play it again' : 'Play the rebuild'); $('pIco').innerHTML = p ? '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>' : '<path d="M4 2l10 6-10 6z"/>'; }
+  let onEnd = null;
+  function ended() { setPlaying(false); if (onEnd) { const f = onEnd; onEnd = null; f(); } }
+  let rmTimer = null;
+  function seek(i, resume) {
+    i = (i + S.length) % S.length; const target = REST[i];
+    const keep = resume ?? playing;
+    clearInterval(rmTimer); rmTimer = null;
+    show(i, true);
+    if (RM) { KRT.pause(); KRT.time(target); setPlaying(false); return; }
+    seeking = true; KRT.pause();
+    const d = Math.min(1.8, .8 + Math.abs(target - KRT.time()) * .035);
+    KRT.tweenTo(target, { duration: d, ease: 'power2.inOut', onComplete: () => { seeking = false; dom(); if (keep && target < DUR - .05) { KRT.play(); setPlaying(true); } else setPlaying(false); } });
+    setPlaying(keep && target < DUR - .05);
+  }
+  function play() {
+    if (RM) { // reduced motion: step through the end states, no tweens
+      if (rmTimer) { clearInterval(rmTimer); rmTimer = null; setPlaying(false); return; }
+      setPlaying(true); rmTimer = setInterval(() => { if (shown >= S.length - 1) { clearInterval(rmTimer); rmTimer = null; return setPlaying(false); } KRT.time(REST[shown + 1]); show(shown + 1, false); }, 3000); return;
+    }
+    if (playing) { gsap.killTweensOf(KRT); seeking = false; KRT.pause(); setPlaying(false); return; }
+    if (KRT.time() >= DUR - .05) return seek(0, true);   // at the end: quick eased rewind, then play
+    KRT.play(); setPlaying(true);
+  }
+  $('prev').onclick = () => seek(shown - 1); $('next').onclick = () => seek(shown + 1); $('play').onclick = play;
   $('textMe').onclick = () => { $('textMe').classList.add('set'); $('textMe').querySelector('span').textContent = "You're set · we'll text you"; $('ncard').classList.add('on'); };
   $('wall').innerHTML = KR.BAYS.map(b => `<div class="bay ${b.mine ? 'mine' : ''} ${b.wait ? 'wait' : ''}"><span class="bn">${b.road ? 'RD' : b.b.replace('Bay ', '0')}</span><div><div class="u">${b.u}</div><div class="c">${b.c}${b.mine ? ' · yours' : ''}</div><div class="s">${b.s}</div><div class="m"><i style="width:${b.p * 100}%"></i></div></div></div>`).join('');
   $('svc').innerHTML = KR.SERVICES.map(([t, d], i) => `<li><span>0${i + 1}</span><b>${t}</b><p>${d}</p></li>`).join('');
   $('brands').textContent = KR.BRANDS; $('towns').textContent = KR.TOWNS;
-  const q = new URLSearchParams(location.search), si = S.findIndex(s => s.k === q.get('stage'));
-  if (si > -1) cur = si;
-  go(cur, false);
-  if (q.get('play')) setTimeout(play, 900);
+  const si = Math.max(0, S.findIndex(s => s.k === q.get('stage')));
+  seeking = true; KRT.time(REST[si]); seeking = false; show(si, false); dom();
+  const press = el => { el.classList.add('press'); setTimeout(() => el.classList.remove('press'), 200); };
+  if (TOUR) {
+    setTimeout(() => { press($('play')); if (!playing) play(); }, 900);
+    onEnd = () => setTimeout(() => { press($('textMe')); $('textMe').click(); }, 900);
+  } else if (q.get('play')) setTimeout(play, 600);
   if (q.get('notify')) $('textMe').click();
-  return { subscribe: f => { subs.push(f); f(S[cur].k, false); }, get cur() { return S[cur].k; }, get i() { return cur; }, go: i => { stop(); go(i); } };
+  return {
+    subscribe: f => { subs.push(f); f(S[shown].k, false); }, get cur() { return S[shown].k; }, get i() { return shown; },
+    go: i => seek(i), play, seek, BOUND, REST, DUR
+  };
 })();
+
 
 // ---------- owner's update screen (small working mock) ----------
 (() => {
@@ -631,271 +735,494 @@ window.showPoster = () => {
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
+/* Procedural inline-6 heavy diesel (unbranded, ISB / C7 class), built part by part so it can explode.
+   Engine-local axes: x = crank axis (+x = front / damper end), y = up (crank centre = 0, deck = .40), z = sideways (+z = exhaust + turbo side, faces the camera). */
 const canvas = document.getElementById('gl'), wrap = document.getElementById('stagewrap');
-const phoneMQ = matchMedia('(max-width:900px)'), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const phoneMQ = matchMedia('(max-width:900px), (max-aspect-ratio:3/4)'), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isPhone = () => phoneMQ.matches, ZOOM = window.KRZOOM || 1, KRT = window.KRT, FX = window.FX;
 let renderer;
 try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
   if (!renderer.getContext()) throw new Error('no gl');
 } catch (e) { window.showPoster(); throw e; }
-const isPhone = () => phoneMQ.matches;
-renderer.setPixelRatio(Math.min(devicePixelRatio, isPhone() ? 1.5 : 1.75));
-renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const PR = () => ZOOM > 1 ? Math.min(devicePixelRatio * ZOOM, 2.6) : Math.min(devicePixelRatio, isPhone() ? 1.5 : 1.75);
+renderer.setPixelRatio(PR());
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.shadowMap.enabled = !isPhone(); renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x070809);
-scene.fog = new THREE.Fog(0x070809, 7, 16);
+scene.fog = new THREE.Fog(0x070809, 9, 19);
 const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-scene.environmentIntensity = 0.32;
+scene.environmentIntensity = 0.42;
+const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 60);
 
-const camera = new THREE.PerspectiveCamera(26, 1, 0.1, 60);
-
-// ---------- procedural textures ----------
-function canvasTex(w, h, draw, rep = 1) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(rep, rep); t.anisotropy = 4; return t; }
-let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-const grimeSrc = document.createElement('canvas'); grimeSrc.width = grimeSrc.height = 512;
-((g, w, h) => {
-  g.fillStyle = '#c9c6c2'; g.fillRect(0, 0, w, h);
-  for (let i = 0; i < 220; i++) { const x = rnd() * w, y = rnd() * h, r = 6 + rnd() * 46; const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, `rgba(${10 + rnd() * 14},${10 + rnd() * 12},${10 + rnd() * 10},${.12 + rnd() * .22})`); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); }
-  for (let i = 0; i < 12; i++) { const x = rnd() * w, y = rnd() * h * .6, l = 20 + rnd() * 90; g.strokeStyle = `rgba(12,8,4,${.25 + rnd() * .35})`; g.lineWidth = 2 + rnd() * 3; g.beginPath(); g.moveTo(x, y); g.lineTo(x + rnd() * 6 - 3, y + l); g.stroke(); }
-  for (let i = 0; i < 900; i++) { g.fillStyle = `rgba(60,50,40,${rnd() * .18})`; g.fillRect(rnd() * w, rnd() * h, 2, 2); }
-})(grimeSrc.getContext('2d'), 512, 512);
-const grime = canvasTex(512, 512, () => {}); grime.repeat.set(3, 1);
-const gctx = grime.image.getContext('2d'), FINS = { dirt: 1 };
-function drawGrime() { gctx.globalAlpha = 1; gctx.fillStyle = '#fff'; gctx.fillRect(0, 0, 512, 512); gctx.globalAlpha = FINS.dirt; gctx.drawImage(grimeSrc, 0, 0); gctx.globalAlpha = 1; grime.needsUpdate = true; }
-drawGrime();
-const floorTex = canvasTex(512, 512, (g, w, h) => {
-  g.fillStyle = '#7a7a7a'; g.fillRect(0, 0, w, h);
-  for (let i = 0; i < 5000; i++) { const v = 90 + rnd() * 70; g.fillStyle = `rgba(${v},${v},${v},.35)`; g.fillRect(rnd() * w, rnd() * h, 1 + rnd() * 2, 1 + rnd() * 2); }
-  for (let i = 0; i < 30; i++) { const x = rnd() * w, y = rnd() * h, r = 20 + rnd() * 80; const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, 'rgba(20,20,20,.35)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); }
-  g.strokeStyle = 'rgba(30,30,30,.6)'; g.lineWidth = 2; g.beginPath(); g.moveTo(0, h / 2); g.lineTo(w, h / 2); g.moveTo(w / 2, 0); g.lineTo(w / 2, h); g.stroke();
-}, 6);
-function label(txt, bg, fg, w = 256, h = 128, font = 'bold 64px "DM Mono", monospace', round = false) {
-  return canvasTex(w, h, (g) => { g.fillStyle = bg; if (round) { g.beginPath(); g.arc(w / 2, h / 2, w / 2 - 2, 0, 7); g.fill(); } else g.fillRect(0, 0, w, h); g.fillStyle = fg; g.font = font; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(txt, w / 2, h / 2 + 4); });
-}
+// ---------- procedural textures (tileable value noise; no downloads) ----------
+let sd = 11; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+function pnoise(cells) { const g = new Float32Array(cells * cells).map(rnd); return (u, v) => {
+  const fx = u * cells, fy = v * cells, x0 = Math.floor(fx), y0 = Math.floor(fy), tx = fx - x0, ty = fy - y0, sx = tx * tx * (3 - 2 * tx), sy = ty * ty * (3 - 2 * ty);
+  const at = (i, j) => g[((j % cells + cells) % cells) * cells + ((i % cells + cells) % cells)];
+  const a = at(x0, y0), b = at(x0 + 1, y0), c = at(x0, y0 + 1), d = at(x0 + 1, y0 + 1); return a + (b - a) * sx + (c - a) * sy + (a - b - c + d) * sx * sy; }; }
+function fbm(list) { return (u, v) => { let s = 0, w = 1, t = 0; for (const f of list) { s += f(u, v) * w; t += w; w *= .55; } return s / t; }; }
+const NOISE = (() => {
+  const N = 256, c = document.createElement('canvas'); c.width = c.height = N; const g = c.getContext('2d'), im = g.createImageData(N, N);
+  const R = fbm([pnoise(3), pnoise(6), pnoise(12), pnoise(24)]), G = fbm([pnoise(48), pnoise(96), pnoise(128)]), B = fbm([pnoise(8), pnoise(16), pnoise(32), pnoise(64)]);
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+    const u = x / N, v = y / N, k = (y * N + x) * 4;
+    im.data[k] = Math.min(255, Math.max(0, (R(u, v) - .5) * 2.1 * 255 + 128));
+    im.data[k + 1] = Math.min(255, Math.max(0, ((G(u, v) - .5) * 1.8 + (rnd() - .5) * .35) * 255 + 128));
+    im.data[k + 2] = Math.min(255, Math.max(0, (B(u, v) - .5) * 2.2 * 255 + 128)); im.data[k + 3] = 255;
+  }
+  g.putImageData(im, 0, 0); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.NoColorSpace; return t;
+})();
+function canvasTex(w, h, draw, rep = [1, 1], srgb = true) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); if (srgb) t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(rep[0], rep[1]); t.anisotropy = 4; return t; }
+const SCRATCH = canvasTex(256, 256, (g, w, h) => { g.fillStyle = '#c9cdd1'; g.fillRect(0, 0, w, h); for (let i = 0; i < 70; i++) { const x = rnd() * w * .5 + w * .25; g.strokeStyle = `rgba(${40 + rnd() * 50},${20 + rnd() * 20},${20},${.4 + rnd() * .5})`; g.lineWidth = .6 + rnd() * 2.2; g.beginPath(); g.moveTo(x, rnd() * h * .2); g.lineTo(x + rnd() * 4 - 2, h * (.6 + rnd() * .4)); g.stroke(); } });
+const FLOOR = canvasTex(512, 512, (g, w, h) => {
+  g.fillStyle = '#5a5b5d'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 6000; i++) { const v = 70 + rnd() * 70; g.fillStyle = `rgba(${v},${v},${v},.28)`; g.fillRect(rnd() * w, rnd() * h, 1 + rnd() * 2, 1 + rnd() * 2); }
+  for (let i = 0; i < 26; i++) { const x = rnd() * w, y = rnd() * h, r = 30 + rnd() * 90, gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, 'rgba(15,15,15,.35)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); }
+  g.strokeStyle = 'rgba(20,20,20,.7)'; g.lineWidth = 2; g.beginPath(); g.moveTo(0, h / 2); g.lineTo(w, h / 2); g.moveTo(w / 2, 0); g.lineTo(w / 2, h); g.stroke();
+}, [7, 7]);
+const SMOKE = canvasTex(64, 64, (g, w) => { const gr = g.createRadialGradient(32, 32, 0, 32, 32, 32); gr.addColorStop(0, 'rgba(200,200,205,.9)'); gr.addColorStop(.5, 'rgba(160,160,165,.35)'); gr.addColorStop(1, 'rgba(120,120,125,0)'); g.fillStyle = gr; g.fillRect(0, 0, w, w); });
+function label(txt, bg, fg, w = 256, h = 112, font = 'bold 54px "DM Mono", monospace') { return canvasTex(w, h, g => { g.fillStyle = bg; g.fillRect(0, 0, w, h); g.fillStyle = fg; g.font = font; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(txt, w / 2, h / 2 + 4); }); }
 
 // ---------- materials ----------
-const ACC = new THREE.Color(0xff6b1a);
+// "cast" surfaces share one shader patch: tri-planar cast grain + bump, old chipped paint, oily grime (dark, glossy), new paint sweep, exhaust heat.
+const U = { dirt: { value: 1 }, old: { value: 1 }, paint: { value: 0 }, heat: { value: 0 } };
+function castMat({ bare, old, paint = 0, paintable = 0, metal = .55, scale = 3.2, heat = 0 }) {
+  const m = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .6, metalness: .5 });
+  const u = { tNoise: { value: NOISE }, uDirt: U.dirt, uOld: U.old, uPaint: U.paint, uHeat: U.heat, uBare: { value: new THREE.Color(bare) }, uOldC: { value: new THREE.Color(old) }, uPaintC: { value: new THREE.Color(paint) },
+    uPaintable: { value: paintable }, uMetal: { value: metal }, uScale: { value: scale }, uHeatable: { value: heat } };
+  m.onBeforeCompile = sh => {
+    Object.assign(sh.uniforms, u);
+    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 vOP; varying vec3 vON;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvOP = position; vON = objectNormal;');
+    sh.fragmentShader = sh.fragmentShader.replace('#include <common>', `#include <common>
+uniform sampler2D tNoise; uniform float uDirt, uOld, uPaint, uHeat, uPaintable, uMetal, uScale, uHeatable; uniform vec3 uBare, uOldC, uPaintC;
+varying vec3 vOP; varying vec3 vON;
+vec4 tri(vec3 p, vec3 n){ vec3 w = pow(abs(n), vec3(4.0)); w /= (w.x + w.y + w.z + 1e-5); return texture2D(tNoise, p.yz) * w.x + texture2D(tNoise, p.xz) * w.y + texture2D(tNoise, p.xy) * w.z; }`)
+      .replace('#include <color_fragment>', `#include <color_fragment>
+vec3 nN = normalize(vON);
+vec4 nz = tri(vOP * uScale, nN), nz2 = tri(vOP * uScale * .31 + .17, nN);
+float grain = nz.g;
+float chip = smoothstep(.22, .27, nz2.b);
+float oldA = uOld * chip;
+float gm = smoothstep(.22, .55, nz2.r * .65 + nz.r * .35 + (.22 - vOP.y) * .45 + nz.b * .1);
+float dirtA = uDirt * gm;
+float pm = uPaintable * smoothstep(vOP.x - .07, vOP.x + .07, mix(-.95, .95, uPaint));
+vec3 cc = uBare * (.86 + .26 * grain);
+cc = mix(cc, uOldC * (.82 + .3 * nz2.r), oldA);
+cc = mix(cc, vec3(.03, .03, .029) * (.8 + .5 * nz.r), dirtA * .94);
+cc = mix(cc, uPaintC * (.97 + .06 * grain), pm);
+diffuseColor.rgb = cc;
+float kR = mix(mix(.5 + .22 * grain, .74, oldA), .24 + .1 * nz.r, dirtA); kR = mix(kR, .3, pm);
+float kM = mix(mix(uMetal, .04, oldA), .12, dirtA); kM = mix(kM, 0., pm);
+float kB = mix(1.0, .25, max(oldA * .6, pm));`)
+      .replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nroughnessFactor = kR;')
+      .replace('#include <metalnessmap_fragment>', '#include <metalnessmap_fragment>\nmetalnessFactor = kM;')
+      .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+{ float hh = (grain * .5 + nz.r * .5) * .0009 * kB;
+  vec3 sx = dFdx(-vViewPosition), sy = dFdy(-vViewPosition); vec2 dh = vec2(dFdx(hh), dFdy(hh));
+  vec3 r1 = cross(sy, normal), r2 = cross(normal, sx); float det = dot(sx, r1);
+  normal = normalize(abs(det) * normal - sign(det) * (dh.x * r1 + dh.y * r2)); }`)
+      .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance += vec3(1.0, .28, .06) * uHeat * uHeatable * (.25 + .75 * grain) * .55;');
+  };
+  m.customProgramCacheKey = () => 'krcast';
+  return m;
+}
+const std = (color, roughness, metalness, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness, metalness, ...extra });
 const M = {
-  body: new THREE.MeshPhysicalMaterial({ color: 0x5a4a3e, roughness: .88, metalness: .3, map: grime }),
-  det: new THREE.MeshPhysicalMaterial({ color: 0x3a3029, roughness: .85, metalness: .35, map: grime }),
-  deck: new THREE.MeshStandardMaterial({ color: 0x6d625a, roughness: .5, metalness: .7 }),
-  cov: new THREE.MeshPhysicalMaterial({ color: 0x3a3029, roughness: .85, metalness: .35, map: grime }),
-  fin: new THREE.MeshStandardMaterial({ color: 0x4a3f36, roughness: .8, metalness: .4 }),
-  steel: new THREE.MeshStandardMaterial({ color: 0xc8cdd2, roughness: .24, metalness: 1 }),
-  steel2: new THREE.MeshStandardMaterial({ color: 0x8d949a, roughness: .35, metalness: 1 }),
-  bright: new THREE.MeshStandardMaterial({ color: 0xeef2f5, roughness: .12, metalness: 1 }),
-  dark: new THREE.MeshStandardMaterial({ color: 0x09090a, roughness: .7, metalness: .2 }),
-  iron: new THREE.MeshStandardMaterial({ color: 0x4a3a30, roughness: .75, metalness: .55 }),
-  alu: new THREE.MeshStandardMaterial({ color: 0xa9adb0, roughness: .45, metalness: .9 }),
-  rubber: new THREE.MeshStandardMaterial({ color: 0x141414, roughness: .8, metalness: 0 }),
-  wood: new THREE.MeshStandardMaterial({ color: 0x8a6a45, roughness: .9 }),
-  dyno: new THREE.MeshStandardMaterial({ color: 0x2c3036, roughness: .5, metalness: .6 }),
-  dynoL: new THREE.MeshStandardMaterial({ color: 0x5b626b, roughness: .3, metalness: .9 }),
-  mach: new THREE.MeshStandardMaterial({ color: 0x3e4a43, roughness: .55, metalness: .4 }),
-  stand: new THREE.MeshStandardMaterial({ color: 0x1d1f22, roughness: .5, metalness: .6 }),
-  score: new THREE.MeshStandardMaterial({ color: 0x7a1d14, roughness: .6, metalness: .6 }),
-  red: new THREE.MeshBasicMaterial({ color: 0xff3b2f }),
-  strap: new THREE.MeshStandardMaterial({ color: 0xe9e5dc, roughness: .7 }),
-  floor: new THREE.MeshStandardMaterial({ color: 0x2a2b2e, roughness: .82, metalness: .15, map: floorTex }),
-  line: new THREE.MeshStandardMaterial({ color: 0xff6b1a, roughness: .7 })
+  block: castMat({ bare: 0x6f7378, old: 0x383c3a, paint: 0x9c3e1c, paintable: 1 }),
+  cover: castMat({ bare: 0x8e9296, old: 0x343836, paint: 0x121315, paintable: 1, metal: .7 }),
+  iron: castMat({ bare: 0x4f4c4a, old: 0x4f4c4a, metal: .6, heat: 1 }),
+  aluC: castMat({ bare: 0x8f9397, old: 0x8f9397, metal: .8, scale: 4 }),
+  steel: std(0xdfe3e7, .32, 1, { roughnessMap: NOISE }),
+  dull: std(0x9a9fa4, .62, 1, { roughnessMap: NOISE }),
+  forged: std(0x5f6468, .7, .9, { roughnessMap: NOISE }),
+  journal: std(0x8f8a84, .55, 1),
+  deck: std(0x2c2b2a, .4, .6),
+  dark: std(0x050505, .85, .1),
+  rubber: std(0x131313, .82, 0),
+  copper: std(0xb37c58, .38, 1),
+  bearNew: std(0xd2d6d9, .26, 1),
+  pistonOld: std(0x9f9b95, .5, .85, { roughnessMap: NOISE }),
+  pistonNew: std(0xe4e7ea, .3, 1, { roughnessMap: NOISE }),
+  carbon: std(0x141210, .7, .2),
+  gasket: std(0x3c3f43, .38, .75),
+  filter: std(0x1c2a35, .4, .35), filter2: std(0x55584f, .5, .15),
+  dyno: std(0x26313c, .45, .55), dynoD: std(0x16191d, .5, .6), stand: std(0x1b1d20, .5, .6),
+  wood: std(0x4a4339, .9, 0), pipe: std(0x2b2d30, .42, .6, { roughnessMap: NOISE }), strap: std(0xd8d4cb, .7, 0),
+  floor: std(0x1c1d20, .8, .1, { map: FLOOR }), red: new THREE.MeshBasicMaterial({ color: 0xff3b2f })
 };
-// clearcoat never goes to 0 so the shader is compiled once and the finish can tween
-const FIN = {
-  dirty: { dirt: 1, body: [0x4c4c4d, .7, .5, .01], det: [0x2e2e2f, .7, .5, .01], cov: [0x3a3a3b, .7, .5, .01], deck: 0x6d625a, iron: 0x4a3a30, fin: 0x4a3f36, finM: .4, finR: .8 },
-  clean: { dirt: 0, body: [0x7f878e, .42, .85, .01], det: [0x5f666c, .45, .85, .01], cov: [0x7a8289, .4, .85, .01], deck: 0xa9b1b8, iron: 0x4f4b48, fin: 0xb8c0c7, finM: 1, finR: .22 },
-  paint: { dirt: 0, body: [0xd2501a, .3, .25, 1], det: [0x1a1a1c, .35, .5, .8], cov: [0x141416, .22, .45, 1], deck: 0xc9d0d6, iron: 0x37373a, fin: 0xe6ebef, finM: 1, finR: .22 }
-};
-[M.body, M.det, M.cov].forEach(m => { m.clearcoat = .01; m.clearcoatRoughness = .25; });
+M.linerOld = std(0x8b9095, .55, 1, { roughnessMap: NOISE });
+M.linerBad = std(0xa4a9ae, .5, 1, { map: SCRATCH, emissive: 0xff2a1a, emissiveIntensity: 0 });
+M.linerNew = std(0xe8ecef, .18, 1);
+M.pistonBad = M.pistonOld.clone(); M.pistonBad.emissive = new THREE.Color(0xff2a1a); M.pistonBad.emissiveIntensity = 0;
+M.bearBad = M.copper.clone(); M.bearBad.emissive = new THREE.Color(0xff2a1a); M.bearBad.emissiveIntensity = 0;
 
-// ---------- geometry helpers (svg units -> metres: x=(sx-442.5)/250, y=(530-sy)/250) ----------
-const SX = x => (x - 442.5) / 250, SY = y => (530 - y) / 250;
-const CX = [255, 330, 405, 480, 555, 630].map(SX), JX = [217.5, 292.5, 367.5, 442.5, 517.5, 592.5, 667.5].map(SX);
-function mesh(geo, mat, x = 0, y = 0, z = 0) { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; return m; }
-const box = (w, h, d, mat, x, y, z, r = .012) => mesh(r ? new RoundedBoxGeometry(w, h, d, 2, Math.min(r, w / 2.2, h / 2.2, d / 2.2)) : new THREE.BoxGeometry(w, h, d), mat, x, y, z);
-function cyl(r, h, mat, x, y, z, axis = 'y', r2, seg = 40) { const m = mesh(new THREE.CylinderGeometry(r, r2 ?? r, h, seg), mat, x, y, z); if (axis === 'x') m.rotation.z = Math.PI / 2; if (axis === 'z') m.rotation.x = Math.PI / 2; return m; }
-const G = (...kids) => { const g = new THREE.Group(); kids.forEach(k => g.add(k)); return g; };
-
-const engine = new THREE.Group(); scene.add(engine);
+// ---------- geometry builder: each part = one group, static meshes merged per material ----------
+const _m = new THREE.Matrix4(), _q = new THREE.Quaternion(), _e = new THREE.Euler(), _s = new THREE.Vector3(), _p = new THREE.Vector3();
+function prep(g) { if (g.index) g = g.toNonIndexed(); for (const k of Object.keys(g.attributes)) if (!['position', 'normal', 'uv'].includes(k)) g.deleteAttribute(k); if (!g.attributes.uv) g.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2)); g.clearGroups(); return g; }
+const rig = new THREE.Group(); scene.add(rig);
 const P = {};
-// block
-{ const g = G(box(1.86, .55, .62, M.body, 0, .715, 0, .02), box(1.88, .025, .64, M.deck, 0, .99, 0, .006), box(1.84, .03, .66, M.det, 0, .455, 0, .008));
-  for (let i = 0; i < 5; i++) g.add(box(.03, .42, .03, M.body, SX(292.5 + 75 * i), .7, .315, .006));
-  CX.forEach(x => { g.add(cyl(.032, .02, M.steel2, x, SY(372), .312, 'z')); });
-  g.add(box(.9, .13, .05, M.body, SX(410), SY(333), .33, .02), box(.26, .2, .12, M.det, SX(589), SY(323), .36, .02));
-  P.bores = CX.map(x => { const b = cyl(.088, .006, M.dark, x, 1.0035, 0); g.add(b); g.add(mesh(new THREE.RingGeometry(.088, .102, 40).rotateX(-Math.PI / 2), M.steel2, x, 1.004, 0)); return b; });
-  P.block = g; }
-// head
-{ const g = G(box(1.9, .2, .6, M.body, 0, 1.1, 0, .015), box(1.9, .014, .61, M.det, 0, 1.004, 0, .004));
-  for (let i = 0; i < 7; i++) [-.2, .2].forEach(z => g.add(cyl(.016, .02, M.steel, SX(217.5 + 75 * i), 1.205, z)));
-  [-.8, .8].forEach(x => { const t = mesh(new THREE.TorusGeometry(.04, .011, 10, 24), M.steel2, x, 1.25, .26); g.add(t); });
-  P.head = g; }
-// cover
-{ const g = G(box(1.72, .13, .46, M.cov, 0, 1.265, 0, .045));
-  for (let k = 0; k < 11; k++) g.add(box(.022, .03, .34, M.fin, SX(244 + k * 37) + .011, 1.335, 0, .006));
-  g.add(cyl(.05, .05, M.dark, SX(602), 1.35, .08));
-  P.cover = g; }
-// pan
-P.pan = G(box(1.82, .07, .6, M.det, 0, .405, 0, .01), box(.94, .25, .52, M.body, SX(380), .27, 0, .04), box(.62, .13, .52, M.body, SX(590), .345, 0, .03), cyl(.02, .02, M.steel, SX(380), .14, 0));
-// front: timing cover, pulleys, belt
-{ const g = G(box(.12, .74, .5, M.det, 1.0, .69, 0, .03), cyl(.15, .07, M.steel, 1.1, SY(420), 0, 'x'), cyl(.112, .076, M.det, 1.1, SY(420), 0, 'x'), cyl(.04, .09, M.steel, 1.1, SY(420), 0, 'x'),
-    cyl(.09, .045, M.steel, 1.1, SY(300), 0, 'x'), cyl(.03, .05, M.dark, 1.1, SY(300), 0, 'x'), cyl(.042, .04, M.steel2, 1.1, .69, .16, 'x'));
-  const pts = [[1.012, 0], [.95, .085], [.73, .2], [.6, .19], [.44, .155], [.29, 0], [.44, -.155], [.6, -.155], [.92, -.092]].map(([y, z]) => new THREE.Vector3(1.1, y, z));
-  g.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, true), 80, .013, 8, true), M.rubber));
-  P.front = g; }
-// flywheel housing
-P.bell = G(cyl(.3, .14, M.det, -1.0, .66, 0, 'x', .38));
-// exhaust manifold + turbo
-{ const g = G(cyl(.055, 1.5, M.iron, SX(417), 1.04, .345, 'x'));
-  CX.forEach(x => g.add(box(.09, .08, .07, M.iron, x, 1.07, .315, .015)));
-  g.add(cyl(.13, .11, M.iron, -1.1, 1.08, .3, 'z'), cyl(.07, .12, M.dark, -1.1, 1.08, .32, 'z'), cyl(.11, .1, M.alu, -1.1, 1.08, .08, 'z'), cyl(.05, .14, M.steel2, -1.1, 1.08, .19, 'z'),
-    cyl(.045, .14, M.alu, -1.1, 1.2, .08), cyl(.075, .1, M.dark, -1.1, 1.31, .08), cyl(.052, .3, M.iron, -1.1, .86, .3));
-  P.exhaust = g; }
-P.lines = G(box(.03, .03, .03, M.dark, 0, -5, 0, 0));
-// pistons (local crown top = 0)
-for (let i = 0; i < 6; i++) {
-  const g = G(cyl(.084, .13, M.steel, 0, -.065, 0), cyl(.0845, .006, M.dark, 0, -.02, 0), cyl(.0845, .006, M.dark, 0, -.036, 0), cyl(.0845, .006, M.dark, 0, -.052, 0),
-    box(.042, .3, .034, M.steel2, 0, -.26, 0, .008), cyl(.058, .045, M.steel2, 0, -.42, 0, 'z'), cyl(.022, .06, M.dark, 0, -.42, 0, 'z'));
-  g.position.x = CX[i]; P['pst' + i] = g;
+class Part {
+  constructor(name, parent = rig, at = [0, 0, 0]) { this.g = new THREE.Group(); this.g.position.set(...at); parent.add(this.g); this.b = new Map(); if (name) P[name] = this.g; }
+  add(mat, geo, p = [0, 0, 0], r = [0, 0, 0], s = null) { geo = prep(geo); _e.set(r[0], r[1], r[2]); _q.setFromEuler(_e); _s.set(1, 1, 1); if (s) _s.set(s[0], s[1], s[2]); _m.compose(_p.set(p[0], p[1], p[2]), _q, _s); geo.applyMatrix4(_m); if (!this.b.has(mat)) this.b.set(mat, []); this.b.get(mat).push(geo); return this; }
+  done(shadow = true) { for (const [mat, list] of this.b) { const m = new THREE.Mesh(mergeGeometries(list), mat); m.castShadow = shadow; m.receiveShadow = true; this.g.add(m); } this.b.clear(); return this.g; }
 }
-// crank (local centre = 0)
-{ const g = G(cyl(.032, 1.95, M.steel, 0, 0, 0, 'x'), cyl(.13, .035, M.steel2, -1.0, 0, 0, 'x'), cyl(.03, .14, M.steel, 1.02, 0, 0, 'x'));
-  CX.forEach((x, i) => { const up = i % 2 ? 1 : -1; g.add(box(.07, .15, .17, M.steel2, x - .035, up * .06, 0, .03), box(.07, .15, .17, M.steel2, x + .035, up * .06, 0, .03), cyl(.042, .04, M.bright, x, -up * .055, 0, 'x')); });
-  JX.forEach(x => g.add(cyl(.05, .045, M.bright, x, 0, 0, 'x')));
-  P.crank = g; }
-// boring machine
-P.tool = G(box(.62, .22, .34, M.mach, CX[3], 1.98, 0, .03), box(.1, 1.0, .1, M.mach, CX[3] + .42, 1.55, -.22, .02), cyl(.07, .26, M.mach, CX[3], 1.74, 0), cyl(.024, .66, M.bright, CX[3], 1.28, 0), cyl(.05, .03, M.steel2, CX[3], 1.0, 0));
-// inspection marks
-{ const ring1 = mesh(new THREE.TorusGeometry(.125, .008, 8, 60).rotateX(Math.PI / 2), M.red, CX[3], 1.014, 0);
-  const ring2 = mesh(new THREE.TorusGeometry(.12, .008, 8, 60).rotateY(Math.PI / 2), M.red, JX[3], SY(490), 0);
-  const ring3 = mesh(new THREE.TorusGeometry(.12, .008, 8, 60).rotateY(Math.PI / 2), M.red, JX[2], SY(490), 0);
-  const sp = (n, x, y, z) => { const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: label(n, '#ff3b2f', '#fff', 128, 128, 'bold 76px "DM Mono", monospace', true), depthTest: false })); s.scale.set(.13, .13, 1); s.position.set(x, y, z); return s; };
-  const l1 = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(CX[3] + .1, 1.03, .06), new THREE.Vector3(CX[3] + .28, 1.3, .1)]), new THREE.LineBasicMaterial({ color: 0xff3b2f }));
-  const l2 = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(JX[3] + .06, SY(490) + .1, .06), new THREE.Vector3(JX[3] + .3, SY(490) + .32, .1)]), new THREE.LineBasicMaterial({ color: 0xff3b2f }));
-  P.marks = G(ring1, ring2, ring3, l1, l2, sp('1', CX[3] + .31, 1.35, .1), sp('2', JX[3] + .34, SY(490) + .37, .1)); }
-// tag
-{ const tagJob = label('KR-0614', '#efe9da', '#111', 256, 112, 'bold 54px "DM Mono", monospace'), tagRdy = label('READY', '#ff6b1a', '#140a04', 256, 112, 'bold 60px "DM Mono", monospace');
-  const tm = new THREE.MeshStandardMaterial({ map: tagJob, roughness: .8, side: THREE.DoubleSide });
-  const plane = mesh(new THREE.PlaneGeometry(.3, .13), tm, .98, 1.4, .3); plane.rotation.set(0, .5, .12);
-  const str = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(SX(602), 1.36, .08), new THREE.Vector3(.86, 1.44, .25)]), new THREE.LineBasicMaterial({ color: 0xcfc8b6 }));
-  P.tag = G(plane, str); P.tag.userData = { tm, tagJob, tagRdy }; }
-// straps
-P.wrap = G(...[-.55, .55].flatMap(x => [box(.05, .006, .72, M.strap, x, 1.335, 0, 0), box(.05, 1.22, .006, M.strap, x, .73, .37, 0), box(.05, 1.22, .006, M.strap, x, .73, -.37, 0)]));
-// pallet
-{ const g = G(); for (let k = 0; k < 7; k++) g.add(box(.26, .025, 1.0, M.wood, -1.02 + k * .34, .107, 0, .004));
-  [-1.0, 0, 1.0].forEach(x => g.add(box(.2, .07, 1.0, M.wood, x, .055, 0, .006))); g.add(box(2.3, .02, .14, M.wood, 0, .01, .38, .004), box(2.3, .02, .14, M.wood, 0, .01, -.38, .004));
-  P.pallet = g; }
-// dyno + cart + exhaust hose
-{ const g = G(box(.5, .52, .58, M.dyno, -1.44, .48, 0, .04), cyl(.17, .04, M.dynoL, -1.44, .5, .3, 'z'), cyl(.06, .05, M.dark, -1.44, .5, .32, 'z'), box(.66, .24, .66, M.stand, -1.44, .12, 0, .02),
-    cyl(.04, .3, M.steel, -1.15, .66, 0, 'x'), box(2.0, .04, .5, M.stand, 0, .05, 0, .01), box(.06, .32, .06, M.stand, -.65, .22, 0, .01), box(.06, .32, .06, M.stand, .65, .22, 0, .01));
-  const hose = new THREE.CatmullRomCurve3([new THREE.Vector3(-1.1, .72, .3), new THREE.Vector3(-1.12, .55, .42), new THREE.Vector3(-1.4, .9, .5), new THREE.Vector3(-1.5, 2.0, .3), new THREE.Vector3(-1.5, 3.2, .1)]);
-  P.dyno = g; }
-// engine stand (3D only)
-P.stand = G(box(.08, .7, .08, M.stand, -1.38, .38, 0, .01), box(.4, .06, .06, M.stand, -1.17, .7, 0, .01), cyl(.1, .03, M.stand, -.95, .7, 0, 'x'), box(.08, .05, .9, M.stand, -1.38, .03, 0, .01), box(.7, .05, .08, M.stand, -1.05, .03, 0, .01),
-  ...[[-1.38, .42], [-1.38, -.42], [-.72, 0]].map(([x, z]) => cyl(.035, .03, M.rubber, x, .035, z, 'z')));
-Object.values(P).forEach(g => { if (g.isObject3D) engine.add(g); });
+const RX = [0, 0, Math.PI / 2], RZ = [Math.PI / 2, 0, 0];      // rotate a Y cylinder onto x / z
+const CY = (r, h, seg = 32, rTop) => new THREE.CylinderGeometry(rTop ?? r, r, h, seg);
+const RB = (w, h, d, r = .01) => new RoundedBoxGeometry(w, h, d, 2, Math.max(.0005, Math.min(r, w / 2 - .0005, h / 2 - .0005, d / 2 - .0005)));
+const TU = (pts, r, seg = 48, closed = false, rs = 10) => new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(...p)), closed, 'centripetal'), seg, r, rs, closed);
+const TO = (R, t, arc = Math.PI * 2, seg = 40) => new THREE.TorusGeometry(R, t, 12, seg, arc);
+const LA = (pts, seg = 36) => new THREE.LatheGeometry(pts.map(([x, y]) => new THREE.Vector2(x, y)), seg);
+function EXX(shape, depth, bevel = 0) { const g = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: bevel > 0, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 2, curveSegments: 20 }); g.translate(0, 0, -depth / 2); g.rotateY(Math.PI / 2); return g; } // extruded along x
+const CX = [-.40, -.24, -.08, .08, .24, .40], JX = [-.48, -.32, -.16, 0, .16, .32, .48];
 
-// floor + safety line + back wall glow
-const floor = mesh(new THREE.PlaneGeometry(40, 40).rotateX(-Math.PI / 2), M.floor, 0, 0, 0); floor.castShadow = false; scene.add(floor);
-const back = new THREE.Mesh(new THREE.PlaneGeometry(30, 10), new THREE.MeshStandardMaterial({ color: 0x111214, roughness: .95 })); back.position.set(0, 5, -4); scene.add(back);
-
-// lights
-scene.add(new THREE.HemisphereLight(0x50555f, 0x0a0a0a, .5));
-const key = new THREE.SpotLight(0xffe0c0, 62, 14, .55, .7, 1.6); key.position.set(1.4, 4.6, 2.6); key.target.position.set(0, .7, 0); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); key.shadow.bias = -.0004; key.shadow.radius = 4; scene.add(key, key.target);
-const rim = new THREE.DirectionalLight(0xa8bcff, 2.2); rim.position.set(-3.5, 2.8, -3); scene.add(rim);
-const kick = new THREE.SpotLight(0xff8a3c, 18, 10, .5, .9, 1.8); kick.position.set(-2.6, .4, 2.4); kick.target.position.set(0, .6, 0); scene.add(kick, kick.target);
-const pool = new THREE.SpotLight(0xffffff, 30, 12, .9, 1, 2); pool.position.set(0, 4, -2.6); pool.target.position.set(0, 0, -3.5); scene.add(pool, pool.target);
-
-// ---------- stage application ----------
-const BASE = {};
-Object.keys(P).forEach(k => { if (P[k].isObject3D) BASE[k] = P[k].position.clone(); });
-const STAND_ON = { teardown: 1, inspection: 1, machining: 1, assembly: 1 };
-const ENTER = { tool: [0, .45], dyno: [-.5, 0], pallet: null, stand: null, marks: null, wrap: [0, .15] };
-const CAMS = {
-  received: { az: .62, el: .26, r: 6.3, t: [0, .72, 0] }, teardown: { az: .5, el: .2, r: 7.2, t: [0, .92, 0] }, inspection: { az: .42, el: .6, r: 5.4, t: [0, .62, 0] },
-  machining: { az: .7, el: .26, r: 6.8, t: [0, 1.15, 0] }, assembly: { az: .55, el: .26, r: 6.8, t: [0, .95, 0] }, dyno: { az: .5, el: .22, r: 7.4, t: [-.3, .78, 0] }, ready: { az: .78, el: .28, r: 6.4, t: [0, .7, 0] }
-};
-const cam = { az: .62, el: .28, r: 5.2, tx: 0, ty: .72, tz: 0 };
-// finish changes gradually: grime fades off, steel brightens, paint comes up
-function setFinish(k, anim) {
-  const F = FIN[k], T = (o, p, d = 1.5, dl = .25) => { gsap.killTweensOf(o); if (anim) gsap.to(o, { ...p, duration: d, delay: dl, ease: 'power2.inOut' }); else Object.assign(o, p); };
-  const C = c => { const x = new THREE.Color(c); return { r: x.r, g: x.g, b: x.b }; };
-  [['body', M.body], ['det', M.det], ['cov', M.cov]].forEach(([n, m]) => { const [c, r, mt, cc] = F[n]; T(m.color, C(c)); T(m, { roughness: r, metalness: mt, clearcoat: cc }); });
-  T(M.deck.color, C(F.deck)); T(M.iron.color, C(F.iron)); T(M.fin.color, C(F.fin)); T(M.fin, { metalness: F.finM, roughness: F.finR });
-  gsap.killTweensOf(FINS);
-  if (anim && FINS.dirt !== F.dirt) gsap.to(FINS, { dirt: F.dirt, duration: 1.6, delay: .3, ease: 'power1.inOut', onUpdate: drawGrime });
-  else { FINS.dirt = F.dirt; drawGrime(); }
-}
-// where each part travels to when it leaves (and comes from when it returns), in metres
-const OFF = { head: [0, 2.4, 0], cover: [0, 2.9, 0], exhaust: [0, 2.4, 0], lines: [0, 2.4, 0], bell: [0, 2.6, 0], front: [1.9, 0, 0], pan: [0, -.02, 2.2],
-  crank: [3.0, 0, 0], pallet: [3.4, 0, 0], stand: [0, 0, -3.4], tool: [0, 1.8, 0], dyno: [-2.8, 0, 0], tag: [0, 1.5, 0], wrap: [0, 1.4, 0] };
-const offOf = n => OFF[n] || (n.startsWith('pst') ? [0, 2.8, 0] : [0, 1.6, 0]);
-const LATE = { head: .35, cover: .6, exhaust: .5, lines: .5, tag: .5, wrap: .3, marks: .5 };
-const stagger = n => n.startsWith('pst') ? +n[3] * .08 : 0;
-function apply(k, anim) {
-  anim = anim && !reduce;
-  const L = KR.LAYOUT[k];
-  setFinish(L.fin, anim);
-  Object.keys(BASE).forEach(name => {
-    const g = P[name], ud = g.userData, sm = name === 'marks'; let v = L.p[name];
-    if (name === 'stand') v = STAND_ON[k] ? [0, 0] : null;
-    if (!v) {                                   // leaving: travel out of frame, then hide
-      if (ud.on === false && anim) return;      // already on its way out
-      ud.on = false; gsap.killTweensOf(g.position); gsap.killTweensOf(g.scale);
-      if (!anim || !g.visible) { g.visible = false; return; }
-      const done = () => { if (ud.on === false) g.visible = false; };
-      if (sm) gsap.to(g.scale, { x: .001, y: .001, z: .001, duration: .45, ease: 'power2.in', onComplete: done });
-      else { const o = offOf(name); gsap.to(g.position, { x: ud.tx + o[0], y: ud.ty + o[1], z: BASE[name].z + o[2], duration: .9, delay: stagger(name) * .6, ease: 'power2.in', onComplete: done }); }
-      return;
-    }
-    let x = BASE[name].x + v[0] / 250, y = BASE[name].y - v[1] / 250;
-    if (name.startsWith('pst') || name === 'crank') y = (530 - v[1]) / 250;
-    const z = BASE[name].z;
-    ud.on = true; ud.tx = x; ud.ty = y;
-    gsap.killTweensOf(g.position); gsap.killTweensOf(g.scale);
-    if (!anim) { g.visible = true; g.position.set(x, y, z); g.scale.setScalar(1); return; }
-    if (!g.visible) {                           // arriving: start off-frame, travel in after the leavers clear
-      g.visible = true;
-      if (sm) { g.position.set(x, y, z); g.scale.setScalar(.001); gsap.to(g.scale, { x: 1, y: 1, z: 1, duration: .7, delay: .9, ease: 'back.out(1.7)' }); }
-      else { const o = offOf(name); g.position.set(x + o[0], y + o[1], z + o[2]); gsap.to(g.position, { x, y, z, duration: 1.15, delay: .45 + (LATE[name] || 0) + stagger(name), ease: 'power3.out' }); }
-    } else {                                    // staying: ease to the new spot
-      g.scale.setScalar(1);
-      gsap.to(g.position, { x, y, z, duration: 1.35, delay: stagger(name) * .7, ease: 'power3.inOut' });
-    }
+// ---- block ----
+{ const b = new Part('block'), s = new THREE.Shape(), R = [[.172, .394], [.186, .38], [.2, .335], [.2, .215], [.186, .165], [.194, .035], [.21, -.055], [.222, -.07], [.222, -.094]];
+  s.moveTo(-R[0][0], R[0][1]); R.forEach(([z, y]) => s.lineTo(z, y)); R.slice().reverse().forEach(([z, y]) => s.lineTo(-z, y)); s.closePath();
+  b.add(M.block, EXX(s, 1.04, .006));
+  [-1, 1].forEach(sd => {
+    [-.32, -.16, 0, .16, .32].forEach(x => { b.add(M.block, RB(.022, .19, .03, .008), [x, .275, sd * .205]); b.add(M.block, RB(.024, .17, .03, .008), [x, .05, sd * .205]); });
+    b.add(M.block, CY(.017, 1.0, 20), [0, .175, sd * .2], RX);                              // oil gallery boss
+    [-.32, -.08, .16].forEach(x => b.add(M.dull, CY(.022, .008, 24), [x + .08, .29, sd * .207], RZ));  // cup plugs
+    JX.forEach(x => b.add(M.block, RB(.05, .045, .03, .01), [x, -.07, sd * .214]));
+    [-.46, .46].forEach(x => b.add(M.block, RB(.1, .05, .14, .012), [x, -.01, sd * .3]));    // mount feet
   });
-  P.bores.forEach((b, i) => b.material = i === 3 && k === 'inspection' ? M.score : i === 3 && k === 'machining' ? M.bright : (k === 'machining' || k === 'assembly' ? M.steel2 : M.dark));
-  const td = P.tag.userData; if (k === 'ready' || k === 'received') { td.tm.map = k === 'ready' ? td.tagRdy : td.tagJob; td.tm.needsUpdate = true; }
-  const c = CAMS[k], to = { az: c.az, el: c.el, r: c.r * (isPhone() ? 1.04 : 1), tx: c.t[0], ty: c.t[1], tz: c.t[2] };
-  gsap.killTweensOf(cam);
-  if (anim) gsap.to(cam, { ...to, duration: 1.8, ease: 'power2.inOut' }); else Object.assign(cam, to);
+  b.add(M.block, RB(.44, .13, .03, .012), [-.08, .11, .214]);                              // oil cooler cover
+  for (let k = 0; k < 6; k++) [.05, .17].forEach(y => b.add(M.dull, CY(.008, .012, 6), [-.27 + k * .076, y, .232], RZ));
+  b.add(M.dull, TU([[0, -.1, .225], [.02, .18, .235], [.03, .36, .262]], .005, 24), [0, 0, 0]); b.add(M.strap, TO(.016, .005), [.03, .375, .262]);
+  b.add(M.deck, RB(1.04, .004, .35, .0015), [0, .3985, 0]);
+  CX.forEach(x => b.add(M.dark, CY(.0565, .003, 36), [x, .4005, 0]));
+  JX.forEach(x => [-1, 1].forEach(sd => b.add(M.dark, CY(.009, .003, 12), [x, .4005, sd * .148])));
+  b.done(); }
+// ---- liners (old 6, new 6) ----
+const linerGeo = () => LA([[.056, .142], [.061, .142], [.061, .392], [.068, .392], [.068, .405], [.056, .405]], 40);
+for (let i = 0; i < 6; i++) { new Part('lOld' + i, rig, [CX[i], 0, 0]).add(i === 3 ? M.linerBad : M.linerOld, linerGeo()).done(); new Part('lNew' + i, rig, [CX[i], 3.2, 0]).add(M.linerNew, linerGeo()).done(); }
+// ---- pistons + rods (crown at y .395 when home) ----
+function piston(name, x, matP, carbon, y0 = 0) {
+  const p = new Part(name, rig, [x, y0, 0]);
+  p.add(matP, CY(.0545, .085, 40), [0, .3525, 0]);
+  [.384, .373, .362].forEach(y => p.add(M.dark, CY(.0548, .0035, 40), [0, y, 0]));
+  p.add(carbon ? M.carbon : matP, CY(.046, .002, 36), [0, .396, 0]); p.add(M.dark, TO(.024, .0045, Math.PI * 2, 30), [0, .3965, 0], [Math.PI / 2, 0, 0]);
+  p.add(M.dark, CY(.014, .112, 16), [0, .332, 0], RZ);
+  p.add(M.forged, RB(.026, .215, .036, .008), [0, .2, 0]); p.add(M.forged, CY(.046, .03, 28), [0, .062, 0], RX); p.add(M.copper, CY(.037, .032, 28), [0, .062, 0], RX);
+  [-1, 1].forEach(s => p.add(M.dull, CY(.007, .05, 8), [0, .04, s * .036]));
+  return p;
 }
-window.__gsap = gsap;
+for (let i = 0; i < 6; i++) piston('p' + i, CX[i], i === 3 ? M.pistonBad : M.pistonOld, true).done();
+{ const crack = new THREE.Mesh(TU([[.02, .3975, .03], [.026, .3975, .036], [.024, .3975, .043], [.032, .3975, .05], [.034, .3975, .053]], .0028, 16), M.red); crack.visible = false; P.p3.add(crack); P.crack = crack; }
+piston('pNew', CX[3], M.pistonNew, false, 3.4).done();
+// ---- crankshaft (I6 throws 0 / 240 / 120) ----
+{ const c = new Part('crank'), TH = [0, 4.19, 2.09, 2.09, 4.19, 0];
+  const web = new THREE.Shape(); web.moveTo(-.05, -.01); web.lineTo(-.045, .062); web.absarc(0, .062, .045, Math.PI, 0, true); web.lineTo(.05, -.01); web.absarc(0, 0, .1, -.15, Math.PI + .15, true); web.closePath();
+  const wg = EXX(web, .024, .003);
+  JX.forEach(x => c.add(M.journal, CY(.04, .046, 32), [x, 0, 0], RX));
+  CX.forEach((x, i) => { const a = TH[i]; [-.044, .044].forEach(dx => c.add(M.forged, wg.clone(), [x + dx, 0, 0], [a, 0, 0])); c.add(M.journal, CY(.036, .064, 28), [x, .062 * Math.cos(a), .062 * Math.sin(a)], RX); });
+  c.add(M.journal, CY(.03, .09, 24), [.545, 0, 0], RX); c.add(M.forged, CY(.075, .03, 32), [-.52, 0, 0], RX);
+  c.done(); }
+// ---- main bearing shells (old 6 + the spun no. 4, new 7) ----
+const shellGeo = () => { const s = new THREE.Shape(); s.absarc(0, 0, .047, Math.PI, Math.PI * 2, false); s.absarc(0, 0, .0415, Math.PI * 2, Math.PI, true); s.closePath(); return EXX(s, .034); };
+{ const o = new Part('bOld'), n = new Part('bNew', rig, [0, -.17, 3.2]); JX.forEach((x, k) => { if (k !== 3) o.add(M.copper, shellGeo(), [x, 0, 0]); n.add(M.bearNew, shellGeo(), [x, 0, 0]); }); o.done(); n.done();
+  new Part('bBad').add(M.bearBad, shellGeo(), [JX[3], 0, 0]).done(); }
+// ---- oil pan ----
+{ const p = new Part('pan');
+  p.add(M.block, RB(1.06, .016, .46, .005), [0, -.104, 0]); p.add(M.block, RB(1.0, .13, .42, .035), [0, -.175, 0]); p.add(M.block, RB(.44, .13, .4, .045), [.24, -.29, 0]);
+  p.add(M.dull, CY(.013, .016, 12), [.24, -.358, .1]);
+  for (let x = -.5; x <= .51; x += .1) [-1, 1].forEach(s => p.add(M.dull, CY(.007, .01, 6), [x, -.094, s * .222]));
+  p.done(); }
+// ---- head gasket ----
+{ const g = new Part('gasket'); g.add(M.gasket, RB(1.07, .003, .35, .001), [0, .4025, 0]); CX.forEach(x => g.add(M.dark, CY(.058, .0035, 36), [x, .4025, 0])); g.done(); }
+// ---- cylinder head ----
+{ const h = new Part('head');
+  h.add(M.block, RB(1.08, .13, .36, .012), [0, .47, 0]);
+  CX.forEach(x => [-1, 1].forEach(s => h.add(M.dark, RB(.045, .036, .006, .006), [x, .47, s * .181])));
+  JX.forEach(x => [-1, 1].forEach(s => h.add(M.dull, CY(.012, .02, 10), [x, .54, s * .15])));
+  h.add(M.block, CY(.035, .05, 20), [.5, .56, -.06]); [-1, 1].forEach(s => h.add(M.dull, TO(.03, .008), [s * .46, .565, .16]));
+  h.add(M.rubber, TU([[.5, .58, -.06], [.55, .65, -.06], [.62, .7, -.07], [.74, .71, -.07]], .022, 32)); h.add(M.dull, TO(.024, .004), [.55, .65, -.06], [0, Math.PI / 2, .9]);
+  h.done(); }
+// ---- valvetrain ----
+{ const v = new Part('rockers');
+  v.add(M.dull, CY(.011, 1.0, 14), [0, .595, -.075], RX);
+  CX.forEach(x => { [-1, 1].forEach(a => [-1, 1].forEach(b => v.add(M.steel, CY(.013, .05, 14), [x + a * .03, .56, b * .045])));
+    [-1, 1].forEach(a => v.add(M.forged, RB(.022, .018, .13, .006), [x + a * .03, .592, -.01])); v.add(M.forged, RB(.04, .04, .03, .006), [x, .578, -.075]);
+    [-1, 1].forEach(b => v.add(M.dull, RB(.075, .01, .02, .003), [x, .586, b * .045])); });
+  v.done(); }
+// ---- injectors, rail and 6 lines ----
+{ const f = new Part('fuel');
+  f.add(M.dull, CY(.02, .96, 20), [0, .55, -.27], RX);
+  CX.forEach(x => { f.add(M.steel, CY(.011, .1, 16), [x, .535, 0]); f.add(M.dark, CY(.016, .022, 16), [x, .595, 0]); f.add(M.forged, RB(.03, .01, .04, .003), [x, .575, .022]);
+    f.add(M.steel, TU([[x, .55, -.252], [x + .012, .585, -.24], [x + .02, .585, -.205], [x + .02, .535, -.186]], .0045, 24, false, 8)); f.add(M.dull, CY(.008, .03, 10), [x + .02, .525, -.18], RZ); });
+  f.done(); }
+// ---- valve cover ----
+{ const c = new Part('cover');
+  c.add(M.cover, RB(1.04, .012, .36, .004), [0, .541, 0]); c.add(M.cover, RB(1.0, .085, .33, .035), [0, .578, 0]);
+  for (let k = 0; k < 9; k++) c.add(M.cover, RB(.012, .016, .25, .004), [-.4 + k * .1, .624, 0]);
+  c.add(M.dark, CY(.034, .03, 24), [.38, .632, .09]); c.add(M.dark, CY(.022, .02, 16), [-.4, .628, -.1]);
+  c.add(M.rubber, TU([[-.4, .635, -.1], [-.42, .66, -.18], [-.45, .58, -.24], [-.46, .4, -.25]], .012, 24));
+  for (let k = 0; k < 6; k++) [-1, 1].forEach(s => c.add(M.dull, CY(.008, .012, 8), [-.42 + k * .168, .55, s * .172]));
+  c.done(); }
+// ---- intake manifold ----
+{ const i = new Part('intake'); i.add(M.block, RB(.92, .09, .08, .02), [0, .47, -.225]); CX.forEach(x => i.add(M.block, RB(.07, .07, .02, .006), [x, .47, -.188]));
+  i.add(M.block, CY(.035, .1, 20), [.5, .48, -.24], RX); i.done(); }
+// ---- exhaust manifold ----
+{ const e = new Part('exhaust');
+  e.add(M.iron, CY(.032, .9, 24), [-.01, .47, .265], RX);
+  CX.forEach(x => { e.add(M.iron, RB(.055, .05, .08, .015), [x, .47, .225]); e.add(M.iron, RB(.075, .072, .012, .004), [x, .47, .187]); });
+  e.add(M.iron, CY(.036, .1, 20), [-.2, .53, .29]); e.done(); }
+// ---- turbo (snail housings, wastegate, stack) + charge pipe ----
+{ const t = new Part('turbo'), tx = -.11, ty = .64, tz = .37;
+  t.add(M.iron, CY(.08, .07, 32), [tx - .09, ty, tz], RX); t.add(M.iron, TO(.078, .038, Math.PI * 1.75, 36), [tx - .09, ty, tz], [0, Math.PI / 2, 0]);
+  t.add(M.dull, CY(.045, .1, 24), [tx, ty, tz], RX);
+  t.add(M.aluC, CY(.085, .065, 32), [tx + .08, ty, tz], RX); t.add(M.aluC, TO(.082, .036, Math.PI * 1.75, 36), [tx + .08, ty, tz], [Math.PI, Math.PI / 2, 0]);
+  t.add(M.aluC, CY(.044, .07, 28), [tx + .14, ty, tz], RX); t.add(M.dark, CY(.037, .004, 24), [tx + .176, ty, tz], RX);
+  t.add(M.aluC, CY(.032, .045, 20), [tx + .07, ty - .1, tz + .08], RZ); t.add(M.dull, CY(.004, .17, 6), [tx - .01, ty - .1, tz + .08], RX);   // wastegate can + rod
+  t.add(M.iron, TU([[tx - .14, ty, tz], [tx - .2, ty + .03, tz], [tx - .21, ty + .12, tz], [tx - .21, ty + .26, tz]], .044, 24));       // stack
+  t.add(M.dark, CY(.038, .004, 20), [tx - .21, ty + .262, tz]);
+  t.done();
+  const cp = new Part('pipe'); cp.add(M.pipe, TU([[tx + .08, ty + .1, tz + .05], [tx + .2, ty + .05, tz + .1], [.45, .64, .4], [.66, .62, .28], [.71, .6, .05], [.66, .55, -.15], [.57, .5, -.22]], .03, 64));  // charge pipe
+  [[tx + .1, ty + .09, tz + .06], [.57, .5, -.22]].forEach(p => cp.add(M.rubber, CY(.036, .05, 20), p, RX)); cp.done();
+  const w = new Part('cwheel', P.turbo, [tx + .168, ty, tz]); w.add(M.steel, CY(.012, .02, 12), [0, 0, 0], RX); for (let k = 0; k < 8; k++) w.add(M.steel, RB(.006, .056, .012, .002), [0, 0, 0], [k * Math.PI / 4, 0, 0]); w.done(false);
+  P.stackTop = new THREE.Object3D(); P.stackTop.position.set(tx - .21, ty + .3, tz); P.turbo.add(P.stackTop); }
+// ---- front: gear cover, damper, pulleys, belt, alternator, hose ----
+{ const f = new Part('front');
+  f.add(M.block, RB(.046, .62, .46, .03), [.562, .17, 0]); f.add(M.block, CY(.07, .05, 28), [.6, .4, .1], RX);
+  for (let k = 0; k < 10; k++) { const a = k / 10 * Math.PI * 2; f.add(M.dull, CY(.008, .012, 6), [.586, .17 + Math.sin(a) * .27, Math.cos(a) * .2], RX); }
+  f.add(M.aluC, CY(.068, .13, 28), [.53, .44, .27], RX); [.49, .52, .55, .58].forEach(x => f.add(M.dark, CY(.07, .006, 28), [x, .44, .27], RX));
+  f.add(M.forged, RB(.04, .12, .03, .006), [.53, .37, .23]);
+  f.add(M.rubber, TU([[.6, .3, .18], [.66, .28, .24], [.77, .24, .26]], .024, 24));
+  const PUL = [[0, 0, .097], [.22, .17, .034], [.44, .27, .032], [.4, .1, .058], [.47, -.06, .052], [.22, -.14, .032]], cy = .26, cz = .05, pts = [];
+  PUL.forEach(([y, z, r]) => { const a0 = Math.atan2(y - cy, z - cz); [-.7, -.35, 0, .35, .7].forEach(d => { const a = a0 + d, py = y + (r + .008) * Math.sin(a), pz = z + (r + .008) * Math.cos(a); pts.push([Math.atan2(py - cy, pz - cz), [.668, py, pz]]); }); });
+  pts.sort((a, b) => a[0] - b[0]); f.add(M.rubber, TU(pts.map(p => p[1]), .008, 200, true, 6));
+  f.done();
+  const spin = (name, at, parts) => { const s = new Part(name, P.front, at); parts(s); s.done(); return s.g; };
+  P.spins = [
+    [spin('damper', [.64, 0, 0], s => { s.add(M.dull, CY(.13, .05, 40), [-.015, 0, 0], RX); s.add(M.rubber, TO(.09, .006, Math.PI * 2, 40), [.011, 0, 0], [0, Math.PI / 2, 0]); s.add(M.dull, CY(.097, .032, 40), [.028, 0, 0], RX);
+      [.022, .034].forEach(x => s.add(M.dark, CY(.0985, .004, 40), [x, 0, 0], RX)); s.add(M.dull, CY(.03, .06, 20), [.03, 0, 0], RX); for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3; s.add(M.dark, CY(.007, .012, 8), [.046, Math.sin(a) * .05, Math.cos(a) * .05], RX); }
+      s.add(M.dark, RB(.004, .05, .012, .002), [.012, .1, 0]); }), 1],
+    [spin('wp', [.668, .4, .1], s => { s.add(M.steel, CY(.058, .03, 32), [0, 0, 0], RX); s.add(M.dull, CY(.03, .06, 16), [-.03, 0, 0], RX); }), .97 / .58],
+    [spin('alt', [.668, .44, .27], s => { s.add(M.steel, CY(.032, .032, 20), [0, 0, 0], RX); s.add(M.dull, CY(.012, .1, 10), [-.05, 0, 0], RX); }), 3],
+    [spin('fan', [.668, .47, -.06], s => { s.add(M.dull, CY(.052, .035, 28), [0, 0, 0], RX); s.add(M.dull, CY(.065, .01, 6), [.022, 0, 0], RX); }), 1.8],
+    [spin('tens', [.668, .22, .17], s => s.add(M.steel, CY(.034, .03, 20), [0, 0, 0], RX)), 2.8],
+    [spin('idler', [.668, .22, -.14], s => s.add(M.steel, CY(.032, .03, 20), [0, 0, 0], RX)), 3]];
+}
+// ---- flywheel housing + starter ----
+{ const b = new Part('bell'); b.add(M.block, CY(.27, .1, 48, .3), [-.585, .05, 0], [0, 0, -Math.PI / 2]);
+  for (let k = 0; k < 12; k++) { const a = k / 12 * Math.PI * 2; b.add(M.block, CY(.016, .1, 10), [-.585, .05 + Math.sin(a) * .29, Math.cos(a) * .29], RX); }
+  b.add(M.dull, CY(.24, .02, 48), [-.64, .05, 0], RX); b.add(M.dark, TO(.245, .009, Math.PI * 2, 64), [-.64, .05, 0], [0, Math.PI / 2, 0]);
+  b.add(M.filter, CY(.055, .22, 24), [-.47, -.03, -.27], RX); b.add(M.filter, CY(.03, .12, 16), [-.45, .05, -.27], RX); b.done(); }
+// ---- filters (upright spin-ons on the exhaust side) ----
+{ const f = new Part('filters');
+  f.add(M.block, RB(.1, .04, .08, .01), [.3, .02, .236]); f.add(M.filter, CY(.055, .18, 32), [.3, .13, .29]); f.add(M.filter, CY(.057, .012, 32), [.3, .045, .29]);
+  f.add(M.block, RB(.08, .035, .07, .01), [.12, .07, .232]); f.add(M.filter2, CY(.04, .15, 28), [.12, .16, .275]); f.add(M.dull, CY(.042, .01, 28), [.12, .09, .275]);
+  f.done(); }
+// ---- shipping tag + straps (rig-local) ----
+{ const job = label('KR-0614', '#efe9da', '#111'), rdy = label('READY', '#ff6b1a', '#140a04', 256, 112, 'bold 60px "DM Mono", monospace');
+  const tm = new THREE.MeshStandardMaterial({ map: job, roughness: .8, side: THREE.DoubleSide });
+  const t = new THREE.Group(); P.tag = t; t.position.set(.38, .64, .09); rig.add(t);
+  const pl = new THREE.Mesh(new THREE.PlaneGeometry(.26, .114), tm); pl.position.set(.12, -.1, .16); pl.rotation.set(0, .45, .1); pl.castShadow = true;
+  const str = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(.04, .05, .06), new THREE.Vector3(.1, -.05, .15)]), new THREE.LineBasicMaterial({ color: 0xcfc8b6 }));
+  t.add(pl, str); t.userData = { tm, job, rdy };
+  const w = new Part('wrap'); [-.34, .34].forEach(x => w.add(M.strap, TU([[x, -.385, -.36], [x, .55, -.33], [x, .675, -.2], [x, .675, .22], [x, .6, .44], [x, -.385, .5]], .011, 48, false, 6))); w.done(); P.wrap.position.y = 2.6; }
 
-// ---------- render loop ----------
+// ---- world props: pallet, dyno + run rails, floor, wall ----
+const Y_PAL = .555, Y_UP = 1.05, Y_DYNO = .80;
+rig.position.y = Y_PAL;
+{ const p = new Part('pallet', scene); for (let k = 0; k < 7; k++) p.add(M.wood, RB(.2, .025, 1.0, .004), [-.6 + k * .2, .132, 0]);
+  [-.55, 0, .55].forEach(x => p.add(M.wood, RB(.14, .1, 1.0, .006), [x, .07, 0])); [-1, 1].forEach(s => p.add(M.wood, RB(1.36, .02, .14, .004), [0, .01, s * .43]));
+  p.add(M.wood, RB(.3, .05, .3, .006), [.24, .17, 0]); p.add(M.wood, RB(.3, .165, .3, .006), [-.3, .227, 0]); p.done(); }
+{ const d = new Part('dyno', scene, [-4.6, 0, 0]), ay = Y_DYNO;
+  d.add(M.dyno, CY(.27, .34, 48), [-1.34, ay, 0], RX); [-1.15, -1.53].forEach(x => d.add(M.dynoD, CY(.21, .05, 40), [x, ay, 0], RX));
+  for (let k = 0; k < 12; k++) d.add(M.dynoD, RB(.3, .014, .02, .004), [-1.34, ay + Math.sin(k * Math.PI / 6) * .272, Math.cos(k * Math.PI / 6) * .272], [k * Math.PI / 6, 0, 0]);
+  d.add(M.dynoD, RB(.5, ay - .2, .5, .02), [-1.34, (ay - .2) / 2 + .02, 0]); d.add(M.stand, RB(.9, .04, .8, .01), [-1.34, .02, 0]);
+  d.add(M.dyno, RB(.05, .34, .05, .01), [-1.34, ay - .2, .33]); d.add(M.dynoD, CY(.03, .08, 16), [-1.34, ay - .38, .33]);
+  d.add(M.rubber, TU([[-1.2, .1, .3], [-1.1, .3, .38], [-1.2, .62, .3], [-1.25, ay - .12, .22]], .02, 32)); d.add(M.rubber, TU([[-1.5, .1, .3], [-1.58, .4, .35], [-1.5, ay - .15, .22]], .02, 32));
+  [-1, 1].forEach(s => { d.add(M.stand, RB(1.7, .05, .07, .008), [-.24, .74, s * .33]); d.add(M.stand, RB(.07, .72, .07, .008), [.56, .37, s * .33]); d.add(M.stand, RB(.07, .72, .07, .008), [-1.05, .37, s * .33]); d.add(M.stand, RB(.3, .03, .1, .006), [.56, .015, s * .33]); });
+  d.add(M.stand, RB(.07, .05, .67, .008), [-1.05, .74, 0]);
+  d.done();
+  const sh = new Part('shaft', P.dyno, [0, ay, 0]); sh.add(M.dull, CY(.026, .4, 20), [-.88, 0, 0], RX); sh.add(M.forged, CY(.1, .025, 32), [-.665, 0, 0], RX); sh.add(M.forged, RB(.05, .1, .1, .01), [-.69, 0, 0]); sh.add(M.forged, RB(.05, .1, .1, .01), [-1.08, 0, 0]);
+  sh.add(M.strap, RB(.02, .03, .03, .004), [-.88, .03, 0]); sh.done(); P.spins.push([P.shaft, 1]); }
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40).rotateX(-Math.PI / 2), M.floor); floor.receiveShadow = true; scene.add(floor);
+const back = new THREE.Mesh(new THREE.PlaneGeometry(30, 10), std(0x101113, .95, 0)); back.position.set(0, 5, -5); scene.add(back);
+
+// ---------- lights ----------
+scene.add(new THREE.HemisphereLight(0x3c4048, 0x0a0a0a, .3));
+const key = new THREE.SpotLight(0xfff2e4, 78, 16, .55, .65, 1.6); key.position.set(2.2, 5.4, 3.4); key.target.position.set(0, .9, 0);
+key.castShadow = !isPhone(); key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -.0003; key.shadow.normalBias = .01; key.shadow.camera.near = 2; key.shadow.camera.far = 12; scene.add(key, key.target);
+const rim = new THREE.DirectionalLight(0xb4c4f0, 1.7); rim.position.set(-3.4, 3, -3.6); scene.add(rim);
+const kick = new THREE.SpotLight(0xffd9bf, 5, 10, .5, .9, 1.8); kick.position.set(-2.6, .5, 2.6); kick.target.position.set(0, .8, 0); scene.add(kick, kick.target);
+const sweep = new THREE.SpotLight(0xfff1dc, 0, 8, .35, .8, 1.5); sweep.position.set(-1.6, 2.2, 2.4); sweep.target.position.set(-.6, .6, 0); scene.add(sweep, sweep.target);
+const pool = new THREE.SpotLight(0xffffff, 26, 12, .9, 1, 2); pool.position.set(0, 4, -2.8); pool.target.position.set(0, 0, -4); scene.add(pool, pool.target);
+
+// ---------- smoke puffs from the stack while it runs on the dyno ----------
+const puffs = []; for (let k = 0; k < 10; k++) { const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: SMOKE, transparent: true, opacity: 0, depthWrite: false })); s.visible = false; scene.add(s); puffs.push(s); }
+
+// ---------- exploded-view labels (HTML, projected every frame) ----------
+const TAGDEF = [
+  ['t1', 'Valve cover', '', 'cover', [.3, .63, .12]], ['t2', 'Injectors + lines', '', 'fuel', [.4, .6, 0]], ['t3', 'Cylinder head', '', 'head', [.5, .5, .18]],
+  ['t4', 'Turbo', '', 'turbo', [-.03, .66, .45]], ['t5', 'Pistons + rods', '', 'p5', [0, .3, .05]], ['t6', 'Crankshaft', '', 'crank', [.47, 0, 0]],
+  ['t7', 'Oil pan', '', 'pan', [.3, -.3, .2]], ['t8', 'Front cover + damper', '', 'front', [.66, .1, .1]],
+  ['i1', 'Liner scored', 'cyl 4', 'lOld3', [0, .36, .06], 'bad'], ['i2', 'Piston cracked', 'cyl 4', 'p3', [0, .39, .05], 'bad'], ['i3', 'Main bearing spun', 'no. 4', 'bBad', [JX[3], -.04, .04], 'bad'],
+  ['m1', 'New liners ×6', '', 'lNew5', [0, .36, .06], 'new'], ['m2', 'New piston', 'cyl 4', 'pNew', [0, .39, .05], 'new'], ['m3', 'Crank ground', '.010 under', 'crank', [-.32, 0, 0], 'new'], ['m4', 'Block decked', '', 'block', [-.48, .4, .12], 'new']];
+const tagBox = document.getElementById('tags'), tagL = document.getElementById('tagL'), legend = document.getElementById('legend'), SVGNS = 'http://www.w3.org/2000/svg';
+const TAGS = TAGDEF.map(([id, text, sub, part, at, cls = '']) => {
+  FX[id] = 0; const n = TAGDEF.filter(d => d[0][0] === id[0]).findIndex(d => d[0] === id) + 1;
+  const el = document.createElement('div'); el.className = 'tg ' + cls; el.innerHTML = `<b>${n}</b><span>${text}${sub ? `<small>${sub}</small>` : ''}</span>`; tagBox.appendChild(el);
+  const ln = document.createElementNS(SVGNS, 'line'), dot = document.createElementNS(SVGNS, 'circle'); dot.setAttribute('r', 3.5); if (cls === 'bad') dot.setAttribute('class', 'bad');
+  ln.style.visibility = dot.style.visibility = 'hidden'; tagL.append(ln, dot);
+  const a = new THREE.Object3D(); a.position.set(...at); P[part].add(a);
+  return { id, n, text, sub, cls, el, ln, dot, a, on: false, w: 0, h: 0 };
+});
+
+// ---------- the build/rebuild, as tweens on the master timeline ----------
+const ST = new Map();
+function cur(o, k) { let s = ST.get(o); if (!s) ST.set(o, s = {}); if (!(k in s)) s[k] = o[k]; return s[k]; }
+function mv(o, to, at, dur = 1, ease = 'power3.inOut') { const from = {}; for (const k in to) from[k] = cur(o, k); Object.assign(ST.get(o), to); KRT.fromTo(o, from, { ...to, duration: dur, ease, immediateRender: false }, at); }
+const tagIn = (id, at) => mv(FX, { [id]: 1 }, at, .4, 'power2.out'), tagsOut = (ids, at) => ids.forEach(id => mv(FX, { [id]: 0 }, at, .28, 'power2.in'));
+const pos = n => P[n].position;
+// 01 Received (0-3.3): work light sweeps across the dirty engine while the camera pushes in
+mv(FX, { sweepI: 1 }, 0, .22, 'power2.out'); mv(FX, { sweep: 1 }, 0, 3.3, 'none'); mv(FX, { sweepI: 0 }, 2.9, .5, 'power2.in');
+// 02 Teardown (3.3-9.9): lifted off the pallet, then the staggered explode along real axes
+mv(rig.position, { y: Y_UP }, 3.3, 1.0, 'power2.inOut'); mv(pos('pallet'), { x: -4.6 }, 3.5, 1.3, 'power2.in'); mv(P.tag.position, { y: 3.2 }, 3.3, .8, 'power2.in');
+mv(pos('cover'), { y: .9 }, 4.2, 1.1); tagIn('t1', 5.1);
+mv(pos('fuel'), { y: .76 }, 4.6, 1.0); tagIn('t2', 5.5);
+mv(pos('rockers'), { y: .6 }, 4.9, 1.0);
+mv(pos('head'), { y: .48 }, 5.2, 1.1); tagIn('t3', 6.2); mv(pos('gasket'), { y: .43 }, 5.4, 1.0);
+mv(pos('exhaust'), { z: .24 }, 5.7, 1.0); mv(pos('turbo'), { x: -.62, z: .32, y: -.05 }, 5.85, 1.1); mv(pos('pipe'), { x: .36, y: .44 }, 5.95, 1.1); tagIn('t4', 6.8); mv(pos('intake'), { z: -.34 }, 6.0, 1.0);
+mv(pos('front'), { x: .46 }, 6.2, 1.0); tagIn('t8', 7.1); mv(pos('filters'), { z: .34 }, 6.35, .9);
+mv(pos('pan'), { y: -.3 }, 6.5, 1.0); tagIn('t7', 7.4);
+for (let i = 0; i < 6; i++) mv(pos('p' + i), { y: .36 }, 6.8 + i * .09, 1.0); tagIn('t5', 8.0);
+mv(pos('crank'), { y: -.28 }, 7.5, 1.0); tagIn('t6', 8.4); mv(pos('bOld'), { y: -.15 }, 7.6, 1.0); mv(pos('bBad'), { y: -.15 }, 7.6, 1.0);
+mv(pos('bell'), { x: -.36 }, 7.7, 1.0);
+tagsOut(['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8'], 9.7);
+// 03 Inspection (9.9-14.8): hot-tanked to bare iron, then the three failures pull forward and pulse red
+mv(FX, { dirt: 0, old: 0 }, 9.9, 1.6, 'power1.inOut');
+mv(pos('lOld3'), { y: .17 }, 10.5, .9); mv(pos('p3'), { z: .17 }, 10.6, .9); mv(pos('bBad'), { z: .2 }, 10.7, .9);
+mv(FX, { hl: 1 }, 10.9, .5, 'power2.out'); tagIn('i1', 11.2); tagIn('i2', 11.5); tagIn('i3', 11.8);
+tagsOut(['i1', 'i2', 'i3'], 14.5); mv(FX, { hl: 0 }, 15.0, .4, 'power2.in');
+// 04 Machining (14.8-19.8): old liners, cracked piston and shells leave; deck + crank get machined; new parts drop in
+for (let i = 0; i < 6; i++) mv(pos('lOld' + i), { y: 3.2 }, 15.0 + i * .07, .9, 'power2.in');
+mv(pos('p3'), { y: 3.4 }, 15.25, .85, 'power2.in'); mv(pos('bBad'), { z: 3.2 }, 15.3, .8, 'power2.in'); mv(pos('bOld'), { z: 3.2 }, 15.35, .8, 'power2.in');
+mv(FX, { deck: 1 }, 15.6, 1.4, 'power2.inOut'); mv(FX, { grind: 1 }, 15.8, 1.6, 'power2.inOut'); mv(P.crank.rotation, { x: Math.PI * 2 }, 15.6, 2.6, 'power2.inOut');
+for (let i = 0; i < 6; i++) mv(pos('lNew' + i), { y: 0 }, 15.9 + i * .1, .9, 'power3.out');
+mv(pos('pNew'), { y: .36 }, 16.6, 1.0, 'power3.out'); mv(pos('bNew'), { z: 0 }, 16.9, .9, 'power3.out');
+tagIn('m1', 16.9); tagIn('m2', 17.5); tagIn('m3', 17.9); tagIn('m4', 18.2); tagsOut(['m1', 'm2', 'm3', 'm4'], 19.5);
+// 05 Assembly (19.8-25.8): everything flies home in reverse order; dyno + run rails slide in underneath
+mv(pos('bNew'), { y: 0 }, 20.0, .8); mv(pos('crank'), { y: 0 }, 20.1, 1.0);
+['p0', 'p1', 'p2', 'pNew', 'p4', 'p5'].forEach((n, k) => mv(pos(n), { y: 0 }, 20.6 + k * .09, 1.0));
+mv(pos('pan'), { y: 0 }, 21.3, .9); mv(pos('front'), { x: 0 }, 21.6, .9); mv(pos('bell'), { x: 0 }, 21.7, .9);
+mv(pos('gasket'), { y: 0 }, 22.0, .9); mv(pos('head'), { y: 0 }, 22.2, 1.0); mv(pos('rockers'), { y: 0 }, 22.7, .9); mv(pos('fuel'), { y: 0 }, 23.0, .9); mv(pos('cover'), { y: 0 }, 23.3, 1.0);
+mv(pos('exhaust'), { z: 0 }, 23.6, .9); mv(pos('turbo'), { x: 0, z: 0, y: 0 }, 23.8, 1.0); mv(pos('pipe'), { x: 0, y: 0 }, 23.95, 1.0); mv(pos('intake'), { z: 0 }, 23.9, .9); mv(pos('filters'), { z: 0 }, 24.1, .8);
+mv(pos('dyno'), { x: 0 }, 24.4, 1.5, 'power3.out'); mv(rig.position, { y: Y_DYNO }, 25.0, 1.0, 'power2.inOut');
+// 06 Dyno (25.8-31.4): it runs (pulleys spin, shake, smoke, manifold heat); gauge + stamp are on the same timeline (TRK)
+mv(FX, { run: 1 }, 25.9, 1.2, 'power2.in'); mv(FX, { heat: 1 }, 26.4, 3.0, 'power1.in');
+mv(FX, { run: 0 }, 30.9, 1.0, 'power2.out'); mv(FX, { heat: 0 }, 31.0, 1.4, 'power1.out');
+// 07 Ready (31.4-36.4): lifted off, dyno leaves, paint sweeps rear to front, set down on the pallet, strapped, tagged
+mv(rig.position, { y: 1.0 }, 31.6, .9); mv(pos('dyno'), { x: -4.6 }, 32.0, 1.3, 'power2.in');
+mv(pos('pallet'), { x: 4.6 }, 31.9, .01, 'none'); mv(pos('pallet'), { x: 0 }, 32.5, 1.3, 'power3.out');
+mv(FX, { paint: 1 }, 31.8, 1.8, 'power2.inOut');
+mv(rig.position, { y: Y_PAL }, 33.4, 1.1, 'power2.inOut');
+mv(FX, { ready: 1 }, 34.0, .01, 'none'); mv(P.wrap.position, { y: 0 }, 34.3, .9, 'power3.out'); mv(P.tag.position, { y: .64 }, 34.7, .9, 'back.out(1.4)');
+// re-render the playhead now that the 3D tweens exist (TRK may have opened on a later stage)
+{ const t = KRT.time(); KRT.time(Math.min(t + .001, KRT.duration())); KRT.time(t); }
+
+// homes, for hiding parts parked off-frame (no pops: they only hide once well out of view)
+const HOME = {}; ['pallet', 'dyno', 'pNew', 'bNew', 'wrap', ...[0, 1, 2, 3, 4, 5].flatMap(i => ['lOld' + i, 'lNew' + i]), 'p3', 'bOld', 'bBad'].forEach(n => HOME[n] = n.startsWith('l') || n.startsWith('p') ? new THREE.Vector3(P[n].position.x, 0, 0) : new THREE.Vector3(0, 0, 0));
+
+// ---------- camera: one spline through the whole timeline, so it never stops ----------
+const K = [
+  [0, .66, .2, 4.3, 0, .62, 0], [1.1, .56, .18, 3.95, 0, .64, 0], [3.2, .44, .16, 3.8, 0, .68, 0], [5.6, .32, .17, 5.6, 0, 1.3, 0], [8.6, .12, .15, 6.5, 0, 1.5, 0],
+  [10.6, -.05, .24, 5.9, .05, 1.5, 0], [13.2, -.2, .32, 5.2, .08, 1.5, .05], [16.0, -.4, .3, 5.0, .05, 1.42, 0], [19.0, -.58, .2, 6.2, 0, 1.48, 0],
+  [22.0, -.44, .16, 5.8, 0, 1.3, 0], [25.0, -.16, .13, 4.9, -.3, 1.0, 0], [28.0, .14, .1, 4.7, -.38, .9, 0], [31.0, .3, .12, 4.6, -.22, .88, 0],
+  [33.5, .52, .18, 4.3, 0, .66, 0], [36.4, .74, .22, 4.1, 0, .62, 0]];
+const cam = [0, 0, 0, 0, 0, 0];
+function camAt(t) {
+  t = Math.max(0, Math.min(K[K.length - 1][0], t)); let i = 0; while (i < K.length - 2 && t > K[i + 1][0]) i++;
+  const p0 = K[Math.max(0, i - 1)], p1 = K[i], p2 = K[i + 1], p3 = K[Math.min(K.length - 1, i + 2)], h = p2[0] - p1[0], u = (t - p1[0]) / h;
+  const h00 = 2 * u ** 3 - 3 * u * u + 1, h10 = u ** 3 - 2 * u * u + u, h01 = -2 * u ** 3 + 3 * u * u, h11 = u ** 3 - u * u;
+  for (let k = 1; k < 7; k++) { const m1 = (p2[k] - p0[k]) / Math.max(1e-3, p2[0] - p0[0]) * h, m2 = (p3[k] - p1[k]) / Math.max(1e-3, p3[0] - p1[0]) * h; cam[k - 1] = h00 * p1[k] + h10 * m1 + h01 * p2[k] + h11 * m2; }
+  return cam;
+}
+
+// ---------- per-frame ----------
 function size() {
   const w = wrap.clientWidth, h = wrap.clientHeight;
-  renderer.setSize(w, h, false); camera.aspect = w / h;
-  if (!isPhone()) camera.setViewOffset(w, h, -w * .14, -h * .02, w, h); else camera.clearViewOffset();
-  camera.updateProjectionMatrix();
+  renderer.setPixelRatio(PR()); renderer.setSize(w, h, false); camera.aspect = w / h;
+  if (!isPhone()) camera.setViewOffset(w, h, -w * .15, -h * .02, w, h); else camera.clearViewOffset();
+  camera.updateProjectionMatrix(); TAGS.forEach(t => t.w = 0);
 }
 addEventListener('resize', size); size();
-let visible = true;
-new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(wrap);
-const clock = new THREE.Clock();
-function frame() {
-  const t = clock.getElapsedTime(), sway = reduce ? 0 : Math.sin(t * .22) * .07;
-  const az = cam.az + sway, el = cam.el;
-  camera.position.set(cam.tx + cam.r * Math.cos(el) * Math.sin(az), cam.ty + cam.r * Math.sin(el), cam.tz + cam.r * Math.cos(el) * Math.cos(az));
-  camera.lookAt(cam.tx, cam.ty, cam.tz);
-  if (visible) renderer.render(scene, camera);
+let visible = true; new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(wrap);
+const C = (a, b, t) => a + (b - a) * t, colA = new THREE.Color(), colB = new THREE.Color(), V = new THREE.Vector3();
+const DECK = [0x2c2b2a, .45, 0x777b80, .55, 0xd6dade, .16], JOUR = [0x8f8a84, .55, 0xe9edf0, .12];
+let lastLegend = '';
+function frame(now) {
+  const t = now / 1000, ph = isPhone(), T = KRT.time();
+  // materials from the timeline state
+  U.dirt.value = FX.dirt; U.old.value = FX.old; U.paint.value = FX.paint; U.heat.value = FX.heat * Math.max(FX.run, .35 * FX.heat);
+  const clean = 1 - FX.dirt; colA.setHex(DECK[0]).lerp(colB.setHex(DECK[2]), clean).lerp(colB.setHex(DECK[4]), FX.deck); M.deck.color.copy(colA); M.deck.roughness = C(C(DECK[1], DECK[3], clean), DECK[5], FX.deck); M.deck.metalness = C(.6, 1, Math.max(clean * .5, FX.deck));
+  M.journal.color.setHex(JOUR[0]).lerp(colB.setHex(JOUR[2]), FX.grind); M.journal.roughness = C(JOUR[1], JOUR[3], FX.grind);
+  const pulse = FX.hl * (.55 + .45 * Math.sin(t * 6.5)); M.linerBad.emissiveIntensity = pulse * 1.4; M.pistonBad.emissiveIntensity = pulse * 1.1; M.bearBad.emissiveIntensity = pulse * 1.6; P.crack.visible = FX.hl > .02;
+  const td = P.tag.userData, want = FX.ready > .5 ? td.rdy : td.job; if (td.tm.map !== want) { td.tm.map = want; td.tm.needsUpdate = true; }
+  P.tag.children[0].rotation.z = .1 + Math.sin(t * 1.4) * .07;
+  for (const n in HOME) { const g = P[n]; g.visible = g.position.distanceTo(HOME[n]) < 2.4; }
+  // running on the dyno
+  const run = reduce ? 0 : FX.run;
+  if (!frame.lt) frame.lt = t; const dt = Math.min(.05, t - frame.lt); frame.lt = t;
+  P.spins.forEach(([g, r]) => { g.rotation.x += dt * run * 13 * r; });
+  P.cwheel.rotation.x += dt * run * 40;
+  rig.position.x = run * .0022 * Math.sin(t * 61); rig.position.z = run * .0016 * Math.sin(t * 47 + 1); rig.rotation.x = run * .0025 * Math.sin(t * 53);
+  P.stackTop.getWorldPosition(V);
+  puffs.forEach((s, k) => { const age = ((t * .55 + k / puffs.length) % 1); s.visible = run > .02; if (!s.visible) return; s.position.set(V.x - age * .25, V.y + age * 1.1, V.z + age * .1); const sc = .12 + age * .55; s.scale.set(sc, sc, 1); s.material.opacity = run * (1 - age) * .3; });
+  sweep.intensity = reduce ? 0 : FX.sweepI * 36; sweep.position.x = C(-1.8, 2.0, FX.sweep); sweep.target.position.x = C(-.8, .8, FX.sweep);
+  // camera
+  const c = camAt(T), sway = reduce ? 0 : Math.sin(t * .23) * .035, k = ph ? 1.25 : 1;
+  const az = c[0] + sway, el = c[1], r = c[2] * k, tx = c[3], ty = c[4] + (ph ? .04 : 0), tz = c[5];
+  camera.position.set(tx + r * Math.cos(el) * Math.sin(az), ty + r * Math.sin(el), tz + r * Math.cos(el) * Math.cos(az)); camera.lookAt(tx, ty, tz);
+  if (visible) { renderer.render(scene, camera); labels(ph); }
   requestAnimationFrame(frame);
 }
-TRK.subscribe(apply);
-frame();
+function labels(ph) {
+  const W = wrap.clientWidth, H = wrap.clientHeight, vis = [];
+  camera.updateMatrixWorld();
+  for (const g of TAGS) {
+    const r = FX[g.id];
+    if (r <= .002) { if (g.on) { g.on = false; g.el.style.visibility = g.ln.style.visibility = g.dot.style.visibility = 'hidden'; } continue; }
+    if (!g.on) { g.on = true; g.el.style.visibility = 'visible'; g.ln.style.visibility = g.dot.style.visibility = ph ? 'hidden' : 'visible'; }
+    if (!g.w) { g.w = g.el.offsetWidth; g.h = g.el.offsetHeight; }
+    g.a.getWorldPosition(V); V.project(camera); g.sx = (V.x * .5 + .5) * W; g.sy = (-V.y * .5 + .5) * H; g.r = r; vis.push(g);
+  }
+  if (ph) {
+    vis.forEach(g => { const s = Math.min(1, g.r * 1.15); g.el.style.transform = `translate(${(g.sx - 11).toFixed(1)}px,${(g.sy - 11).toFixed(1)}px) scale(${s.toFixed(3)})`; g.el.style.clipPath = 'none'; });
+    const key = vis.filter(g => g.r > .5).map(g => g.id).join();
+    if (key !== lastLegend) { lastLegend = key; const on = vis.filter(g => g.r > .5); legend.style.gridTemplateColumns = on.length > 4 ? '1fr 1fr' : '1fr'; legend.innerHTML = on.map(g => `<li class="${g.cls}"><i>${g.n}</i>${g.text}${g.sub ? ' · ' + g.sub : ''}</li>`).join(''); }
+    return;
+  }
+  if (lastLegend) { lastLegend = ''; legend.innerHTML = ''; }
+  let cx = 0, cy = 0; vis.forEach(g => { cx += g.sx; cy += g.sy; }); cx /= vis.length || 1; cy /= vis.length || 1;
+  const minX = Math.min(W * .37, 500), top = 136, bot = H - 175;
+  vis.forEach(g => {
+    let dx = g.sx - cx, dy = g.sy - cy; const L = Math.hypot(dx, dy) || 1; dx /= L; dy /= L;
+    if (vis.length === 1) { dx = .8; dy = -.6; }
+    g.right = dx >= -.15; g.ly = g.sy + dy * 46; g.lx = g.sx + (g.right ? 1 : -1) * (54 + Math.abs(dy) * 10);
+  });
+  [true, false].forEach(side => { const s = vis.filter(g => g.right === side).sort((a, b) => a.ly - b.ly); for (let k = 0; k < s.length; k++) { s[k].ly = Math.max(top, Math.min(bot, s[k].ly)); if (k) s[k].ly = Math.max(s[k].ly, s[k - 1].ly + s[k - 1].h + 6); } for (let k = s.length - 2; k >= 0; k--) if (s[k + 1].ly > bot) s[k].ly = Math.min(s[k].ly, s[k + 1].ly - s[k].h - 6); });
+  vis.forEach(g => {
+    let x = g.right ? g.lx : g.lx - g.w; x = Math.max(minX, Math.min(W - g.w - 12, x)); const y = g.ly - g.h / 2;
+    const ex = g.right ? x : x + g.w, e = Math.min(1, g.r * 1.5);
+    g.ln.setAttribute('x1', g.sx.toFixed(1)); g.ln.setAttribute('y1', g.sy.toFixed(1)); g.ln.setAttribute('x2', (g.sx + (ex - g.sx) * e).toFixed(1)); g.ln.setAttribute('y2', (g.sy + (g.ly - g.sy) * e).toFixed(1));
+    g.dot.setAttribute('cx', g.sx.toFixed(1)); g.dot.setAttribute('cy', g.sy.toFixed(1));
+    const cut = ((1 - Math.max(0, (g.r - .25) / .75)) * 100).toFixed(1);
+    g.el.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`; g.el.style.clipPath = g.right ? `inset(0 ${cut}% 0 0)` : `inset(0 0 0 ${cut}%)`;
+  });
+}
+window.KR3 = { scene, camera, renderer, M, P, U, key, kick, rim, sweep, pool };
+requestAnimationFrame(frame);
 </script>
 </body>
 </html>

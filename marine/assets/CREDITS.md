@@ -1,0 +1,10 @@
+# Marine assets: credits and licences
+
+| File | What it is | Source | Author | Licence | Used for |
+|---|---|---|---|---|---|
+| `photo-motor.jpg` (69 KB, 960x720) | Older Evinrude 115 "OceanPro" two-stroke on a white boat on its trailer, parking-lot phone photo | https://commons.wikimedia.org/wiki/File:Lancha-atras.jpg | Rodrigo César | Public domain (released by the author, per the file page) | Sample customer photo 1 in the scanner, step-chip thumbnail, owner-phone card thumbnail. Cropped to the motor + stern, resized, +3% contrast. The maker's name on the cowl is the customer's old motor in a customer-style photo (allowed by BRIEF-R3); the "115 hp two-stroke" tag sits over it. |
+| `photo-plate.jpg` (68 KB, 960x720) | Close-up of a worn ID plate on a cream clamp bracket | Rendered in code: `src/gen-photos.html?w=plate` (three.js r186 + canvas phone-camera pass) | IC Business Systems (made for this demo) | Own work | Sample customer photo 2. Unbranded plate ("OUTBOARD MOTOR", model 115 TL, 115 hp / 85.8 kW, 20 in. shaft); the serial is a made-up number, blurred. |
+| `photo-meter.jpg` (58 KB, 960x720) | Helm hour meter reading 01427.3 on a black gauge panel | Rendered in code: `src/gen-photos.html?w=meter` | IC Business Systems (made for this demo) | Own work | Sample customer photo 3. |
+| `src/gen-photos.html` | Generator for the two rendered photos | This repo | IC Business Systems | Own work | Re-render with `?w=plate` / `?w=meter`; the JPEG lands in `window.OUT`. Not loaded by the page. |
+
+Searched and not used: Wikimedia Commons had no free ID-plate photo that matched a 115 hp motor (the only CC0 plate is a 9.8 hp Tohatsu) and no free boat hour-meter close-up (the usable ones are CC BY-SA or panel meters). Pexels search pages were reachable but had no plate or hour-meter close-up either; Unsplash blocked scripted fetches; Openverse timed out. No paid generation was used. No 3D model was downloaded: the boat, trailer, motors, hoist and shop are built in code inside `a.html`.

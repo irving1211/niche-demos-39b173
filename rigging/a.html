@@ -93,8 +93,8 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .ph .scr{width:100%;height:100%;border-radius:28px;overflow:hidden;position:relative;background:linear-gradient(160deg,#1d2633,#0b0f15)}
 .ph .tm{position:absolute;top:58px;width:100%;text-align:center;font:800 64px/1 "Big Shoulders Display";color:#ffffffd0}
 .ph .dt{position:absolute;top:128px;width:100%;text-align:center;font-size:14px;color:#ffffff90}
-.card{position:absolute;left:10px;right:10px;top:176px;background:#f4efe6;color:#14110d;border-radius:14px;padding:14px 14px 12px;transform:translateY(-360px);box-shadow:0 18px 40px #0009}
-.card.in{transform:none;transition:transform .7s cubic-bezier(.2,1.3,.4,1)}
+.card{position:absolute;left:10px;right:10px;top:176px;background:#f4efe6;color:#14110d;border-radius:14px;padding:14px 14px 12px;transform:translateY(-470px);visibility:hidden;box-shadow:0 18px 40px #0009}
+.card.in{transform:none;visibility:visible;transition:transform .7s cubic-bezier(.2,1.3,.4,1)}
 .card .hd{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .card .hd i{width:20px;height:20px;border-radius:5px;background:var(--acc);display:grid;place-items:center;font:900 13px "Big Shoulders Display";color:#140800;font-style:normal}
 .card .hd span{margin-left:auto;font-weight:500;color:#6b655c;letter-spacing:0;text-transform:none}
@@ -128,8 +128,15 @@ footer{padding:28px 44px 40px;color:var(--mut);font-size:14px;display:flex;justi
   .steps li b{font:800 40px/1 "Big Shoulders Display";color:var(--acc)}
   .steps li h3{font:800 24px/1.1 "Big Shoulders Display";text-transform:uppercase}
   .steps li p{color:#c3beb4}
-  .card{transform:none}
+  .card{transform:none;visibility:visible}
 }
+/* hands-free tour (?tour=1) for screen recording: no cursor, no scrollbar, no scroll cue */
+html.tour,html.tour *{cursor:none!important}
+html.tour{scrollbar-width:none}
+html.tour::-webkit-scrollbar{display:none}
+html.tour .cue{display:none}
+.btn,.seg button{transition:transform .18s ease-out}
+.btn.tap,.seg button.tap{transform:scale(.94)}
 /* phone */
 @media (max-width:760px){
   body{font-size:17px}
@@ -157,6 +164,7 @@ footer{padding:28px 44px 40px;color:var(--mut);font-size:14px;display:flex;justi
   .plan{grid-template-columns:1fr;gap:30px}
   .out{padding:24px}
   .out .crew{font-size:48px}
+  .send small{flex-basis:100%}
   .svc{grid-template-columns:1fr}
   .band .in{padding:32px 16px}
   .two{grid-template-columns:1fr;gap:40px}
@@ -235,7 +243,7 @@ footer{padding:28px 44px 40px;color:var(--mut);font-size:14px;display:flex;justi
         <div class="crew" id="pc">4-person crew</div>
         <div class="eq" id="pe">30-ton hydraulic gantry or 60-ton crane</div>
         <ul id="pn"></ul>
-        <div class="est"><div><small>Truck</small><b id="pt">Lowboy</b></div><div><small>On site</small><b id="pd">est. 1 day</b></div></div>
+        <div class="est"><div><small>Truck</small><b id="pt">Lowboy</b></div><div><small>On site</small><b id="pdays">est. 1 day</b></div></div>
       </div>
       <div class="send"><button class="btn btn-acc" id="sendBtn" type="button">Send to Halyard</button><small>Demo only: nothing is sent.</small></div>
       <div class="ph" aria-label="What lands on the owner's phone">
@@ -302,6 +310,8 @@ window.STORY={p:0};window.STORY_N=7;
 // truck travel profile on the road stage (accelerate, cruise, brake)
 window.TRAV=x=>{const a=.2,v=1/(1-a);if(x<=0)return 0;if(x>=1)return 1;if(x<a)return .5*v/a*x*x;if(x>1-a)return 1-.5*v/a*(1-x)*(1-x);return .5*v*a+v*(x-a)};
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TOUR=/[?&]tour=1\b/.test(location.search);window.TOUR=TOUR;
+if(TOUR){document.documentElement.classList.add('tour');if('scrollRestoration' in history)history.scrollRestoration='manual';scrollTo(0,0)}
 const $=s=>document.querySelector(s);
 const rail=$('#rail');STAGES.forEach(s=>{const e=document.createElement('span');e.innerHTML='<b>'+s.t+'</b>';rail.appendChild(e)});
 $('#stepsList').innerHTML=STAGES.map(s=>`<li><b>${s.t}</b><div><h3>${s.h}</h3><p>${s.d}</p></div></li>`).join('');
@@ -326,7 +336,7 @@ ui(0);
 addEventListener('scroll',()=>{document.querySelector('.bar').style.background=scrollY>innerHeight*7.1?'#06080b':''},{passive:true});
 if(!reduce&&window.gsap){
   gsap.registerPlugin(ScrollTrigger);gsap.ticker.lagSmoothing(0);
-  gsap.to(STORY,{p:7,ease:'none',scrollTrigger:{trigger:'#story',start:'top top',end:()=>'+='+innerHeight*7,pin:true,scrub:1,anticipatePin:1,invalidateOnRefresh:true},onUpdate:()=>ui(STORY.p)});
+  gsap.to(STORY,{p:7,ease:'none',scrollTrigger:{trigger:'#story',start:'top top',end:()=>'+='+innerHeight*7,pin:true,scrub:TOUR?true:1,anticipatePin:1,invalidateOnRefresh:true},onUpdate:()=>ui(STORY.p)});
 }
 // ---------- plan tool ----------
 function plan(w,mi,door,floor){
@@ -350,7 +360,7 @@ function fill(el){el.style.setProperty('--v',((el.value-el.min)/(el.max-el.min)*
 function upd(){
   const w=+W.value,mi=+MI.value,dw=+DW.value;[W,MI,DW].forEach(fill);
   $('#wo').textContent=w.toLocaleString()+' lb';$('#mio').textContent=mi+' mi';$('#dwo').textContent=Math.floor(dw/12)+' ft '+(dw%12)+' in';
-  const r=plan(w,mi,dw,floor);$('#pc').textContent=r.crew;$('#pe').textContent=r.eq;$('#pt').textContent=r.truck;$('#pd').textContent=r.days;
+  const r=plan(w,mi,dw,floor);$('#pc').textContent=r.crew;$('#pe').textContent=r.eq;$('#pt').textContent=r.truck;$('#pdays').textContent=r.days;
   $('#pn').innerHTML=r.notes.map(n=>'<li>'+n+'</li>').join('');
   $('#cardTxt').textContent=`${w.toLocaleString()} lb machine · ${mi} mi · ${floor} floor · door ${Math.floor(dw/12)} ft. Suggested: ${r.crew}, ${r.eq.toLowerCase()}.`;
 }
@@ -358,6 +368,40 @@ function upd(){
 document.querySelectorAll('#fl button').forEach(b=>b.addEventListener('click',()=>{floor=b.dataset.v;document.querySelectorAll('#fl button').forEach(x=>x.setAttribute('aria-pressed',x===b));upd()}));
 upd();
 $('#sendBtn').addEventListener('click',()=>{const c=$('#card');c.classList.remove('in');void c.offsetWidth;c.classList.add('in');$('#sendBtn').textContent='Sent: Halyard will call you'});
+
+// ---------- ?tour=1: hands-free run for the promo video (eased auto-scroll + scripted plan fill-in) ----------
+// Beats (seconds after the tour starts, ~1.4 s after load) are listed in NOTES.md. window.TOUR_T = seconds since start.
+function runTour(){
+  if(!window.gsap||!window.ScrollTrigger||!ScrollTrigger.getAll().length)return;
+  const st=ScrollTrigger.getAll()[0],vh=innerHeight,ph=innerWidth<760,sc={y:scrollY},T0=performance.now();
+  gsap.ticker.add(()=>{window.TOUR_T=(performance.now()-T0)/1000});
+  const tl=gsap.timeline();let t=0;
+  const yP=p=>st.start+p*vh,yEl=(sel,off)=>()=>$(sel).getBoundingClientRect().top+scrollY-off;
+  const go=(y,d,ease='sine.inOut')=>{tl.to(sc,{y,duration:d,ease,onUpdate:()=>scrollTo(0,sc.y)},t);t+=d};
+  const hold=d=>{t+=d};
+  const tap=(el,fn)=>{tl.call(()=>{el.classList.add('tap');setTimeout(()=>el.classList.remove('tap'),190);fn&&fn()},null,t)};
+  const slide=(el,to,d)=>{const o={v:+el.value};tl.to(o,{v:to,duration:d,ease:'power2.inOut',onUpdate:()=>{el.value=Math.round(o.v/ +el.step)* +el.step;upd()}},t);t+=d};
+  // story: travel (the stage's action plays) then hold on the end state
+  hold(2.5);                       // 06:00 first screen
+  go(yP(1.86),3.0);hold(2.4);      // 07:30 power down, jacks, skates in
+  go(yP(2.9),2.8);hold(2.4);       // 09:10 skated out the dock door
+  go(yP(3.96),4.4);hold(2.6);      // 10:40 pick, slew, set on the lowboy, chains on
+  go(yP(4.96),6.6);hold(.8);       // 13:00 the rain drive (keeps moving: no hold mid-highway)
+  go(yP(5.93),3.6);hold(2.4);      // 14:30 gantry lift, truck out, rolled in
+  go(yP(6.8),2.4);hold(2.8);       // 16:00 leveled and anchored
+  // plan your move: scripted fill-in, then Send drops our job card on the drawn phone
+  const planTop=()=>$('#plan .kick').getBoundingClientRect().top+scrollY-(ph?82:100);
+  tl.to(sc,{y:planTop,duration:1.5,ease:'power2.inOut',onUpdate:()=>scrollTo(0,sc.y)},t);t+=1.5;hold(.4);
+  slide(W,64000,1.2);hold(.2);slide(MI,85,1.0);hold(.2);slide(DW,90,1.0);hold(.2);
+  const up=$('#fl button[data-v=upper]');tap(up,()=>up.click());hold(.8);
+  if(ph){tl.to(sc,{y:yEl('#out',74),duration:1.1,ease:'power2.inOut',onUpdate:()=>scrollTo(0,sc.y)},t);t+=1.1;hold(1.2)}
+  else hold(1.0);
+  const sb=$('#sendBtn'),phY=()=>{const r=$('.ph').getBoundingClientRect();return r.bottom+scrollY-innerHeight+(ph?14:60)};
+  tl.to(sc,{y:phY,duration:1.3,ease:'power2.inOut',onUpdate:()=>scrollTo(0,sc.y)},t);t+=1.3;hold(.4);
+  tap(sb,()=>sb.click());hold(3.4);
+  window.TOUR_LEN=t;window.TOUR_TL=tl;
+}
+if(TOUR&&!reduce)addEventListener('load',()=>setTimeout(runTour,1400));
 </script>
 
 <script type="importmap">{"imports":{"three":"../vendor/three.module.js","three/addons/":"../vendor/addons/"}}</script>
@@ -365,6 +409,7 @@ $('#sendBtn').addEventListener('click',()=>{const c=$('#card');c.classList.remov
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 const canvas=document.getElementById('gl');
 const phone=()=>innerWidth<760,PH=phone();
@@ -446,7 +491,8 @@ const sky=new THREE.Mesh(new THREE.SphereGeometry(500,32,16),new THREE.ShaderMat
  vertexShader:'varying vec3 vD;void main(){vD=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
  fragmentShader:'uniform vec3 top,mid,hor,glow;uniform float amt;uniform vec3 sun;varying vec3 vD;void main(){float y=vD.y;vec3 c=mix(hor,mid,smoothstep(0.,.16,y));c=mix(c,top,smoothstep(.14,.55,y));float g=pow(max(dot(vD,sun),0.),5.)*amt*(1.-smoothstep(-.02,.35,y));c+=glow*g;c=mix(hor*.35,c,smoothstep(-.12,0.,y));gl_FragColor=vec4(c,1.);\n#include <colorspace_fragment>\n}'}));
 sky.renderOrder=-1;sky.frustumCulled=false;scene.add(sky);
-const PAL={dawn:{top:'#05080f',mid:'#122036',hor:'#b0603a',fog:'#17202d',amt:1},road:{top:'#07090d',mid:'#151c26',hor:'#3c4653',fog:'#1b222b',amt:0},late:{top:'#06090f',mid:'#131a27',hor:'#5b4038',fog:'#141b25',amt:.4}};
+// road = 13:00 in November rain: low grey overcast, misty distance (no night sky)
+const PAL={dawn:{top:'#05080f',mid:'#122036',hor:'#b0603a',fog:'#17202d',amt:1},road:{top:'#38414c',mid:'#56606b',hor:'#78818a',fog:'#626b74',amt:0},late:{top:'#06090f',mid:'#131a27',hor:'#5b4038',fog:'#141b25',amt:.4}};
 for(const k in PAL)for(const f of['top','mid','hor','fog'])PAL[k][f]=new THREE.Color(PAL[k][f]);
 
 // ---------- lights ----------
@@ -454,6 +500,7 @@ const hemi=new THREE.HemisphereLight('#53698f','#0a0a0a',.5);scene.add(hemi);
 const sun=new THREE.DirectionalLight('#ffa860',2.2);sun.castShadow=true;sun.shadow.mapSize.set(PH?1024:2048,PH?1024:2048);
 Object.assign(sun.shadow.camera,{left:-22,right:22,top:20,bottom:-14,near:1,far:140});sun.shadow.bias=-.0004;sun.shadow.normalBias=.02;scene.add(sun,sun.target);
 const fillL=new THREE.DirectionalLight('#7f9cc8',.35);fillL.position.set(-30,14,30);scene.add(fillL,fillL.target);
+const C_SUN=new THREE.Color('#ffa860'),C_OVC=new THREE.Color('#c9d2dc'),C_HSKY=new THREE.Color('#53698f'),C_HSKY2=new THREE.Color('#a4b0be'),C_HGND=new THREE.Color('#0a0a0a'),C_HGND2=new THREE.Color('#2c2f2a'),C_GND=new THREE.Color('#0b0d0f'),C_GND2=new THREE.Color('#1f261f');
 function spot(x,y,z,tx_,tz,i){const s=new THREE.SpotLight('#ffd7a3',i,26,.62,.65,1.6);s.position.set(x,y,z);s.target.position.set(tx_,0,tz);scene.add(s,s.target);return s}
 
 // ---------- world layout ----------
@@ -465,7 +512,12 @@ const HW0=60,HW1=350;
 const gnd=add(new THREE.PlaneGeometry(1600,400).rotateX(-Math.PI/2),std('#0b0d0f',.97,0),200,0,0);gnd.castShadow=false;
 const floorA=add(new THREE.PlaneGeometry(24,13).rotateX(-Math.PI/2),std('#ffffff',.8,0,{map:tx(concC,4,2.2)}),-12,.02,-.5);
 const yard=add(new THREE.PlaneGeometry(62,20).rotateX(-Math.PI/2),std('#ffffff',.88,0,{map:tx(asphC,8,2.6)}),31,.012,-5);
-const roadMat=std('#ffffff',1,0,{map:tx(asphC,40,2.2),roughnessMap:tx(wetC,12,1,false),envMapIntensity:1.4});
+// wet highway: low roughness with patchy puddles, reflecting a grey overcast sky (its own small environment map)
+const envScene=new THREE.Scene();envScene.add(new THREE.Mesh(new THREE.SphereGeometry(50,32,16),new THREE.ShaderMaterial({side:THREE.BackSide,
+ vertexShader:'varying vec3 vD;void main(){vD=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+ fragmentShader:'varying vec3 vD;void main(){float y=vD.y;vec3 c=mix(vec3(.5,.54,.58),vec3(.24,.27,.31),smoothstep(0.,.5,y));c=mix(vec3(.05,.06,.06),c,smoothstep(-.06,.02,y));gl_FragColor=vec4(c,1.);}'})));
+const roadEnv=pm.fromScene(envScene,.02).texture;
+const roadMat=std('#ffffff',.6,0,{map:tx(asphC,40,2.2),roughnessMap:tx(wetC,12,1,false),envMap:roadEnv,envMapIntensity:1.0});
 add(new THREE.PlaneGeometry(HW1-HW0+4,16.4).rotateX(-Math.PI/2),roadMat,(HW0+HW1)/2,.014,-4.4);
 add(new THREE.PlaneGeometry(200,8.6).rotateX(-Math.PI/2),std('#ffffff',.9,0,{map:tx(asphC,26,1.1),roughnessMap:tx(wetC,20,1,false)}),HW1+98,.013,-.6);
 // lane paint
@@ -479,10 +531,33 @@ bx(HW1-HW0,.02,.14,M.yel,(HW0+HW1)/2,.024,-4.45,null,0,false);bx(HW1-HW0,.02,.14
 bx(HW1-HW0,.32,.05,M.galv,(HW0+HW1)/2,.62,4.35,null,.012);
 {const n=Math.floor((HW1-HW0)/1.9),pg=new THREE.InstancedMesh(new THREE.BoxGeometry(.15,.75,.15),M.graphD,n);for(let i=0;i<n;i++){dm.makeTranslation(HW0+i*1.9,.37,4.45);pg.setMatrixAt(i,dm)}pg.castShadow=true;scene.add(pg);
  const nr=Math.floor(n/8),dl=new THREE.InstancedMesh(new THREE.BoxGeometry(.06,.1,.02),emis('#f2efe6',1.6),nr);for(let i=0;i<nr;i++){dm.makeTranslation(HW0+i*8*1.9,.86,4.36);dl.setMatrixAt(i,dm)}scene.add(dl)}
-// trees: dark spruce line both sides
-{const pts=[];for(let x=-70;x<BC+120;x+=2.6+rnd()*1.6){pts.push([x,-34-rnd()*14]);if(x>HW0-10)pts.push([x,22+rnd()*14])}
- const tg=new THREE.ConeGeometry(1,1,7);tg.translate(0,.5,0);const tr=new THREE.InstancedMesh(tg,std('#0a0f0d',1,0),pts.length);
- pts.forEach(([x,z],i)=>{const h=6+rnd()*9;dm.compose(V(x,0,z),new THREE.Quaternion(),V(1.6+rnd()*1.4,h,1.6+rnd()*1.4));tr.setMatrixAt(i,dm)});scene.add(tr)}
+// trees: a mixed New England tree line, both sides. Layered low-poly spruce/pine + bare-ish November hardwoods.
+// One merged geometry per kind, instanced, vertex colours (trunk vs needles) x per-tree tint; tops sway in a slow wind.
+const treeU={value:0};
+const TREE={};{
+ const part=(g,col,x=0,y=0,z=0,ry=0)=>{g=g.toNonIndexed();g.rotateY(ry);g.translate(x,y,z);const n=g.attributes.position.count,c=new Float32Array(n*3);for(let i=0;i<n;i++)c.set(col,i*3);g.setAttribute('color',new THREE.BufferAttribute(c,3));return g};
+ const BARK=[.42,.33,.26],ND=[1,1,1],ND2=[.82,.86,.8];
+ // spruce: trunk + 5 drooping tiers, each turned and nudged a little so the silhouette isn't a perfect cone
+ const sp=[part(new THREE.CylinderGeometry(.03,.05,.3,6),BARK,0,.15,0)];
+ [[.5,.34,.1],[.42,.3,.29],[.34,.27,.47],[.25,.24,.63],[.15,.22,.78]].forEach(([r,h,y],i)=>sp.push(part(new THREE.ConeGeometry(r,h,7,1,true),i%2?ND2:ND,(i%2?.02:-.015),y+h/2,(i%3-1)*.015,i*.9)));
+ sp.push(part(new THREE.ConeGeometry(.05,.14,6),ND,0,.93,0));
+ TREE.pine=mergeGeometries(sp);
+ // hardwood: trunk, two limbs, three faceted crowns (thin, late-autumn)
+ const hw=[part(new THREE.CylinderGeometry(.035,.06,.5,6),BARK,0,.25,0)];
+ const limb=(a,b)=>{const g=new THREE.CylinderGeometry(.018,.026,1,5),d=new THREE.Vector3().subVectors(b,a);g.translate(0,.5,0);g.scale(1,d.length(),1);g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(UP,d.clone().normalize()));g.translate(a.x,a.y,a.z);return part(g,BARK)};
+ hw.push(limb(V(0,.38,0),V(.2,.62,.05)),limb(V(0,.42,0),V(-.18,.66,-.04)));
+ [[.24,.06,.74,0],[.2,.19,.6,.05],[.19,-.18,.64,-.04],[.15,.02,.9,.02]].forEach(([r,x,y,z],i)=>hw.push(part(new THREE.IcosahedronGeometry(r,0),i%2?ND2:ND,x,y,z,i)));
+ TREE.hard=mergeGeometries(hw);
+}
+{const pts=[];for(let x=-70;x<BC+120;x+=2.2+rnd()*1.5){pts.push([x,-33-rnd()*15]);if(rnd()<.35)pts.push([x+1,-40-rnd()*10]);if(x>HW0-10&&x<BC-60)pts.push([x,22+rnd()*14])}
+ const mk=()=>{const m=new THREE.MeshStandardMaterial({color:'#ffffff',vertexColors:true,roughness:.95,metalness:0,flatShading:true});
+  m.onBeforeCompile=sh=>{sh.uniforms.uT=treeU;sh.vertexShader='uniform float uT;\n'+sh.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\n#ifdef USE_INSTANCING\nfloat ph_=instanceMatrix[3].x*.37+instanceMatrix[3].z*.23;\n#else\nfloat ph_=0.;\n#endif\nfloat bd_=max(position.y-.25,0.);bd_*=bd_;transformed.x+=(sin(uT*1.1+ph_)*.7+sin(uT*2.7+ph_*1.7)*.3)*.05*bd_;transformed.z+=cos(uT*.9+ph_*1.3)*.03*bd_;')};return m};
+ const pines=[],hards=[];pts.forEach(p=>(rnd()<.72?pines:hards).push(p));
+ const cP=['#16251d','#1b2a1f','#13211b','#203024','#182619'].map(c=>new THREE.Color(c)),cH=['#3d3424','#4a3a26','#2f2e22','#56402a','#33301f'].map(c=>new THREE.Color(c));
+ [[TREE.pine,pines,cP,[7,16],[8,13]],[TREE.hard,hards,cH,[7,12],[7,11]]].forEach(([g,ps,cols,hR,wR])=>{
+  const tr=new THREE.InstancedMesh(g,mk(),ps.length),q=new THREE.Quaternion();
+  ps.forEach(([x,z],i)=>{const h=hR[0]+rnd()*(hR[1]-hR[0]),w=h*(.38+rnd()*.12)*(wR[0]+rnd()*(wR[1]-wR[0]))/10;q.setFromAxisAngle(UP,rnd()*6.28);dm.compose(V(x,0,z),q,V(w,h,w*(.9+rnd()*.2)));tr.setMatrixAt(i,dm);tr.setColorAt(i,cols[i%cols.length])});
+  tr.frustumCulled=false;scene.add(tr)})}
 
 // ---------- plant buildings ----------
 const wallA=std('#ffffff',.7,.35,{map:tx(corrC('#262c34','#323944','#1b2027'),18,1)}),wallB=std('#ffffff',.7,.35,{map:tx(corrC('#2e3538','#3b4347','#22282b'),18,1)});
@@ -641,8 +716,18 @@ for(let i=-2;i<=2;i++)bx(.06,.06,.12,amberMat,K+3.9,3.84,i*.4,truck,0,false);
 const beacons=[1,-1].map(s=>{const m=bx(.16,.12,.16,emis('#ffae1a',0),K+2.2,3.86,s*.95,truck,.03,false);const gl=glowSprite('#ffa018',2.6,truck,K+2.2,3.95,s*.95,0);return{m,gl}});
 const head=new THREE.SpotLight('#fff3dc',0,70,.42,.7,1.4);head.position.set(K+6.1,1.6,0);head.target.position.set(K+34,0,0);truck.add(head,head.target);
 const headPool=plane(7,18,decal(streakTex,'#fff0d4',.0),K+15,.04,0,0,truck,-Math.PI/2);headPool.rotation.z=Math.PI/2;
-// tie-down chains
-const chains=[0,1,2,3].map(()=>rod(.026,M.chain,null,6));
+// tie-down chains: real links (instanced, alternating 90 deg) + a lever load binder on each run
+const LINK_P=.092,MAXL=36,linkG=new THREE.TorusGeometry(.04,.011,5,10);linkG.scale(1,1.45,1);
+const chainLinks=new THREE.InstancedMesh(linkG,M.chain,4*MAXL);chainLinks.castShadow=true;chainLinks.count=0;chainLinks.frustumCulled=false;scene.add(chainLinks);
+const binders=[0,1,2,3].map(()=>{const g=new THREE.Group();scene.add(g);g.visible=false;
+  cy(.034,.3,M.graphD,0,0,0,g,'y',10);cy(.05,.08,M.graph,0,0,0,g,'y',10);
+  const lv=bx(.026,.46,.026,M.rigY,.06,.12,0,g,.008);lv.rotation.z=-.2;cy(.02,.08,M.rubber,.105,.34,0,g,'y',8);return g});
+// rear spray off the tyres + taillight reflections on the wet road (truck-local)
+const SPE=[[-5.0,1.25],[-6.3,1.25],[-7.6,1.25],[-5.0,-1.25],[-6.3,-1.25],[-7.6,-1.25],[K-.65,1.3],[K+.65,1.3],[K-.65,-1.3],[K+.65,-1.3]];
+const SPN=PH?110:220,spP=new Float32Array(SPN*3),spC=new Float32Array(SPN*3),spAge=Float32Array.from({length:SPN},()=>rnd()),spR=Float32Array.from({length:SPN},()=>rnd());
+const spG=new THREE.BufferGeometry();spG.setAttribute('position',new THREE.BufferAttribute(spP,3));spG.setAttribute('color',new THREE.BufferAttribute(spC,3));
+const spray=new THREE.Points(spG,new THREE.PointsMaterial({map:glowTex,size:2.1,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));spray.frustumCulled=false;truck.add(spray);
+const tailRef=[-1.16,1.16].map(z=>{const m=plane(.7,5,decal(streakTex,'#ff3a20',0),-11.2,.045,z,0,truck,-Math.PI/2);m.rotation.z=-Math.PI/2;return m});
 
 // ---------- hydraulic gantry (4 telescoping legs on track) ----------
 const gantry=new THREE.Group();scene.add(gantry);const legs=[];
@@ -670,7 +755,7 @@ const poleL=[0,1].slice(0,PH?1:2).map(()=>{const l=new THREE.PointLight('#ffd6a0
 // rain + dust
 const rainN=PH?320:700,rp=new Float32Array(rainN*6);for(let i=0;i<rainN;i++){const x=(rnd()-.5)*60,y=rnd()*24,z=(rnd()-.5)*40;rp.set([x,y,z,x-.5,y-.9,z],i*6)}
 const rainG=new THREE.BufferGeometry();rainG.setAttribute('position',new THREE.BufferAttribute(rp,3));
-const rainM=new THREE.LineBasicMaterial({color:'#a9b8c8',transparent:true,opacity:0,depthWrite:false});const rain=new THREE.LineSegments(rainG,rainM);rain.frustumCulled=false;scene.add(rain);
+const rainM=new THREE.LineBasicMaterial({color:'#d2dae2',transparent:true,opacity:0,depthWrite:false});const rain=new THREE.LineSegments(rainG,rainM);rain.frustumCulled=false;scene.add(rain);
 const dN=PH?140:340,dp=new Float32Array(dN*3);for(let i=0;i<dN;i++){const B=rnd()<.55;dp[i*3]=B?BC+(rnd()-.5)*14:-8+(rnd()-.5)*16;dp[i*3+1]=rnd()*9;dp[i*3+2]=B?PADZ+(rnd()-.5)*12:(rnd()-.5)*10}
 const dG=new THREE.BufferGeometry();dG.setAttribute('position',new THREE.BufferAttribute(dp,3));
 scene.add(new THREE.Points(dG,new THREE.PointsMaterial({color:'#ffd9a8',size:.05,transparent:true,opacity:.5,depthWrite:false,blending:THREE.AdditiveBlending})));
@@ -714,21 +799,22 @@ const KEYS=[
  {p:3.16,t:[9,6.4,-2.6],az:-5,el:7,w:25,h:17,pw:17,pel:2},
  {p:3.92,t:[11.2,5,-1.6],az:5,el:8,w:24,h:15,pw:17,pel:2},
  {p:4.0,t:'t',o:[1.5,2.6,1],az:14,el:8,w:22,h:9,pw:12},
- {p:4.34,t:'t',o:[10,3,-.6],az:-68,el:16,w:16,h:9.5,pw:9,pel:3},
- {p:4.64,t:'t',o:[9.5,3.2,-.6],az:-58,el:18,w:15,h:9,pw:8.6,pel:3},
- {p:5.02,t:[BC+1.5,3.2,-1.6],az:30,el:15,w:22,h:12,pw:12},
- {p:5.5, t:[BC+2,3.2,-2.2],az:36,el:16,w:21,h:11,pw:12},
+ {p:4.34,t:'t',o:[10,3,-.6],po:[5.6,2.7,-.4],az:-68,el:16,w:16,h:9.5,pw:12.5,pel:3},
+ {p:4.64,t:'t',o:[9.5,3.2,-.6],po:[5.4,2.8,-.4],az:-58,el:18,w:15,h:9,pw:12,pel:3},
+ {p:5.02,t:[BC+1.5,3.2,-1.6],pt:[BC-.4,2.8,.2],az:30,el:15,w:22,h:12,pw:12},
+ {p:5.5, t:[BC+2,3.2,-2.2],pt:[BC,2.8,-.4],az:36,el:16,w:21,h:11,pw:12},
  {p:5.95,t:[BC,2.4,-13.5],az:40,el:20,w:17,h:10,pw:9.5},
  {p:6.6, t:[BC,1.6,PADZ],az:28,el:13,w:7.6,h:4.6,pw:5.6},
  {p:7.01,t:[BC,1.6,PADZ],az:22,el:12,w:7.2,h:4.4,pw:5.3}
 ];
 const ta=V(),tb=V(),tgt=V();
-function keyT(k,s,out){if(k.t==='m')return out.set(s.mx+k.o[0],s.my+k.o[1],s.mz+k.o[2]);if(k.t==='t')return out.set(s.tx+k.o[0],k.o[1],k.o[2]);return out.set(...k.t)}
+// phone keys may override the target (pt) or the follow offset (po) so the load stays the focal point in portrait
+function keyT(k,s,out,ph){const T=(ph&&k.pt)||k.t,o=(ph&&k.po)||k.o;if(T==='m')return out.set(s.mx+o[0],s.my+o[1],s.mz+o[2]);if(T==='t')return out.set(s.tx+o[0],o[1],o[2]);return out.set(T[0],T[1],T[2])}
 function cam(p,s){
   let i=0;while(i<KEYS.length-2&&p>KEYS[i+1].p)i++;
   const a=KEYS[i],b=KEYS[i+1],f=sm((p-a.p)/(b.p-a.p));
-  keyT(a,s,ta);keyT(b,s,tb);tgt.lerpVectors(ta,tb,f);
-  const ph=phone(),W=canvas.clientWidth||innerWidth,H=canvas.clientHeight||innerHeight,asp=W/H;
+  const ph=phone();keyT(a,s,ta,ph);keyT(b,s,tb,ph);tgt.lerpVectors(ta,tb,f);
+  const W=canvas.clientWidth||innerWidth,H=canvas.clientHeight||innerHeight,asp=W/H;
   camera.fov=ph?46:34;
   const az=L(a.az,b.az,f)*D2R,el=(L(a.el,b.el,f)+(ph?L(a.pel??5,b.pel??5,f):0))*D2R;
   const fw=ph?L(a.pw??a.w*.6,b.pw??b.w*.6,f):L(a.w,b.w,f),fh=L(a.h,b.h,f);
@@ -743,8 +829,10 @@ function cam(p,s){
 
 // ---------- apply ----------
 const P=V(),Q=V(),cA=new THREE.Color(),cB=new THREE.Color();
-let lastTx=TW;
+let lastTx=TW,lastTr=0,lagS=0,lastT=0,spdS=0;
+const LQ=new THREE.Quaternion(),LQ2=new THREE.Quaternion(),LS=V(1,1,1),LA=V(),LB=V(),LD=V(),LPos=V(),XAX=V(1,0,0);
 function apply(p,t){
+  const dt=Math.min(.1,Math.max(.001,(t-lastT)/1000));lastT=t;treeU.value=t/1000;
   const s=state(p);
   // machine
   MC.g.position.set(s.mx,s.my,s.mz);MC.power(s.power);MC.feet.visible=p>=5.9;
@@ -759,7 +847,11 @@ function apply(p,t){
   turret.rotation.y=-Math.atan2(dZ,dX);boomPivot.rotation.z=Math.acos(cl((r+1.5)/BL));
   crane.updateMatrixWorld(true);
   const tip=boomPivot.localToWorld(V(16.6,-.5,0)),lat=V(0,0,1).applyQuaternion(turret.getWorldQuaternion(new THREE.Quaternion()));
-  const sway=s.rig?0:Math.sin(t*.0011)*.05;hookG.position.set(tip.x+sway,s.hookY,tip.z);hookG.rotation.y=turret.rotation.y;
+  // hook + load sway: a slow pendulum, plus a little lag behind the slew (the load trails, then settles)
+  let dtr=turret.rotation.y-lastTr;lastTr=turret.rotation.y;if(Math.abs(dtr)>.15)dtr=0;lagS+=(dtr*9-lagS)*.06;
+  const rr=r||1,pa=s.rig?.03:.05,ox=-lagS*dZ/rr+Math.sin(t*.0017)*pa,oz=lagS*dX/rr+Math.cos(t*.0013)*pa*.5;
+  hookG.position.set(tip.x+ox,s.hookY,tip.z+oz);hookG.rotation.y=turret.rotation.y+Math.sin(t*.0009)*.04;
+  const air=p>=3&&p<4?cl((s.my-DECK)/.6):0;if(air>0){s.mx+=ox*air;s.mz+=oz*air;MC.g.position.set(s.mx,s.my,s.mz)}
   [-.16,-.06,.06,.16].forEach((o,k)=>between(ropes[k],V(tip.x+lat.x*o,tip.y,tip.z+lat.z*o),V(hookG.position.x+lat.x*o*.6,s.hookY+.4,hookG.position.z+lat.z*o*.6)));
   const lb=turret.localToWorld(V(1.4,.75,0)),lt=boomPivot.localToWorld(V(5.4,-.5,0));P.lerpVectors(lb,lt,.62);Q.lerpVectors(lb,lt,.5);between(lufB,lb,P);between(lufR,Q,lt);
   // rigging
@@ -768,7 +860,13 @@ function apply(p,t){
     for(const x of[-1.3,1.3])for(const z of[-1.75,1.75]){between(slings[k++],hb,V(s.mx+x,fy+.07,s.mz+z));between(slings[k++],V(s.mx+x,fy-.07,s.mz+z),V(s.mx+x,s.my+.2,s.mz+z))}}
   else slings.forEach(c=>c.visible=false);
   // chains
-  let k=0;for(const x of[-1.3,1.3])for(const z of[-1.75,1.75]){const c=chains[k++];if(s.chains<=0){c.visible=false;continue}const a=V(s.mx+x,s.my+.2,s.mz+z),b=V(s.tx+x*2.4,DECK+.02,1+Math.sign(z)*1.25);between(c,b,P.lerpVectors(b,a,s.chains))}
+  let k=0,nl=0;for(const x of[-1.3,1.3])for(const z of[-1.75,1.75]){const bd=binders[k++];if(s.chains<=0){bd.visible=false;continue}
+    LB.set(s.mx+x,s.my+.2,s.mz+z);LA.set(s.tx+x*2.4,DECK+.02,1+Math.sign(z)*1.25);LB.lerpVectors(LA,LB,s.chains);LD.subVectors(LB,LA);
+    const len=LD.length();if(len<.02){bd.visible=false;continue}LD.multiplyScalar(1/len);LQ.setFromUnitVectors(UP,LD);
+    const n=Math.min(MAXL,Math.max(1,Math.round(len/LINK_P)));
+    for(let i=0;i<n;i++){LPos.copy(LA).addScaledVector(LD,(i+.5)*len/n);LQ2.setFromAxisAngle(UP,i%2?Math.PI/2:0).premultiply(LQ);dm.compose(LPos,LQ2,LS);chainLinks.setMatrixAt(nl++,dm)}
+    const bs=seg(s.chains,.85,1);bd.visible=bs>0;if(bs>0){bd.position.copy(LA).addScaledVector(LD,len*.42);bd.quaternion.copy(LQ);bd.scale.setScalar(bs)}}
+  chainLinks.count=nl;chainLinks.instanceMatrix.needsUpdate=true;
   // gantry
   gantry.position.set(BC,0,s.gz);const H=s.gH;
   legs.forEach(l=>{const e2=Math.min(1.25,Math.max(.25,(H-2.95)*.55)),top2=2.62+e2;l.mid.position.y=2.62+e2/2;l.mid.scale.y=e2;l.rd.position.y=(top2+H-.3)/2;l.rd.scale.y=Math.max(.02,H-.3-top2);l.hd.position.y=H-.15});
@@ -776,19 +874,29 @@ function apply(p,t){
   k=0;for(const x of[-1.3,1.3])for(const z of[-1.75,1.75]){const c=links[k++];if(s.links<=0){c.visible=false;continue}const a=V(BC+x,H-.24,s.gz+z),b=V(BC+x,s.my+.2,s.mz+z);between(c,a,P.lerpVectors(a,b,s.links))}
   anchors.visible=s.anc>0;anchors.scale.set(1,Math.max(.01,s.anc),1);
   // stage looks: sky, fog, light
-  const wR=seg(p,3.72,4.12)*(1-seg(p,4.86,5.08)),wL=seg(p,4.86,5.08);
+  const wR=seg(p,3.93,4.2)*(1-seg(p,4.86,5.08)),wL=seg(p,4.86,5.08);
   const A=PAL.dawn,B=wL>0?PAL.late:PAL.road,w=wL>0?wL:wR;
   for(const f of['top','mid','hor'])skyU[f].value.copy(A[f]).lerp(B[f],w);skyU.amt.value=L(A.amt,B.amt,w);
-  scene.fog.color.copy(A.fog).lerp(B.fog,w);scene.fog.near=L(40,16,wR);scene.fog.far=L(150,190,wR);
-  sun.intensity=L(L(2.1,.9,wL),.22,wR);hemi.intensity=L(.5,.32,wR);renderer.toneMappingExposure=L(1.1,1.3,wR);
-    head.intensity=L(30,420,wR);headPool.material.opacity=.32*wR;
-  rainM.opacity=.3*wR;
+  scene.fog.color.copy(A.fog).lerp(B.fog,w);scene.fog.near=L(40,14,wR);scene.fog.far=L(150,150,wR);
+  // overcast daylight on the road: soft grey skylight dominates, the low "sun" turns into flat cloud light
+  sun.intensity=L(L(2.1,.9,wL),.75,wR);sun.color.copy(C_SUN).lerp(C_OVC,wR);
+  hemi.intensity=L(.5,1.6,wR);hemi.color.copy(C_HSKY).lerp(C_HSKY2,wR);hemi.groundColor.copy(C_HGND).lerp(C_HGND2,wR);
+  gnd.material.color.copy(C_GND).lerp(C_GND2,wR);renderer.toneMappingExposure=L(1.1,1.0,wR);
+  head.intensity=L(30,260,wR);headPool.material.opacity=.16*wR;poolMat.opacity=L(.55,.22,wR);
+  rainM.opacity=.42*wR;
   // road life: oncoming traffic, pole light sweeping the load
   const onRoad=wR>.01;
   cars.forEach((c,i)=>{if(c.dir<0){const x=s.tx+150-((t*.032+i*53)%300);c.g.position.set(x,0,i%2?-7.0:-10.5)}else{c.g.position.set(s.tx-34+((t*.0055)%120),0,-2.6)}
     c.g.visible=onRoad&&c.g.position.x>HW0&&c.g.position.x<HW1});
   const near=[...poles].sort((a,b)=>Math.abs(a-s.tx-2)-Math.abs(b-s.tx-2));
-  poleL.forEach((l,i)=>{const x=near[i];l.position.set(x,11.2,-1.6);l.intensity=onRoad?L(0,380,cl(1-Math.abs(x-s.tx-2)/40)):0});
+  poleL.forEach((l,i)=>{const x=near[i];l.position.set(x,11.2,-1.6);l.intensity=onRoad?L(0,170,cl(1-Math.abs(x-s.tx-2)/40)):0});
+  // tyre spray scales with the truck's real speed (scroll- or tour-driven), only in the rain
+  spdS+=(Math.abs(dx)/dt-spdS)*.12;const spAmt=wR*cl(spdS/18);tailRef.forEach(m=>m.material.opacity=.38*wR);
+  spray.visible=spAmt>.01&&truck.visible;
+  if(spray.visible){for(let i=0;i<SPN;i++){spAge[i]+=dt*1.7;if(spAge[i]>1){spAge[i]-=1;spR[i]=rnd()}const e=SPE[i%SPE.length],a=spAge[i],j=spR[i];
+    spP[i*3]=e[0]-.5-a*(1.6+2.2*j);spP[i*3+1]=.12+a*(.7+.8*j);spP[i*3+2]=e[1]+Math.sign(e[1])*a*(.15+.5*j);
+    const c=a*(1-a)*4*spAmt*.085;spC[i*3]=c;spC[i*3+1]=c*1.03;spC[i*3+2]=c*1.07}
+    spG.attributes.position.needsUpdate=true;spG.attributes.color.needsUpdate=true}
   if(rainM.opacity>0){const a=rainG.attributes.position.array,dy=.6;for(let i=0;i<a.length;i+=6){a[i+1]-=dy;a[i+4]-=dy;if(a[i+4]<0){a[i+1]+=24;a[i+4]+=24}}rainG.attributes.position.needsUpdate=true}
   cam(p,s);
 }
@@ -796,7 +904,10 @@ function size(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSiz
 addEventListener('resize',size);size();
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const dpos=dG.attributes.position.array;
+// only render while the story is on screen (saves the GPU while people use the plan tool)
+let onScreen=true;if(window.IntersectionObserver)new IntersectionObserver(e=>{onScreen=e[e.length-1].isIntersecting},{rootMargin:'100px'}).observe(document.getElementById('story'));
 function frame(t){
+  if(!onScreen&&t){if(!reduce)requestAnimationFrame(frame);return}
   apply(window.STORY.p,t||0);
   if(!reduce){for(let i=1;i<dpos.length;i+=3){dpos[i]+=.004;if(dpos[i]>9)dpos[i]=0}dG.attributes.position.needsUpdate=true}
   renderer.render(scene,camera);

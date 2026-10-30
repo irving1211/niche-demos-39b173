@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Calloway Smile Studio · Dental implants, veneers and family care</title>
+<meta name="description" content="Concept demo. Calloway Smile Studio, a fictional two-office dental practice in Essex County, MA.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="importmap">{"imports":{"three":"../vendor/three.module.js","three/addons/":"../vendor/addons/"}}</script>
+<style>
+:root{--bg:#f6f2ec;--paper:#fcfaf6;--ink:#1b2a2a;--mut:#56645f;--teal:#0f5c58;--teal2:#0a4643;--mint:#e4efeb;--mint2:#d3e6e0;--sand:#efe8de;--pink:#c9737d;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;--sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;--hd:68px;--vh:1vh}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--sans);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img,svg,canvas{display:block}
+span[data-i],b[data-i],em[data-i],small[data-i],i[data-i]{display:inline-block}
+.wrap{max-width:1296px;margin:0 auto;padding:0 72px}
+.eyebrow{font:600 13px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.02}
+h2{font-size:clamp(40px,4.6vw,64px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font:600 16px/1 var(--sans);white-space:nowrap;transition:transform .15s,background-color .2s}
+.btn.solid{background:var(--teal);color:#fff}.btn.solid:hover{background:var(--teal2)}
+.btn.soft{background:var(--mint);color:var(--teal2)}.btn.soft:hover{background:var(--mint2)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn:active,.press{transform:scale(.95)!important}
+/* header */
+.hd{position:sticky;top:0;z-index:20;height:var(--hd);background:rgba(246,242,236,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.hd .wrap{height:100%;display:flex;align-items:center;gap:28px;max-width:none;padding:0 40px}
+.brand{display:flex;align-items:center;gap:11px;flex:none}
+.brand .mk{width:34px;height:34px}
+.brand b{font:400 27px/1 var(--serif);letter-spacing:-.01em;display:block}
+.brand small{display:block;font:600 10.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-top:4px}
+.nv{display:flex;gap:26px;margin-left:18px;font:500 15px var(--sans);color:var(--mut)}
+.nv a{padding:12px 0}.nv a:hover{color:var(--ink)}
+.hr{margin-left:auto;display:flex;align-items:center;gap:10px}
+.lang{display:flex;background:var(--sand);border-radius:999px;padding:3px}
+.lang button{min-width:46px;min-height:42px;border-radius:999px;font:700 13px var(--sans);letter-spacing:.08em;color:var(--mut);transition:background-color .25s,color .25s}
+.lang button[aria-pressed=true]{background:#fff;color:var(--teal2);box-shadow:0 1px 6px rgba(20,40,38,.1)}
+.hcall .num{font-variant-numeric:tabular-nums}
+/* hero */
+.hero{position:relative;height:calc(100 * var(--vh) - var(--hd));min-height:640px;max-height:980px;overflow:hidden;
+  background:radial-gradient(70% 80% at 66% 42%,#fffefb 0%,#f8f4ee 46%,#efe8de 100%)}
+.stage{position:absolute;inset:0}
+#gl{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+.poster{position:absolute;inset:0;display:none;align-items:center;justify-content:center}
+.poster svg{width:min(52vw,520px);height:auto;margin-left:28%}
+.nogl .poster{display:flex}.nogl .ctl,.nogl .pctl{display:none}
+.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2}
+.lines line,.lines circle{visibility:hidden}
+.lines line{stroke:rgba(15,92,88,.55);stroke-width:1.2}
+.lines circle{fill:#fff;stroke:var(--teal);stroke-width:2}
+.tags{position:absolute;inset:0;pointer-events:none;z-index:3}
+.tg{position:absolute;left:0;top:0;visibility:hidden;display:flex;align-items:center;gap:10px;white-space:nowrap;padding:8px 14px 8px 8px;background:rgba(255,255,255,.92);border-radius:12px;box-shadow:0 6px 24px rgba(27,42,42,.08);will-change:transform,clip-path}
+.tg i{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font:700 12.5px/26px var(--sans);font-style:normal;text-align:center}
+.tg b{display:block;font:600 16px/1.2 var(--sans)}
+.tg small{display:block;font:500 13px/1.25 var(--sans);color:var(--mut);margin-top:1px}
+.copy{position:absolute;z-index:4;left:72px;top:50%;transform:translateY(-52%);width:470px}
+.copy h1{font-size:clamp(50px,4.6vw,68px);margin:16px 0 18px}
+.copy h1 em{font-style:italic;color:var(--teal)}
+.lede{font-size:18px;color:var(--mut);max-width:440px}
+.ctl{display:flex;align-items:center;gap:14px;margin-top:28px}
+.play{display:inline-flex;align-items:center;gap:14px;min-height:58px;padding:0 26px 0 8px;border-radius:999px;background:var(--ink);color:#fff;font:600 16.5px var(--sans);transition:transform .15s}
+.play .pi{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.play .pi svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
+.play.back .pi svg{transform:rotate(180deg)}
+.steps{list-style:none;margin-top:26px;display:grid;gap:2px;max-width:430px}
+.steps button{width:100%;display:flex;align-items:center;gap:14px;min-height:46px;padding:4px 10px 4px 4px;border-radius:12px;text-align:left;transition:background-color .3s}
+.steps button:hover{background:rgba(15,92,88,.06)}
+.steps .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--sand);color:var(--mut);font:700 13px/30px var(--sans);text-align:center;transition:background-color .35s,color .35s}
+.steps .on .n{background:var(--teal);color:#fff}
+.steps .nm{font:600 16px var(--sans)}
+.steps .sb{margin-left:auto;font:500 14px var(--sans);color:var(--mut);text-align:right}
+.calm{display:flex;gap:10px;align-items:flex-start;margin-top:18px;font-size:15px;color:var(--mut);max-width:430px}
+.calm svg{flex:none;width:20px;height:20px;margin-top:2px;stroke:var(--teal);fill:none;stroke-width:1.8}
+.seal{position:absolute;z-index:4;right:40px;bottom:32px;width:118px;height:118px}
+.seal text{font:700 9.4px var(--sans);letter-spacing:.06em;fill:var(--teal2);text-transform:uppercase}
+.trust{position:absolute;z-index:4;left:72px;bottom:30px;display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;font:600 14.5px var(--sans);color:var(--ink)}
+.trust li{display:flex;align-items:center;gap:8px}
+.trust li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal)}
+/* sections */
+section{position:relative}
+.smile{padding:110px 0 120px;background:var(--paper)}
+.sm-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:64px;align-items:center}
+.sm-stage{position:relative;aspect-ratio:1.3;border-radius:28px;overflow:hidden;background:radial-gradient(80% 85% at 50% 46%,#ffffff 0%,#f5efe8 62%,#ebe2d7 100%)}
+#gl2{position:absolute;inset:0;width:100%;height:100%}
+.sm-tag{position:absolute;left:20px;top:18px;font:600 13px var(--sans);color:var(--mut);background:rgba(255,255,255,.75);padding:7px 12px;border-radius:999px}
+.sm-shade{position:absolute;right:20px;top:18px;font:600 13px var(--sans);color:var(--teal2);background:rgba(255,255,255,.75);padding:7px 12px;border-radius:999px;font-variant-numeric:tabular-nums}
+.sm-copy h2{margin:14px 0 16px}
+.sm-copy p.lede{margin-bottom:30px}
+.ctrl{background:#fff;border-radius:22px;padding:24px 24px 22px;box-shadow:0 10px 40px rgba(27,42,42,.06)}
+.ctrl .row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.ctrl .row b{font:600 16px var(--sans)}
+.ctrl output{font:600 15px var(--sans);color:var(--teal2);font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer;touch-action:pan-y}
+input[type=range]::-webkit-slider-runnable-track{height:12px;border-radius:99px;background:linear-gradient(90deg,#cdb488,#ddcca8 30%,#ece4d2 60%,#fbfaf6)}
+input[type=range]::-moz-range-track{height:12px;border-radius:99px;background:linear-gradient(90deg,#cdb488,#ddcca8 30%,#ece4d2 60%,#fbfaf6)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:32px;height:32px;margin-top:-10px;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(27,42,42,.25),inset 0 0 0 7px var(--teal)}
+input[type=range]::-moz-range-thumb{width:32px;height:32px;border:0;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(27,42,42,.25),inset 0 0 0 7px var(--teal)}
+.ticks{display:flex;justify-content:space-between;font:500 14px var(--sans);color:var(--mut);margin-top:2px}
+.sw{display:flex;align-items:center;gap:16px;width:100%;margin-top:20px;padding-top:20px;text-align:left;min-height:60px}
+.sw .tr{flex:none;width:56px;height:32px;border-radius:99px;background:#d9d3ca;position:relative;transition:background-color .3s}
+.sw .tr::after{content:"";position:absolute;left:3px;top:3px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.18);transition:transform .35s cubic-bezier(.3,1.3,.5,1)}
+.sw[aria-checked=true] .tr{background:var(--teal)}.sw[aria-checked=true] .tr::after{transform:translateX(24px)}
+.sw b{display:block;font:600 16px var(--sans)}.sw small{display:block;font:500 14.5px var(--sans);color:var(--mut)}
+.note{display:flex;gap:10px;margin-top:18px;font-size:14.5px;color:var(--mut)}
+.note svg{flex:none;width:18px;height:18px;margin-top:3px;stroke:var(--mut);fill:none;stroke-width:1.7}
+.sm-copy .btn{margin-top:26px}
+.svc{padding:120px 0 40px}
+.svc-h{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:46px}
+.svc-h p{max-width:420px;color:var(--mut)}
+.svc-l{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.svc-l li{background:var(--paper);border-radius:22px;padding:26px 24px 28px;min-height:198px}
+.svc-l .k{font:400 32px/1 var(--serif);color:var(--teal)}
+.svc-l h3{font:600 19px/1.25 var(--sans);margin:20px 0 8px;letter-spacing:0}
+.svc-l p{font-size:15.5px;color:var(--mut);line-height:1.5}
+.svc-l li.em{background:var(--teal);color:#fff}.svc-l li.em .k{color:#bfe1d9}.svc-l li.em p{color:#d5ebe5}
+.money{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.money div{background:var(--mint);border-radius:22px;padding:30px 30px 32px}
+.money h3{font-size:34px;margin-bottom:10px}
+.money p{color:#33504b}
+.rev{padding:110px 0 30px}
+.rev h2{margin:12px 0 8px}
+.rev .sub{color:var(--mut);margin-bottom:40px}
+.rev-l{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rev-l li{background:var(--paper);border-radius:22px;padding:30px 28px}
+.rev-l blockquote{font:400 24px/1.25 var(--serif)}
+.rev-l .by{display:flex;justify-content:space-between;gap:10px;margin-top:22px;font:600 14px var(--sans);color:var(--mut)}
+.rev-l .by span:last-child{color:var(--teal);font-weight:600}
+.off{padding:110px 0 120px}
+.off-g{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start}
+.off h2{margin:12px 0 16px}
+.onotes{list-style:none;margin-top:26px;display:grid;gap:10px;font-size:16px;color:var(--ink)}
+.onotes li{display:flex;gap:12px;align-items:baseline}.onotes li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+.seg{display:inline-flex;background:var(--sand);border-radius:999px;padding:4px;margin:28px 0 0;position:relative}
+.seg button{position:relative;z-index:1;min-height:48px;padding:0 24px;border-radius:999px;font:600 16px var(--sans);color:var(--mut);transition:color .3s}
+.seg button[aria-pressed=true]{color:var(--teal2)}
+.seg .pill{position:absolute;z-index:0;top:4px;height:48px;border-radius:999px;background:#fff;box-shadow:0 1px 6px rgba(20,40,38,.1)}
+.card{background:var(--paper);border-radius:26px;padding:34px 34px 30px}
+.card .nm{font:400 38px/1 var(--serif)}
+.card .ad{color:var(--mut);margin-top:8px}
+.card .ph{display:block;font:600 26px var(--sans);margin-top:18px;font-variant-numeric:tabular-nums;color:var(--teal2)}
+.hours{list-style:none;margin-top:20px;display:grid;gap:0}
+.hours li{display:flex;justify-content:space-between;padding:9px 0;font-size:16px}
+.hours li+li{box-shadow:0 -1px 0 rgba(27,42,42,.07)}
+.hours li span:last-child{font-variant-numeric:tabular-nums;color:var(--mut)}
+.hours li.today span{color:var(--teal2);font-weight:600}
+.card .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.form{overflow:hidden;height:0}
+.form .in{padding-top:26px}
+.form label{display:block;font:600 14.5px var(--sans);margin:14px 0 6px}
+.form input{width:100%;min-height:50px;border:0;border-radius:14px;background:#fff;padding:0 16px;font:500 17px var(--sans);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(27,42,42,.1)}
+.form input:focus{outline:2px solid var(--teal);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{min-height:44px;padding:0 16px;border-radius:999px;background:#fff;font:600 15px var(--sans);color:var(--mut);box-shadow:inset 0 0 0 1px rgba(27,42,42,.1);transition:background-color .25s,color .25s}
+.chips button[aria-pressed=true]{background:var(--teal);color:#fff;box-shadow:none}
+.form .send{margin-top:22px;width:100%}
+.form .fine{font-size:14px;color:var(--mut);margin-top:12px}
+.done{display:none;margin-top:22px;padding:18px 20px;border-radius:16px;background:var(--mint);color:var(--teal2);font-weight:600}
+.done.on{display:block}
+.ft{padding:56px 0 120px;background:var(--ink);color:#d9e2df}
+.ft .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px}
+.ft .brand b{color:#fff}.ft .brand small{color:#9fb1ad}
+.ft p{font-size:15px;color:#9fb1ad}
+.ft .ph{display:grid;gap:6px;font-size:16px}
+.ft .demo{width:100%;margin-top:12px;font-size:14px;color:#8aa09b}
+.mbar{display:none}
+html.tour,html.tour *{cursor:none!important}
+html.tour .mbar{bottom:0}
+@media (max-width:1180px){.svc-l{grid-template-columns:repeat(2,1fr)}.nv{display:none}}
+/* phone */
+@media (max-width:900px),(max-aspect-ratio:3/4){
+  :root{--hd:60px}
+  body{font-size:17px}
+  .wrap{padding:0 20px}
+  .hd .wrap{padding:0 14px 0 16px;gap:10px}
+  .brand .mk{width:28px;height:28px}.brand b{font-size:23px}.brand small{font-size:9px;letter-spacing:.18em}
+  .nv,.hd .hcall,.hd .hbook{display:none}
+  .lang button{min-width:44px;min-height:40px}
+  .hero{height:calc(100 * var(--vh) - var(--hd) - 74px);min-height:600px;max-height:none;display:flex;flex-direction:column;background:radial-gradient(90% 60% at 50% 58%,#fffefb 0%,#f8f4ee 50%,#efe8de 100%)}
+  .copy{position:relative;left:auto;top:auto;transform:none;width:auto;padding:16px 20px 0;order:0}
+  .copy h1{font-size:35px;line-height:1.04;margin:9px 0 8px}
+  .lede{font-size:16px;line-height:1.45}
+  .ctl,.steps,.calm{display:none}
+  .stage{position:relative;inset:auto;order:1;flex:1 1 auto;min-height:300px}
+  .poster svg{width:72%;margin:0}
+  .pctl{order:2;padding:4px 20px 12px;display:flex;gap:10px}
+  .pctl .play{flex:1;justify-content:flex-start;min-height:56px}
+  .seal{right:auto;left:12px;bottom:12px;width:80px;height:80px}
+  .trust{display:none}
+  .tg{padding:6px 10px 6px 6px;gap:7px;border-radius:10px}
+  .tg i{width:22px;height:22px;font-size:11.5px;line-height:22px}
+  .tg b{font-size:14.5px}.tg small{display:none}
+  .smile{padding:56px 0 64px}
+  .sm-grid{grid-template-columns:1fr;gap:26px}
+  .sm-grid{gap:0}.sm-copy{display:contents}
+  .sm-copy .eyebrow{order:0}.sm-copy h2{order:1;margin:10px 0 18px}.sm-copy p.lede{display:none}
+  .sm-stage{order:2;aspect-ratio:1.25;border-radius:22px}.ctrl{order:3;margin-top:14px}.sm-copy .btn{order:4;justify-self:start}
+  .ctrl{padding:16px 18px 14px}.sw{margin-top:6px;padding-top:8px}.note{margin-top:8px;font-size:14px}
+  .svc{padding:72px 0 24px}.svc-h{display:block;margin-bottom:28px}.svc-h p{margin-top:12px}
+  .svc-l{grid-template-columns:1fr;gap:10px}.svc-l li{min-height:0;padding:22px 20px}
+  .svc-l h3{margin:12px 0 6px}
+  .money{grid-template-columns:1fr;gap:10px}.money div{padding:24px 20px}.money h3{font-size:30px}
+  .rev{padding:72px 0 20px}.rev-l{grid-template-columns:1fr;gap:10px}.rev-l li{padding:24px 20px}.rev-l blockquote{font-size:22px}
+  .off{padding:72px 0 80px}.off-g{grid-template-columns:1fr;gap:6px}.onotes{font-size:16px;margin-top:20px}
+  .seg{display:flex;width:100%}.seg button{flex:1;padding:0 8px}
+  .card{padding:26px 20px 24px}.card .nm{font-size:34px}
+  .card .acts .btn{flex:1 1 100%}
+  .ft{padding:44px 0 110px}
+  .mbar{display:flex;position:fixed;z-index:30;left:0;right:0;bottom:0;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(246,242,236,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .mbar .btn{flex:1;min-height:52px;padding:0 14px;font-size:16px}
+  .mbar .btn small{display:block;font:500 12px var(--sans);opacity:.75;margin-top:2px}
+  .mbar .btn .two{display:flex;flex-direction:column;align-items:flex-start;line-height:1.1}
+}
+@media (min-width:901px) and (min-aspect-ratio:3/4){.pctl{display:none}}
+@media (min-width:901px) and (min-aspect-ratio:3/4) and (max-height:860px){.copy h1{font-size:52px;margin:12px 0 12px}.steps{margin-top:16px}.steps button{min-height:40px}.ctl{margin-top:20px}.calm{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hd" id="hd"><div class="wrap">
+  <a class="brand" href="#top" aria-label="Calloway Smile Studio">
+    <svg class="mk" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#0f5c58"/><path d="M12.5 13.5c2.6-2.4 5-1.2 7.5-1.2s4.9-1.2 7.5 1.2c2.3 2.2 1.1 6.4.2 9.1-.9 2.8-1.4 6.5-3 6.7-1.9.3-1.9-5.4-4.7-5.4s-2.8 5.7-4.7 5.4c-1.6-.2-2.1-3.9-3-6.7-.9-2.7-2.1-6.9.2-9.1z" fill="#fcfaf6"/></svg>
+    <span><b>Calloway</b><small data-i="brandSub">Smile Studio</small></span>
+  </a>
+  <nav class="nv" aria-label="Main">
+    <a href="#top" data-i="navImpl">Implants</a><a href="#smile" data-i="navSmile">Your smile</a><a href="#services" data-i="navSvc">Services</a><a href="#offices" data-i="navOff">Offices</a>
+  </nav>
+  <div class="hr">
+    <div class="lang" role="group" aria-label="Language"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="es" aria-pressed="false">ES</button></div>
+    <a class="btn soft hcall" id="hcall" href="tel:+19785550188"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg><span data-i="call">Call</span> <span class="num" id="hnum">(978) 555-0188</span></a>
+    <a class="btn solid hbook" href="#offices" data-book><span data-i="book">Book a visit</span></a>
+  </div>
+</div></header>
+
+<main>
+<section class="hero" id="top">
+  <div class="stage" id="stage">
+    <canvas id="gl" aria-label="3D model of a dental implant in a cut-away of gum and jawbone"></canvas>
+    <div class="poster" aria-hidden="true"><svg viewBox="0 0 300 360"><rect x="20" y="230" width="260" height="120" rx="14" fill="#efe3cf"/><rect x="20" y="214" width="260" height="30" rx="14" fill="#e4a1a8"/><g fill="#c8ccd1"><rect x="128" y="196" width="44" height="104" rx="10"/></g><g stroke="#9aa0a6" stroke-width="3"><path d="M128 216h44M128 232h44M128 248h44M128 264h44M128 280h44"/></g><path d="M138 160h24l4 38h-32z" fill="#d7bd86"/><path d="M112 80c12-12 26-6 38-6s26-6 38 6c10 11 4 34 0 46-3 10-12 22-38 22s-35-12-38-22c-4-12-10-35 0-46z" fill="#fbf9f4" stroke="#e7e0d4" stroke-width="2"/></svg></div>
+<svg class="seal" viewBox="0 0 120 120" aria-label="Exclusive in Essex County, MA">
+    <defs><path id="sp" d="M60 60m-45 0a45 45 0 1 1 90 0a45 45 0 1 1-90 0"/></defs>
+    <circle cx="60" cy="60" r="58" fill="#fff"/><circle cx="60" cy="60" r="33" fill="none" stroke="#0f5c58" stroke-width="1"/>
+    <text><textPath href="#sp" id="sealT" textLength="278" lengthAdjust="spacing">Exclusive in Essex County, MA ·</textPath></text>
+    <path d="M51.5 52.5c2.1-2 4.1-1 6.1-1h4.8c2 0 4-1 6.1 1 1.9 1.8.9 5.2.2 7.4-.7 2.3-1.1 5.3-2.4 5.5-1.6.2-1.6-4.4-3.8-4.4h-1c-2.3 0-2.3 4.6-3.9 4.4-1.3-.2-1.7-3.2-2.4-5.5-.8-2.2-1.8-5.6.2-7.4z" fill="#0f5c58" transform="translate(-0.2 -2)"/>
+  </svg>
+    <svg class="lines" id="lines" aria-hidden="true"></svg>
+    <div class="tags" id="tags">
+      <div class="tg" data-k="1"><i>1</i><span><b data-i="t1">Crown</b><small data-i="t1s">What you see and chew with</small></span></div>
+      <div class="tg" data-k="2"><i>2</i><span><b data-i="t2">Abutment</b><small data-i="t2s">Connects the crown to the post</small></span></div>
+      <div class="tg" data-k="3"><i>3</i><span><b data-i="t3">Implant post</b><small data-i="t3s">Titanium, sits where the root was</small></span></div>
+      <div class="tg" data-k="4"><i>4</i><span><b data-i="t4">Your jawbone</b><small data-i="t4s">Grows around the post and holds it</small></span></div>
+    </div>
+  </div>
+  <div class="copy">
+    <p class="eyebrow" data-i="heroEye">Dental implants · Essex County</p>
+    <h1 data-i="heroH">A new tooth that looks and feels <em>like your own.</em></h1>
+    <p class="lede" data-i="heroP">Wondering what an implant really is? Watch one come apart, piece by piece. We explain every step before we begin.</p>
+    <div class="ctl"><button class="play" id="play"><span class="pi"><svg viewBox="0 0 20 20"><path d="M10 3v14M4 9l6-6 6 6"/></svg></span><span data-i="pApart" id="playL">See the parts</span></button></div>
+    <ol class="steps" id="steps">
+      <li><button data-s="0"><span class="n">1</span><span class="nm" data-i="t1">Crown</span><span class="sb" data-i="s1">Porcelain, shade-matched</span></button></li>
+      <li><button data-s="1"><span class="n">2</span><span class="nm" data-i="t2">Abutment</span><span class="sb" data-i="s2">The connector</span></button></li>
+      <li><button data-s="2"><span class="n">3</span><span class="nm" data-i="t3">Implant post</span><span class="sb" data-i="s3">Titanium root</span></button></li>
+      <li><button data-s="3"><span class="n">4</span><span class="nm" data-i="t4">Your jawbone</span><span class="sb" data-i="s4">Holds it for life</span></button></li>
+    </ol>
+    <p class="calm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg><span data-i="calm">We numb the area first, work gently and check on you the whole way. No surprises.</span></p>
+  </div>
+  <div class="pctl"><button class="play" id="play2"><span class="pi"><svg viewBox="0 0 20 20"><path d="M10 3v14M4 9l6-6 6 6"/></svg></span><span data-i="pApart" id="playL2">See the parts</span></button></div>
+  <ul class="trust">
+    <li data-i="tr1">New patients welcome</li><li data-i="tr2">Same-day emergencies</li><li data-i="tr3">Most PPO plans · payment plans</li><li data-i="tr4">Hablamos español</li>
+  </ul>
+</section>
+
+<section class="smile" id="smile"><div class="wrap sm-grid">
+  <div class="sm-stage" id="smStage"><canvas id="gl2" aria-label="3D sample smile: upper and lower front teeth"></canvas><span class="sm-tag" data-i="smTag">Sample smile, not a real patient</span><span class="sm-shade" id="smShade">A3.5</span></div>
+  <div class="sm-copy">
+    <p class="eyebrow" data-i="smEye">Smile preview</p>
+    <h2 data-i="smH">What could your smile look like?</h2>
+    <p class="lede" data-i="smP">Slide to try a whiter shade. Turn on veneers to see a chipped tooth and a small gap evened out.</p>
+    <div class="ctrl">
+      <div class="row"><b data-i="shade">Shade</b><output id="shadeOut">A3.5</output></div>
+      <input type="range" id="shade" min="0" max="1000" value="0" aria-label="Shade">
+      <div class="ticks"><span data-i="today">Today</span><span data-i="after">After whitening</span></div>
+      <button class="sw" id="ven" role="switch" aria-checked="false"><span class="tr"></span><span><b data-i="ven">Veneers</b><small data-i="venS">Evens out the chip and the gap</small></span></button>
+      <p class="note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span data-i="smNote">Preview only. Your dentist matches shade and shape in person.</span></p>
+    </div>
+    <a class="btn soft" href="#offices" data-book data-reason="2"><span data-i="smCta">Ask about whitening or veneers</span></a>
+  </div>
+</div></section>
+
+<section class="svc" id="services"><div class="wrap">
+  <div class="svc-h"><div><p class="eyebrow" data-i="svcEye">What we do</p><h2 data-i="svcH">Care for the whole family</h2></div><p data-i="svcP">From a first cleaning to a full smile makeover. We tell you what we see, what it costs, and what your choices are.</p></div>
+  <ul class="svc-l">
+    <li><span class="k">01</span><h3 data-i="v1">Dental implants</h3><p data-i="v1p">Replace a missing tooth with one that stays put and feels natural.</p></li>
+    <li><span class="k">02</span><h3 data-i="v2">Veneers</h3><p data-i="v2p">Thin porcelain shells that even out chips, gaps and color.</p></li>
+    <li><span class="k">03</span><h3 data-i="v3">Clear aligners</h3><p data-i="v3p">Straighten your teeth with clear trays, no metal brackets.</p></li>
+    <li><span class="k">04</span><h3 data-i="v4">Whitening</h3><p data-i="v4p">In-office whitening in about an hour, or trays to use at home.</p></li>
+    <li><span class="k">05</span><h3 data-i="v5">Crowns</h3><p data-i="v5p">A strong cap that protects a cracked or worn-down tooth.</p></li>
+    <li><span class="k">06</span><h3 data-i="v6">Cleanings and family care</h3><p data-i="v6p">Checkups and cleanings for kids, parents and grandparents.</p></li>
+    <li class="em"><span class="k">07</span><h3 data-i="v7">Emergencies</h3><p data-i="v7p">Toothache or a broken tooth? Call us. We keep time open for same-day visits.</p></li>
+    <li><span class="k">08</span><h3 data-i="v8">New patients</h3><p data-i="v8p">Your first visit is a calm checkup and a plan you can take home. No pressure.</p></li>
+  </ul>
+  <div class="money">
+    <div><h3 data-i="insH">Insurance</h3><p data-i="insP">We take most PPO dental plans and send the claim for you. Not sure about yours? Call and we will check it before your visit.</p></div>
+    <div><h3 data-i="finH">Payment plans</h3><p data-i="finP">Monthly payment plans are available. You get the full cost in writing before any treatment starts. No surprises.</p></div>
+  </div>
+</div></section>
+
+<section class="rev"><div class="wrap">
+  <p class="eyebrow" data-i="revEye">Patients</p><h2 data-i="revH">What patients tell us</h2><p class="sub" data-i="revSub">Sample reviews written for this demo, not real patients.</p>
+  <ul class="rev-l">
+    <li><blockquote data-i="r1">“They showed me a model of the implant before we started, so I knew exactly what was going on.”</blockquote><p class="by"><span>M. R.</span><span data-i="sample">Sample review</span></p></li>
+    <li><blockquote data-i="r2">“The front desk answered every question in Spanish, and my kids actually like going.”</blockquote><p class="by"><span>L. P.</span><span data-i="sample">Sample review</span></p></li>
+    <li><blockquote data-i="r3">“My whitening was done in one visit, and they told me the price up front.”</blockquote><p class="by"><span>D. K.</span><span data-i="sample">Sample review</span></p></li>
+  </ul>
+</div></section>
+
+<section class="off" id="offices"><div class="wrap off-g">
+  <div>
+    <p class="eyebrow" data-i="offEye">Offices</p><h2 data-i="offH">Two offices, one team</h2>
+    <p class="lede" data-i="offP">Same dentists, same care, same prices. Pick the office closer to home or work.</p>
+    <ul class="onotes"><li data-i="on1">Hablamos español at both offices</li><li data-i="on2">Tooth pain? Call either office, we keep time open the same day</li><li data-i="on3">New patients welcome, kids too</li></ul>
+    <div class="seg" id="seg" role="group" aria-label="Office"><span class="pill" id="pill"></span><button data-o="mill" aria-pressed="true">Mill District</button><button data-o="lake" aria-pressed="false">Lakeside</button></div>
+  </div>
+  <div class="card" id="card">
+    <p class="nm" id="oName">Mill District</p>
+    <p class="ad" id="oAddr">48 Mill Pond Way, Suite 2 · free parking behind the building</p>
+    <a class="ph" id="oPhone" href="tel:+19785550188">(978) 555-0188</a>
+    <ul class="hours" id="oHours"></ul>
+    <div class="acts">
+      <a class="btn solid" id="oCall" href="tel:+19785550188"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg><span id="oCallL">Call this office</span></a>
+      <button class="btn soft" id="oBook"><span data-i="bookHere">Book at this office</span></button>
+    </div>
+    <form class="form" id="form" novalidate><div class="in">
+      <label for="fName" data-i="fName">Your name</label><input id="fName" autocomplete="name">
+      <label for="fPhone" data-i="fPhone">Phone</label><input id="fPhone" inputmode="tel" autocomplete="tel">
+      <label data-i="fDay">Best day for you</label>
+      <div class="chips" id="cDay"><button type="button" data-v="0" aria-pressed="false" data-i="d0">Any weekday</button><button type="button" data-v="1" aria-pressed="false" data-i="d1">Mornings</button><button type="button" data-v="2" aria-pressed="false" data-i="d2">Afternoons</button><button type="button" data-v="3" aria-pressed="false" data-i="d3">Saturday</button></div>
+      <label data-i="fWhy">Reason for the visit</label>
+      <div class="chips" id="cWhy"><button type="button" data-v="0" aria-pressed="false" data-i="w0">Checkup and cleaning</button><button type="button" data-v="1" aria-pressed="false" data-i="w1">Implant consult</button><button type="button" data-v="2" aria-pressed="false" data-i="w2">Whitening or veneers</button><button type="button" data-v="3" aria-pressed="false" data-i="w3">Tooth pain</button><button type="button" data-v="4" aria-pressed="false" data-i="w4">Something else</button></div>
+      <button class="btn solid send" id="send" type="submit"><span id="sendL">Request my visit at Mill District</span></button>
+      <p class="fine" data-i="fine">We only ask what we need to call you back. Demo form: nothing is sent.</p>
+      <p class="done" id="done" role="status"></p>
+    </div></form>
+  </div>
+</div></section>
+</main>
+
+<footer class="ft"><div class="wrap">
+  <div><a class="brand" href="#top"><svg class="mk" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#fcfaf6"/><path d="M12.5 13.5c2.6-2.4 5-1.2 7.5-1.2s4.9-1.2 7.5 1.2c2.3 2.2 1.1 6.4.2 9.1-.9 2.8-1.4 6.5-3 6.7-1.9.3-1.9-5.4-4.7-5.4s-2.8 5.7-4.7 5.4c-1.6-.2-2.1-3.9-3-6.7-.9-2.7-2.1-6.9.2-9.1z" fill="#0f5c58"/></svg><span><b>Calloway</b><small data-i="brandSub">Smile Studio</small></span></a>
+  <p style="margin-top:14px" data-i="ftSeal">Exclusive in Essex County, MA</p></div>
+  <div class="ph"><a href="tel:+19785550188">Mill District · (978) 555-0188</a><a href="tel:+19785550191">Lakeside · (978) 555-0191</a></div>
+  <p class="demo" data-i="demo">Concept demo · fictional business · IC Business Systems</p>
+</div></footer>
+
+<div class="mbar" id="mbar">
+  <a class="btn soft" id="mcall" href="tel:+19785550188"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg><span class="two"><span data-i="call">Call</span><small id="mcallO">Mill District</small></span></a>
+  <a class="btn solid" href="#offices" data-book><span data-i="book">Book a visit</span></a>
+</div>
+
+<script src="../vendor/gsap.min.js"></script>
+<script>
+/* ---------- words (EN is read from the page, ES lives here) ---------- */
+const ES = {
+  brandSub: 'Smile Studio', navImpl: 'Implantes', navSmile: 'Su sonrisa', navSvc: 'Servicios', navOff: 'Consultorios', call: 'Llamar', book: 'Reservar cita',
+  t1: 'Corona', t1s: 'Lo que se ve y con lo que mastica', t2: 'Pilar', t2s: 'Une la corona con el poste', t3: 'Poste del implante', t3s: 'De titanio, va donde estaba la raíz', t4: 'Su hueso', t4s: 'Crece alrededor del poste y lo sostiene',
+  heroEye: 'Implantes dentales · condado de Essex', heroH: 'Un diente nuevo que se ve y se siente <em>como el suyo.</em>',
+  heroP: '¿Se pregunta qué es en realidad un implante? Véalo por partes, pieza por pieza. Le explicamos cada paso antes de empezar.',
+  pApart: 'Ver las piezas', pBack: 'Volver a armarlo', pAgain: 'Verlo otra vez', pGo: 'Mire…',
+  s1: 'Porcelana, del tono de sus dientes', s2: 'La pieza que conecta', s3: 'Raíz de titanio', s4: 'Lo sostiene para siempre',
+  calm: 'Primero adormecemos la zona, trabajamos con calma y le preguntamos cómo se siente en todo momento. Sin sorpresas.',
+  tr1: 'Pacientes nuevos bienvenidos', tr2: 'Emergencias el mismo día', tr3: 'Casi todos los planes PPO · planes de pago', tr4: 'We speak English',
+  smTag: 'Sonrisa de muestra, no es un paciente real', smEye: 'Vista previa de su sonrisa', smH: '¿Cómo podría verse su sonrisa?',
+  smP: 'Deslice para probar un tono más blanco. Active las carillas para ver cómo se emparejan un diente astillado y un pequeño espacio.',
+  shade: 'Tono', today: 'Hoy', after: 'Después del blanqueamiento', ven: 'Carillas', venS: 'Emparejan la astilla y el espacio',
+  smNote: 'Es solo una vista previa. Su dentista escoge el tono y la forma con usted, en persona.', smCta: 'Pregunte por blanqueamiento o carillas',
+  svcEye: 'Lo que hacemos', svcH: 'Cuidado para toda la familia', svcP: 'Desde la primera limpieza hasta un cambio completo de sonrisa. Le decimos lo que vemos, lo que cuesta y cuáles son sus opciones.',
+  v1: 'Implantes dentales', v1p: 'Reemplace un diente que le falta con uno fijo que se siente natural.',
+  v2: 'Carillas', v2p: 'Láminas finas de porcelana que corrigen astillas, espacios y color.',
+  v3: 'Alineadores transparentes', v3p: 'Enderece sus dientes con férulas transparentes, sin brackets de metal.',
+  v4: 'Blanqueamiento', v4p: 'En el consultorio en más o menos una hora, o con férulas para usar en casa.',
+  v5: 'Coronas', v5p: 'Una funda resistente que protege un diente rajado o gastado.',
+  v6: 'Limpiezas y cuidado familiar', v6p: 'Chequeos y limpiezas para niños, padres y abuelos.',
+  v7: 'Emergencias', v7p: '¿Dolor de muela o un diente roto? Llámenos. Dejamos espacio para citas el mismo día.',
+  v8: 'Pacientes nuevos', v8p: 'Su primera visita es un chequeo tranquilo y un plan que se puede llevar a casa. Sin presión.',
+  insH: 'Seguro dental', insP: 'Aceptamos la mayoría de los planes dentales PPO y enviamos el reclamo por usted. ¿No sabe si aceptamos el suyo? Llame y lo revisamos antes de su cita.',
+  finH: 'Planes de pago', finP: 'Tenemos planes de pago mensuales. Le damos el costo completo por escrito antes de empezar cualquier tratamiento. Sin sorpresas.',
+  revEye: 'Pacientes', revH: 'Lo que nos dicen los pacientes', revSub: 'Reseñas de muestra escritas para esta demostración, no son pacientes reales.',
+  r1: '“Me enseñaron un modelo del implante antes de empezar, así que supe todo el tiempo lo que estaba pasando.”',
+  r2: '“En la recepción me contestaron todas las preguntas en español, y a mis hijos hasta les gusta ir.”',
+  r3: '“Me hicieron el blanqueamiento en una sola visita y me dijeron el precio desde el principio.”', sample: 'Reseña de muestra',
+  offEye: 'Consultorios', on1: 'Hablamos español en los dos consultorios', on2: '¿Dolor de muela? Llame a cualquiera de los dos, dejamos espacio el mismo día', on3: 'Pacientes nuevos bienvenidos, niños también', offH: 'Dos consultorios, un mismo equipo', offP: 'Los mismos dentistas, el mismo cuidado y los mismos precios. Escoja el que le quede más cerca de su casa o su trabajo.',
+  bookHere: 'Reservar en este consultorio', fName: 'Su nombre', fPhone: 'Teléfono', fDay: 'El mejor día para usted', d0: 'Cualquier día de semana', d1: 'Por la mañana', d2: 'Por la tarde', d3: 'Sábado',
+  fWhy: 'Motivo de la visita', w0: 'Chequeo y limpieza', w1: 'Consulta de implante', w2: 'Blanqueamiento o carillas', w3: 'Dolor de muela', w4: 'Otra cosa',
+  fine: 'Solo pedimos lo necesario para devolverle la llamada. Formulario de demostración: no se envía nada.',
+  ftSeal: 'Exclusivo en el condado de Essex, MA', demo: 'Demostración de concepto · negocio ficticio · IC Business Systems'
+};
+const EXTRA = {
+  en: { pApart: 'See the parts', pBack: 'Put it back together', pAgain: 'See it again', pGo: 'Watch…', seal: 'Exclusive in Essex County, MA', callThis: 'Call this office', reqAt: 'Request my visit at ', thanks: n => `Thanks${n ? ', ' + n : ''}. Our ${OFF.cur().name} team will call you to confirm a time. (Demo: nothing was sent.)`, shadeTip: 'Shade', today: 'Today', closed: 'Closed', sat13: '1st and 3rd Saturday' },
+  es: { seal: 'Exclusivo en el condado de Essex, MA', callThis: 'Llamar a este consultorio', reqAt: 'Solicitar mi cita en ', thanks: n => `Gracias${n ? ', ' + n : ''}. Nuestro equipo de ${OFF.cur().name} le llamará para confirmar la hora. (Demostración: no se envió nada.)`, shadeTip: 'Tono', today: 'Hoy', closed: 'Cerrado', sat13: '1.er y 3.er sábado' }
+};
+const EN = {};
+document.querySelectorAll('[data-i]').forEach(el => { if (!(el.dataset.i in EN)) EN[el.dataset.i] = el.innerHTML; });
+Object.assign(EN, { pBack: EXTRA.en.pBack, pAgain: EXTRA.en.pAgain, pGo: EXTRA.en.pGo });
+const q = new URLSearchParams(location.search), TOUR = !!q.get('tour'), RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let LANG = q.get('lang') || (() => { try { return sessionStorage.getItem('cssLang'); } catch (e) { return null; } })() || 'en';
+const T = k => (LANG === 'es' ? (ES[k] ?? EN[k]) : EN[k]), X = k => EXTRA[LANG][k] ?? EXTRA.en[k];
+if (navigator.webdriver) gsap.ticker.lagSmoothing(0);
+
+/* tour: scale so 1080x1920 reads like a phone and 1920x1080 like the 1440 design */
+if (TOUR) {
+  document.documentElement.classList.add('tour');
+  const W = innerWidth, H = innerHeight, z = H > W ? (W > 520 ? W / 420 : 1) : (W > 1500 ? W / 1440 : 1);
+  if (z !== 1) document.documentElement.style.zoom = z;
+  window.CZOOM = z;
+}
+const ZM = window.CZOOM || 1;
+const setVH = () => document.documentElement.style.setProperty('--vh', (innerHeight / ZM / 100) + 'px');
+setVH(); addEventListener('resize', setVH);
+
+/* text that changes wipes out upward and the new text wipes in (no fades) */
+function roll(el, html, anim) {
+  if (!anim || RM) { gsap.killTweensOf(el); el.innerHTML = html; gsap.set(el, { clearProps: 'clipPath,transform' }); return; }
+  el._want = html;
+  if (gsap.isTweening(el)) return;
+  const r = el.getBoundingClientRect(), d = Math.max(0, Math.min(.25, (r.top / innerHeight) * .12));
+  gsap.timeline({ delay: d }).to(el, { clipPath: 'inset(0% 0% 100% 0%)', y: -7, duration: .17, ease: 'power2.in' })
+    .call(() => { el.innerHTML = el._want; })
+    .fromTo(el, { clipPath: 'inset(100% 0% 0% 0%)', y: 8 }, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: .34, ease: 'power3.out', clearProps: 'clipPath,transform' });
+}
+const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0; };
+
+/* ---------- offices ---------- */
+const OFF = {
+  data: {
+    mill: { name: 'Mill District', tel: '+19785550188', ph: '(978) 555-0188', addr: { en: '48 Mill Pond Way, Suite 2 · free parking behind the building', es: '48 Mill Pond Way, Suite 2 · estacionamiento gratis detrás del edificio' },
+      hours: [['Mon', '8:00 – 6:00'], ['Tue', '8:00 – 6:00'], ['Wed', '8:00 – 6:00'], ['Thu', '8:00 – 6:00'], ['Fri', '8:00 – 2:00'], ['Sat', 'sat13|9:00 – 1:00']] },
+    lake: { name: 'Lakeside', tel: '+19785550191', ph: '(978) 555-0191', addr: { en: '310 Shoreline Road · parking at the front door', es: '310 Shoreline Road · estacionamiento frente a la puerta' },
+      hours: [['Mon', '10:00 – 7:00'], ['Tue', '8:00 – 5:00'], ['Wed', '8:00 – 5:00'], ['Thu', '10:00 – 7:00'], ['Fri', '8:00 – 3:00'], ['Sat', 'closed']] }
+  },
+  k: 'mill', cur() { return this.data[this.k]; }
+};
+const DAYS = { en: { Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday' }, es: { Mon: 'Lunes', Tue: 'Martes', Wed: 'Miércoles', Thu: 'Jueves', Fri: 'Viernes', Sat: 'Sábado' } };
+const $ = id => document.getElementById(id);
+function hoursHTML() {
+  const o = OFF.cur(), td = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][new Date().getDay()];
+  return o.hours.map(([d, h]) => {
+    let v = h; if (h === 'closed') v = X('closed'); else if (h.startsWith('sat13|')) v = h.split('|')[1] + ' <small style="display:inline;font-size:13px">(' + X('sat13') + ')</small>';
+    return `<li class="${d === td ? 'today' : ''}"><span>${DAYS[LANG][d]}</span><span>${v}</span></li>`;
+  }).join('');
+}
+function renderOffice(anim) {
+  const o = OFF.cur();
+  [['hnum', o.ph], ['oName', o.name], ['oPhone', o.ph], ['mcallO', o.name]].forEach(([id, v]) => roll($(id), v, anim && inView($(id))));
+  roll($('oAddr'), o.addr[LANG], anim && inView($('oAddr')));
+  roll($('oHours'), hoursHTML(), anim && inView($('oHours')));
+  roll($('oCallL'), X('callThis'), anim && inView($('oCallL')));
+  roll($('sendL'), X('reqAt') + o.name, anim && inView($('sendL')));
+  ['hcall', 'oPhone', 'oCall', 'mcall'].forEach(id => $(id).href = 'tel:' + o.tel);
+  document.querySelectorAll('#seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.o === OFF.k));
+  pill(anim);
+  if ($('done').classList.contains('on')) $('done').textContent = X('thanks')($('fName').value.trim().split(' ')[0]);
+}
+function pill(anim) {
+  const b = document.querySelector(`#seg button[data-o="${OFF.k}"]`), s = $('seg');
+  const x = b.offsetLeft, w = b.offsetWidth;
+  if (anim && !RM) gsap.to($('pill'), { x, width: w, duration: .55, ease: 'power3.inOut' }); else gsap.set($('pill'), { x, width: w });
+}
+$('seg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b || b.dataset.o === OFF.k) return; OFF.k = b.dataset.o; renderOffice(true); });
+addEventListener('resize', () => pill(false));
+
+/* booking form (no network) */
+let formOpen = false;
+function openForm(anim = true) {
+  if (formOpen) return; formOpen = true;
+  const f = $('form'), h = f.scrollHeight;
+  if (!anim || RM) { f.style.height = 'auto'; return; }
+  gsap.fromTo(f, { height: 0 }, { height: h, duration: .7, ease: 'power3.inOut', onComplete: () => f.style.height = 'auto' });
+  gsap.fromTo('#form .in > *', { y: 14, clipPath: 'inset(0 0 100% 0)' }, { y: 0, clipPath: 'inset(0 0 0% 0)', duration: .5, stagger: .035, ease: 'power3.out', delay: .12, clearProps: 'clipPath,transform' });
+}
+$('oBook').addEventListener('click', () => openForm());
+document.querySelectorAll('[data-book]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault(); const r = a.dataset.reason;
+  goTo($('offices'), () => { openForm(); if (r != null) pick($('cWhy'), r); });
+}));
+function pick(box, v) { box.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === String(v))); }
+['cDay', 'cWhy'].forEach(id => $(id).addEventListener('click', e => { const b = e.target.closest('button'); if (b) pick($(id), b.dataset.v); }));
+$('form').addEventListener('submit', e => {
+  e.preventDefault(); const d = $('done');
+  d.textContent = X('thanks')($('fName').value.trim().split(' ')[0]); d.classList.add('on');
+  if (!RM) gsap.fromTo(d, { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: .6, ease: 'power3.out', clearProps: 'clipPath' });
+});
+function goTo(el, then, dur) {
+  const y = el.getBoundingClientRect().top + scrollY - parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hd')) * ZM * 0 - 70 * ZM;
+  if (RM) { scrollTo(0, y); then && then(); return; }
+  const o = { y: scrollY };
+  gsap.to(o, { y, duration: dur || Math.min(1.6, .6 + Math.abs(y - scrollY) / 2600), ease: 'power2.inOut', onUpdate: () => scrollTo(0, o.y), onComplete: () => then && then() });
+}
+
+/* ---------- language ---------- */
+function setLang(l, anim) {
+  LANG = l; try { sessionStorage.setItem('cssLang', l); } catch (e) {}
+  document.documentElement.lang = l;
+  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+  document.querySelectorAll('[data-i]').forEach(el => { const h = T(el.dataset.i); if (h != null && el.innerHTML !== h) roll(el, h, anim && inView(el)); });
+  $('sealT').textContent = X('seal') + ' ·';
+  if (anim && !RM) gsap.fromTo('.seal', { rotation: -40 }, { rotation: 0, duration: 1, ease: 'power3.out', transformOrigin: '50% 50%' });
+  renderOffice(anim); window.CAL_UI && CAL_UI.lang(anim); window.SMILE && SMILE.ui(anim);
+  window.TAGS_W && window.TAGS_W();
+}
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => { if (b.dataset.lang !== LANG) setLang(b.dataset.lang, true); }));
+
+/* ---------- the implant: ONE master timeline (window.CALT). 3D tweens are added by the WebGL module ---------- */
+window.FX = { l1: 0, l2: 0, l3: 0, l4: 0, heal: 1, click: 0 };
+window.CAL_UI = (() => {
+  const DUR = 10.6, REST = 4.5, STEP = [1.6, 2.2, 3.7, 4.5];
+  const CALT = window.CALT = gsap.timeline({ paused: true, onUpdate: sync });
+  CALT.to({}, { duration: DUR }, 0);
+  const lab = (k, at, d = .45) => CALT.fromTo(FX, { [k]: 0 }, { [k]: 1, duration: d, ease: 'power2.out', immediateRender: false }, at);
+  const unl = (k, at) => CALT.fromTo(FX, { [k]: 1 }, { [k]: 0, duration: .3, ease: 'power2.in', immediateRender: false }, at);
+  lab('l1', 1.0); lab('l2', 2.05); lab('l3', 3.25); lab('l4', 3.65);
+  unl('l1', 4.6); unl('l2', 4.68); unl('l3', 4.76); unl('l4', 4.84);
+  lab('l4', 7.25, .4); unl('l4', 8.75);           // "grows around the post" while the bone heals
+  let busy = false, phase = 'start';
+  const btns = [$('play'), $('play2')], lbls = [$('playL'), $('playL2')];
+  function label(k, anim) { lbls.forEach(l => { l.dataset.i = k; roll(l, T(k), anim); }); btns.forEach(b => b.classList.toggle('back', k === 'pBack')); }
+  function state() { const t = CALT.time(); return t < .02 ? 'start' : t < REST - .02 ? 'out' : Math.abs(t - REST) < .03 ? 'rest' : t < DUR - .03 ? 'in' : 'end'; }
+  let lastK = 'pApart';
+  function sync() {
+    const t = CALT.time(), s = state();
+    const k = s === 'rest' ? 'pBack' : (s === 'start' || s === 'end') ? 'pApart' : 'pGo';
+    const kk = s === 'end' ? 'pAgain' : k;
+    if (kk !== lastK) { lastK = kk; label(kk, true); }
+    let on = -1; if (t > .6 && t < 5.0) on = t < 1.6 ? 0 : t < 2.4 ? 1 : t < 3.55 ? 2 : 3; else if (t > 7.1 && t < 8.8) on = 3;
+    document.querySelectorAll('#steps li').forEach((li, i) => li.classList.toggle('on', i === on));
+  }
+  function play() {
+    const s = state();
+    btns.forEach(b => { b.classList.add('press'); setTimeout(() => b.classList.remove('press'), 140); });
+    if (RM) { CALT.time(s === 'rest' ? DUR : REST); sync(); return; }
+    if (s === 'start' || s === 'end') { CALT.time(0); CALT.tweenTo(REST, { duration: REST, ease: 'none' }); }
+    else if (s === 'rest') CALT.tweenTo(DUR, { duration: DUR - REST, ease: 'none' });
+  }
+  btns.forEach(b => b.addEventListener('click', play));
+  document.querySelectorAll('#steps button').forEach(b => b.addEventListener('click', () => {
+    const tt = STEP[+b.dataset.s]; if (RM) { CALT.time(tt); return; }
+    gsap.killTweensOf(CALT); CALT.tweenTo(tt, { duration: Math.min(1.8, .7 + Math.abs(tt - CALT.time()) * .3), ease: 'power2.inOut' });
+  }));
+  return { DUR, REST, play, sync, lang: anim => { lbls.forEach(l => roll(l, T(l.dataset.i || 'pApart'), anim)); } };
+})();
+
+/* ---------- smile preview state (the 3D module reads it) ---------- */
+window.SMILE = (() => {
+  const st = { shade: 0, ven: 0 }, SH = ['A4', 'A3.5', 'A3', 'A2', 'A1', 'B1', 'BL4', 'BL2'];
+  const name = () => SH[Math.min(SH.length - 1, Math.round(.4 + st.shade * (SH.length - 1.4)))];
+  const sl = $('shade'), sw = $('ven');
+  function ui() { const n = name(); $('shadeOut').textContent = n; $('smShade').textContent = X('shadeTip') + ' ' + n; }
+  sl.addEventListener('input', () => { gsap.killTweensOf(st, 'shade'); st.shade = sl.value / 1000; ui(); });
+  function setVen(on, anim = true) {
+    sw.setAttribute('aria-checked', on);
+    if (RM || !anim) { st.ven = on ? 1 : 0; return; }
+    gsap.to(st, { ven: on ? 1 : 0, duration: 1.25, ease: 'power3.inOut' });
+    st.sweep = performance.now();
+  }
+  sw.addEventListener('click', () => setVen(sw.getAttribute('aria-checked') !== 'true'));
+  function setShade(v) { st.shade = v; sl.value = Math.round(v * 1000); ui(); }
+  return { st, ui, setVen, setShade };
+})();
+setLang(LANG, false);
+SMILE.ui();
+document.fonts && document.fonts.ready.then(() => pill(false));
+
+/* autoplay the break-apart once, so the hero rewards right away (the assembled model is visible at first paint) */
+if (!TOUR && !RM && !q.get('still')) setTimeout(() => { if (CALT.time() < .01 && scrollY < 200) CAL_UI.play(); }, 1100);
+if (q.get('t') != null) { CALT.time(+q.get('t')); CAL_UI.sync(); }
+if (q.get('ven')) SMILE.setVen(true, false);
+if (q.get('shade')) SMILE.setShade(+q.get('shade'));
+if (q.get('office')) { OFF.k = q.get('office'); renderOffice(false); }
+if (q.get('form')) openForm(false);
+</script>
+
+<script>
+/* ---------- tour (?tour=1): a hands-free run for screen recording (window.CALTOUR) ---------- */
+if (TOUR) {
+  const tap = el => { el.classList.add('press'); setTimeout(() => el.classList.remove('press'), 160); };
+  const sc = { y: 0 };
+  const scrollTween = (tl, sel, at, dur, off = 70) => {
+    let from = 0, to = 0;
+    tl.fromTo(sc, { y: 0 }, { y: 1, duration: dur, ease: 'power2.inOut', immediateRender: false,
+      onStart: () => { from = scrollY; const el = document.querySelector(sel); to = sel === 'top' ? 0 : el.getBoundingClientRect().top + scrollY - off * ZM; },
+      onUpdate: () => scrollTo(0, from + (to - from) * sc.y) }, at);
+  };
+  const typeIn = (tl, id, text, at, dur) => { const o = { n: 0 }; tl.fromTo(o, { n: 0 }, { n: text.length, duration: dur, ease: 'none', immediateRender: false, onUpdate: () => { $(id).value = text.slice(0, Math.round(o.n)); } }, at); };
+  const TL = window.CALTOUR = gsap.timeline({ paused: true });
+  TL.call(() => { tap($(innerWidth / ZM > 900 && innerWidth > innerHeight ? 'play' : 'play2')); }, null, 0.8);
+  TL.to(CALT, { time: CAL_UI.REST, duration: CAL_UI.REST, ease: 'none' }, 0.8);          // 0.8 - 5.3 break-apart
+  TL.call(() => tap($(innerWidth / ZM > 900 && innerWidth > innerHeight ? 'play' : 'play2')), null, 7.0);
+  TL.to(CALT, { time: CAL_UI.DUR, duration: CAL_UI.DUR - CAL_UI.REST, ease: 'none' }, 7.0); // 7.0 - 13.1 reassemble
+  scrollTween(TL, innerWidth / ZM > 900 && innerWidth > innerHeight ? '#smile .sm-grid' : '#smile .sm-copy h2', 13.5, 1.7, 84);                                         // 13.5 - 15.2 to the smile
+  const sh = { v: 0 }; TL.fromTo(sh, { v: 0 }, { v: 1, duration: 3.2, ease: 'power1.inOut', immediateRender: false, onUpdate: () => SMILE.setShade(sh.v) }, 15.6);
+  TL.call(() => { tap($('ven')); SMILE.setVen(true); }, null, 19.4);
+  TL.call(() => { tap(document.querySelector('.lang button[data-lang=es]')); setLang('es', true); }, null, 21.6);
+  scrollTween(TL, '#offices', 23.8, 1.8, 40);
+  TL.call(() => { const b = document.querySelector('#seg button[data-o=lake]'); tap(b); OFF.k = 'lake'; renderOffice(true); }, null, 26.0);
+  TL.call(() => { tap($('oBook')); openForm(); }, null, 27.6);
+  scrollTween(TL, '#oBook', 28.0, 1.1, innerHeight / ZM * .18);
+  typeIn(TL, 'fName', 'Ana R.', 29.3, .8);
+  typeIn(TL, 'fPhone', '(978) 555-0100', 30.2, 1.0);
+  TL.call(() => { const b = document.querySelector('#cDay button[data-v="1"]'); tap(b); pick($('cDay'), 1); }, null, 31.4);
+  TL.call(() => { const b = document.querySelector('#cWhy button[data-v="1"]'); tap(b); pick($('cWhy'), 1); }, null, 32.0);
+  scrollTween(TL, '#send', 32.3, .8, innerHeight / ZM * .45);
+  TL.call(() => { tap($('send')); $('form').requestSubmit(); }, null, 33.4);
+  TL.to({}, { duration: 2.6 }, 33.4);                                                       // hold on the confirmation, ends 36.0
+  const at = q.get('at');
+  addEventListener('load', () => setTimeout(() => { scrollTo(0, 0); if (at != null) { const st = at.split(',').map(Number); st.forEach((v, i) => setTimeout(() => TL.seek(v, false), i * 1400)); } else TL.play(0); }, 500));
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { mergeVertices, mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+
+const phoneMQ = matchMedia('(max-width:900px), (max-aspect-ratio:3/4)'), isPhone = () => phoneMQ.matches;
+const RMm = matchMedia('(prefers-reduced-motion: reduce)').matches, ZOOM = window.CZOOM || 1, CALT = window.CALT, FX = window.FX;
+const PR = () => ZOOM > 1 ? Math.min(devicePixelRatio * ZOOM, 2.4) : Math.min(devicePixelRatio, isPhone() ? 1.5 : 1.75);
+const sstep = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+const C = (a, b, t) => a + (b - a) * t;
+function mkRenderer(canvas) {
+  const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  if (!r.getContext()) throw new Error('no gl');
+  r.setPixelRatio(PR()); r.toneMapping = THREE.NeutralToneMapping; r.toneMappingExposure = 1.0; r.outputColorSpace = THREE.SRGBColorSpace;
+  return r;
+}
+
+/* ---------- geometry helpers ---------- */
+function superE(th, n) { const c = Math.cos(th), s = Math.sin(th); return [Math.sign(c) * Math.pow(Math.abs(c), 2 / n), Math.sign(s) * Math.pow(Math.abs(s), 2 / n)]; }
+// grid surface: f(u,v) -> [x,y,z,h]; u wraps around, v goes up. Seams/poles are merged so normals are smooth.
+function gridGeo(US, VS, f) {
+  const pos = new Float32Array((US + 1) * (VS + 1) * 3), hh = new Float32Array((US + 1) * (VS + 1)), idx = [];
+  for (let i = 0; i <= VS; i++) for (let j = 0; j <= US; j++) { const k = i * (US + 1) + j, p = f(j / US, i / VS); pos[k * 3] = p[0]; pos[k * 3 + 1] = p[1]; pos[k * 3 + 2] = p[2]; hh[k] = p[3] || 0; }
+  for (let i = 0; i < VS; i++) for (let j = 0; j < US; j++) { const a = i * (US + 1) + j, b = a + 1, c = a + US + 1, d = c + 1; idx.push(a, c, b, b, c, d); }
+  let g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('aH', new THREE.BufferAttribute(hh, 1)); g.setIndex(idx);
+  g = mergeVertices(g, 1e-5); g.computeVertexNormals(); return outward(g);
+}
+// make a closed surface face outward (flip winding if the normals point in)
+function outward(g) {
+  g.computeBoundingBox(); const c = new THREE.Vector3(); g.boundingBox.getCenter(c);
+  const p = g.attributes.position, n = g.attributes.normal; let s = 0;
+  for (let i = 0; i < p.count; i += 7) s += (p.getX(i) - c.x) * n.getX(i) + (p.getY(i) - c.y) * n.getY(i) + (p.getZ(i) - c.z) * n.getZ(i);
+  if (s < 0) { const ix = g.index.array; for (let i = 0; i < ix.length; i += 3) { const t = ix[i + 1]; ix[i + 1] = ix[i + 2]; ix[i + 2] = t; } g.computeVertexNormals(); }
+  return g;
+}
+// a tooth: kind inc | can | pre | mol. W = half width, Df/Db = labial/lingual half depth, H = crown height, R = root length (0 = crown only)
+function toothGeo(sp, US = 64, VS = 70) {
+  const n = sp.n || 2.7, R = sp.R || 0, vr = R ? .38 : .07;
+  return gridGeo(US, VS, (u, v) => {
+    const th = u * Math.PI * 2, [cx, cz] = superE(th, n), dep = cz > 0 ? sp.Df : sp.Db;
+    if (v < vr) {
+      const s = v / vr;
+      if (!R) { const a = Math.sin(s * Math.PI / 2); return [cx * sp.W * .8 * a, 0, cz * dep * .86 * a, 0]; }
+      const sh = Math.pow(Math.sin(s * Math.PI / 2), .55) * (.4 + .6 * s);
+      return [cx * sp.W * .8 * sh * (sp.rootW || 1), -R * (1 - s), cz * dep * .86 * sh, -(1 - s)];
+    }
+    const t = (v - vr) / (1 - vr); let x, y, z;
+    if (sp.kind === 'inc' || sp.kind === 'can') {
+      const bl = sp.kind === 'inc';
+      const wx = sp.W * (.8 + .2 * sstep(0, .55, t)) * (bl ? 1 : 1 - .18 * sstep(.6, 1, t));
+      const wz = dep * (.86 + .14 * Math.sin(Math.min(1, t * 1.6) * Math.PI / 2)) * (1 - .78 * Math.pow(t, 1.5)) * Math.sqrt(Math.max(0, 1 - Math.pow(t, 7)));
+      const top = bl ? 1 - .08 * Math.pow(Math.abs(cx), 5) : 1 - .3 * Math.pow(Math.abs(cx), 1.25);
+      x = cx * wx; z = cz * wz + (cz > 0 ? .055 * Math.sin(t * Math.PI) * sp.H * (1 - .5 * cx * cx) : 0); y = sp.H * t * top;
+    } else if (sp.kind === 'pre') {
+      const g = Math.max(0, (t - .72) / .28), rr = Math.pow(Math.cos(g * Math.PI / 2), .65);
+      const wx = sp.W * (.82 + .18 * sstep(0, .5, t)) * rr, wz = dep * (.9 + .1 * Math.sin(Math.min(1, t * 1.8) * Math.PI / 2)) * rr;
+      x = cx * wx; z = cz * wz; y = sp.H * (t < .72 ? t : .72 + .28 * Math.sin(g * Math.PI / 2)) * (1 - .2 * Math.pow(Math.abs(cx), 1.4) * sstep(.4, 1, t));
+    } else { // molar crown: walls, then an occlusal table with four cusps and a central groove
+      const cusp = .5 + .5 * Math.cos(4 * th + .5);
+      if (t < .66) { const b = Math.sin(Math.min(1, t / .45) * Math.PI / 2); x = cx * sp.W * (.8 + .2 * b); z = cz * dep * (.82 + .18 * b); y = sp.H * t * .98; }
+      else {
+        const g = (t - .66) / .34, rim = g < .32 ? 1 - .2 * Math.pow(g / .32, 2) : .8 * (1 - (g - .32) / .68);
+        x = cx * sp.W * rim; z = cz * dep * .97 * rim;
+        y = sp.H * (.65 + (.3 + .07 * cusp) * Math.sin(Math.min(1, g / .32) * Math.PI / 2) - .13 * sstep(.32, 1, g));
+      }
+    }
+    return [x, y, z, t];
+  });
+}
+function rootGeo(len, w, d, tilt) {
+  const g = gridGeo(28, 30, (u, v) => {
+    const th = u * Math.PI * 2, [cx, cz] = superE(th, 2.2), sh = Math.pow(Math.sin(v * Math.PI / 2), .35) * (.55 + .45 * v);
+    return [cx * w * sh + tilt * (1 - v), -len * (1 - v) + .12 * v, cz * d * sh, -(1 - v) * .9 - .05];
+  });
+  return g;
+}
+
+/* ---------- shared materials ---------- */
+const GL_NOISE = `
+float hsh(vec3 p){ p = fract(p * .3183099 + .1); p *= 17.0; return fract(p.x * p.y * p.z * (p.x + p.y + p.z)); }
+float vn(vec3 x){ vec3 i = floor(x), f = fract(x); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(mix(hsh(i), hsh(i + vec3(1,0,0)), f.x), mix(hsh(i + vec3(0,1,0)), hsh(i + vec3(1,1,0)), f.x), f.y),
+             mix(mix(hsh(i + vec3(0,0,1)), hsh(i + vec3(1,0,1)), f.x), mix(hsh(i + vec3(0,1,1)), hsh(i + vec3(1,1,1)), f.x), f.y), f.z); }
+vec2 h22(vec2 p){ p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3))); return fract(sin(p) * 43758.5453); }
+vec2 wor(vec2 p){ vec2 i = floor(p), f = fract(p); float d = 8.0, s = 0.0;
+  for (int y = -1; y <= 1; y++) for (int x = -1; x <= 1; x++) { vec2 g = vec2(float(x), float(y)), o = h22(i + g), r = g + o - f; float dd = dot(r, r); if (dd < d) { d = dd; s = o.x; } }
+  return vec2(sqrt(d), s); }`;
+function patch(m, vars, frag, after = '#include <color_fragment>', extra = '') {
+  m.onBeforeCompile = sh => {
+    Object.assign(sh.uniforms, m.userData.u || {});
+    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute float aH;\nvarying float vH;\nvarying vec3 vOP;\nvarying vec3 vON;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvH = aH; vOP = transformed; vON = objectNormal;');
+    sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\nvarying float vH;\nvarying vec3 vOP;\nvarying vec3 vON;\n' + vars + GL_NOISE)
+      .replace(after, after + '\n' + frag) + '';
+    if (extra) sh.fragmentShader = sh.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\n' + extra);
+  };
+  m.customProgramCacheKey = () => m.name; return m;
+}
+// enamel: shade from the uniform, warmer at the neck, translucent grey-blue at the biting edge, optional stain; root = matte dentin
+function enamelMat(name, u) {
+  const m = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: .17, metalness: 0, clearcoat: .8, clearcoatRoughness: .1, sheen: .35, sheenColor: 0xffffff, sheenRoughness: .45, specularIntensity: .75, ior: 1.62 });
+  m.name = name; m.userData.u = u;
+  return patch(m, 'uniform vec3 uEn; uniform float uStain; uniform float uTr;\n', `
+    float crown = smoothstep(-0.03, 0.05, vH), cerv = 1.0 - smoothstep(0.0, 0.5, vH);
+    vec3 en = uEn;
+    en = mix(en, en * vec3(0.95, 0.88, 0.74), cerv * 0.55);
+    float edge = smoothstep(0.72, 1.0, vH) * uTr;
+    en = mix(en, vec3(0.66, 0.72, 0.79) * (0.3 + 0.7 * en.g), edge * 0.62);
+    float n1 = vn(vOP * 7.0), n2 = vn(vOP * 21.0 + 3.1);
+    float st = uStain * (0.55 * cerv + 0.45 * smoothstep(0.35, 0.8, n1 * 0.75 + n2 * 0.25) * (0.3 + 0.7 * cerv));
+    en = mix(en, en * vec3(0.86, 0.76, 0.58), st * 0.6);
+    en *= 0.985 + 0.03 * n2;
+    en *= 0.99 + 0.012 * sin(vOP.y * 140.0 + n1 * 3.0) * smoothstep(0.2, 0.8, vH);
+    diffuseColor.rgb = mix(vec3(0.88, 0.78, 0.60), en, crown);`, '#include <color_fragment>',
+    'totalEmissiveRadiance += diffuseColor.rgb * 0.035 * smoothstep(-0.03, 0.05, vH);');
+}
+function gumMat(name, cutColor, base = '0.84, 0.43, 0.49') {
+  const m = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: .36, clearcoat: .6, clearcoatRoughness: .22, sheen: .25, sheenColor: 0xffc9cf, sheenRoughness: .5 });
+  m.name = name;
+  return patch(m, '', `
+    vec3 g = vec3(${base});
+    float n = vn(vOP * 26.0), nb = vn(vOP * 6.0);
+    g *= 0.94 + 0.08 * n + 0.04 * nb;
+    float margin = 1.0 - smoothstep(0.0, 0.16, vH);
+    g = mix(g, vec3(0.80, 0.42, 0.47), margin * 0.5);
+    ${cutColor ? 'float cut = step(0.9, vON.z) * step(-0.01, vOP.z);\n vec3 cc = vec3(0.90, 0.56, 0.59) * (0.97 + 0.05 * n);\n float sock = cut * (1.0 - smoothstep(0.155, 0.17, abs(vOP.x)));\n cc *= 1.0 - 0.18 * sock * (1.0 - abs(vOP.x) / 0.17);\n g = mix(g, cc, cut);' : ''}
+    diffuseColor.rgb = g;`);
+}
+const titanium = new THREE.MeshPhysicalMaterial({ color: 0xc3c8ce, metalness: 1, roughness: .2, clearcoat: .3, clearcoatRoughness: .2 });
+const anodized = new THREE.MeshPhysicalMaterial({ color: 0xdcc493, metalness: 1, roughness: .24 });
+const hexMat = new THREE.MeshStandardMaterial({ color: 0x3c4146, metalness: .8, roughness: .45 });
+
+/* =====================================================================================
+   HERO: implant in a cut-away of gum + jawbone (x = along the jaw, y = up, z = toward you)
+   ===================================================================================== */
+const canvas = document.getElementById('gl'), stageEl = document.getElementById('stage');
+let R1;
+try { R1 = mkRenderer(canvas); } catch (e) { document.querySelector('.hero').classList.add('nogl'); }
+if (R1) {
+  R1.shadowMap.enabled = true; R1.shadowMap.type = THREE.PCFSoftShadowMap;
+  const scene = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(R1);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), .04).texture; scene.environmentIntensity = .5;
+  const camera = new THREE.PerspectiveCamera(26, 1, .1, 80);
+  const key = new THREE.DirectionalLight(0xfff4e8, 2.7); key.position.set(-4.5, 8, 4.5); key.castShadow = true;
+  key.shadow.mapSize.set(isPhone() ? 1024 : 2048, isPhone() ? 1024 : 2048); key.shadow.radius = 6; key.shadow.bias = -.0006; key.shadow.normalBias = .02;
+  Object.assign(key.shadow.camera, { left: -4, right: 4, top: 5, bottom: -3, near: 1, far: 22 });
+  scene.add(key, key.target);
+  const fill = new THREE.HemisphereLight(0xfffaf3, 0xd9c6b8, .4); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xe8f3ff, 1.1); rim.position.set(5, 4, -6); scene.add(rim);
+
+  const L = 3.6, BH = 2.0;
+  const bw = y => { const u = Math.min(1, Math.max(0, -y / BH)); return .40 + .34 * Math.sin(Math.min(1, u * 1.2) * Math.PI / 2); };
+  // bone half-profile in (z, y), z <= 0 (the front half is cut away at z = 0)
+  const boneProf = (() => {
+    const p = [], w0 = bw(-.16);
+    for (let k = 0; k <= 10; k++) { const a = k / 10 * Math.PI / 2; p.push([-w0 * Math.sin(a), -.16 * (1 - Math.cos(a))]); }
+    for (let k = 1; k <= 22; k++) { const y = -.16 - (1.56 * k / 22); p.push([-bw(y), y]); }
+    const wb = bw(-1.72); for (let k = 1; k <= 10; k++) { const a = k / 10 * Math.PI / 2; p.push([-wb * Math.cos(a), -1.72 - .28 * Math.sin(a)]); }
+    return p;
+  })();
+  const gumOuter = (() => { const c = new THREE.SplineCurve([[0, .3], [-.22, .29], [-.4, .23], [-.53, .1], [-.585, -.1], [-.6, -.32], [-.575, -.5]].map(a => new THREE.Vector2(a[0], a[1]))); return c.getPoints(30).map(v => [v.x, v.y]); })();
+  const gumProf = gumOuter.concat([[-.52, -.47], [-.48, -.28], [-.43, -.1], [-.3, -.05], [-.12, -.03], [0, -.02]]);
+  // build a sliced block: smooth side wall from a 2D profile, flat cut face at z = 0, flat ends at x = +-L/2
+  function sliceGeo(prof, faceY0, faceY1, zf = 0) {
+    const n = prof.length, pos = [], nor = [], aH = [], idx = [];
+    const nrm = k => { const a = prof[Math.max(0, k - 1)], b = prof[Math.min(n - 1, k + 1)], tz = b[0] - a[0], ty = b[1] - a[1], l = Math.hypot(tz, ty) || 1; return [ty / l, -tz / l]; };
+    for (let k = 0; k < n; k++) { const [z, y] = prof[k], [nz, ny] = nrm(k); for (const x of [-L / 2, L / 2]) { pos.push(x, y, z); nor.push(0, ny, nz); aH.push(1); } }
+    for (let k = 0; k < n - 1; k++) { const a = k * 2, b = a + 1, c = a + 2, d = a + 3; idx.push(a, c, b, b, c, d); }
+    let side = new THREE.BufferGeometry(); side.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); side.setAttribute('normal', new THREE.Float32BufferAttribute(nor, 3)); side.setAttribute('aH', new THREE.Float32BufferAttribute(aH, 1)); side.setIndex(idx);
+    fixWind(side);
+    const face = new THREE.PlaneGeometry(L, faceY1 - faceY0, 1, 1); face.translate(0, (faceY0 + faceY1) / 2, zf); face.deleteAttribute('uv'); face.setAttribute('aH', new THREE.Float32BufferAttribute([1, 1, 1, 1], 1));
+    const sh = new THREE.Shape(prof.map(a => new THREE.Vector2(a[0], a[1])));
+    const caps = [-1, 1].map(sx => { const g = new THREE.ShapeGeometry(sh, 2); g.deleteAttribute('uv'); const p = g.attributes.position;
+      for (let i = 0; i < p.count; i++) { const X = p.getX(i), Y = p.getY(i); p.setXYZ(i, sx * (L / 2 + (zf ? .002 : 0)), Y, X); }
+      const nn = new Float32Array(p.count * 3); for (let i = 0; i < p.count; i++) nn[i * 3] = sx; g.setAttribute('normal', new THREE.BufferAttribute(nn, 3));
+      g.setAttribute('aH', new THREE.Float32BufferAttribute(new Array(p.count).fill(1), 1)); fixWind(g); return g; });
+    return mergeGeometries([side.toNonIndexed(), face.toNonIndexed(), caps[0].toNonIndexed(), caps[1].toNonIndexed()]);
+  }
+  // flip triangles whose winding disagrees with their stored normals
+  function fixWind(g) {
+    const p = g.attributes.position, nn = g.attributes.normal, ix = g.index ? g.index.array : null; if (!ix) return;
+    const A = new THREE.Vector3(), B = new THREE.Vector3(), Cc = new THREE.Vector3(), N = new THREE.Vector3();
+    for (let i = 0; i < ix.length; i += 3) {
+      A.fromBufferAttribute(p, ix[i]); B.fromBufferAttribute(p, ix[i + 1]); Cc.fromBufferAttribute(p, ix[i + 2]);
+      B.sub(A); Cc.sub(A); B.cross(Cc); N.fromBufferAttribute(nn, ix[i]);
+      if (B.dot(N) < 0) { const t = ix[i + 1]; ix[i + 1] = ix[i + 2]; ix[i + 2] = t; }
+    }
+  }
+  // jawbone: cortical shell + porous (cancellous) inside, procedurally in the shader. uHeal fills the bone back in around the post.
+  const boneU = { uHeal: { value: 1 } };
+  const boneMat = patch(Object.assign(new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .82, metalness: 0 }), { name: 'bone' }), 'uniform float uHeal;\nfloat BW(float y){ float u = clamp(-y / 2.0, 0.0, 1.0); return 0.40 + 0.34 * sin(min(1.0, u * 1.2) * 1.5707963); }\n', `
+    vec3 cort = vec3(0.95, 0.915, 0.84), canc = vec3(0.915, 0.835, 0.715), pore = vec3(0.70, 0.55, 0.43);
+    vec3 col = cort;
+    bool face = vON.z > 0.9 && vOP.z > -0.01, endf = abs(vON.x) > 0.9;
+    if (face || endf) {
+      vec2 p = face ? vOP.xy : vec2(vOP.z, vOP.y);
+      float d = face ? min(min(-vOP.y, vOP.y + 2.0), 1.8 - abs(vOP.x)) : min(min(BW(vOP.y) - abs(vOP.z), vOP.y + 2.0), -vOP.y + 0.02);
+      vec2 w1 = wor(p * 5.2), w2 = wor(p * 11.0 + 7.3);
+      float r1 = 0.24 + 0.17 * w1.y, r2 = 0.2 + 0.14 * w2.y;
+      float holes = max((1.0 - smoothstep(r1 - 0.06, r1, w1.x)) * step(0.28, w1.y), (1.0 - smoothstep(r2 - 0.07, r2, w2.x)) * 0.8);
+      float rim = 1.0 - smoothstep(0.05, 0.1, d);
+      float inner = smoothstep(r1 * 0.2, r1, w1.x);
+      col = mix(canc, pore * (0.9 + 0.12 * inner), holes * 0.85);
+      if (face) {
+        // the socket the post sits in: a threaded half-groove, fresh when the post is out, filled in again as it heals
+        float ax = abs(vOP.x), y = vOP.y;
+        float inSock = (1.0 - smoothstep(0.205, 0.215, ax)) * step(-1.17, y);
+        float ring = (1.0 - smoothstep(0.21, 0.21 + 0.16 * uHeal + 0.02, ax)) * step(-1.2, y);
+        col = mix(col, mix(cort, vec3(0.97, 0.95, 0.9), 0.4), ring * uHeal * 0.85);
+        float cyl = sqrt(max(0.0, 1.0 - pow(ax / 0.21, 2.0)));
+        float thr = 0.5 + 0.5 * sin((y + vOP.x * 0.12) / 0.092 * 6.2832);
+        float sx = clamp(vOP.x / 0.21, -1.0, 1.0); float lit = clamp(-sx * -0.55 + cyl * 0.75, 0.0, 1.0);
+        vec3 sk = vec3(0.80, 0.68, 0.57) * (0.42 + 0.4 * lit) * (0.84 + 0.2 * thr);
+        col = mix(col, sk, inSock);
+      }
+      col = mix(col, cort, rim);
+    }
+      col *= face ? (0.86 + 0.14 * smoothstep(-2.0, -0.2, vOP.y)) : 1.0;
+    diffuseColor.rgb = col;`);
+  boneMat.userData.u = boneU;
+  const bone = new THREE.Mesh(sliceGeo(boneProf, -BH, 0), boneMat);
+  const gumHero = gumMat('gumHero', true);
+  const gumG = sliceGeo(gumProf, -.02, .3, .003);
+  { const a = gumG.attributes.position, h = gumG.attributes.aH; for (let i = 0; i < a.count; i++) h.setX(i, a.getY(i) > .25 && Math.abs(a.getX(i)) < .34 ? (a.getY(i) - .25) / .05 * .0 + 1 : 1); }
+  const gum = new THREE.Mesh(gumG, gumHero);
+  bone.receiveShadow = gum.receiveShadow = true; bone.castShadow = gum.castShadow = true;
+  const jaw = new THREE.Group(); jaw.add(bone, gum); scene.add(jaw);
+
+  // neighbouring natural molars, roots shown in the cut-away
+  const enU = { uEn: { value: new THREE.Color(.93, .9, .84) }, uStain: { value: 0 }, uTr: { value: .25 } };
+  const enHero = enamelMat('enHero', enU);
+  const molSpec = { kind: 'mol', W: .5, Df: .46, Db: .44, H: .78, n: 2.9 };
+  const molCrown = toothGeo(molSpec, 72, 64);
+  const natural = mergeGeometries([molCrown, rootGeo(.42, .36, .36, 0).translate(0, .02, 0), rootGeo(1.3, .16, .21, .1).translate(-.19, 0, 0), rootGeo(1.22, .16, .21, -.1).translate(.19, 0, 0)]);
+  [-1.13, 1.13].forEach(x => { const m = new THREE.Mesh(natural, enHero); m.position.set(x, .25, -.08); m.rotation.y = x * .06; m.castShadow = m.receiveShadow = true; scene.add(m); });
+
+  // the implant: titanium post with a real helical thread, an abutment, and a crown
+  const PL = 1.15, PITCH = .092;
+  const postGeo = gridGeo(110, 240, (u, v) => {
+    const th = u * Math.PI * 2; let y, r;
+    const core = y => .162 + .036 * sstep(-PL, -PL + .55, y);
+    const thread = y => { const ph = ((y / PITCH + u) % 1 + 1) % 1; const f = sstep(.08, .36, ph) * (1 - sstep(.52, .8, ph)); return .043 * f * sstep(-PL + .02, -PL + .16, y) * (1 - sstep(-.17, -.11, y)); };
+    if (v < .05) { const a = v / .05; y = -PL + .06 * (1 - Math.cos(a * Math.PI / 2)); r = core(y) * Math.sin(a * Math.PI / 2); }
+    else if (v > .965) { const a = (v - .965) / .035; y = 0; r = .205 * (1 - a); }
+    else { const a = (v - .05) / .915; y = -PL + .06 + a * (PL - .06); r = y > -.1 ? .205 : y > -.13 ? C(core(y) + .0, .205, sstep(-.13, -.1, y)) : core(y) + thread(y); }
+    return [Math.cos(th) * r, y, Math.sin(th) * r, 0];
+  });
+  const post = new THREE.Group(), postM = new THREE.Mesh(postGeo, titanium);
+  const hex = new THREE.Mesh(new THREE.CylinderGeometry(.085, .085, .012, 6), hexMat); hex.position.y = .002;
+  post.add(postM, hex); postM.castShadow = postM.receiveShadow = true;
+  const abPts = [[0, -.12], [.1, -.12], [.11, -.02], [.17, 0], [.205, .02], [.235, .13], [.24, .2], [.225, .25], [.17, .27], [.16, .3], [.13, .6], [.1, .63], [0, .635]].map(a => new THREE.Vector2(a[0], a[1]));
+  const abut = new THREE.Group(), abM = new THREE.Mesh(new THREE.LatheGeometry(abPts, 72), anodized); abM.castShadow = true; abut.add(abM);
+  const crown = new THREE.Group(), crM = new THREE.Mesh(toothGeo({ ...molSpec, W: .5, H: .8 }, 72, 64), enHero); crM.position.y = .24; crM.castShadow = crM.receiveShadow = true; crown.add(crM);
+  scene.add(post, abut, crown);
+
+  // soft studio floor shadow
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: .13 })); floor.rotation.x = -Math.PI / 2; floor.position.y = -BH - .001; floor.receiveShadow = true; scene.add(floor);
+  const blob = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'), gr = g.createRadialGradient(64, 64, 4, 64, 64, 64); gr.addColorStop(0, 'rgba(60,45,40,.32)'); gr.addColorStop(1, 'rgba(60,45,40,0)'); g.fillStyle = gr; g.fillRect(0, 0, 128, 128); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+  const ao = new THREE.Mesh(new THREE.PlaneGeometry(5.2, 2.2), new THREE.MeshBasicMaterial({ map: blob, transparent: true, depthWrite: false })); ao.rotation.x = -Math.PI / 2; ao.position.set(0, -BH + .004, -.3); scene.add(ao);
+
+  // label anchors
+  const anchor = (parent, x, y, z) => { const o = new THREE.Object3D(); o.position.set(x, y, z); parent.add(o); return o; };
+  const AN = [anchor(crown, .5, .62, .1), anchor(abut, .2, .4, .05), anchor(post, .2, -.62, .08), anchor(jaw, .6, -.72, 0)];
+
+  /* ---- the break-apart, as tweens on the master timeline ---- */
+  const ST = new Map();
+  const cur = (o, k) => { let s = ST.get(o); if (!s) ST.set(o, s = {}); if (!(k in s)) s[k] = o[k]; return s[k]; };
+  function mv(o, to, at, dur = 1, ease = 'power3.inOut') { const from = {}; for (const k in to) from[k] = cur(o, k); Object.assign(ST.get(o), to); CALT.fromTo(o, from, { ...to, duration: dur, ease, immediateRender: false }, at); }
+  const TURN = Math.PI * 2;
+  // apart (0 - 4.5): crown lifts, abutment rises, the post unscrews (turns while it climbs its own thread) and rises clear
+  mv(crown.position, { y: 1.1 }, 0, 1.0, 'power2.inOut'); mv(crown.position, { y: 2.7 }, 1.0, 1.8, 'power2.inOut'); mv(crown.rotation, { z: -.05 }, 0, .8, 'power2.out'); mv(crown.rotation, { z: 0 }, .8, .9, 'power2.inOut');
+  mv(abut.position, { y: 2.12 }, 1.05, 1.7, 'power2.inOut');
+  mv(post.rotation, { y: -6 * TURN }, 1.3, 2.6, 'power1.inOut');
+  mv(post.position, { y: .38 }, 1.3, 1.5, 'power1.in'); mv(post.position, { y: 1.5 }, 2.8, 1.25, 'power2.out');
+  mv(boneU.uHeal, { value: 0 }, 2.0, 1.6, 'power1.inOut');
+  // back together (4.5 - 10.6): post comes down and screws in, the bone fills in around it, abutment drops, crown clicks home
+  mv(post.position, { y: .4 }, 4.75, 1.2, 'power2.inOut'); mv(abut.position, { y: 1.3 }, 4.9, 1.3, 'power2.inOut'); mv(crown.position, { y: 1.78 }, 5.0, 1.35, 'power2.inOut'); mv(post.rotation, { y: -4 * TURN }, 4.75, 1.2, 'power1.inOut');
+  mv(post.position, { y: 0 }, 5.95, 1.35, 'power1.inOut'); mv(post.rotation, { y: 0 }, 5.95, 1.35, 'power1.inOut');
+  mv(boneU.uHeal, { value: 1 }, 7.1, 1.6, 'power2.out');
+  mv(abut.position, { y: 0 }, 7.45, 1.05, 'power3.inOut');
+  mv(crown.position, { y: .05 }, 8.25, 1.05, 'power3.inOut'); mv(crown.position, { y: 0 }, 9.3, .16, 'power2.in');
+  mv(FX, { click: 1 }, 9.3, .07, 'none'); mv(FX, { click: 0 }, 9.37, .45, 'power2.out');
+  { const t = CALT.time(); CALT.time(Math.min(t + .001, CALT.duration())); CALT.time(t); }
+
+  /* ---- camera: one spline through the whole timeline ---- [t, az, el, r, tx, ty, tz] */
+  const K = [[0, .6, .34, 8.4, 0, -.45, 0], [.9, .55, .31, 9.6, 0, .45, 0], [2.2, .48, .27, 11.0, 0, 1.15, 0], [3.4, .44, .25, 11.4, 0, 1.36, 0], [4.5, .4, .23, 11.4, 0, 1.38, 0],
+    [6.0, .36, .25, 10.6, 0, .95, 0], [7.6, .42, .29, 10.2, 0, .68, 0], [9.2, .52, .33, 8.7, 0, -.3, 0], [10.6, .6, .34, 8.4, 0, -.45, 0]];
+  const cam = [0, 0, 0, 0, 0, 0];
+  function camAt(t) {
+    t = Math.max(0, Math.min(K[K.length - 1][0], t)); let i = 0; while (i < K.length - 2 && t > K[i + 1][0]) i++;
+    const p0 = K[Math.max(0, i - 1)], p1 = K[i], p2 = K[i + 1], p3 = K[Math.min(K.length - 1, i + 2)], h = p2[0] - p1[0], u = (t - p1[0]) / h;
+    const h00 = 2 * u ** 3 - 3 * u * u + 1, h10 = u ** 3 - 2 * u * u + u, h01 = -2 * u ** 3 + 3 * u * u, h11 = u ** 3 - u * u;
+    for (let k = 1; k < 7; k++) { const m1 = (p2[k] - p0[k]) / Math.max(1e-3, p2[0] - p0[0]) * h, m2 = (p3[k] - p1[k]) / Math.max(1e-3, p3[0] - p1[0]) * h; cam[k - 1] = h00 * p1[k] + h10 * m1 + h01 * p2[k] + h11 * m2; }
+    return cam;
+  }
+  const tagEls = [...document.querySelectorAll('#tags .tg')], svg = document.getElementById('lines');
+  const TG = tagEls.map((el, i) => { const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line'), dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); dot.setAttribute('r', 4.5); svg.append(ln, dot); return { el, ln, dot, a: AN[i], k: 'l' + (i + 1), w: 0, h: 0, on: false }; });
+  window.TAGS_W = () => setTimeout(() => TG.forEach(g => g.w = 0), 600);
+  let W = 1, H = 1;
+  function size() {
+    W = stageEl.clientWidth; H = stageEl.clientHeight;
+    R1.setPixelRatio(PR()); R1.setSize(W, H, false); camera.aspect = W / H;
+    if (!isPhone()) camera.setViewOffset(W, H, -W * .17, H * .0, W, H); else camera.setViewOffset(W, H, W * .1, H * .05, W, H);
+    camera.updateProjectionMatrix(); TG.forEach(g => g.w = 0);
+  }
+  addEventListener('resize', size); size();
+  let visible = true; new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(stageEl);
+  const V = new THREE.Vector3();
+  function labels(ph) {
+    camera.updateMatrixWorld(); const vis = [];
+    for (const g of TG) {
+      const r = FX[g.k];
+      if (r <= .002) { if (g.on) { g.on = false; g.el.style.visibility = g.ln.style.visibility = g.dot.style.visibility = 'hidden'; } continue; }
+      if (!g.on) { g.on = true; g.el.style.visibility = g.ln.style.visibility = g.dot.style.visibility = 'visible'; }
+      if (!g.w) { g.w = g.el.offsetWidth; g.h = g.el.offsetHeight; }
+      g.a.getWorldPosition(V); V.project(camera); g.sx = (V.x * .5 + .5) * W; g.sy = (-V.y * .5 + .5) * H; g.r = r; vis.push(g);
+    }
+    const top = ph ? 70 : 24, bot = H - (ph ? 16 : 170), off = ph ? 34 : 64;
+    vis.sort((a, b) => a.sy - b.sy);
+    vis.forEach((g, k) => { g.ly = Math.max(top + g.h / 2, Math.min(bot - g.h / 2, g.sy - (ph ? 10 : 14))); if (k) g.ly = Math.max(g.ly, vis[k - 1].ly + vis[k - 1].h / 2 + g.h / 2 + 8); });
+    for (let k = vis.length - 2; k >= 0; k--) if (vis[k + 1].ly + vis[k + 1].h / 2 > bot) vis[k].ly = Math.min(vis[k].ly, vis[k + 1].ly - vis[k + 1].h / 2 - vis[k].h / 2 - 8);
+    vis.forEach(g => {
+      let x = g.sx + off; x = Math.min(W - g.w - (ph ? 8 : 24), x); const y = g.ly - g.h / 2, e = Math.min(1, g.r * 1.6);
+      g.ln.setAttribute('x1', g.sx.toFixed(1)); g.ln.setAttribute('y1', g.sy.toFixed(1)); g.ln.setAttribute('x2', (g.sx + (x - g.sx) * e).toFixed(1)); g.ln.setAttribute('y2', (g.sy + (g.ly - g.sy) * e).toFixed(1));
+      g.dot.setAttribute('cx', g.sx.toFixed(1)); g.dot.setAttribute('cy', g.sy.toFixed(1)); g.dot.setAttribute('r', (4.5 * Math.min(1, g.r * 2)).toFixed(2));
+      const cut = ((1 - Math.max(0, (g.r - .3) / .7)) * 100).toFixed(1);
+      g.el.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`; g.el.style.clipPath = `inset(0 ${cut}% 0 0 round 12px)`;
+    });
+  }
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (!visible) return;
+    const t = now / 1000, ph = isPhone(), c = camAt(CALT.time());
+    const sway = RMm ? 0 : Math.sin(t * .21) * .05, k = ph ? 1.16 : 1;
+    const az = c[0] + sway, el = c[1], r = c[2] * k, tx = c[3], ty = c[4] + (ph ? .15 : 0) - FX.click * .025, tz = c[5];
+    camera.position.set(tx + r * Math.cos(el) * Math.sin(az), ty + r * Math.sin(el), tz + r * Math.cos(el) * Math.cos(az)); camera.lookAt(tx, ty, tz);
+    crown.scale.set(1 + FX.click * .012, 1 - FX.click * .02, 1 + FX.click * .012);
+    R1.render(scene, camera); labels(ph);
+  }
+  requestAnimationFrame(frame);
+  window.CAL3D = { scene, camera, renderer: R1, post, abut, crown, jaw, boneU };
+}
+
+/* =====================================================================================
+   SMILE PREVIEW: a sample upper + lower front arch (dental-model style, no face)
+   ===================================================================================== */
+const c2 = document.getElementById('gl2'), smStage = document.getElementById('smStage');
+let R2;
+try { R2 = mkRenderer(c2); R2.toneMappingExposure = .86; } catch (e) { smStage.style.display = 'none'; }
+if (R2) {
+  const scene = new THREE.Scene(), pm = new THREE.PMREMGenerator(R2);
+  scene.environment = pm.fromScene(new RoomEnvironment(), .04).texture; scene.environmentIntensity = .55;
+  const camera = new THREE.PerspectiveCamera(20, 1, .1, 60);
+  const key = new THREE.DirectionalLight(0xfff7ee, 1.9); key.position.set(-6, 3.5, 3); scene.add(key);
+  const spec = new THREE.DirectionalLight(0xffffff, 2.6); spec.position.set(1.5, 4, 6); scene.add(spec);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xd8c2b6, .3));
+  const sweep = new THREE.PointLight(0xffffff, 0, 6, 1.6); scene.add(sweep);
+  const S = window.SMILE.st;
+  const U = { uEn: { value: new THREE.Color() }, uStain: { value: 1 }, uTr: { value: .7 } };
+  const en = enamelMat('enSmile', U);
+  const U2 = { uEn: { value: new THREE.Color() }, uStain: U.uStain, uTr: U.uTr }, enLo = enamelMat('enSmileLo', U2);
+  // tooth sizes (half widths): central, lateral, canine, premolar 1, premolar 2
+  const UP = [{ kind: 'inc', W: .43, Df: .17, Db: .2, H: 1.06 }, { kind: 'inc', W: .33, Df: .15, Db: .17, H: .9 }, { kind: 'can', W: .38, Df: .2, Db: .22, H: 1.0 }, { kind: 'pre', W: .35, Df: .24, Db: .25, H: .82 }, { kind: 'pre', W: .34, Df: .24, Db: .25, H: .76 }];
+  const LO = [{ kind: 'inc', W: .26, Df: .13, Db: .15, H: .8 }, { kind: 'inc', W: .28, Df: .14, Db: .16, H: .84 }, { kind: 'can', W: .33, Df: .18, Db: .2, H: .95 }, { kind: 'pre', W: .35, Df: .23, Db: .24, H: .8 }, { kind: 'pre', W: .36, Df: .24, Db: .26, H: .76 }];
+  const geos = {}; const tg = (sp, key) => geos[key] || (geos[key] = toothGeo({ ...sp, R: .5, n: 2.15 }, 56, 60));
+  // the chipped upper central: morph target that cuts its mesial corner off (influence 1 = chipped)
+  const chipGeo = (() => {
+    const g = toothGeo({ ...UP[0], R: .5, n: 2.15 }, 64, 72), p = g.attributes.position, m = new Float32Array(p.array);
+    const W = UP[0].W, H = UP[0].H;
+    for (let i = 0; i < p.count; i++) { const x = -p.getX(i), y = p.getY(i); const cutY = H * .93 - (x - W * .3) * 1.1; if (y > cutY && x > W * .25) { m[i * 3 + 1] = cutY + (y - cutY) * .08; m[i * 3 + 2] = p.getZ(i) * .96; } }
+    const tmp = new THREE.BufferGeometry(); tmp.setAttribute('position', new THREE.BufferAttribute(m, 3)); tmp.setIndex(g.index); tmp.computeVertexNormals();
+    g.morphAttributes.position = [new THREE.BufferAttribute(m.map((v, i) => v - p.array[i]), 3)];
+    g.morphAttributes.normal = [new THREE.BufferAttribute(tmp.attributes.normal.array.map((v, i) => v - g.attributes.normal.array[i]), 3)];
+    g.morphTargetsRelative = true; return g;
+  })();
+  const teeth = [];
+  const arch = (A, B) => { // ellipse arc lookup: s (arc length from the midline) -> point + outward angle
+    const N = 400, tab = [0]; let px = 0, pz = 0;
+    for (let i = 1; i <= N; i++) { const f = i / N * 1.45, x = A * Math.sin(f), z = B * (Math.cos(f) - 1); tab.push(tab[i - 1] + Math.hypot(x - px, z - pz)); px = x; pz = z; }
+    return s => { const a = Math.abs(s); let i = 1; while (i < N && tab[i] < a) i++; const f = (i - 1 + (a - tab[i - 1]) / (tab[i] - tab[i - 1])) / N * 1.45, sg = Math.sign(s) || 1;
+      return { x: sg * A * Math.sin(f), z: B * (Math.cos(f) - 1), ang: sg * (Math.PI / 2 - Math.atan2(A * Math.cos(f), B * Math.sin(f) + 1e-6)) }; };
+  };
+  const archU = arch(2.35, 1.75), archL = arch(2.05, 1.6);
+  function makeArch(list, upper) {
+    const out = [];
+    for (const side of [-1, 1]) list.forEach((sp, i) => {
+      const chip = upper && i === 0 && side === -1, g = chip ? chipGeo : tg(sp, (upper ? 'u' : 'l') + i);
+      const m = new THREE.Mesh(g, upper ? en : enLo); m.rotation.order = 'YXZ';
+      if (upper) m.rotation.z = Math.PI;
+      const grp = { m, sp, i, side, upper }; out.push(grp); scene.add(m);
+    });
+    return out;
+  }
+  const upT = makeArch(UP, true), loT = makeArch(LO, false);
+  const Y_UP = .62, Y_LO = -.96;
+  function place(v) {
+    const gapU = .13;
+    for (const set of [upT, loT]) {
+      const up = set === upT, list = up ? UP : LO, ar = up ? archU : archL;
+      for (const t of set) {
+        let s = (up ? gapU / 2 : 0); for (let k = 0; k < t.i; k++) s += list[k].W * 2 * .97 + .012; s += t.sp.W * .97;
+        if (up && t.i === 0) s -= v * gapU / 4;
+        const p = ar(t.side * s), m = t.m;
+        m.position.set(p.x, up ? Y_UP : Y_LO, p.z + (up ? 0 : -.36));
+        m.rotation.y = p.ang; m.rotation.x = up ? -.14 : .12;
+        // before veneers: the patient's left lateral is turned and a bit short; veneers even it out
+        if (up && t.i === 1 && t.side === 1) { m.rotation.y += .2 * (1 - v); m.scale.set(1, .93 + .07 * v, 1); m.position.z -= .03 * (1 - v); }
+        if (up && t.i === 0) m.scale.x = 1 + v * (gapU / 4) / (t.sp.W * .97);
+        if (t.m.morphTargetInfluences) t.m.morphTargetInfluences[0] = 1 - v;
+        t.s = s; t.p = p;
+      }
+    }
+  }
+  // gums: a scalloped band along each arch (papillae between teeth, rounded collar at each neck); rebuilt when teeth move
+  function gumBand(set, upper) {
+    const SN = 150, PR_ = 7, pos = new Float32Array((SN + 1) * (PR_ + 1) * 3), mh = new Float32Array((SN + 1) * (PR_ + 1)), idx = [];
+    for (let i = 0; i < SN; i++) for (let j = 0; j < PR_; j++) { const a = i * (PR_ + 1) + j, b = a + 1, c = a + PR_ + 1, d = c + 1; idx.push(a, b, c, b, d, c); }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('aH', new THREE.BufferAttribute(mh, 1)); g.setIndex(idx);
+    const ar = upper ? archU : archL, sMax = 4.2, yb = upper ? Y_UP : Y_LO, dir = upper ? 1 : -1, zo = upper ? 0 : -.36;
+    g.userData.update = () => {
+      const ts = set.slice().sort((a, b) => a.side * a.s - b.side * b.s);
+      for (let i = 0; i <= SN; i++) {
+        const s = -sMax + 2 * sMax * i / SN; let mg = -.27, df = .2, bl = 0;
+        for (const t of ts) { const d = (s - t.side * t.s) / (t.sp.W * .97 * t.m.scale.x); if (Math.abs(d) < 1) { mg = Math.max(mg, -.27 + .34 * Math.pow(1 - d * d, .6) * (t.m.scale.y)); df = t.sp.Df * (1 - .25 * d * d) + .02; } bl += Math.exp(-d * d * 2.2) * .06; }
+        const p = ar(s), nx = Math.sin(p.ang), nz = Math.cos(p.ang);
+        const rows = [[df * .92, mg], [df + .05 + bl * .3, mg + .08], [df + .09 + bl, mg + .26], [df + .1 + bl, .62], [df + .06 + bl * .6, .95], [df - .12, 1.12], [-.25, 1.18], [-.6, 1.05]];
+        rows.forEach(([n, u], j) => { const k = (i * (PR_ + 1) + j); pos[k * 3] = p.x + nx * n; pos[k * 3 + 1] = yb + dir * u; pos[k * 3 + 2] = p.z + zo + nz * n; mh[k] = j / PR_; });
+      }
+      g.attributes.position.needsUpdate = true; g.computeVertexNormals();
+      if (!g.userData.chk) { g.userData.chk = 1; const k = (SN / 2) * (PR_ + 1) + 2; if (g.attributes.normal.getZ(k) < 0) { const ix = g.index.array; for (let q = 0; q < ix.length; q += 3) { const tt = ix[q + 1]; ix[q + 1] = ix[q + 2]; ix[q + 2] = tt; } g.index.needsUpdate = true; g.computeVertexNormals(); } }
+    };
+    return g;
+  }
+  const gm = gumMat('gumSmile', false, '0.70, 0.33, 0.37');
+  const gU = gumBand(upT, true), gL = gumBand(loT, false);
+  scene.add(new THREE.Mesh(gU, gm), new THREE.Mesh(gL, gm));
+  // a soft, warm shadow behind the arches so the white teeth have something to sit against
+  const back = (() => { const c = document.createElement('canvas'); c.width = 256; c.height = 128; const g = c.getContext('2d'), gr = g.createRadialGradient(128, 64, 6, 128, 64, 128); gr.addColorStop(0, 'rgba(58,30,34,1)'); gr.addColorStop(.7, 'rgba(88,48,52,1)'); gr.addColorStop(1, 'rgba(120,72,76,1)'); g.fillStyle = gr; g.fillRect(0, 0, 256, 128); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+  const bm = new THREE.Mesh(new THREE.PlaneGeometry(7.5, 3.2), new THREE.MeshBasicMaterial({ map: back })); bm.position.set(0, -.2, -1.9); bm.scale.set(1.3, .75, 1); scene.add(bm);
+  const DULL = new THREE.Color(.78, .69, .53), BRIGHT = new THREE.Color(.9, .885, .85), tmpC = new THREE.Color();
+  let lastV = -1, W = 1, H = 1;
+  function size() { W = smStage.clientWidth; H = smStage.clientHeight; R2.setPixelRatio(PR()); R2.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix(); }
+  addEventListener('resize', size); size();
+  let visible = false; new IntersectionObserver(e => { visible = e[0].isIntersecting; }, { rootMargin: '120px' }).observe(smStage);
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (!visible) return;
+    const t = now / 1000, v = S.ven;
+    if (Math.abs(v - lastV) > 1e-4) { place(v); gU.userData.update(); gL.userData.update(); lastV = v; }
+    const sh = S.shade, e = sh * sh * (3 - 2 * sh);
+    U.uEn.value.copy(tmpC.copy(DULL).lerp(BRIGHT, e)); U2.uEn.value.copy(U.uEn.value).multiplyScalar(.86); U.uStain.value = Math.max(0, 1 - sh * 1.35) * (1 - .5 * v); U.uTr.value = .75 - .2 * v;
+    const sw = S.sweep ? (now - S.sweep) / 1200 : 2; sweep.intensity = sw < 1 ? Math.sin(sw * Math.PI) * 9 : 0; sweep.position.set(C(-2.6, 2.6, Math.min(1, sw)), .2, 1.6);
+    const ph = W / H < 1.15, d = ph ? 8.6 : 7.9, sway = RMm ? 0 : Math.sin(t * .25) * .07;
+    camera.position.set(Math.sin(sway) * d, .55 + Math.sin(t * .19) * .04 * (RMm ? 0 : 1), Math.cos(sway) * d); camera.lookAt(0, -.12, -.3);
+    R2.render(scene, camera);
+  }
+  requestAnimationFrame(frame);
+  window.CAL3D_SMILE = { scene, camera, renderer: R2, upT, loT };
+}
+</script>
+</body>
+</html>
