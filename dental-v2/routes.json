@@ -1,0 +1,148 @@
+{
+  "schema": "site-foundation/routes@1",
+  "generator": "@icbs/site-foundation@0.4.1",
+  "deployment": "demo",
+  "origin": "https://irving1211.github.io",
+  "base": "/niche-demos-39b173/dental-v2/",
+  "langs": [
+    "en",
+    "es"
+  ],
+  "defaultLocale": "en",
+  "routes": [
+    {
+      "path": "/",
+      "id": "home",
+      "lang": "en",
+      "template": "home",
+      "indexable": true,
+      "sitemap": true,
+      "url": "https://irving1211.github.io/niche-demos-39b173/dental-v2/",
+      "equivalents": {
+        "en": "/",
+        "es": "/es/"
+      }
+    },
+    {
+      "path": "/es/",
+      "id": "home",
+      "lang": "es",
+      "template": "home",
+      "indexable": true,
+      "sitemap": true,
+      "url": "https://irving1211.github.io/niche-demos-39b173/dental-v2/es/",
+      "equivalents": {
+        "en": "/",
+        "es": "/es/"
+      }
+    },
+    {
+      "path": "/new-patients/",
+      "id": "new-patients",
+      "lang": "en",
+      "template": "new-patients",
+      "indexable": true,
+      "sitemap": true,
+      "url": "https://irving1211.github.io/niche-demos-39b173/dental-v2/new-patients/",
+      "equivalents": {
+        "en": "/new-patients/",
+        "es": "/es/new-patients/"
+      }
+    },
+    {
+      "path": "/es/new-patients/",
+      "id": "new-patients",
+      "lang": "es",
+      "template": "new-patients",
+      "indexable": true,
+      "sitemap": true,
+      "url": "https://irving1211.github.io/niche-demos-39b173/dental-v2/es/new-patients/",
+      "equivalents": {
+        "en": "/new-patients/",
+        "es": "/es/new-patients/"
+      }
+    },
+    {
+      "path": "/services/",
+      "id": "services",
+      "lang": "en",
+      "template": "services",
+      "indexable": true,
+      "sitemap": true,
+      "url": "https://irving1211.github.io/niche-demos-39b173/dental-v2/services/",
+      "equivalents": {
+        "en": "/services/",
+        "es": "/es/services/"
+      }
+    },
+    {
+      "path": "/es/services/",
+      "id": "services",
+      "lang": "es",
+      "template": "services",
+      "indexable": true,
+      "sitemap": true,
+      "url": "https://irving1211.github.io/niche-demos-39b173/dental-v2/es/services/",
+      "equivalents": {
+        "en": "/services/",
+        "es": "/es/services/"
+      }
+    },
+    {
+      "path": "/visit/",
+      "id": "visit",
+      "lang": "en",
+      "template": "visit",
+      "indexable": true,
+      "sitemap": true,
+      "url": "https://irving1211.github.io/niche-demos-39b173/dental-v2/visit/",
+      "equivalents": {
+        "en": "/visit/",
+        "es": "/es/visit/"
+      }
+    },
+    {
+      "path": "/es/visit/",
+      "id": "visit",
+      "lang": "es",
+      "template": "visit",
+      "indexable": true,
+      "sitemap": true,
+      "url": "https://irving1211.github.io/niche-demos-39b173/dental-v2/es/visit/",
+      "equivalents": {
+        "en": "/visit/",
+        "es": "/es/visit/"
+      }
+    },
+    {
+      "path": "/office/",
+      "id": "office",
+      "lang": "en",
+      "template": "office",
+      "indexable": true,
+      "sitemap": true,
+      "url": "https://irving1211.github.io/niche-demos-39b173/dental-v2/office/",
+      "equivalents": {
+        "en": "/office/",
+        "es": "/es/office/"
+      }
+    },
+    {
+      "path": "/es/office/",
+      "id": "office",
+      "lang": "es",
+      "template": "office",
+      "indexable": true,
+      "sitemap": true,
+      "url": "https://irving1211.github.io/niche-demos-39b173/dental-v2/es/office/",
+      "equivalents": {
+        "en": "/office/",
+        "es": "/es/office/"
+      }
+    }
+  ],
+  "unrouted": [
+    "/404.html",
+    "/full-site/"
+  ]
+}
